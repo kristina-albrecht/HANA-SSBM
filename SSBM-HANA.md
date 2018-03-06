@@ -13,14 +13,25 @@ titlepage-rule-height: 1
 ...
 
 # SAP HANA
+## In-Memory Datenbank
+## Column-Based Architektur
+## Komprimierung
+## Memory Zugrigge
 
 # Star Schema Benchmark (SSBM)
+## Unterschiede zu TPC-H
+## Generierung von SSBM-Tabellen
+## Tabellen in HANA laden
 
 # SQL-Abfragen für SSBM
+## Anpassung der TPC-H Queries auf SSBM
+## Generierung von Abfragen mit Qgen
 
 # Durchführung von Benchmarks 
 
-## Installation
-
-## Performance Tests
+## Aufsetzen von HANA: Installation, Beschreibung vom System (Prozessoren, RAM, OS, Festplattenspeicher etc.)
+## Durchführung von Performance Tests und Auswertung der Query Execution Plans
+### Indizes
+### Parallele Zugriffe
+### Row vs. Column Store
 
