@@ -13,30 +13,29 @@ titlepage-rule-height: 1
 ...
 
 # SAP HANA
-## In-Memory Datenbank
-## Column-Based Architektur
-## Komprimierung
-## Memory Zugrigge
+- In-Memory Datenbank
+- Column-Based Architektur
+- Komprimierung
+- Memory Zugrigge
 
 # Star Schema Benchmark (SSBM)
-## Unterschiede zu TPC-H
-## Generierung von SSBM-Tabellen
-## Tabellen in HANA laden
+- Unterschiede zu TPC-H
+- Generierung von SSBM-Tabellen
+- Tabellen in HANA laden
 
 # SQL-Abfragen für SSBM
-## Anpassung der TPC-H Queries auf SSBM
-## Generierung von Abfragen mit Qgen
+- Anpassung der TPC-H Queries auf SSBM
+- Generierung von Abfragen mit Qgen
 
 # Durchführung von Benchmarks 
-
-## Aufsetzen von HANA: Installation, Beschreibung vom System (Prozessoren, RAM, OS, Festplattenspeicher etc.)
-## Durchführung von Performance Tests und Auswertung der Query Execution Plans
-### Indizes
-### Parallele Zugriffe
-### Row vs. Column Store
+### Aufsetzen von HANA: Installation, Beschreibung vom System (Prozessoren, RAM, OS, Festplattenspeicher etc.)
+### Durchführung von Performance Tests und Auswertung der Query Execution Plans
+- Indizes
+- Parallele Zugriffe
+- Row vs. Column Store
 
 # Fragen
-### Zugriff auf HANA an der DH
-### Gibt es Standard-Queries für SSBM? 
-### Wie viele Queries? Skalierung?
-### Welche Metriken sind bei dem Benchmark wichtig?
+- Zugriff auf HANA an der DH
+- Gibt es Standard-Queries für SSBM? 
+- Wie viele Queries? Skalierung?
+- Welche Metriken sind bei dem Benchmark wichtig?
