@@ -35,7 +35,7 @@ titlepage-rule-height: 1
 ### Parallele Zugriffe
 ### Row vs. Column Store
 
-#Fragen
+# Fragen
 ### Zugriff auf HANA an der DH
 ### Gibt es Standard-Queries für SSBM? 
 ### Wie viele Queries? Skalierung?
