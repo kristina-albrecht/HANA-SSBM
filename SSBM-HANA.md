@@ -30,9 +30,10 @@ titlepage-rule-height: 1
 # Durchführung von Benchmarks 
 ### Aufsetzen von HANA: Installation, Beschreibung vom System (Prozessoren, RAM, OS, Festplattenspeicher etc.)
 ### Durchführung von Performance Tests und Auswertung der Query Execution Plans
-- Indizes
-- Parallele Zugriffe
 - Row vs. Column Store
+- Wie kann man durch Indizes oder Hints beschleunigen?
+- Parallele Zugriffe (Concurrency, unter Umständen)
+
 
 # Fragen
 - Out of Memory Problem
@@ -40,3 +41,4 @@ titlepage-rule-height: 1
 - Gibt es Standard-Queries für SSBM? 
 - Wie viele Queries? Skalierung?
 - Welche Metriken sind bei dem Benchmark wichtig?
+Laufzeit, (Systembelastung)
