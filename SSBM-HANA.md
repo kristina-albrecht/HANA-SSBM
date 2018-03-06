@@ -35,6 +35,7 @@ titlepage-rule-height: 1
 - Row vs. Column Store
 
 # Fragen
+- Out of Memory Problem
 - Zugriff auf HANA an der DH
 - Gibt es Standard-Queries für SSBM? 
 - Wie viele Queries? Skalierung?
