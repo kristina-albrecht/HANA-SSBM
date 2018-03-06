@@ -19,6 +19,7 @@ titlepage-rule-height: 1
 - Memory Zugrigge
 
 # Star Schema Benchmark (SSBM)
+- Warum SSBM? Für Dimensionale Modellierung, interessant für OLAP
 - Unterschiede zu TPC-H
 - Generierung von SSBM-Tabellen
 - Tabellen in HANA laden
