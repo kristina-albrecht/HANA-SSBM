@@ -13,6 +13,37 @@ titlepage-rule-height: 1
 ...
 
 # SAP HANA
+
+# Generell HANA als in-memory Datenbank
+
+ SAP Hana (Die High Performance Analytic Appliance) ist eine Entwicklungsplattform und bestehtim Kern aus einer „in-memory“ Datenbank.
+
+Transaktionen und Analysen werden aufeiner einzigen, singulären Datenkopie im Hauptspeicher verarbeitet, anstatt dieFestplatte als Datenspeicher zu benutzen. Dadurch ist es möglich sehr komplexeAbfragen und Datenbankoperationen mit sehr hohen Durchsatz auszuführen.
+
+Hana verbindet OLTP, durch die SQL undACID (Atomicity, Consistency, Isolation andDurability) Kompatibilität, und OLAP durch das „in-memory“ feature.Durch das ACID Prinzips ist die Datenbank geeignet um Unternehmensinterne Datenzu speichern. Es ist nicht nötig Datenanalysen über einen ETL Prozess an einDatawarehouse weiterzuleiten. Komplexe Echtzeit Analysen [[1\]](#_ftn1)könnennun direkt durch SAP Hana durchgeführt werden. Das erspart die erheblichenKosten und vor allem Zeit.
+
+Beim der „in-memory“ Technologie werdendie Daten im Hauptspeicher anstatt auf elektromagnetischen Festplattengespeichert. Antwortzeiten und Auswertungen können dadurch schneller als beigewöhnlichen Festplatten durch den Prozessor vorgenommen werden. Dadurch, dassder Zugriff auf die Festplatte nun wegfällt, verkürzt sich dieDatenzugriffszeit bis auf das Fünffache. 
+
+![img](file:///C:/Users/IBM_ADMIN/AppData/Local/Temp/OICE_16_974FA576_32C1D314_1CA5/msohtmlclip1/01/clip_image001.png)
+
+ 
+
+<https://intellipaat.com/blog/what-is-sap-hana/> 
+
+Um nun aber dem „D“ des ACID Prinzips gerechtzu werden reicht eine Speicherung im füchtigen Hauptspeicher nicht. Für die Datensicherungmüssen deshalb traditionelle Festplatten benutzt werden. Diese werden bei derreinen Analyse von Daten nicht berücksichtigt. Wenn Transaktionen getätigtwerden, müssen die regelmäßig an das nicht flüchtige Speichermedium übergebenwerden. Außerdem wird dort zu jeder Transaktion ein Protokolleintraghinterlegt.
+
+------
+
+[[1\]](#_ftnref1)https://intellipaat.com/interview-question/sap-hana-interview-questions/
+
+2<https://link.springer.com.ezproxy.dhbw-mannheim.de/book/10.1007%2F978-3-658-18603-6>
+
+3<https://www.sap.com/germany/products/hana.html#pdf-asset=2caaec36-847c-0010-82c7-eda71af511fa&page=3>
+
+ 
+
+ 
+
 - In-Memory Datenbank
 - Column-Based Architektur
 - Komprimierung
