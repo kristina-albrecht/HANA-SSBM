@@ -1,0 +1,1521 @@
+<?Version 22?>
+<Plan ID="ID_E6F2AED3B310BD45BE212D4889E54ED9_0" xmlns="http://www.sap.com/ndb/planviz" Type="Executed" PlanType="QoExec">
+<SystemVersion><![CDATA[{"Version":"2.00.023.00.1513691289","CompileType":"rel"}]]></SystemVersion>
+<SQL><![CDATA[select c_city, s_city, d_year, sum(lo_revenue)
+as revenue
+from customer
+join lineorder
+  on lo_custkey = c_customerkey
+join supplier
+  on lo_suppkey = s_suppkey
+join dim_date
+  on lo_orderdatekey = d_datekey
+where
+(c_city='UNITED KI1' or c_city='UNITED KI5')
+and (s_city='UNITED KI1' or s_city='UNITED KI5')
+and d_yearmonth = 'Dec1997'
+group by c_city, s_city, d_year
+order by d_year asc, revenue desc]]></SQL>
+<CompileTime>
+	<Start Unit="us">1520955852554788</Start>
+	<End Unit="us">1520955852555259</End>
+</CompileTime>
+<StmtStats><![CDATA[]]></StmtStats>
+<StmtMemStats><![CDATA[[{"Allocated Count":1899,"Allocated Size":40924276,"Allocator Name":"WorkloadCtx/281483566831201/Statement/435573891396822","Count in Use":1896,"Deallocated Count":1830,"Deallocated Size":40862164,"Depth":3,"Max Allocation Size (estimate)":62672,"Max Single Allocation Size":7498304,"Size in Use":61888},{"Allocated Count":5,"Allocated Size":15008,"Allocator Name":"WorkloadCtx/281483566831201/Statement/435573891396822/Pool/RowEngine/QueryExecution","Count in Use":5,"Deallocated Count":0,"Deallocated Size":0,"Depth":4,"Max Allocation Size (estimate)":15008,"Max Single Allocation Size":12288,"Size in Use":15008},{"Allocated Count":1921,"Allocated Size":40911924,"Allocator Name":"WorkloadCtx/281483566831201/Statement/435573891396822/IMPLICIT","Count in Use":1918,"Deallocated Count":1831,"Deallocated Size":40862180,"Depth":4,"Max Allocation Size (estimate)":50304,"Max Single Allocation Size":7498304,"Size in Use":49520}]]]></StmtMemStats>
+<CompileSummary><![CDATA[{"Compilation Time Breakdown":{"parsing time":"0.729 ms","checking time":"2.226 ms","QP to QC conversion time":"0.232 ms","rewriting time":"19.350 ms","query compilation time":"35.975 ms"},"Cost Based Optimization Details":{"# of operators normalized":"10","memory pool size normalized":"1.000 MB","cost based optimization time":"8.342 ms","limit of alternative enumeration":"100","limit of joinThruJoin enumeration":"50","# of alternative enumerations":"8","# of duplicate detections":"1","# of expansions":"29","# of prunings":"27","# of index enumerations":"0","# of column search enumerations":"25","# of column Join estimator calls":"5","# of operator groups":"20","# of operators":"28","# of possible combinations of plan":"12","memory pool size of physical enumerations":"1.000 MB","default expression segment size":"16384","# of expression segment blocks":"2","estimated expression pre-eval memory size":"0.004 MB"},"Plan Properties":{"Non-Deterministic Functions":{}}}]]></CompileSummary>
+	<RootRelation ID="ID_E6F2AED3B310BD45BE212D4889E54ED9_0" TypeName="PROJECT" InternalBufferId="2" Status="Finished">
+		<Name>COLUMN SEARCH</Name>
+		<ExecutionType>COLUMN</ExecutionType>
+		<Summary><![CDATA[CUSTOMER.C_CITY, SUPPLIER.S_CITY, DIM_DATE.D_YEAR, SUM(LINEORDER.LO_REVENUE)]]></Summary>
+		<Location>hxehost:39001</Location>
+		<EstimatedCost>
+			<Inclusive Unit="us">2775.79</Inclusive>
+		</EstimatedCost>
+		<EstimatedOutputCardinality>28</EstimatedOutputCardinality>
+		<ExecutionTime>
+			<Start Unit="us">1520955852669517</Start>
+			<End Unit="us">1520955852722326</End>
+			<Exclusive Unit="us">52</Exclusive>
+			<Inclusive Unit="us">52809</Inclusive>
+			<Timestamps>[{"Open": [{"start":1520955852669517,"end":1520955852669540,"thread":2609},{"start":1520955852721060,"end":1520955852721062,"thread":2609}]},{"Fetch": [{"start":1520955852721122,"end":1520955852721134,"thread":2609},{"start":1520955852721138,"end":1520955852721149,"thread":2609},{"start":1520955852721150,"end":1520955852721151,"thread":2609}]},{"Close": [{"start":1520955852721159,"end":1520955852721160,"thread":2609},{"start":1520955852722324,"end":1520955852722326,"thread":2609}]}]</Timestamps>
+		</ExecutionTime>
+		<MemoryUsage>
+			<Max>0</Max>
+		</MemoryUsage>
+		<KernelCPUTime Unit="ms">0.000</KernelCPUTime>
+		<UserCPUTime Unit="ms">0.042</UserCPUTime>
+		<Details><![CDATA[{"Projected Cols":"CUSTOMER.C_CITY, SUPPLIER.S_CITY, DIM_DATE.D_YEAR, SUM(LINEORDER.LO_REVENUE)"}]]></Details>
+		<Child ID="ID_E6F2AED3B310BD45BE212D4889E54ED9_105" >
+			<ExecutedOutputCardinality>4</ExecutedOutputCardinality>
+			<FetchCallCount>1</FetchCallCount>
+		</Child>
+	</RootRelation>
+	<Relation ID="ID_E6F2AED3B310BD45BE212D4889E54ED9_105" TypeName="TREX_SEARCH" InternalBufferId="1" Status="Finished">
+		<Name>COLUMN SEARCH</Name>
+		<ExecutionType>COLUMN</ExecutionType>
+		<Summary><![CDATA[CUSTOMER.C_CITY, SUPPLIER.S_CITY, DIM_DATE.D_YEAR, SUM(LINEORDER.LO_REVENUE)]]></Summary>
+		<Location>hxehost:39001</Location>
+		<EstimatedCost>
+			<Inclusive Unit="us">2683.83</Inclusive>
+		</EstimatedCost>
+		<EstimatedOutputCardinality>28</EstimatedOutputCardinality>
+		<ExecutionTime>
+			<Start Unit="us">1520955852669542</Start>
+			<End Unit="us">1520955852722319</End>
+			<Exclusive Unit="us">1195</Exclusive>
+			<Inclusive Unit="us">52777</Inclusive>
+			<Timestamps>[{"Open": [{"start":1520955852669542,"end":1520955852669570,"thread":2609},{"start":1520955852721053,"end":1520955852721059,"thread":2609}]},{"Fetch": [{"start":1520955852721135,"end":1520955852721138,"thread":2609}]},{"Close": [{"start":1520955852721160,"end":1520955852721161,"thread":2609},{"start":1520955852721162,"end":1520955852722319,"thread":2609}]}]</Timestamps>
+		</ExecutionTime>
+		<MemoryUsage>
+			<Max>0</Max>
+		</MemoryUsage>
+		<KernelCPUTime Unit="ms">0.000</KernelCPUTime>
+		<UserCPUTime Unit="ms">1.190</UserCPUTime>
+		<Details><![CDATA[{"Projected Cols":"CUSTOMER.C_CITY, SUPPLIER.S_CITY, DIM_DATE.D_YEAR, SUM(LINEORDER.LO_REVENUE)"}]]></Details>
+		<InnerPlans>
+			<Plan ID="ID_E6F2AED3B310BD45BE212D4889E54ED9_105_0" Type="Estimated" PlanType="Logical">
+				<RootRelation ID="ID_E6F2AED3B310BD45BE212D4889E54ED9_105_0" TypeName="PROJECT">
+					<Name>COLUMN SEARCH</Name>
+					<Summary><![CDATA[CUSTOMER.C_CITY, SUPPLIER.S_CITY, DIM_DATE.D_YEAR, SUM(LINEORDER.LO_REVENUE)]]></Summary>
+					<Location>hxehost:39001</Location>
+					<EstimatedCost>
+						<Exclusive Unit="us">-1e+06</Exclusive>
+						<Inclusive Unit="us">2683.83</Inclusive>
+					</EstimatedCost>
+					<EstimatedOutputCardinality>28</EstimatedOutputCardinality>
+					<Details><![CDATA[{"Projected Cols":"CUSTOMER.C_CITY, SUPPLIER.S_CITY, DIM_DATE.D_YEAR, SUM(LINEORDER.LO_REVENUE)"}]]></Details>
+					<Child ID="ID_E6F2AED3B310BD45BE212D4889E54ED9_105_1">
+					</Child>
+				</RootRelation>
+				<Relation ID="ID_E6F2AED3B310BD45BE212D4889E54ED9_105_1" TypeName="ORDER_BY">
+					<Name>ORDER BY</Name>
+					<Summary><![CDATA[DIM_DATE.D_YEAR ASC, SUM(LINEORDER.LO_REVENUE) DESC]]></Summary>
+					<EstimatedCost>
+						<Exclusive Unit="us">-1e+06</Exclusive>
+						<Inclusive Unit="us">2666.2</Inclusive>
+					</EstimatedCost>
+					<EstimatedOutputCardinality>28</EstimatedOutputCardinality>
+					<Details><![CDATA[{"Sort Cols":"DIM_DATE.D_YEAR ASC, SUM(LINEORDER.LO_REVENUE) DESC"}]]></Details>
+					<Child ID="ID_E6F2AED3B310BD45BE212D4889E54ED9_105_2">
+					</Child>
+				</Relation>
+				<Relation ID="ID_E6F2AED3B310BD45BE212D4889E54ED9_105_2" TypeName="GROUP_BY">
+					<Name>AGGREGATION</Name>
+					<Summary><![CDATA[GROUPING: CUSTOMER.C_CITY, SUPPLIER.S_CITY, DIM_DATE.D_YEAR, AGGREGATION: SUM(LINEORDER.LO_REVENUE)]]></Summary>
+					<EstimatedCost>
+						<Exclusive Unit="us">-1e+06</Exclusive>
+						<Inclusive Unit="us">2664.59</Inclusive>
+					</EstimatedCost>
+					<EstimatedOutputCardinality>28</EstimatedOutputCardinality>
+					<Details><![CDATA[{"Grouping Cols":"CUSTOMER.C_CITY, SUPPLIER.S_CITY, DIM_DATE.D_YEAR, ","Aggregation Cols":"SUM(LINEORDER.LO_REVENUE)"}]]></Details>
+					<Child ID="ID_E6F2AED3B310BD45BE212D4889E54ED9_105_3">
+					</Child>
+				</Relation>
+				<Relation ID="ID_E6F2AED3B310BD45BE212D4889E54ED9_105_3" TypeName="SELECT">
+					<Name>FILTER</Name>
+					<Summary><![CDATA[(ITAB_IN (SYSTEM.CUSTOMER.C_CITY)(SYSTEM.SUPPLIER.S_CITY)) ]]></Summary>
+					<EstimatedCost>
+						<Exclusive Unit="us">-1e+06</Exclusive>
+						<Inclusive Unit="us">2637.29</Inclusive>
+					</EstimatedCost>
+					<EstimatedOutputCardinality>72.1485</EstimatedOutputCardinality>
+					<Details><![CDATA[{"Filter":"(ITAB_IN (SYSTEM.CUSTOMER.C_CITY)(SYSTEM.SUPPLIER.S_CITY)) "}]]></Details>
+					<Child ID="ID_E6F2AED3B310BD45BE212D4889E54ED9_105_4">
+					</Child>
+				</Relation>
+				<Relation ID="ID_E6F2AED3B310BD45BE212D4889E54ED9_105_4" TypeName="JOIN">
+					<Name>JOIN</Name>
+					<Summary><![CDATA[JOIN CONDITION: (INNER many-to-one) LINEORDER.LO_CUSTKEY = CUSTOMER.C_CUSTOMERKEY, (INNER many-to-one) LINEORDER.LO_SUPPKEY = SUPPLIER.S_SUPPKEY, (INNER many-to-one) LINEORDER.LO_ORDERDATEKEY = DIM_DATE.D_DATEKEY]]></Summary>
+					<EstimatedCost>
+						<Exclusive Unit="us">-1e+06</Exclusive>
+						<Inclusive Unit="us">2637.29</Inclusive>
+					</EstimatedCost>
+					<EstimatedOutputCardinality>72.1485</EstimatedOutputCardinality>
+					<Details><![CDATA[{"Join Condition":"(INNER many-to-one) LINEORDER.LO_CUSTKEY = CUSTOMER.C_CUSTOMERKEY, (INNER many-to-one) LINEORDER.LO_SUPPKEY = SUPPLIER.S_SUPPKEY, (INNER many-to-one) LINEORDER.LO_ORDERDATEKEY = DIM_DATE.D_DATEKEY"}]]></Details>
+					<Child ID="ID_E6F2AED3B310BD45BE212D4889E54ED9_105_5">
+					</Child>
+					<Child ID="ID_E6F2AED3B310BD45BE212D4889E54ED9_105_6">
+					</Child>
+					<Child ID="ID_E6F2AED3B310BD45BE212D4889E54ED9_105_7">
+					</Child>
+					<Child ID="ID_E6F2AED3B310BD45BE212D4889E54ED9_105_8">
+					</Child>
+				</Relation>
+				<Relation ID="ID_E6F2AED3B310BD45BE212D4889E54ED9_105_8" TypeName="TABLE">
+					<Name>COLUMN TABLE</Name>
+					<Summary><![CDATA[FILTER CONDITION: DIM_DATE.D_YEARMONTH = 'Dec1997']]></Summary>
+					<Schema><![CDATA[SYSTEM]]></Schema>
+					<TableType><![CDATA[COLUMN TABLE]]></TableType>
+					<ObjectName><![CDATA[DIM_DATE]]></ObjectName>
+					<Location>hxehost:39001</Location>
+					<EstimatedOutputCardinality>38.3399</EstimatedOutputCardinality>
+					<Details><![CDATA[{"Filter":"DIM_DATE.D_YEARMONTH = 'Dec1997'"}]]></Details>
+				</Relation>
+				<Relation ID="ID_E6F2AED3B310BD45BE212D4889E54ED9_105_7" TypeName="TABLE">
+					<Name>COLUMN TABLE</Name>
+					<Summary><![CDATA[FILTER CONDITION: (SUPPLIER.S_CITY = 'UNITED KI1') OR (SUPPLIER.S_CITY = 'UNITED KI5')]]></Summary>
+					<Schema><![CDATA[SYSTEM]]></Schema>
+					<TableType><![CDATA[COLUMN TABLE]]></TableType>
+					<ObjectName><![CDATA[SUPPLIER]]></ObjectName>
+					<Location>hxehost:39001</Location>
+					<EstimatedOutputCardinality>180</EstimatedOutputCardinality>
+					<Details><![CDATA[{"Filter":"(SUPPLIER.S_CITY = 'UNITED KI1') OR (SUPPLIER.S_CITY = 'UNITED KI5')"}]]></Details>
+				</Relation>
+				<Relation ID="ID_E6F2AED3B310BD45BE212D4889E54ED9_105_6" TypeName="TABLE">
+					<Name>COLUMN TABLE</Name>
+					<Summary><![CDATA[FILTER CONDITION: (CUSTOMER.C_CITY = 'UNITED KI1') OR (CUSTOMER.C_CITY = 'UNITED KI5')]]></Summary>
+					<Schema><![CDATA[SYSTEM]]></Schema>
+					<TableType><![CDATA[COLUMN TABLE]]></TableType>
+					<ObjectName><![CDATA[CUSTOMER]]></ObjectName>
+					<Location>hxehost:39001</Location>
+					<EstimatedOutputCardinality>1500</EstimatedOutputCardinality>
+					<Details><![CDATA[{"Filter":"(CUSTOMER.C_CITY = 'UNITED KI1') OR (CUSTOMER.C_CITY = 'UNITED KI5')"}]]></Details>
+				</Relation>
+				<Relation ID="ID_E6F2AED3B310BD45BE212D4889E54ED9_105_5" TypeName="TABLE">
+					<Name>COLUMN TABLE</Name>
+					<Schema><![CDATA[SYSTEM]]></Schema>
+					<TableType><![CDATA[COLUMN TABLE]]></TableType>
+					<ObjectName><![CDATA[LINEORDER]]></ObjectName>
+					<Location>hxehost:39001</Location>
+					<EstimatedOutputCardinality>5.99862e+07</EstimatedOutputCardinality>
+				</Relation>
+			</Plan>
+			<Plan ID="cs_plan309_hxehost_39001" Type="Executed" PlanType="Column">
+				<RootRelation ID="X2_plan22036_hxehost_39001_result0" Status="Finished">
+					<Name>Result</Name>
+					<Location><![CDATA[hxehost:39001]]></Location>
+					<Child ID="X2_plan22036_hxehost_39001_pop28">
+						<ConnectorName><![CDATA[JEPlanDataResultDocuments]]></ConnectorName>
+						<ExecutedOutputCardinality>4</ExecutedOutputCardinality>
+						<Payload Unit="bytes">944</Payload>
+						<Details><![CDATA[{ "description":"Result table of a query","data container member":"(column) SYSTEM.CUSTOMER.C_CITY","data container member":"(column) SYSTEM.DIM_DATE.D_YEAR","data container member":"(column) SYSTEM.LINEORDER.LO_REVENUE$sum$","data container member":"(column) SYSTEM.SUPPLIER.S_CITY" }]]></Details>
+					</Child>
+				</RootRelation>
+				<Relation ID="X2_plan22036_hxehost_39001" Status="Finished" Physical="False">
+					<Name><![CDATA[Column Search]]></Name>
+					<ExecutionType>Column Search</ExecutionType>
+					<Summary><![CDATA[24 nodes]]></Summary>
+					<Schema><![CDATA[SYSTEM]]></Schema>
+					<ObjectName><![CDATA[#JE4613937818241143785, CUSTOMER, DIM_DATE, LINEORDER, SUPPLIER]]></ObjectName>
+					<ExecutionTime>
+						<Exclusive Unit="ms">49.512</Exclusive>
+						<Inclusive Unit="ms">49.849</Inclusive>
+						<Timestamps>[{"Pop":[{"start":1520955852669657,"end":1520955852670303}]},{"Pop":[{"start":1520955852670340,"end":1520955852670514}]},{"Pop":[{"start":1520955852670531,"end":1520955852670919}]},{"Pop":[{"start":1520955852670935,"end":1520955852671290}]},{"Pop":[{"start":1520955852671307,"end":1520955852671352}]},{"Pop":[{"start":1520955852671366,"end":1520955852671405}]},{"Pop":[{"start":1520955852671420,"end":1520955852718594}]},{"Pop":[{"start":1520955852718626,"end":1520955852718649}]},{"Pop":[{"start":1520955852718660,"end":1520955852718672}]},{"Pop":[{"start":1520955852718683,"end":1520955852718694}]},{"Pop":[{"start":1520955852718704,"end":1520955852718724}]},{"Pop":[{"start":1520955852718734,"end":1520955852718782}]},{"Pop":[{"start":1520955852718794,"end":1520955852718818}]},{"Pop":[{"start":1520955852718828,"end":1520955852718900}]},{"Pop":[{"start":1520955852718912,"end":1520955852718943}]},{"Pop":[{"start":1520955852718957,"end":1520955852719037}]},{"Pop":[{"start":1520955852719048,"end":1520955852719087}]},{"Pop":[{"start":1520955852719102,"end":1520955852719221}]},{"Pop":[{"start":1520955852719234,"end":1520955852719286}]},{"Pop":[{"start":1520955852719299,"end":1520955852719310}]},{"Pop":[{"start":1520955852719320,"end":1520955852719351}]},{"Pop":[{"start":1520955852719361,"end":1520955852719379}]},{"Pop":[{"start":1520955852719389,"end":1520955852719409}]},{"Pop":[{"start":1520955852719426,"end":1520955852719506}]}]</Timestamps>
+					</ExecutionTime>
+					<KernelCPUTime Unit="ms">0</KernelCPUTime>
+					<UserCPUTime Unit="ms">9.545</UserCPUTime>
+					<Details><![CDATA[{"nodes":"24","table/column processed 001":"#JE4613937818241143785","table/column processed 002":"CUSTOMER","table/column processed 003":"CUSTOMER.C_CITY","table/column processed 004":"CUSTOMER.C_CUSTOMERKEY","table/column processed 005":"DIM_DATE","table/column processed 006":"DIM_DATE.D_DATEKEY","table/column processed 007":"DIM_DATE.D_YEAR","table/column processed 008":"LINEORDER","table/column processed 009":"LINEORDER.C_CUSTOMERKEY","table/column processed 010":"LINEORDER.D_DATEKEY","table/column processed 011":"LINEORDER.LO_CUSTKEY","table/column processed 012":"LINEORDER.LO_ORDERDATEKEY","table/column processed 013":"LINEORDER.LO_REVENUE","table/column processed 014":"LINEORDER.LO_SUPPKEY","table/column processed 015":"LINEORDER.S_SUPPKEY","table/column processed 016":"SUPPLIER","table/column processed 017":"SUPPLIER.S_CITY","table/column processed 018":"SUPPLIER.S_SUPPKEY","schema":"SYSTEM"}]]></Details>
+					<InnerPlans>
+						<Plan ID="subplan_X2_plan22036_hxehost_39001" PlanType="Column">
+							<Relation ID="X2_plan22036_hxehost_39001_pop16" TypeName="CS_POP" Status="Finished">
+								<Name><![CDATA[JEEvalPrecond]]></Name>
+								<ExecutionType>Column Search</ExecutionType>
+								<Summary><![CDATA[Access Table using 1 Filter]]></Summary>
+								<Schema><![CDATA[SYSTEM]]></Schema>
+								<ObjectName><![CDATA[SUPPLIER]]></ObjectName>
+								<TableType><![CDATA[COLUMN TABLE]]></TableType>
+								<Location><![CDATA[hxehost:39001]]></Location>
+								<ExecutionTime>
+									<Exclusive Unit="ms">0.388</Exclusive>
+									<Inclusive Unit="ms">0.388</Inclusive>
+									<Timestamps>[{"Pop":[{"start":1520955852670531,"end":1520955852670919}]}]</Timestamps>
+								</ExecutionTime>
+								<KernelCPUTime Unit="ms">0</KernelCPUTime>
+								<UserCPUTime Unit="ms">0.403</UserCPUTime>
+								<Details><![CDATA[{"table processed":"SUPPLIER","PerformanceTrace":"{\"details\":[{\"1_timestamp\":\"2018-03-13 16:44:12.670913\",\"2_key\":\"table name\",\"3_value\":\"SUPPLIER\",\"9_location\":\"hxehost:39001\"},{\"1_timestamp\":\"2018-03-13 16:44:12.670916\",\"2_key\":\"<large detail>\",\"3_value\":\"<executePop(<Search(<jeDocIdSearchPrep()=0.36>)=0.37>)=0.37>\",\"9_location\":\"hxehost:39001\"}]}","PythonTrace":".setName('SYSTEMDB::SYSTEM:SUPPLIER','en')
+.setResultFromTo(1, 18446744073709551615)
+qv=[]
+qo = fuzzypy.QueryEntry()
+qo.setLocation('SYSTEM:SUPPLIER', 'en', 'ForAllEntriesItab:0x7f51c2888f60', '')
+qo.setValue('\\x01\\x06S_CITY', '\\x01\\x03204', 'EQ')
+qo.setRowType('ATTRIBUTE')
+qo.setContentType(fuzzypy.CT_CONTENT)
+qo.setSearchTermFlags(137)
+qo.setId(1)
+qv.append(qo)
+.setQuery(qv, 0, 0, 2)
+.setFlags(16448)
+.setLocale('BINARY')
+.setQueryPart(0)
+"}]]></Details>
+								<InnerPlans>
+									<Plan ID="cs_plan302_hxehost_39001" PlanType="Column" />
+								</InnerPlans>
+							</Relation>
+							<Relation ID="X2_plan22036_hxehost_39001_pop20" TypeName="CS_POP" Status="Finished">
+								<Name><![CDATA[JEAggregate]]></Name>
+								<ExecutionType>Column Search</ExecutionType>
+								<Summary><![CDATA[ SUM (LO_REVENUE)]]></Summary>
+								<Schema><![CDATA[SYSTEM]]></Schema>
+								<ObjectName><![CDATA[LINEORDER.LO_REVENUE]]></ObjectName>
+								<TableType><![CDATA[COLUMN TABLE]]></TableType>
+								<Location><![CDATA[hxehost:39001]]></Location>
+								<ExecutionTime>
+									<Exclusive Unit="ms">0.052</Exclusive>
+									<Inclusive Unit="ms">49.629</Inclusive>
+									<Timestamps>[{"Pop":[{"start":1520955852719234,"end":1520955852719286}]}]</Timestamps>
+								</ExecutionTime>
+								<KernelCPUTime Unit="ms">0</KernelCPUTime>
+								<UserCPUTime Unit="ms">0.063</UserCPUTime>
+								<Details><![CDATA[{"table/column processed 001":"LINEORDER.LO_REVENUE","PerformanceTrace":"{\"details\":[{\"1_timestamp\":\"2018-03-13 16:44:12.719281\",\"2_key\":\"table name\",\"3_value\":\"LINEORDER\",\"9_location\":\"hxehost:39001\"},{\"1_timestamp\":\"2018-03-13 16:44:12.719283\",\"2_key\":\"<large detail>\",\"3_value\":\"<executePop(<LO_REVENUE(<JEAggregator(fn=1,rows=4,inputsize=55,bigcount=0,)=0.01>fn=1,in=55,out=4,)=0.03>)=0.04>\",\"9_location\":\"hxehost:39001\"}]}","PythonTrace":".setIndex('SYSTEMDB::SYSTEM:LINEORDER','en')
+.setAttribute('LO_REVENUE')
+.setAggregationTypes(1)
+.setLocale('BINARY')
+.setQueryPart(0)
+"}]]></Details>
+								<Child ID="X2_plan22036_hxehost_39001_pop23">
+									<ConnectorName><![CDATA[JEPlanData]]></ConnectorName>
+									<ExecutedOutputCardinality>55</ExecutedOutputCardinality>
+									<Payload Unit="bytes">220</Payload>
+									<Details><![CDATA[{ "data container":"vector of integers","description":"list of values" }]]></Details>
+								</Child>
+								<Child ID="X2_plan22036_hxehost_39001_pop23">
+									<ConnectorName><![CDATA[JEPlanData]]></ConnectorName>
+									<ExecutedOutputCardinality>55</ExecutedOutputCardinality>
+									<Payload Unit="bytes">1088</Payload>
+									<Details><![CDATA[{ "data container":"aligned vector of data","description":"vector of values" }]]></Details>
+								</Child>
+							</Relation>
+							<Relation ID="X2_plan22036_hxehost_39001_pop3" TypeName="CS_POP" Status="Finished">
+								<Name><![CDATA[JEEvalPrecond]]></Name>
+								<ExecutionType>Column Search</ExecutionType>
+								<Summary><![CDATA[Access Table using 1 Filter]]></Summary>
+								<Schema><![CDATA[SYSTEM]]></Schema>
+								<ObjectName><![CDATA[CUSTOMER]]></ObjectName>
+								<TableType><![CDATA[COLUMN TABLE]]></TableType>
+								<Location><![CDATA[hxehost:39001]]></Location>
+								<ExecutionTime>
+									<Exclusive Unit="ms">0.646</Exclusive>
+									<Inclusive Unit="ms">0.646</Inclusive>
+									<Timestamps>[{"Pop":[{"start":1520955852669657,"end":1520955852670303}]}]</Timestamps>
+								</ExecutionTime>
+								<KernelCPUTime Unit="ms">0</KernelCPUTime>
+								<UserCPUTime Unit="ms">0.668</UserCPUTime>
+								<Details><![CDATA[{"table processed":"CUSTOMER","PerformanceTrace":"{\"details\":[{\"1_timestamp\":\"2018-03-13 16:44:12.670294\",\"2_key\":\"table name\",\"3_value\":\"CUSTOMER\",\"9_location\":\"hxehost:39001\"},{\"1_timestamp\":\"2018-03-13 16:44:12.670298\",\"2_key\":\"<large detail>\",\"3_value\":\"<executePop(<Search(<jeDocIdSearchPrep()=0.60>)=0.61>)=0.63>\",\"9_location\":\"hxehost:39001\"}]}","PythonTrace":".setName('SYSTEMDB::SYSTEM:CUSTOMER','en')
+.setResultFromTo(1, 18446744073709551615)
+qv=[]
+qo = fuzzypy.QueryEntry()
+qo.setLocation('SYSTEM:CUSTOMER', 'en', 'ForAllEntriesItab:0x7f50ce6eea20', '')
+qo.setValue('\\x01\\x06C_CITY', '\\x01\\x03204', 'EQ')
+qo.setRowType('ATTRIBUTE')
+qo.setContentType(fuzzypy.CT_CONTENT)
+qo.setSearchTermFlags(137)
+qo.setId(0)
+qv.append(qo)
+.setQuery(qv, 0, 0, 1)
+.setFlags(16448)
+.setLocale('BINARY')
+.setQueryPart(0)
+"}]]></Details>
+								<InnerPlans>
+									<Plan ID="cs_plan299_hxehost_39001" PlanType="Column" />
+								</InnerPlans>
+							</Relation>
+							<Relation ID="X2_plan22036_hxehost_39001_pop7" TypeName="CS_POP" Status="Finished">
+								<Name><![CDATA[JEEvalPrecond]]></Name>
+								<ExecutionType>Column Search</ExecutionType>
+								<Summary><![CDATA[Access Table using 1 Filter]]></Summary>
+								<Schema><![CDATA[SYSTEM]]></Schema>
+								<ObjectName><![CDATA[DIM_DATE]]></ObjectName>
+								<TableType><![CDATA[COLUMN TABLE]]></TableType>
+								<Location><![CDATA[hxehost:39001]]></Location>
+								<ExecutionTime>
+									<Exclusive Unit="ms">0.355</Exclusive>
+									<Inclusive Unit="ms">0.355</Inclusive>
+									<Timestamps>[{"Pop":[{"start":1520955852670935,"end":1520955852671290}]}]</Timestamps>
+								</ExecutionTime>
+								<KernelCPUTime Unit="ms">0</KernelCPUTime>
+								<UserCPUTime Unit="ms">0.367</UserCPUTime>
+								<Details><![CDATA[{"table processed":"DIM_DATE","PerformanceTrace":"{\"details\":[{\"1_timestamp\":\"2018-03-13 16:44:12.671284\",\"2_key\":\"table name\",\"3_value\":\"DIM_DATE\",\"9_location\":\"hxehost:39001\"},{\"1_timestamp\":\"2018-03-13 16:44:12.671287\",\"2_key\":\"<large detail>\",\"3_value\":\"<executePop(<Search(<jeDocIdSearchPrep()=0.33>)=0.33>)=0.34>\",\"9_location\":\"hxehost:39001\"}]}","PythonTrace":".setName('SYSTEMDB::SYSTEM:DIM_DATE','en')
+.setResultFromTo(1, 18446744073709551615)
+qv=[]
+qo = fuzzypy.QueryEntry()
+qo.setLocation('SYSTEM:DIM_DATE', 'en', 'D_YEARMONTH', '')
+qo.setValue('Dec1997', '', 'EQ')
+qo.setRowType('ATTRIBUTE')
+qo.setContentType(fuzzypy.CT_CONTENT)
+qo.setSearchTermFlags(17)
+qo.setId(4)
+qv.append(qo)
+.setQuery(qv, 0, 0, 0)
+.setFlags(16448)
+.setLocale('BINARY')
+.setQueryPart(0)
+"}]]></Details>
+								<InnerPlans>
+									<Plan ID="cs_plan305_hxehost_39001" PlanType="Column" />
+								</InnerPlans>
+							</Relation>
+							<Relation ID="cs_plan309_hxehost_39001_pattern2" Status="Finished" Physical="False">
+								<Name><![CDATA[join]]></Name>
+								<ExecutionType>Column Search</ExecutionType>
+								<Summary><![CDATA[(11 nodes) composition of semijoins]]></Summary>
+								<Schema><![CDATA[SYSTEM]]></Schema>
+								<ObjectName><![CDATA[CUSTOMER, DIM_DATE, LINEORDER, SUPPLIER]]></ObjectName>
+								<ExecutionTime>
+									<Exclusive Unit="ms">47.650</Exclusive>
+									<Inclusive Unit="ms">49.380</Inclusive>
+									<Timestamps>[{"Pop":[{"start":1520955852670340,"end":1520955852670514}]},{"Pop":[{"start":1520955852671307,"end":1520955852671352}]},{"Pop":[{"start":1520955852671366,"end":1520955852671405}]},{"Pop":[{"start":1520955852671420,"end":1520955852718594}]},{"Pop":[{"start":1520955852718626,"end":1520955852718649}]},{"Pop":[{"start":1520955852718660,"end":1520955852718672}]},{"Pop":[{"start":1520955852718683,"end":1520955852718694}]},{"Pop":[{"start":1520955852718704,"end":1520955852718724}]},{"Pop":[{"start":1520955852718734,"end":1520955852718782}]},{"Pop":[{"start":1520955852718794,"end":1520955852718818}]},{"Pop":[{"start":1520955852718957,"end":1520955852719037}]}]</Timestamps>
+								</ExecutionTime>
+								<KernelCPUTime Unit="ms">0</KernelCPUTime>
+								<UserCPUTime Unit="ms">7.533</UserCPUTime>
+								<Details><![CDATA[{"nodes":"11","table/column processed 001":"CUSTOMER.C_CUSTOMERKEY","table/column processed 002":"DIM_DATE.D_DATEKEY","table/column processed 003":"LINEORDER.C_CUSTOMERKEY","table/column processed 004":"LINEORDER.D_DATEKEY","table/column processed 005":"LINEORDER.LO_CUSTKEY","table/column processed 006":"LINEORDER.LO_ORDERDATEKEY","table/column processed 007":"LINEORDER.LO_SUPPKEY","table/column processed 008":"LINEORDER.S_SUPPKEY","table/column processed 009":"SUPPLIER.S_SUPPKEY","schema":"SYSTEM","table/column processed 001":"CUSTOMER.C_CUSTOMERKEY","table/column processed 002":"DIM_DATE.D_DATEKEY","table/column processed 003":"LINEORDER.C_CUSTOMERKEY","table/column processed 004":"LINEORDER.D_DATEKEY","table/column processed 005":"LINEORDER.LO_CUSTKEY","table/column processed 006":"LINEORDER.LO_ORDERDATEKEY","table/column processed 007":"LINEORDER.LO_SUPPKEY","table/column processed 008":"LINEORDER.S_SUPPKEY","table/column processed 009":"SUPPLIER.S_SUPPKEY","schema":"SYSTEM"}]]></Details>
+								<InnerPlans>
+									<Plan ID="subplan_cs_plan309_hxehost_39001_pattern2" PlanType="Column">
+										<Relation ID="X2_plan22036_hxehost_39001_pop22" TypeName="CS_POP" Status="Finished">
+											<Name><![CDATA[JECreateNTuple]]></Name>
+											<ExecutionType>Column Search</ExecutionType>
+											<Summary><![CDATA[Sorted Merge Join]]></Summary>
+											<Location><![CDATA[hxehost:39001]]></Location>
+											<ExecutionTime>
+												<Exclusive Unit="ms">0.080</Exclusive>
+												<Inclusive Unit="ms">49.380</Inclusive>
+												<Timestamps>[{"Pop":[{"start":1520955852718957,"end":1520955852719037}]}]</Timestamps>
+											</ExecutionTime>
+											<KernelCPUTime Unit="ms">0</KernelCPUTime>
+											<UserCPUTime Unit="ms">0.091</UserCPUTime>
+											<Details><![CDATA[{"PerformanceTrace":"{\"details\":[{\"1_timestamp\":\"2018-03-13 16:44:12.719029\",\"2_key\":\"table name\",\"3_value\":\"<none>\",\"9_location\":\"hxehost:39001\"},{\"1_timestamp\":\"2018-03-13 16:44:12.719031\",\"2_key\":\"<large detail>\",\"3_value\":\"<executePop(<loop(<RowInfo(produced=55,discarded=0,deadEnds=0,)=0.00>numCores=1,cols=4,rows=55,)=0.05>)=0.06>\",\"9_location\":\"hxehost:39001\"}]}","PythonTrace":".setQueryPart(0)
+.addInfo('IX_SYSTEMDB::SYSTEM:LINEORDERen', 'VID_SYSTEMDB::SYSTEM:DIM_DATEen/D_DATEKEY', 1, 0, 1, 0, 2, -1, 2, 0)
+.addInfo('VID_SYSTEMDB::SYSTEM:DIM_DATEen/D_DATEKEY', 'IX_SYSTEMDB::SYSTEM:DIM_DATEen', 0, 1, 0, 1, -1, -1, 2, 1)
+.addInfo('IX_SYSTEMDB::SYSTEM:LINEORDERen', 'VID_SYSTEMDB::SYSTEM:SUPPLIERen/S_SUPPKEY', 0, 0, 1, 0, 4, -1, 1, 2)
+.addInfo('VID_SYSTEMDB::SYSTEM:SUPPLIERen/S_SUPPKEY', 'IX_SYSTEMDB::SYSTEM:SUPPLIERen', 0, 1, 0, 1, -1, -1, 1, 3)
+.addInfo('IX_SYSTEMDB::SYSTEM:LINEORDERen', 'VID_SYSTEMDB::SYSTEM:CUSTOMERen/C_CUSTOMERKEY', 0, 0, 0, 0, -1, -1, 0, 4)
+.addInfo('VID_SYSTEMDB::SYSTEM:CUSTOMERen/C_CUSTOMERKEY', 'IX_SYSTEMDB::SYSTEM:CUSTOMERen', 0, 1, 0, 1, -1, -1, 0, 5)
+.setFlags(5)
+.setEstimatedResultSize(45)
+"}]]></Details>
+											<Child ID="X2_plan22036_hxehost_39001_pop4">
+												<ConnectorName><![CDATA[JEPlanData]]></ConnectorName>
+												<ExecutedOutputCardinality>53</ExecutedOutputCardinality>
+												<Payload Unit="bytes">1312</Payload>
+												<Details><![CDATA[{ "data container":"vector of integer pairs: (docid, valueid)","description":"result of semi-join reduction" }]]></Details>
+											</Child>
+											<Child ID="X2_plan22036_hxehost_39001_pop8">
+												<ConnectorName><![CDATA[JEPlanData]]></ConnectorName>
+												<ExecutedOutputCardinality>27</ExecutedOutputCardinality>
+												<Payload Unit="bytes">1136</Payload>
+												<Details><![CDATA[{ "data container":"vector of integer pairs: (docid, valueid)","description":"result of semi-join reduction" }]]></Details>
+											</Child>
+											<Child ID="X2_plan22036_hxehost_39001_pop10">
+												<ConnectorName><![CDATA[JEPlanData]]></ConnectorName>
+												<ExecutedOutputCardinality>55</ExecutedOutputCardinality>
+												<Payload Unit="bytes">3939552</Payload>
+												<Details><![CDATA[{ "data container":"vector of integer pairs: (docid, valueid)","description":"result of semi-join reduction" }]]></Details>
+											</Child>
+											<Child ID="X2_plan22036_hxehost_39001_pop10">
+												<ConnectorName><![CDATA[JEPlanData]]></ConnectorName>
+												<ExecutedOutputCardinality>55</ExecutedOutputCardinality>
+												<Payload Unit="bytes">32152</Payload>
+												<Details><![CDATA[{ "data container":"vector of integer pairs: (docid, valueid)","description":"result of semi-join reduction" }]]></Details>
+											</Child>
+											<Child ID="X2_plan22036_hxehost_39001_pop10">
+												<ConnectorName><![CDATA[JEPlanData]]></ConnectorName>
+												<ExecutedOutputCardinality>55</ExecutedOutputCardinality>
+												<Payload Unit="bytes">3724072</Payload>
+												<Details><![CDATA[{ "data container":"vector of integer pairs: (docid, valueid)","description":"result of semi-join reduction" }]]></Details>
+											</Child>
+											<Child ID="X2_plan22036_hxehost_39001_pop17">
+												<ConnectorName><![CDATA[JEPlanData]]></ConnectorName>
+												<ExecutedOutputCardinality>47</ExecutedOutputCardinality>
+												<Payload Unit="bytes">1264</Payload>
+												<Details><![CDATA[{ "data container":"vector of integer pairs: (docid, valueid)","description":"result of semi-join reduction" }]]></Details>
+											</Child>
+										</Relation>
+										<Relation ID="cs_plan309_hxehost_39001_pattern1" Status="Finished" Physical="False">
+											<Name><![CDATA[reduction phase]]></Name>
+											<ExecutionType>Column Search</ExecutionType>
+											<Summary><![CDATA[(10 nodes) reduce data prior to join]]></Summary>
+											<Schema><![CDATA[SYSTEM]]></Schema>
+											<ObjectName><![CDATA[CUSTOMER, DIM_DATE, LINEORDER, SUPPLIER]]></ObjectName>
+											<ExecutionTime>
+												<Exclusive Unit="ms">47.570</Exclusive>
+												<Inclusive Unit="ms">49.161</Inclusive>
+												<Timestamps>[{"Pop":[{"start":1520955852670340,"end":1520955852670514}]},{"Pop":[{"start":1520955852671307,"end":1520955852671352}]},{"Pop":[{"start":1520955852671366,"end":1520955852671405}]},{"Pop":[{"start":1520955852671420,"end":1520955852718594}]},{"Pop":[{"start":1520955852718626,"end":1520955852718649}]},{"Pop":[{"start":1520955852718660,"end":1520955852718672}]},{"Pop":[{"start":1520955852718683,"end":1520955852718694}]},{"Pop":[{"start":1520955852718704,"end":1520955852718724}]},{"Pop":[{"start":1520955852718734,"end":1520955852718782}]},{"Pop":[{"start":1520955852718794,"end":1520955852718818}]}]</Timestamps>
+											</ExecutionTime>
+											<KernelCPUTime Unit="ms">0</KernelCPUTime>
+											<UserCPUTime Unit="ms">7.442</UserCPUTime>
+											<Details><![CDATA[{"nodes":"10","table/column processed 001":"CUSTOMER.C_CUSTOMERKEY","table/column processed 002":"DIM_DATE.D_DATEKEY","table/column processed 003":"LINEORDER.C_CUSTOMERKEY","table/column processed 004":"LINEORDER.D_DATEKEY","table/column processed 005":"LINEORDER.LO_CUSTKEY","table/column processed 006":"LINEORDER.LO_ORDERDATEKEY","table/column processed 007":"LINEORDER.LO_SUPPKEY","table/column processed 008":"LINEORDER.S_SUPPKEY","table/column processed 009":"SUPPLIER.S_SUPPKEY","schema":"SYSTEM","table/column processed 001":"CUSTOMER.C_CUSTOMERKEY","table/column processed 002":"DIM_DATE.D_DATEKEY","table/column processed 003":"LINEORDER.C_CUSTOMERKEY","table/column processed 004":"LINEORDER.D_DATEKEY","table/column processed 005":"LINEORDER.LO_CUSTKEY","table/column processed 006":"LINEORDER.LO_ORDERDATEKEY","table/column processed 007":"LINEORDER.LO_SUPPKEY","table/column processed 008":"LINEORDER.S_SUPPKEY","table/column processed 009":"SUPPLIER.S_SUPPKEY","schema":"SYSTEM","table/column processed 001":"CUSTOMER.C_CUSTOMERKEY","table/column processed 002":"DIM_DATE.D_DATEKEY","table/column processed 003":"LINEORDER.C_CUSTOMERKEY","table/column processed 004":"LINEORDER.D_DATEKEY","table/column processed 005":"LINEORDER.LO_CUSTKEY","table/column processed 006":"LINEORDER.LO_ORDERDATEKEY","table/column processed 007":"LINEORDER.LO_SUPPKEY","table/column processed 008":"LINEORDER.S_SUPPKEY","table/column processed 009":"SUPPLIER.S_SUPPKEY","schema":"SYSTEM"}]]></Details>
+											<InnerPlans>
+												<Plan ID="subplan_cs_plan309_hxehost_39001_pattern1" PlanType="Column">
+													<Relation ID="X2_plan22036_hxehost_39001_pop10" TypeName="CS_POP" Status="Finished">
+														<Name><![CDATA[JEStep2]]></Name>
+														<ExecutionType>Column Search</ExecutionType>
+														<Summary><![CDATA[Semijoin2 (multiple second join partners) + Filter]]></Summary>
+														<Schema><![CDATA[SYSTEM]]></Schema>
+														<ObjectName><![CDATA[LINEORDER]]></ObjectName>
+														<Location><![CDATA[hxehost:39001]]></Location>
+														<ExecutionTime>
+															<Exclusive Unit="ms">47.174</Exclusive>
+															<Inclusive Unit="ms">48.937</Inclusive>
+															<Timestamps>[{"Pop":[{"start":1520955852671420,"end":1520955852718594}]}]</Timestamps>
+														</ExecutionTime>
+														<KernelCPUTime Unit="ms">0</KernelCPUTime>
+														<UserCPUTime Unit="ms">6.922</UserCPUTime>
+														<Details><![CDATA[{"table/column processed 001":"LINEORDER.LO_SUPPKEY","table/column processed 002":"LINEORDER.LO_ORDERDATEKEY","table/column processed 003":"LINEORDER.LO_CUSTKEY","PerformanceTrace":"{\"details\":[{\"1_timestamp\":\"2018-03-13 16:44:12.697919\",\"2_key\":\"column access\",\"3_value\":\"Block index: no index existing [column: LO_SUPPKEY, table: LINEORDER, schema: SYSTEM]\",\"4_duration\":\"26.436\",\"9_location\":\"hxehost:39001\"},{\"1_timestamp\":\"2018-03-13 16:44:12.717217\",\"2_key\":\"column access\",\"3_value\":\"Block index: no index existing [column: LO_CUSTKEY, table: LINEORDER, schema: SYSTEM]\",\"4_duration\":\"15.522\",\"9_location\":\"hxehost:39001\"},{\"1_timestamp\":\"2018-03-13 16:44:12.717571\",\"2_key\":\"column access\",\"3_value\":\"Inverted index: no index existing [column: LO_ORDERDATEKEY, table: LINEORDER, schema: SYSTEM]\",\"4_duration\":\"0.256\",\"9_location\":\"hxehost:39001\"},{\"1_timestamp\":\"2018-03-13 16:44:12.718584\",\"2_key\":\"table name\",\"3_value\":\"LINEORDER\",\"9_location\":\"hxehost:39001\"},{\"1_timestamp\":\"2018-03-13 16:44:12.718586\",\"2_key\":\"<large detail>\",\"3_value\":\"<executePop(<jeGetApproxCounts(attrs=1,)=0.00><jeGetApproxCounts(attrs=1,)=0.00><jeGetApproxCounts(attrs=1,)=0.00><fillTT(numTT=1,)=0.00><translate_remove_li_vec(size=164,newSize=164,)=0.00><jeReadIndex(<issFill()=0.00>in=164,out=492333,)=26.47><translate_remove_vec(size=164,newSize=164,)=0.00><translate_mark_li_no_abort_vec(size=492333,)=1.56><fillTT(numTT=1,)=0.00><translate_remove_li_vec(size=2370,newSize=1566,)=0.04><jeReadIndex(in=1566,out=3908,)=15.93><translate_mark_li_vec(size=3908,)=0.03><fillTT(numTT=1,)=0.00><translate_remove_li_vec(size=31,newSize=31,)=0.00><jeReadIndex(in=31,out=55,)=0.26><translate_mark_li_vec(size=55,)=0.00><markTuplesNotInTL(num=492333,numMarked=492278,)=0.44><removeTuples(<eraseRows(NumCols=2,)=0.51>in=492333,partitions=0,out=55,)=0.52><markTuplesNotInTL(num=3908,numMarked=3853,)=0.00><removeTuples(<eraseRows(NumCols=2,)=0.00>in=3908,partitions=0,out=55,)=0.00><tlsort(rows=55,)=0.00><tlsort(rows=55,)=0.00>)=47.15>\",\"9_location\":\"hxehost:39001\"}]}","FunctionProfiler":"[{\"Start Time\":\"2018-03-13 16:44:12.646\",\"Steps\":[{\"Name\":\"IndirectScanVecOutHelper\",\"Total\":10.984}],\"Thread\":3460},{\"Start Time\":\"2018-03-13 16:44:12.656\",\"Steps\":[{\"Name\":\"IndirectScanVecOutHelper\",\"Total\":1.358}],\"Thread\":3478},{\"Start Time\":\"2018-03-13 16:44:12.658\",\"Steps\":[{\"Name\":\"IndirectScanVecOutHelper\",\"Total\":2.514}],\"Thread\":3460},{\"Start Time\":\"2018-03-13 16:44:12.646\",\"Steps\":[{\"Name\":\"IndirectScanVecOutHelper\",\"Total\":17.514}],\"Thread\":3431},{\"Start Time\":\"2018-03-13 16:44:12.646\",\"Steps\":[{\"Name\":\"IndirectScanVecOutHelper\",\"Total\":18.325}],\"Thread\":3440},{\"Start Time\":\"2018-03-13 16:44:12.646\",\"Steps\":[{\"Name\":\"IndirectScanVecOutHelper\",\"Total\":20.067}],\"Thread\":2274},{\"Start Time\":\"2018-03-13 16:44:12.646\",\"Steps\":[{\"Name\":\"IndirectScanVecOutHelper\",\"Total\":21.181}],\"Thread\":3514},{\"Start Time\":\"2018-03-13 16:44:12.646\",\"Steps\":[{\"Name\":\"IndirectScanVecOutHelper\",\"Total\":21.252}],\"Thread\":3519},{\"Start Time\":\"2018-03-13 16:44:12.646\",\"Steps\":[{\"Children\":0.209,\"Name\":\"IndDocuments::scan(values,vector)\",\"Self\":21.581,\"Steps\":[{\"Name\":\"postProcessScanVecResult()\",\"Total\":0.209}],\"Total\":21.79}],\"Thread\":2609},{\"Start Time\":\"2018-03-13 16:44:12.677\",\"Steps\":[{\"Name\":\"IndirectScanVecOutHelper\",\"Total\":1.566}],\"Thread\":3481},{\"Start Time\":\"2018-03-13 16:44:12.677\",\"Steps\":[{\"Name\":\"IndirectScanVecOutHelper\",\"Total\":1.761}],\"Thread\":2274},{\"Start Time\":\"2018-03-13 16:44:12.677\",\"Steps\":[{\"Name\":\"IndirectScanVecOutHelper\",\"Total\":1.921}],\"Thread\":3478},{\"Start Time\":\"2018-03-13 16:44:12.677\",\"Steps\":[{\"Name\":\"IndirectScanVecOutHelper\",\"Total\":3.037}],\"Thread\":3514},{\"Start Time\":\"2018-03-13 16:44:12.677\",\"Steps\":[{\"Name\":\"IndirectScanVecOutHelper\",\"Total\":3.148}],\"Thread\":2583},{\"Start Time\":\"2018-03-13 16:44:12.677\",\"Steps\":[{\"Name\":\"IndirectScanVecOutHelper\",\"Total\":8.374}],\"Thread\":3518},{\"Start Time\":\"2018-03-13 16:44:12.677\",\"Steps\":[{\"Name\":\"IndirectScanVecOutHelper\",\"Total\":10.318}],\"Thread\":3460},{\"Start Time\":\"2018-03-13 16:44:12.677\",\"Steps\":[{\"Name\":\"IndirectScanVecOutHelper\",\"Total\":14.151}],\"Thread\":3449},{\"Start Time\":\"2018-03-13 16:44:12.676\",\"Steps\":[{\"Children\":0.219,\"Name\":\"IndDocuments::scan(values,vector)\",\"Self\":14.474,\"Steps\":[{\"Name\":\"postProcessScanVecResult()\",\"Total\":0.219}],\"Total\":14.693}],\"Thread\":2609}]","PythonTrace":".setIndex('SYSTEMDB::SYSTEM:LINEORDERen')
+attrFrom=['S_SUPPKEY']
+attrTo=['LO_SUPPKEY']
+parts=[('SYSTEMDB::SYSTEM:SUPPLIERen', 0, 4294967295, 0)]
+.addReducer('SYSTEMDB::SYSTEM:SUPPLIERen', attrFrom, attrTo, parts, 0, flags=1, sortAttrs=[])
+attrFrom=['D_DATEKEY']
+attrTo=['LO_ORDERDATEKEY']
+parts=[('SYSTEMDB::SYSTEM:DIM_DATEen', 1, 4294967295, 0)]
+.addReducer('SYSTEMDB::SYSTEM:DIM_DATEen', attrFrom, attrTo, parts, 1, sortAttrs=[])
+attrFrom=['C_CUSTOMERKEY']
+attrTo=['LO_CUSTKEY']
+parts=[('SYSTEMDB::SYSTEM:CUSTOMERen', 2, 4294967295, 0)]
+.addReducer('SYSTEMDB::SYSTEM:CUSTOMERen', attrFrom, attrTo, parts, 2, flags=1, sortAttrs=[])
+.setFlags(0)
+.setMarkValue(-1)
+.setISSInput(4294967295)
+.prepare()
+.setQueryPart(0)
+"}]]></Details>
+														<Child ID="X2_plan22036_hxehost_39001_pop15">
+															<ConnectorName><![CDATA[JEPlanData]]></ConnectorName>
+															<ExecutedOutputCardinality>164</ExecutedOutputCardinality>
+															<Payload Unit="bytes">1140</Payload>
+															<Details><![CDATA[{ "data container":"vector of integer pairs: (docid, valueid)","description":"result of semi-join reduction" }]]></Details>
+														</Child>
+														<Child ID="X2_plan22036_hxehost_39001_pop6">
+															<ConnectorName><![CDATA[JEPlanData]]></ConnectorName>
+															<ExecutedOutputCardinality>31</ExecutedOutputCardinality>
+															<Payload Unit="bytes">608</Payload>
+															<Details><![CDATA[{ "data container":"vector of integer pairs: (docid, valueid)","description":"result of semi-join reduction" }]]></Details>
+														</Child>
+														<Child ID="X2_plan22036_hxehost_39001_pop2">
+															<ConnectorName><![CDATA[JEPlanData]]></ConnectorName>
+															<ExecutedOutputCardinality>2370</ExecutedOutputCardinality>
+															<Payload Unit="bytes">9964</Payload>
+															<Details><![CDATA[{ "data container":"vector of integer pairs: (docid, valueid)","description":"result of semi-join reduction" }]]></Details>
+														</Child>
+													</Relation>
+													<Relation ID="X2_plan22036_hxehost_39001_pop11" TypeName="CS_POP" Status="Finished">
+														<Name><![CDATA[JEStep3b]]></Name>
+														<ExecutionType>Column Search</ExecutionType>
+														<Summary><![CDATA[Semijoin3]]></Summary>
+														<Schema><![CDATA[SYSTEM]]></Schema>
+														<ObjectName><![CDATA[LINEORDER.D_DATEKEY]]></ObjectName>
+														<TableType><![CDATA[COLUMN TABLE]]></TableType>
+														<Location><![CDATA[hxehost:39001]]></Location>
+														<ExecutionTime>
+															<Exclusive Unit="ms">0.023</Exclusive>
+															<Inclusive Unit="ms">48.992</Inclusive>
+															<Timestamps>[{"Pop":[{"start":1520955852718626,"end":1520955852718649}]}]</Timestamps>
+														</ExecutionTime>
+														<KernelCPUTime Unit="ms">0</KernelCPUTime>
+														<UserCPUTime Unit="ms">0.046</UserCPUTime>
+														<Details><![CDATA[{"table/column processed 001":"LINEORDER.D_DATEKEY","PerformanceTrace":"{\"details\":[{\"1_timestamp\":\"2018-03-13 16:44:12.718645\",\"2_key\":\"table name\",\"3_value\":\"LINEORDER\",\"9_location\":\"hxehost:39001\"},{\"1_timestamp\":\"2018-03-13 16:44:12.718647\",\"2_key\":\"<large detail>\",\"3_value\":\"<executePop(<uniqueValues(in=55,out=27,)=0.00>)=0.01>\",\"9_location\":\"hxehost:39001\"}]}","PythonTrace":".setNames('SYSTEMDB::SYSTEM:LINEORDER','en','VID_SYSTEMDB::SYSTEM:DIM_DATEen/D_DATEKEY')
+.setEdgeId(2)
+.setQueryPart(0)
+"}]]></Details>
+														<Child ID="X2_plan22036_hxehost_39001_pop10">
+															<ConnectorName><![CDATA[JEPlanData]]></ConnectorName>
+															<ExecutedOutputCardinality>55</ExecutedOutputCardinality>
+															<Payload Unit="bytes">32152</Payload>
+															<Details><![CDATA[{ "data container":"vector of integer pairs: (docid, valueid)","description":"result of semi-join reduction" }]]></Details>
+														</Child>
+													</Relation>
+													<Relation ID="X2_plan22036_hxehost_39001_pop12" TypeName="CS_POP" Status="Finished">
+														<Name><![CDATA[JEStep3b]]></Name>
+														<ExecutionType>Column Search</ExecutionType>
+														<Summary><![CDATA[Semijoin3]]></Summary>
+														<Schema><![CDATA[SYSTEM]]></Schema>
+														<ObjectName><![CDATA[LINEORDER.C_CUSTOMERKEY]]></ObjectName>
+														<TableType><![CDATA[COLUMN TABLE]]></TableType>
+														<Location><![CDATA[hxehost:39001]]></Location>
+														<ExecutionTime>
+															<Exclusive Unit="ms">0.012</Exclusive>
+															<Inclusive Unit="ms">49.015</Inclusive>
+															<Timestamps>[{"Pop":[{"start":1520955852718660,"end":1520955852718672}]}]</Timestamps>
+														</ExecutionTime>
+														<KernelCPUTime Unit="ms">0</KernelCPUTime>
+														<UserCPUTime Unit="ms">0.0219999</UserCPUTime>
+														<Details><![CDATA[{"table/column processed 001":"LINEORDER.C_CUSTOMERKEY","PerformanceTrace":"{\"details\":[{\"1_timestamp\":\"2018-03-13 16:44:12.718668\",\"2_key\":\"table name\",\"3_value\":\"LINEORDER\",\"9_location\":\"hxehost:39001\"},{\"1_timestamp\":\"2018-03-13 16:44:12.718670\",\"2_key\":\"<large detail>\",\"3_value\":\"<executePop(<uniqueValues(in=55,out=53,)=0.00>)=0.00>\",\"9_location\":\"hxehost:39001\"}]}","PythonTrace":".setNames('SYSTEMDB::SYSTEM:LINEORDER','en','VID_SYSTEMDB::SYSTEM:CUSTOMERen/C_CUSTOMERKEY')
+.setEdgeId(0)
+.setQueryPart(0)
+"}]]></Details>
+														<Child ID="X2_plan22036_hxehost_39001_pop10">
+															<ConnectorName><![CDATA[JEPlanData]]></ConnectorName>
+															<ExecutedOutputCardinality>55</ExecutedOutputCardinality>
+															<Payload Unit="bytes">3724072</Payload>
+															<Details><![CDATA[{ "data container":"vector of integer pairs: (docid, valueid)","description":"result of semi-join reduction" }]]></Details>
+														</Child>
+													</Relation>
+													<Relation ID="X2_plan22036_hxehost_39001_pop13" TypeName="CS_POP" Status="Finished">
+														<Name><![CDATA[JEStep3b]]></Name>
+														<ExecutionType>Column Search</ExecutionType>
+														<Summary><![CDATA[Semijoin3]]></Summary>
+														<Schema><![CDATA[SYSTEM]]></Schema>
+														<ObjectName><![CDATA[LINEORDER.S_SUPPKEY]]></ObjectName>
+														<TableType><![CDATA[COLUMN TABLE]]></TableType>
+														<Location><![CDATA[hxehost:39001]]></Location>
+														<ExecutionTime>
+															<Exclusive Unit="ms">0.011</Exclusive>
+															<Inclusive Unit="ms">49.037</Inclusive>
+															<Timestamps>[{"Pop":[{"start":1520955852718683,"end":1520955852718694}]}]</Timestamps>
+														</ExecutionTime>
+														<KernelCPUTime Unit="ms">0</KernelCPUTime>
+														<UserCPUTime Unit="ms">0.019</UserCPUTime>
+														<Details><![CDATA[{"table/column processed 001":"LINEORDER.S_SUPPKEY","PerformanceTrace":"{\"details\":[{\"1_timestamp\":\"2018-03-13 16:44:12.718691\",\"2_key\":\"table name\",\"3_value\":\"LINEORDER\",\"9_location\":\"hxehost:39001\"},{\"1_timestamp\":\"2018-03-13 16:44:12.718692\",\"2_key\":\"<large detail>\",\"3_value\":\"<executePop(<uniqueValues(in=55,out=47,)=0.00>)=0.00>\",\"9_location\":\"hxehost:39001\"}]}","PythonTrace":".setNames('SYSTEMDB::SYSTEM:LINEORDER','en','VID_SYSTEMDB::SYSTEM:SUPPLIERen/S_SUPPKEY')
+.setEdgeId(1)
+.setQueryPart(0)
+"}]]></Details>
+														<Child ID="X2_plan22036_hxehost_39001_pop10">
+															<ConnectorName><![CDATA[JEPlanData]]></ConnectorName>
+															<ExecutedOutputCardinality>55</ExecutedOutputCardinality>
+															<Payload Unit="bytes">3939552</Payload>
+															<Details><![CDATA[{ "data container":"vector of integer pairs: (docid, valueid)","description":"result of semi-join reduction" }]]></Details>
+														</Child>
+													</Relation>
+													<Relation ID="cs_plan309_hxehost_39001_pattern1_abstr1" Status="Finished" Physical="False">
+														<Name><![CDATA[JEStep1]]></Name>
+														<ExecutionType>Column Search</ExecutionType>
+														<Summary><![CDATA[(3 identical) Semijoin1 (first join partner)]]></Summary>
+														<Schema><![CDATA[SYSTEM]]></Schema>
+														<ObjectName><![CDATA[CUSTOMER, DIM_DATE, SUPPLIER]]></ObjectName>
+														<ExecutionTime>
+															<Exclusive Unit="ms">0.258</Exclusive>
+															<Inclusive Unit="ms">1.748</Inclusive>
+															<Timestamps>[{"Pop":[{"start":1520955852670340,"end":1520955852670514}]},{"Pop":[{"start":1520955852671307,"end":1520955852671352}]},{"Pop":[{"start":1520955852671366,"end":1520955852671405}]}]</Timestamps>
+														</ExecutionTime>
+														<KernelCPUTime Unit="ms">0</KernelCPUTime>
+														<UserCPUTime Unit="ms">0.315</UserCPUTime>
+														<Details><![CDATA[{"nodes":"3","table/column processed 001":"CUSTOMER.C_CUSTOMERKEY","table/column processed 002":"DIM_DATE.D_DATEKEY","table/column processed 003":"SUPPLIER.S_SUPPKEY","schema":"SYSTEM","table/column processed 001":"CUSTOMER.C_CUSTOMERKEY","table/column processed 002":"DIM_DATE.D_DATEKEY","table/column processed 003":"SUPPLIER.S_SUPPKEY","schema":"SYSTEM","table/column processed 001":"CUSTOMER.C_CUSTOMERKEY","table/column processed 002":"DIM_DATE.D_DATEKEY","table/column processed 003":"SUPPLIER.S_SUPPKEY","schema":"SYSTEM","table/column processed 001":"CUSTOMER.C_CUSTOMERKEY","table/column processed 002":"DIM_DATE.D_DATEKEY","table/column processed 003":"SUPPLIER.S_SUPPKEY","schema":"SYSTEM"}]]></Details>
+														<InnerPlans>
+															<Plan ID="subplan_cs_plan309_hxehost_39001_pattern1_abstr1" PlanType="Column">
+																<Relation ID="X2_plan22036_hxehost_39001_pop15" TypeName="CS_POP" Status="Finished">
+																	<Name><![CDATA[JEStep1]]></Name>
+																	<ExecutionType>Column Search</ExecutionType>
+																	<Summary><![CDATA[Semijoin1 (first join partner)]]></Summary>
+																	<Schema><![CDATA[SYSTEM]]></Schema>
+																	<ObjectName><![CDATA[SUPPLIER.S_SUPPKEY]]></ObjectName>
+																	<TableType><![CDATA[COLUMN TABLE]]></TableType>
+																	<Location><![CDATA[hxehost:39001]]></Location>
+																	<ExecutionTime>
+																		<Exclusive Unit="ms">0.039</Exclusive>
+																		<Inclusive Unit="ms">0.874</Inclusive>
+																		<Timestamps>[{"Pop":[{"start":1520955852671366,"end":1520955852671405}]}]</Timestamps>
+																	</ExecutionTime>
+																	<KernelCPUTime Unit="ms">0</KernelCPUTime>
+																	<UserCPUTime Unit="ms">0.05</UserCPUTime>
+																	<Details><![CDATA[{"table/column processed 001":"SUPPLIER.S_SUPPKEY","PerformanceTrace":"{\"details\":[{\"1_timestamp\":\"2018-03-13 16:44:12.671400\",\"2_key\":\"table name\",\"3_value\":\"SUPPLIER\",\"9_location\":\"hxehost:39001\"},{\"1_timestamp\":\"2018-03-13 16:44:12.671402\",\"2_key\":\"<large detail>\",\"3_value\":\"<executePop(<jeReadValueIds()=0.00><uniqueHeadValues(<uniqueHeadValues(<uniqueHeadValues(<uniqueValues(<eraseUnique(un=164,)=0.00>sz=164,)=0.00>line=577,)=0.00>line=567,)=0.01>in=164,out=164,)=0.01><getApproxCounts()=0.00>)=0.03>\",\"9_location\":\"hxehost:39001\"}]}","PythonTrace":".setNames('SYSTEMDB::SYSTEM:SUPPLIER','en',['S_SUPPKEY'], [0])
+.setEdgeId(1)
+.setRuntimeValues(-1, -1, [])
+.setJoinPartType(0)
+.setFlags(24)
+.setLocale('BINARY')
+.setQueryPart(0)
+"}]]></Details>
+																	<Child ID="X2_plan22036_hxehost_39001_pop16">
+																		<ConnectorName><![CDATA[JEPlanData]]></ConnectorName>
+																		<ExecutedOutputCardinality>164</ExecutedOutputCardinality>
+																		<Payload Unit="bytes">200</Payload>
+																		<Details><![CDATA[{ "description":"result of the evaluation of a filter condition" }]]></Details>
+																	</Child>
+																</Relation>
+																<Relation ID="X2_plan22036_hxehost_39001_pop2" TypeName="CS_POP" Status="Finished">
+																	<Name><![CDATA[JEStep1]]></Name>
+																	<ExecutionType>Column Search</ExecutionType>
+																	<Summary><![CDATA[Semijoin1 (first join partner)]]></Summary>
+																	<Schema><![CDATA[SYSTEM]]></Schema>
+																	<ObjectName><![CDATA[CUSTOMER.C_CUSTOMERKEY]]></ObjectName>
+																	<TableType><![CDATA[COLUMN TABLE]]></TableType>
+																	<Location><![CDATA[hxehost:39001]]></Location>
+																	<ExecutionTime>
+																		<Exclusive Unit="ms">0.174</Exclusive>
+																		<Inclusive Unit="ms">0.857</Inclusive>
+																		<Timestamps>[{"Pop":[{"start":1520955852670340,"end":1520955852670514}]}]</Timestamps>
+																	</ExecutionTime>
+																	<KernelCPUTime Unit="ms">0</KernelCPUTime>
+																	<UserCPUTime Unit="ms">0.206</UserCPUTime>
+																	<Details><![CDATA[{"table/column processed 001":"CUSTOMER.C_CUSTOMERKEY","PerformanceTrace":"{\"details\":[{\"1_timestamp\":\"2018-03-13 16:44:12.670508\",\"2_key\":\"table name\",\"3_value\":\"CUSTOMER\",\"9_location\":\"hxehost:39001\"},{\"1_timestamp\":\"2018-03-13 16:44:12.670510\",\"2_key\":\"<large detail>\",\"3_value\":\"<executePop(<jeReadValueIds()=0.04><uniqueHeadValues(<uniqueHeadValues(<uniqueHeadValues(<uniqueValues(<eraseUnique(un=2370,)=0.08>sz=2370,)=0.08>line=577,)=0.09>line=567,)=0.09>in=2370,out=2370,)=0.09><getApproxCounts()=0.00>)=0.16>\",\"9_location\":\"hxehost:39001\"}]}","PythonTrace":".setNames('SYSTEMDB::SYSTEM:CUSTOMER','en',['C_CUSTOMERKEY'], [0])
+.setEdgeId(0)
+.setRuntimeValues(-1, -1, [])
+.setJoinPartType(0)
+.setFlags(24)
+.setLocale('BINARY')
+.setQueryPart(0)
+"}]]></Details>
+																	<Child ID="X2_plan22036_hxehost_39001_pop3">
+																		<ConnectorName><![CDATA[JEPlanData]]></ConnectorName>
+																		<ExecutedOutputCardinality>2370</ExecutedOutputCardinality>
+																		<Payload Unit="bytes">200</Payload>
+																		<Details><![CDATA[{ "description":"result of the evaluation of a filter condition" }]]></Details>
+																	</Child>
+																</Relation>
+																<Relation ID="X2_plan22036_hxehost_39001_pop6" TypeName="CS_POP" Status="Finished">
+																	<Name><![CDATA[JEStep1]]></Name>
+																	<ExecutionType>Column Search</ExecutionType>
+																	<Summary><![CDATA[Semijoin1 (first join partner)]]></Summary>
+																	<Schema><![CDATA[SYSTEM]]></Schema>
+																	<ObjectName><![CDATA[DIM_DATE.D_DATEKEY]]></ObjectName>
+																	<TableType><![CDATA[COLUMN TABLE]]></TableType>
+																	<Location><![CDATA[hxehost:39001]]></Location>
+																	<ExecutionTime>
+																		<Exclusive Unit="ms">0.045</Exclusive>
+																		<Inclusive Unit="ms">0.417</Inclusive>
+																		<Timestamps>[{"Pop":[{"start":1520955852671307,"end":1520955852671352}]}]</Timestamps>
+																	</ExecutionTime>
+																	<KernelCPUTime Unit="ms">0</KernelCPUTime>
+																	<UserCPUTime Unit="ms">0.059</UserCPUTime>
+																	<Details><![CDATA[{"table/column processed 001":"DIM_DATE.D_DATEKEY","PerformanceTrace":"{\"details\":[{\"1_timestamp\":\"2018-03-13 16:44:12.671347\",\"2_key\":\"table name\",\"3_value\":\"DIM_DATE\",\"9_location\":\"hxehost:39001\"},{\"1_timestamp\":\"2018-03-13 16:44:12.671349\",\"2_key\":\"<large detail>\",\"3_value\":\"<executePop(<jeReadValueIds()=0.00><uniqueHeadValues(<uniqueHeadValues(<uniqueHeadValues(<uniqueValues(<eraseUnique(un=31,)=0.00>sz=31,)=0.00>line=577,)=0.00>line=567,)=0.00>in=31,out=31,)=0.01><getApproxCounts()=0.00>)=0.03>\",\"9_location\":\"hxehost:39001\"}]}","PythonTrace":".setNames('SYSTEMDB::SYSTEM:DIM_DATE','en',['D_DATEKEY'], [0])
+.setEdgeId(2)
+.setRuntimeValues(-1, -1, [])
+.setJoinPartType(0)
+.setFlags(24)
+.setLocale('BINARY')
+.setQueryPart(0)
+"}]]></Details>
+																	<Child ID="X2_plan22036_hxehost_39001_pop7">
+																		<ConnectorName><![CDATA[JEPlanData]]></ConnectorName>
+																		<ExecutedOutputCardinality>31</ExecutedOutputCardinality>
+																		<Payload Unit="bytes">200</Payload>
+																		<Details><![CDATA[{ "description":"result of the evaluation of a filter condition" }]]></Details>
+																	</Child>
+																</Relation>
+															</Plan>
+														</InnerPlans>
+													</Relation>
+													<Relation ID="cs_plan309_hxehost_39001_pattern1_abstr2" Status="Finished" Physical="False">
+														<Name><![CDATA[JEStep4]]></Name>
+														<ExecutionType>Column Search</ExecutionType>
+														<Summary><![CDATA[(3 identical) Semijoin4]]></Summary>
+														<Schema><![CDATA[SYSTEM]]></Schema>
+														<ObjectName><![CDATA[CUSTOMER, DIM_DATE, SUPPLIER]]></ObjectName>
+														<ExecutionTime>
+															<Exclusive Unit="ms">0.092</Exclusive>
+															<Inclusive Unit="ms">49.161</Inclusive>
+															<Timestamps>[{"Pop":[{"start":1520955852718704,"end":1520955852718724}]},{"Pop":[{"start":1520955852718734,"end":1520955852718782}]},{"Pop":[{"start":1520955852718794,"end":1520955852718818}]}]</Timestamps>
+														</ExecutionTime>
+														<KernelCPUTime Unit="ms">0</KernelCPUTime>
+														<UserCPUTime Unit="ms">0.118</UserCPUTime>
+														<Details><![CDATA[{"nodes":"3","table/column processed 001":"CUSTOMER.C_CUSTOMERKEY","table/column processed 002":"DIM_DATE.D_DATEKEY","table/column processed 003":"SUPPLIER.S_SUPPKEY","schema":"SYSTEM","table/column processed 001":"CUSTOMER.C_CUSTOMERKEY","table/column processed 002":"DIM_DATE.D_DATEKEY","table/column processed 003":"SUPPLIER.S_SUPPKEY","schema":"SYSTEM","table/column processed 001":"CUSTOMER.C_CUSTOMERKEY","table/column processed 002":"DIM_DATE.D_DATEKEY","table/column processed 003":"SUPPLIER.S_SUPPKEY","schema":"SYSTEM","table/column processed 001":"CUSTOMER.C_CUSTOMERKEY","table/column processed 002":"DIM_DATE.D_DATEKEY","table/column processed 003":"SUPPLIER.S_SUPPKEY","schema":"SYSTEM"}]]></Details>
+														<InnerPlans>
+															<Plan ID="subplan_cs_plan309_hxehost_39001_pattern1_abstr2" PlanType="Column">
+																<Relation ID="X2_plan22036_hxehost_39001_pop17" TypeName="CS_POP" Status="Finished">
+																	<Name><![CDATA[JEStep4]]></Name>
+																	<ExecutionType>Column Search</ExecutionType>
+																	<Summary><![CDATA[Semijoin4]]></Summary>
+																	<Schema><![CDATA[SYSTEM]]></Schema>
+																	<ObjectName><![CDATA[SUPPLIER.S_SUPPKEY]]></ObjectName>
+																	<TableType><![CDATA[COLUMN TABLE]]></TableType>
+																	<Location><![CDATA[hxehost:39001]]></Location>
+																	<ExecutionTime>
+																		<Exclusive Unit="ms">0.024</Exclusive>
+																		<Inclusive Unit="ms">49.161</Inclusive>
+																		<Timestamps>[{"Pop":[{"start":1520955852718794,"end":1520955852718818}]}]</Timestamps>
+																	</ExecutionTime>
+																	<KernelCPUTime Unit="ms">0</KernelCPUTime>
+																	<UserCPUTime Unit="ms">0.034</UserCPUTime>
+																	<Details><![CDATA[{"table/column processed 001":"SUPPLIER.S_SUPPKEY","PerformanceTrace":"{\"details\":[{\"1_timestamp\":\"2018-03-13 16:44:12.718814\",\"2_key\":\"table name\",\"3_value\":\"SUPPLIER\",\"9_location\":\"hxehost:39001\"},{\"1_timestamp\":\"2018-03-13 16:44:12.718816\",\"2_key\":\"<large detail>\",\"3_value\":\"<executePop(<JEUtils_removeTuplesNotIn(in=164,out=47,)=0.00><tlsort(<sort(<NTuple Sort(NumCols=2,NumRows=47,)=0.00>)=0.00>rows=47,)=0.00>)=0.01>\",\"9_location\":\"hxehost:39001\"}]}","PythonTrace":".setNames('SYSTEMDB::SYSTEM:SUPPLIER','en','en',['S_SUPPKEY'])
+.setJoinPartType(0)
+.setEdgeId(1)
+.setRuntimeValues(-1, -1, [])
+.setOutputMask(0)
+.setOutputHeadName('VID_SYSTEMDB::SYSTEM:SUPPLIERen/S_SUPPKEY',True)
+.setFlags(1)
+.setLocale('BINARY')
+.setQueryPart(0)
+"}]]></Details>
+																	<Child ID="X2_plan22036_hxehost_39001_pop15">
+																		<ConnectorName><![CDATA[JEPlanData]]></ConnectorName>
+																		<ExecutedOutputCardinality>164</ExecutedOutputCardinality>
+																		<Payload Unit="bytes">2200</Payload>
+																		<Details><![CDATA[{ "data container":"vector of integer pairs: (docid, valueid)","description":"result of semi-join reduction" }]]></Details>
+																	</Child>
+																	<Child ID="X2_plan22036_hxehost_39001_pop13">
+																		<ConnectorName><![CDATA[JEPlanData]]></ConnectorName>
+																		<ExecutedOutputCardinality>47</ExecutedOutputCardinality>
+																		<Payload Unit="bytes">704</Payload>
+																		<Details><![CDATA[{ "data container":"vector of integer pairs: (docid, valueid)","description":"result of semi-join reduction" }]]></Details>
+																	</Child>
+																</Relation>
+																<Relation ID="X2_plan22036_hxehost_39001_pop4" TypeName="CS_POP" Status="Finished">
+																	<Name><![CDATA[JEStep4]]></Name>
+																	<ExecutionType>Column Search</ExecutionType>
+																	<Summary><![CDATA[Semijoin4]]></Summary>
+																	<Schema><![CDATA[SYSTEM]]></Schema>
+																	<ObjectName><![CDATA[CUSTOMER.C_CUSTOMERKEY]]></ObjectName>
+																	<TableType><![CDATA[COLUMN TABLE]]></TableType>
+																	<Location><![CDATA[hxehost:39001]]></Location>
+																	<ExecutionTime>
+																		<Exclusive Unit="ms">0.048</Exclusive>
+																		<Inclusive Unit="ms">49.125</Inclusive>
+																		<Timestamps>[{"Pop":[{"start":1520955852718734,"end":1520955852718782}]}]</Timestamps>
+																	</ExecutionTime>
+																	<KernelCPUTime Unit="ms">0</KernelCPUTime>
+																	<UserCPUTime Unit="ms">0.056</UserCPUTime>
+																	<Details><![CDATA[{"table/column processed 001":"CUSTOMER.C_CUSTOMERKEY","PerformanceTrace":"{\"details\":[{\"1_timestamp\":\"2018-03-13 16:44:12.718778\",\"2_key\":\"table name\",\"3_value\":\"CUSTOMER\",\"9_location\":\"hxehost:39001\"},{\"1_timestamp\":\"2018-03-13 16:44:12.718780\",\"2_key\":\"<large detail>\",\"3_value\":\"<executePop(<JEUtils_removeTuplesNotIn(in=2370,out=53,)=0.02><tlsort(<sort(<NTuple Sort(NumCols=2,NumRows=53,)=0.00>)=0.00>rows=53,)=0.01>)=0.04>\",\"9_location\":\"hxehost:39001\"}]}","PythonTrace":".setNames('SYSTEMDB::SYSTEM:CUSTOMER','en','en',['C_CUSTOMERKEY'])
+.setJoinPartType(0)
+.setEdgeId(0)
+.setRuntimeValues(-1, -1, [])
+.setOutputMask(0)
+.setOutputHeadName('VID_SYSTEMDB::SYSTEM:CUSTOMERen/C_CUSTOMERKEY',True)
+.setFlags(1)
+.setLocale('BINARY')
+.setQueryPart(0)
+"}]]></Details>
+																	<Child ID="X2_plan22036_hxehost_39001_pop2">
+																		<ConnectorName><![CDATA[JEPlanData]]></ConnectorName>
+																		<ExecutedOutputCardinality>2370</ExecutedOutputCardinality>
+																		<Payload Unit="bytes">19848</Payload>
+																		<Details><![CDATA[{ "data container":"vector of integer pairs: (docid, valueid)","description":"result of semi-join reduction" }]]></Details>
+																	</Child>
+																	<Child ID="X2_plan22036_hxehost_39001_pop12">
+																		<ConnectorName><![CDATA[JEPlanData]]></ConnectorName>
+																		<ExecutedOutputCardinality>53</ExecutedOutputCardinality>
+																		<Payload Unit="bytes">704</Payload>
+																		<Details><![CDATA[{ "data container":"vector of integer pairs: (docid, valueid)","description":"result of semi-join reduction" }]]></Details>
+																	</Child>
+																</Relation>
+																<Relation ID="X2_plan22036_hxehost_39001_pop8" TypeName="CS_POP" Status="Finished">
+																	<Name><![CDATA[JEStep4]]></Name>
+																	<ExecutionType>Column Search</ExecutionType>
+																	<Summary><![CDATA[Semijoin4]]></Summary>
+																	<Schema><![CDATA[SYSTEM]]></Schema>
+																	<ObjectName><![CDATA[DIM_DATE.D_DATEKEY]]></ObjectName>
+																	<TableType><![CDATA[COLUMN TABLE]]></TableType>
+																	<Location><![CDATA[hxehost:39001]]></Location>
+																	<ExecutionTime>
+																		<Exclusive Unit="ms">0.020</Exclusive>
+																		<Inclusive Unit="ms">49.067</Inclusive>
+																		<Timestamps>[{"Pop":[{"start":1520955852718704,"end":1520955852718724}]}]</Timestamps>
+																	</ExecutionTime>
+																	<KernelCPUTime Unit="ms">0</KernelCPUTime>
+																	<UserCPUTime Unit="ms">0.028</UserCPUTime>
+																	<Details><![CDATA[{"table/column processed 001":"DIM_DATE.D_DATEKEY","PerformanceTrace":"{\"details\":[{\"1_timestamp\":\"2018-03-13 16:44:12.718720\",\"2_key\":\"table name\",\"3_value\":\"DIM_DATE\",\"9_location\":\"hxehost:39001\"},{\"1_timestamp\":\"2018-03-13 16:44:12.718721\",\"2_key\":\"<large detail>\",\"3_value\":\"<executePop(<JEUtils_removeTuplesNotIn(in=31,out=27,)=0.00><tlsort(rows=27,)=0.00>)=0.01>\",\"9_location\":\"hxehost:39001\"}]}","PythonTrace":".setNames('SYSTEMDB::SYSTEM:DIM_DATE','en','en',['D_DATEKEY'])
+.setJoinPartType(0)
+.setEdgeId(2)
+.setRuntimeValues(-1, -1, [])
+.setOutputMask(0)
+.setOutputHeadName('VID_SYSTEMDB::SYSTEM:DIM_DATEen/D_DATEKEY',True)
+.setFlags(1)
+.setLocale('BINARY')
+.setQueryPart(0)
+"}]]></Details>
+																	<Child ID="X2_plan22036_hxehost_39001_pop6">
+																		<ConnectorName><![CDATA[JEPlanData]]></ConnectorName>
+																		<ExecutedOutputCardinality>31</ExecutedOutputCardinality>
+																		<Payload Unit="bytes">1136</Payload>
+																		<Details><![CDATA[{ "data container":"vector of integer pairs: (docid, valueid)","description":"result of semi-join reduction" }]]></Details>
+																	</Child>
+																	<Child ID="X2_plan22036_hxehost_39001_pop11">
+																		<ConnectorName><![CDATA[JEPlanData]]></ConnectorName>
+																		<ExecutedOutputCardinality>27</ExecutedOutputCardinality>
+																		<Payload Unit="bytes">704</Payload>
+																		<Details><![CDATA[{ "data container":"vector of integer pairs: (docid, valueid)","description":"result of semi-join reduction" }]]></Details>
+																	</Child>
+																</Relation>
+															</Plan>
+														</InnerPlans>
+													</Relation>
+												</Plan>
+											</InnerPlans>
+										</Relation>
+									</Plan>
+								</InnerPlans>
+							</Relation>
+							<Relation ID="cs_plan309_hxehost_39001_pattern3" Status="Finished" Physical="False">
+								<Name><![CDATA[grouping]]></Name>
+								<ExecutionType>Column Search</ExecutionType>
+								<Summary><![CDATA[(4 nodes) evaluate a group by clause]]></Summary>
+								<Schema><![CDATA[SYSTEM]]></Schema>
+								<ObjectName><![CDATA[CUSTOMER, DIM_DATE, LINEORDER, SUPPLIER]]></ObjectName>
+								<ExecutionTime>
+									<Exclusive Unit="ms">0.261</Exclusive>
+									<Inclusive Unit="ms">49.564</Inclusive>
+									<Timestamps>[{"Pop":[{"start":1520955852718828,"end":1520955852718900}]},{"Pop":[{"start":1520955852718912,"end":1520955852718943}]},{"Pop":[{"start":1520955852719048,"end":1520955852719087}]},{"Pop":[{"start":1520955852719102,"end":1520955852719221}]}]</Timestamps>
+								</ExecutionTime>
+								<KernelCPUTime Unit="ms">0</KernelCPUTime>
+								<UserCPUTime Unit="ms">0.3</UserCPUTime>
+								<Details><![CDATA[{"nodes":"4","table/column processed 001":"CUSTOMER.C_CITY","table/column processed 002":"DIM_DATE.D_YEAR","table/column processed 003":"LINEORDER","table/column processed 004":"SUPPLIER.S_CITY","schema":"SYSTEM","table/column processed 001":"CUSTOMER.C_CITY","table/column processed 002":"DIM_DATE.D_YEAR","table/column processed 003":"LINEORDER","table/column processed 004":"SUPPLIER.S_CITY","schema":"SYSTEM"}]]></Details>
+								<InnerPlans>
+									<Plan ID="subplan_cs_plan309_hxehost_39001_pattern3" PlanType="Column">
+										<Relation ID="X2_plan22036_hxehost_39001_pop23" TypeName="CS_POP" Status="Finished">
+											<Name><![CDATA[JEPreAggregate]]></Name>
+											<ExecutionType>Column Search</ExecutionType>
+											<Summary><![CDATA[Group By]]></Summary>
+											<Schema><![CDATA[SYSTEM]]></Schema>
+											<ObjectName><![CDATA[LINEORDER]]></ObjectName>
+											<TableType><![CDATA[COLUMN TABLE]]></TableType>
+											<Location><![CDATA[hxehost:39001]]></Location>
+											<ExecutionTime>
+												<Exclusive Unit="ms">0.119</Exclusive>
+												<Inclusive Unit="ms">49.564</Inclusive>
+												<Timestamps>[{"Pop":[{"start":1520955852719102,"end":1520955852719221}]}]</Timestamps>
+											</ExecutionTime>
+											<KernelCPUTime Unit="ms">0</KernelCPUTime>
+											<UserCPUTime Unit="ms">0.13</UserCPUTime>
+											<Details><![CDATA[{"table processed":"LINEORDER","PerformanceTrace":"{\"details\":[{\"1_timestamp\":\"2018-03-13 16:44:12.719215\",\"2_key\":\"table name\",\"3_value\":\"<none>\",\"9_location\":\"hxehost:39001\"},{\"1_timestamp\":\"2018-03-13 16:44:12.719217\",\"2_key\":\"<large detail>\",\"3_value\":\"<executePop(<calcUNs(<mapWithIVA(<toIVA(capacity=31,word_size=4,)=0.00>unsSize=27,max-min=30,)=0.00><mapWithIVA(<toIVA(capacity=1976,word_size=4,)=0.00>unsSize=47,max-min=1975,)=0.00><mapWithIVA(<toIVA(capacity=12401,word_size=4,)=0.00>unsSize=53,max-min=12400,)=0.00><calcUNs(<countBits(<updateMinMax(num=55,min=5,max=5,)=0.00><updateMinMax(num=55,min=221,max=225,)=0.00><updateMinMax(num=55,min=221,max=225,)=0.00>cols=3,rows=55,)=0.00><shift(bits=6,)=0.03><convertUnsToIndexes(<checkRownumberUns()=0.00><updateMinMax(num=55,min=0,max=36,)=0.00><transformValsToIndexes_vector()=0.00>num=55,wordsize=2,)=0.00>cols=3,rows=55,)=0.05>in=55,maxrow=4,)=0.08><buildOutputNtuple(<setWhich()=0.00><extractWhich()=0.00><extractWhich()=0.00><extractWhich()=0.00>)=0.01><extractCols()=0.00>)=0.10>\",\"9_location\":\"hxehost:39001\"}]}","PythonTrace":".addKeyFigureIndex('SYSTEMDB::SYSTEM:LINEORDERen', 0)
+.setQueryPart(0)
+"}]]></Details>
+											<Child ID="X2_plan22036_hxehost_39001_pop22">
+												<ConnectorName><![CDATA[JEPlanData]]></ConnectorName>
+												<ExecutedOutputCardinality>55</ExecutedOutputCardinality>
+												<Payload Unit="bytes">2576</Payload>
+												<Details><![CDATA[{ "data container":"vector of vector of integers","description":"matrix of internal docid values containing the result of a join" }]]></Details>
+											</Child>
+											<Child ID="X2_plan22036_hxehost_39001_pop18">
+												<ConnectorName><![CDATA[JEPlanData]]></ConnectorName>
+												<ExecutedOutputCardinality>53</ExecutedOutputCardinality>
+												<Payload Unit="bytes">1312</Payload>
+												<Details><![CDATA[{ "data container":"vector of integer pairs: (docid, valueid)","description":"result of semi-join reduction" }]]></Details>
+											</Child>
+											<Child ID="X2_plan22036_hxehost_39001_pop19">
+												<ConnectorName><![CDATA[JEPlanData]]></ConnectorName>
+												<ExecutedOutputCardinality>27</ExecutedOutputCardinality>
+												<Payload Unit="bytes">1104</Payload>
+												<Details><![CDATA[{ "data container":"vector of integer pairs: (docid, valueid)","description":"result of semi-join reduction" }]]></Details>
+											</Child>
+											<Child ID="X2_plan22036_hxehost_39001_pop21">
+												<ConnectorName><![CDATA[JEPlanData]]></ConnectorName>
+												<ExecutedOutputCardinality>47</ExecutedOutputCardinality>
+												<Payload Unit="bytes">1264</Payload>
+												<Details><![CDATA[{ "data container":"vector of integer pairs: (docid, valueid)","description":"result of semi-join reduction" }]]></Details>
+											</Child>
+										</Relation>
+										<Relation ID="cs_plan309_hxehost_39001_pattern3_abstr1" Status="Finished" Physical="False">
+											<Name><![CDATA[JEDistinctAttribute]]></Name>
+											<ExecutionType>Column Search</ExecutionType>
+											<Summary><![CDATA[3 nodes with same name]]></Summary>
+											<Schema><![CDATA[SYSTEM]]></Schema>
+											<ObjectName><![CDATA[CUSTOMER, DIM_DATE, SUPPLIER]]></ObjectName>
+											<ExecutionTime>
+												<Exclusive Unit="ms">0.142</Exclusive>
+												<Inclusive Unit="ms">49.430</Inclusive>
+												<Timestamps>[{"Pop":[{"start":1520955852718828,"end":1520955852718900}]},{"Pop":[{"start":1520955852718912,"end":1520955852718943}]},{"Pop":[{"start":1520955852719048,"end":1520955852719087}]}]</Timestamps>
+											</ExecutionTime>
+											<KernelCPUTime Unit="ms">0</KernelCPUTime>
+											<UserCPUTime Unit="ms">0.17</UserCPUTime>
+											<Details><![CDATA[{"nodes":"3","table/column processed 001":"CUSTOMER.C_CITY","table/column processed 002":"DIM_DATE.D_YEAR","table/column processed 003":"SUPPLIER.S_CITY","schema":"SYSTEM","table/column processed 001":"CUSTOMER.C_CITY","table/column processed 002":"DIM_DATE.D_YEAR","table/column processed 003":"SUPPLIER.S_CITY","schema":"SYSTEM","table/column processed 001":"CUSTOMER.C_CITY","table/column processed 002":"DIM_DATE.D_YEAR","table/column processed 003":"SUPPLIER.S_CITY","schema":"SYSTEM"}]]></Details>
+											<InnerPlans>
+												<Plan ID="subplan_cs_plan309_hxehost_39001_pattern3_abstr1" PlanType="Column">
+													<Relation ID="X2_plan22036_hxehost_39001_pop18" TypeName="CS_POP" Status="Finished">
+														<Name><![CDATA[JEDistinctAttribute]]></Name>
+														<ExecutionType>Column Search</ExecutionType>
+														<Summary><![CDATA[Group By C_CITY]]></Summary>
+														<Schema><![CDATA[SYSTEM]]></Schema>
+														<ObjectName><![CDATA[CUSTOMER.C_CITY]]></ObjectName>
+														<TableType><![CDATA[COLUMN TABLE]]></TableType>
+														<Location><![CDATA[hxehost:39001]]></Location>
+														<ExecutionTime>
+															<Exclusive Unit="ms">0.072</Exclusive>
+															<Inclusive Unit="ms">49.243</Inclusive>
+															<Timestamps>[{"Pop":[{"start":1520955852718828,"end":1520955852718900}]}]</Timestamps>
+														</ExecutionTime>
+														<KernelCPUTime Unit="ms">0</KernelCPUTime>
+														<UserCPUTime Unit="ms">0.08</UserCPUTime>
+														<Details><![CDATA[{"table/column processed 001":"CUSTOMER.C_CITY","PerformanceTrace":"{\"details\":[{\"1_timestamp\":\"2018-03-13 16:44:12.718896\",\"2_key\":\"table name\",\"3_value\":\"CUSTOMER\",\"9_location\":\"hxehost:39001\"},{\"1_timestamp\":\"2018-03-13 16:44:12.718898\",\"2_key\":\"<large detail>\",\"3_value\":\"<executePop(<extractInput(<updateMinMax(num=53,min=202832,max=215232,)=0.00>)=0.00><fillResultWithValIDs(<jeReadValueIds()=0.04>rows=53,)=0.05>)=0.06>\",\"9_location\":\"hxehost:39001\"}]}","PythonTrace":".setIndex('SYSTEMDB::SYSTEM:CUSTOMER','en')
+.setFlags(0)
+.addAttribute('C_CITY', '')
+.setQueryPart(0)
+"}]]></Details>
+														<Child ID="X2_plan22036_hxehost_39001_pop4">
+															<ConnectorName><![CDATA[JEPlanData]]></ConnectorName>
+															<ExecutedOutputCardinality>53</ExecutedOutputCardinality>
+															<Payload Unit="bytes">1312</Payload>
+															<Details><![CDATA[{ "data container":"vector of integer pairs: (docid, valueid)","description":"result of semi-join reduction" }]]></Details>
+														</Child>
+													</Relation>
+													<Relation ID="X2_plan22036_hxehost_39001_pop19" TypeName="CS_POP" Status="Finished">
+														<Name><![CDATA[JEDistinctAttribute]]></Name>
+														<ExecutionType>Column Search</ExecutionType>
+														<Summary><![CDATA[Group By D_YEAR]]></Summary>
+														<Schema><![CDATA[SYSTEM]]></Schema>
+														<ObjectName><![CDATA[DIM_DATE.D_YEAR]]></ObjectName>
+														<TableType><![CDATA[COLUMN TABLE]]></TableType>
+														<Location><![CDATA[hxehost:39001]]></Location>
+														<ExecutionTime>
+															<Exclusive Unit="ms">0.031</Exclusive>
+															<Inclusive Unit="ms">49.286</Inclusive>
+															<Timestamps>[{"Pop":[{"start":1520955852718912,"end":1520955852718943}]}]</Timestamps>
+														</ExecutionTime>
+														<KernelCPUTime Unit="ms">0</KernelCPUTime>
+														<UserCPUTime Unit="ms">0.041</UserCPUTime>
+														<Details><![CDATA[{"table/column processed 001":"DIM_DATE.D_YEAR","PerformanceTrace":"{\"details\":[{\"1_timestamp\":\"2018-03-13 16:44:12.718940\",\"2_key\":\"table name\",\"3_value\":\"DIM_DATE\",\"9_location\":\"hxehost:39001\"},{\"1_timestamp\":\"2018-03-13 16:44:12.718942\",\"2_key\":\"<large detail>\",\"3_value\":\"<executePop(<extractInput()=0.00><fillResultWithValIDs(<jeReadValueIds()=0.01>rows=27,)=0.01>)=0.02>\",\"9_location\":\"hxehost:39001\"}]}","PythonTrace":".setIndex('SYSTEMDB::SYSTEM:DIM_DATE','en')
+.setFlags(0)
+.addAttribute('D_YEAR', '')
+.setQueryPart(0)
+"}]]></Details>
+														<Child ID="X2_plan22036_hxehost_39001_pop8">
+															<ConnectorName><![CDATA[JEPlanData]]></ConnectorName>
+															<ExecutedOutputCardinality>27</ExecutedOutputCardinality>
+															<Payload Unit="bytes">1136</Payload>
+															<Details><![CDATA[{ "data container":"vector of integer pairs: (docid, valueid)","description":"result of semi-join reduction" }]]></Details>
+														</Child>
+													</Relation>
+													<Relation ID="X2_plan22036_hxehost_39001_pop21" TypeName="CS_POP" Status="Finished">
+														<Name><![CDATA[JEDistinctAttribute]]></Name>
+														<ExecutionType>Column Search</ExecutionType>
+														<Summary><![CDATA[Group By S_CITY]]></Summary>
+														<Schema><![CDATA[SYSTEM]]></Schema>
+														<ObjectName><![CDATA[SUPPLIER.S_CITY]]></ObjectName>
+														<TableType><![CDATA[COLUMN TABLE]]></TableType>
+														<Location><![CDATA[hxehost:39001]]></Location>
+														<ExecutionTime>
+															<Exclusive Unit="ms">0.039</Exclusive>
+															<Inclusive Unit="ms">49.430</Inclusive>
+															<Timestamps>[{"Pop":[{"start":1520955852719048,"end":1520955852719087}]}]</Timestamps>
+														</ExecutionTime>
+														<KernelCPUTime Unit="ms">0</KernelCPUTime>
+														<UserCPUTime Unit="ms">0.049</UserCPUTime>
+														<Details><![CDATA[{"table/column processed 001":"SUPPLIER.S_CITY","PerformanceTrace":"{\"details\":[{\"1_timestamp\":\"2018-03-13 16:44:12.719083\",\"2_key\":\"table name\",\"3_value\":\"SUPPLIER\",\"9_location\":\"hxehost:39001\"},{\"1_timestamp\":\"2018-03-13 16:44:12.719085\",\"2_key\":\"<large detail>\",\"3_value\":\"<executePop(<extractInput(<updateMinMax(num=47,min=12351,max=14326,)=0.00>)=0.00><fillResultWithValIDs(<jeReadValueIds()=0.01>rows=47,)=0.02>)=0.03>\",\"9_location\":\"hxehost:39001\"}]}","PythonTrace":".setIndex('SYSTEMDB::SYSTEM:SUPPLIER','en')
+.setFlags(0)
+.addAttribute('S_CITY', '')
+.setQueryPart(0)
+"}]]></Details>
+														<Child ID="X2_plan22036_hxehost_39001_pop17">
+															<ConnectorName><![CDATA[JEPlanData]]></ConnectorName>
+															<ExecutedOutputCardinality>47</ExecutedOutputCardinality>
+															<Payload Unit="bytes">1264</Payload>
+															<Details><![CDATA[{ "data container":"vector of integer pairs: (docid, valueid)","description":"result of semi-join reduction" }]]></Details>
+														</Child>
+													</Relation>
+												</Plan>
+											</InnerPlans>
+										</Relation>
+									</Plan>
+								</InnerPlans>
+							</Relation>
+							<Relation ID="cs_plan309_hxehost_39001_pattern4" Status="Finished" Physical="False">
+								<Name><![CDATA[result assembly]]></Name>
+								<ExecutionType>Column Search</ExecutionType>
+								<Summary><![CDATA[(5 nodes) build result table with requested columns]]></Summary>
+								<Schema><![CDATA[SYSTEM]]></Schema>
+								<ObjectName><![CDATA[#JE4613937818241143785, CUSTOMER, DIM_DATE, SUPPLIER]]></ObjectName>
+								<ExecutionTime>
+									<Exclusive Unit="ms">0.160</Exclusive>
+									<Inclusive Unit="ms">49.849</Inclusive>
+									<Timestamps>[{"Pop":[{"start":1520955852719299,"end":1520955852719310}]},{"Pop":[{"start":1520955852719320,"end":1520955852719351}]},{"Pop":[{"start":1520955852719361,"end":1520955852719379}]},{"Pop":[{"start":1520955852719389,"end":1520955852719409}]},{"Pop":[{"start":1520955852719426,"end":1520955852719506}]}]</Timestamps>
+								</ExecutionTime>
+								<KernelCPUTime Unit="ms">0</KernelCPUTime>
+								<UserCPUTime Unit="ms">0.211</UserCPUTime>
+								<Details><![CDATA[{"nodes":"5","table/column processed 001":"#JE4613937818241143785","table/column processed 002":"CUSTOMER.C_CITY","table/column processed 003":"DIM_DATE.D_YEAR","table/column processed 004":"SUPPLIER.S_CITY","schema":"SYSTEM","table/column processed 001":"#JE4613937818241143785","table/column processed 002":"CUSTOMER.C_CITY","table/column processed 003":"DIM_DATE.D_YEAR","table/column processed 004":"SUPPLIER.S_CITY","schema":"SYSTEM"}]]></Details>
+								<InnerPlans>
+									<Plan ID="subplan_cs_plan309_hxehost_39001_pattern4" PlanType="Column">
+										<Relation ID="X2_plan22036_hxehost_39001_pop24" TypeName="CS_POP" Status="Finished">
+											<Name><![CDATA[JEUniqueColumn]]></Name>
+											<ExecutionType>Column Search</ExecutionType>
+											<Summary><![CDATA[Split Plandata]]></Summary>
+											<Schema><![CDATA[SYSTEM]]></Schema>
+											<ObjectName><![CDATA[#JE4613937818241143785]]></ObjectName>
+											<TableType><![CDATA[COLUMN TABLE]]></TableType>
+											<Location><![CDATA[hxehost:39001]]></Location>
+											<ExecutionTime>
+												<Exclusive Unit="ms">0.011</Exclusive>
+												<Inclusive Unit="ms">49.653</Inclusive>
+												<Timestamps>[{"Pop":[{"start":1520955852719299,"end":1520955852719310}]}]</Timestamps>
+											</ExecutionTime>
+											<KernelCPUTime Unit="ms">0</KernelCPUTime>
+											<UserCPUTime Unit="ms">0.0219999</UserCPUTime>
+											<Details><![CDATA[{"table/column processed":"#JE4613937818241143785","table/column processed":"#JE4613937818241143785","table/column processed":"#JE4613937818241143785","PerformanceTrace":"{\"details\":[{\"1_timestamp\":\"2018-03-13 16:44:12.719306\",\"2_key\":\"table name\",\"3_value\":\"<none>\",\"9_location\":\"hxehost:39001\"},{\"1_timestamp\":\"2018-03-13 16:44:12.719308\",\"2_key\":\"<executePop()=0.00>\",\"9_location\":\"hxehost:39001\"}]}","PythonTrace":".setLogicalIndex('SYSTEMDB::SYSTEM:#JE4613937818241143785','en')
+.setLateMatThreshold(20000)
+.addRequestedColumn('IX_SYSTEMDB::SYSTEM:CUSTOMERen', 1, 0, 18446744073709551615, 25)
+.addRequestedColumn('IX_SYSTEMDB::SYSTEM:DIM_DATEen', 1, 0, 18446744073709551615, 25)
+.addRequestedColumn('IX_SYSTEMDB::SYSTEM:SUPPLIERen', 1, 0, 18446744073709551615, 25)
+.setQueryPart(0)
+"}]]></Details>
+											<Child ID="X2_plan22036_hxehost_39001_pop23">
+												<ConnectorName><![CDATA[JEPlanData]]></ConnectorName>
+												<ExecutedOutputCardinality>4</ExecutedOutputCardinality>
+												<Payload Unit="bytes">1340</Payload>
+												<Details><![CDATA[{ "data container":"vector of vector of integers","description":"matrix of internal docid values containing the result of a join" }]]></Details>
+											</Child>
+										</Relation>
+										<Relation ID="X2_plan22036_hxehost_39001_pop28" TypeName="CS_POP" Status="Finished">
+											<Name><![CDATA[JEAssembleResults]]></Name>
+											<ExecutionType>Column Search</ExecutionType>
+											<Summary><![CDATA[Build Result + Order By D_YEAR, LO_REVENUE$sum$]]></Summary>
+											<Location><![CDATA[hxehost:39001]]></Location>
+											<ExecutionTime>
+												<Exclusive Unit="ms">0.080</Exclusive>
+												<Inclusive Unit="ms">49.849</Inclusive>
+												<Timestamps>[{"Pop":[{"start":1520955852719426,"end":1520955852719506}]}]</Timestamps>
+											</ExecutionTime>
+											<KernelCPUTime Unit="ms">0</KernelCPUTime>
+											<UserCPUTime Unit="ms">0.096</UserCPUTime>
+											<Details><![CDATA[{"column processed 001":"D_YEAR (Order By)","column processed 002":"LO_REVENUE$sum$ (Order By)","PerformanceTrace":"{\"details\":[{\"1_timestamp\":\"2018-03-13 16:44:12.719498\",\"2_key\":\"table name\",\"3_value\":\"#JE4613937818241143785\",\"9_location\":\"hxehost:39001\"},{\"1_timestamp\":\"2018-03-13 16:44:12.719500\",\"2_key\":\"<large detail>\",\"3_value\":\"<executePop(<doItThePreparedWay(cols=4,)=0.02><sortAfterMat(<itabsort()=0.02><reorderColumns()=0.00>rows=4,)=0.03>)=0.06>\",\"9_location\":\"hxehost:39001\"}]}","FunctionProfiler":"[{\"Start Time\":\"2018-03-13 16:44:12.694\",\"Steps\":[{\"Name\":\"sortcolumn\",\"Total\":0.004}],\"Thread\":2609}]","PythonTrace":".setLogicalIndex('SYSTEM:#JE4613937818241143785','en')
+.setAnchorTable('','en')
+.setQueryPart(0)
+.setFlags(224)
+.setReqAttr2View({'SYSTEMDB::SYSTEM:CUSTOMERen/C_CITY' : 'SYSTEM.CUSTOMER.C_CITY','SYSTEMDB::SYSTEM:DIM_DATEen/D_YEAR' : 'SYSTEM.DIM_DATE.D_YEAR','SYSTEMDB::SYSTEM:LINEORDERen/LO_REVENUE' : 'SYSTEM.LINEORDER.LO_REVENUE','SYSTEMDB::SYSTEM:LINEORDERen/LO_REVENUE$sum$' : 'SYSTEM.LINEORDER.LO_REVENUE$sum$','SYSTEMDB::SYSTEM:SUPPLIERen/S_CITY' : 'SYSTEM.SUPPLIER.S_CITY'})
+.setSortAttrs([('D_YEAR', 1), ('LO_REVENUE$sum$', 0)])
+.setLocale('BINARY')
+"}]]></Details>
+											<Child ID="X2_plan22036_hxehost_39001_pop23">
+												<ConnectorName><![CDATA[JEPlanData]]></ConnectorName>
+												<ExecutedOutputCardinality>4</ExecutedOutputCardinality>
+												<Payload Unit="bytes">1340</Payload>
+												<Details><![CDATA[{ "data container":"vector of vector of integers","description":"matrix of internal docid values containing the result of a join" }]]></Details>
+											</Child>
+											<Child ID="X2_plan22036_hxehost_39001_pop20">
+												<ConnectorName><![CDATA[JEPlanDataAttrVals]]></ConnectorName>
+												<ExecutedOutputCardinality>4</ExecutedOutputCardinality>
+												<Payload Unit="bytes">488</Payload>
+												<Details><![CDATA[{ "data container":"vector of columns","description":"result of a projection: list of columns with type definition and values or docids","data container member":"(column) LO_REVENUE (type) decfloat" }]]></Details>
+											</Child>
+											<Child ID="X2_plan22036_hxehost_39001_pop25">
+												<ConnectorName><![CDATA[JEPlanDataAttrVals]]></ConnectorName>
+												<ExecutedOutputCardinality>4</ExecutedOutputCardinality>
+												<Payload Unit="bytes">680</Payload>
+												<Details><![CDATA[{ "data container":"vector of columns","description":"result of a projection: list of columns with type definition and values or docids","data container member":"(column) C_CITY (type) string" }]]></Details>
+											</Child>
+											<Child ID="X2_plan22036_hxehost_39001_pop26">
+												<ConnectorName><![CDATA[JEPlanDataAttrVals]]></ConnectorName>
+												<ExecutedOutputCardinality>4</ExecutedOutputCardinality>
+												<Payload Unit="bytes">440</Payload>
+												<Details><![CDATA[{ "data container":"vector of columns","description":"result of a projection: list of columns with type definition and values or docids","data container member":"(column) D_YEAR (type) int" }]]></Details>
+											</Child>
+											<Child ID="X2_plan22036_hxehost_39001_pop27">
+												<ConnectorName><![CDATA[JEPlanDataAttrVals]]></ConnectorName>
+												<ExecutedOutputCardinality>4</ExecutedOutputCardinality>
+												<Payload Unit="bytes">680</Payload>
+												<Details><![CDATA[{ "data container":"vector of columns","description":"result of a projection: list of columns with type definition and values or docids","data container member":"(column) S_CITY (type) fixedstring" }]]></Details>
+											</Child>
+										</Relation>
+										<Relation ID="cs_plan309_hxehost_39001_pattern4_abstr1" Status="Finished" Physical="False">
+											<Name><![CDATA[JERequestedAttributes]]></Name>
+											<ExecutionType>Column Search</ExecutionType>
+											<Summary><![CDATA[3 nodes with same name]]></Summary>
+											<Schema><![CDATA[SYSTEM]]></Schema>
+											<ObjectName><![CDATA[CUSTOMER, DIM_DATE, SUPPLIER]]></ObjectName>
+											<ExecutionTime>
+												<Exclusive Unit="ms">0.069</Exclusive>
+												<Inclusive Unit="ms">49.752</Inclusive>
+												<Timestamps>[{"Pop":[{"start":1520955852719320,"end":1520955852719351}]},{"Pop":[{"start":1520955852719361,"end":1520955852719379}]},{"Pop":[{"start":1520955852719389,"end":1520955852719409}]}]</Timestamps>
+											</ExecutionTime>
+											<KernelCPUTime Unit="ms">0</KernelCPUTime>
+											<UserCPUTime Unit="ms">0.093</UserCPUTime>
+											<Details><![CDATA[{"nodes":"3","table/column processed 001":"CUSTOMER.C_CITY","table/column processed 002":"DIM_DATE.D_YEAR","table/column processed 003":"SUPPLIER.S_CITY","schema":"SYSTEM","table/column processed 001":"CUSTOMER.C_CITY","table/column processed 002":"DIM_DATE.D_YEAR","table/column processed 003":"SUPPLIER.S_CITY","schema":"SYSTEM","table/column processed 001":"CUSTOMER.C_CITY","table/column processed 002":"DIM_DATE.D_YEAR","table/column processed 003":"SUPPLIER.S_CITY","schema":"SYSTEM"}]]></Details>
+											<InnerPlans>
+												<Plan ID="subplan_cs_plan309_hxehost_39001_pattern4_abstr1" PlanType="Column">
+													<Relation ID="X2_plan22036_hxehost_39001_pop25" TypeName="CS_POP" Status="Finished">
+														<Name><![CDATA[JERequestedAttributes]]></Name>
+														<ExecutionType>Column Search</ExecutionType>
+														<Summary><![CDATA[Projection of column C_CITY]]></Summary>
+														<Schema><![CDATA[SYSTEM]]></Schema>
+														<ObjectName><![CDATA[CUSTOMER.C_CITY]]></ObjectName>
+														<TableType><![CDATA[COLUMN TABLE]]></TableType>
+														<Location><![CDATA[hxehost:39001]]></Location>
+														<ExecutionTime>
+															<Exclusive Unit="ms">0.031</Exclusive>
+															<Inclusive Unit="ms">49.694</Inclusive>
+															<Timestamps>[{"Pop":[{"start":1520955852719320,"end":1520955852719351}]}]</Timestamps>
+														</ExecutionTime>
+														<KernelCPUTime Unit="ms">0</KernelCPUTime>
+														<UserCPUTime Unit="ms">0.039</UserCPUTime>
+														<Details><![CDATA[{"table/column processed 001":"CUSTOMER.C_CITY","PerformanceTrace":"{\"details\":[{\"1_timestamp\":\"2018-03-13 16:44:12.719347\",\"2_key\":\"table name\",\"3_value\":\"CUSTOMER\",\"9_location\":\"hxehost:39001\"},{\"1_timestamp\":\"2018-03-13 16:44:12.719349\",\"2_key\":\"<large detail>\",\"3_value\":\"<executePop(<valuearray(attrs=1,rows=4,)=0.01><reorder()=0.00>)=0.02>\",\"9_location\":\"hxehost:39001\"}]}","PythonTrace":".setIndex('SYSTEMDB::SYSTEM:CUSTOMER','en')
+.addAttribute('C_CITY', 1)
+.setFlags(12)
+.setLocale('BINARY')
+.setQueryPart(0)
+"}]]></Details>
+														<Child ID="X2_plan22036_hxehost_39001_pop24">
+															<ConnectorName><![CDATA[JEPlanData]]></ConnectorName>
+															<ExecutedOutputCardinality>4</ExecutedOutputCardinality>
+															<Payload Unit="bytes">1340</Payload>
+															<Details><![CDATA[{ "data container":"vector of vector of integers","description":"matrix of internal docid values containing the result of a join" }]]></Details>
+														</Child>
+													</Relation>
+													<Relation ID="X2_plan22036_hxehost_39001_pop26" TypeName="CS_POP" Status="Finished">
+														<Name><![CDATA[JERequestedAttributes]]></Name>
+														<ExecutionType>Column Search</ExecutionType>
+														<Summary><![CDATA[Projection of column D_YEAR]]></Summary>
+														<Schema><![CDATA[SYSTEM]]></Schema>
+														<ObjectName><![CDATA[DIM_DATE.D_YEAR]]></ObjectName>
+														<TableType><![CDATA[COLUMN TABLE]]></TableType>
+														<Location><![CDATA[hxehost:39001]]></Location>
+														<ExecutionTime>
+															<Exclusive Unit="ms">0.018</Exclusive>
+															<Inclusive Unit="ms">49.722</Inclusive>
+															<Timestamps>[{"Pop":[{"start":1520955852719361,"end":1520955852719379}]}]</Timestamps>
+														</ExecutionTime>
+														<KernelCPUTime Unit="ms">0</KernelCPUTime>
+														<UserCPUTime Unit="ms">0.027</UserCPUTime>
+														<Details><![CDATA[{"table/column processed 001":"DIM_DATE.D_YEAR","PerformanceTrace":"{\"details\":[{\"1_timestamp\":\"2018-03-13 16:44:12.719376\",\"2_key\":\"table name\",\"3_value\":\"DIM_DATE\",\"9_location\":\"hxehost:39001\"},{\"1_timestamp\":\"2018-03-13 16:44:12.719377\",\"2_key\":\"<large detail>\",\"3_value\":\"<executePop(<valuearray(attrs=1,rows=4,)=0.00><reorder()=0.00>)=0.01>\",\"9_location\":\"hxehost:39001\"}]}","PythonTrace":".setIndex('SYSTEMDB::SYSTEM:DIM_DATE','en')
+.addAttribute('D_YEAR', 3)
+.setFlags(12)
+.setLocale('BINARY')
+.setQueryPart(0)
+"}]]></Details>
+														<Child ID="X2_plan22036_hxehost_39001_pop24">
+															<ConnectorName><![CDATA[JEPlanData]]></ConnectorName>
+															<ExecutedOutputCardinality>4</ExecutedOutputCardinality>
+															<Payload Unit="bytes">1340</Payload>
+															<Details><![CDATA[{ "data container":"vector of vector of integers","description":"matrix of internal docid values containing the result of a join" }]]></Details>
+														</Child>
+													</Relation>
+													<Relation ID="X2_plan22036_hxehost_39001_pop27" TypeName="CS_POP" Status="Finished">
+														<Name><![CDATA[JERequestedAttributes]]></Name>
+														<ExecutionType>Column Search</ExecutionType>
+														<Summary><![CDATA[Projection of column S_CITY]]></Summary>
+														<Schema><![CDATA[SYSTEM]]></Schema>
+														<ObjectName><![CDATA[SUPPLIER.S_CITY]]></ObjectName>
+														<TableType><![CDATA[COLUMN TABLE]]></TableType>
+														<Location><![CDATA[hxehost:39001]]></Location>
+														<ExecutionTime>
+															<Exclusive Unit="ms">0.020</Exclusive>
+															<Inclusive Unit="ms">49.752</Inclusive>
+															<Timestamps>[{"Pop":[{"start":1520955852719389,"end":1520955852719409}]}]</Timestamps>
+														</ExecutionTime>
+														<KernelCPUTime Unit="ms">0</KernelCPUTime>
+														<UserCPUTime Unit="ms">0.027</UserCPUTime>
+														<Details><![CDATA[{"table/column processed 001":"SUPPLIER.S_CITY","PerformanceTrace":"{\"details\":[{\"1_timestamp\":\"2018-03-13 16:44:12.719405\",\"2_key\":\"table name\",\"3_value\":\"SUPPLIER\",\"9_location\":\"hxehost:39001\"},{\"1_timestamp\":\"2018-03-13 16:44:12.719406\",\"2_key\":\"<large detail>\",\"3_value\":\"<executePop(<valuearray(attrs=1,rows=4,)=0.00><reorder()=0.00>)=0.01>\",\"9_location\":\"hxehost:39001\"}]}","PythonTrace":".setIndex('SYSTEMDB::SYSTEM:SUPPLIER','en')
+.addAttribute('S_CITY', 1)
+.setFlags(12)
+.setLocale('BINARY')
+.setQueryPart(0)
+"}]]></Details>
+														<Child ID="X2_plan22036_hxehost_39001_pop24">
+															<ConnectorName><![CDATA[JEPlanData]]></ConnectorName>
+															<ExecutedOutputCardinality>4</ExecutedOutputCardinality>
+															<Payload Unit="bytes">1340</Payload>
+															<Details><![CDATA[{ "data container":"vector of vector of integers","description":"matrix of internal docid values containing the result of a join" }]]></Details>
+														</Child>
+													</Relation>
+												</Plan>
+											</InnerPlans>
+										</Relation>
+									</Plan>
+								</InnerPlans>
+							</Relation>
+						</Plan>
+					</InnerPlans>
+				</Relation>
+			</Plan>
+		</InnerPlans>
+	</Relation>
+
+	<ReferencedPlans>
+		<Plan ID="cs_plan299_hxehost_39001" Type="Executed" PlanType="Column">
+			<RootRelation ID="cs_plan299_hxehost_39001_result1" Status="Finished">
+				<Name>Result</Name>
+				<Location><![CDATA[hxehost:39001]]></Location>
+				<Child ID="cs_plan299_hxehost_39001_oltpSearchNode1">
+					<ConnectorName><![CDATA[SearchAPI::SearchResults]]></ConnectorName>
+					<ExecutedOutputCardinality>2370</ExecutedOutputCardinality>
+					<Payload Unit="bytes">200</Payload>
+				</Child>
+			</RootRelation>
+			<Relation ID="cs_plan299_hxehost_39001_oltpSearchNode1" TypeName="FAST_SEARCH" Status="Finished">
+				<Name><![CDATA[dynamic search]]></Name>
+				<Summary><![CDATA[estimate first & optimize search accordingly]]></Summary>
+				<Schema><![CDATA[SYSTEM]]></Schema>
+				<ObjectName><![CDATA[CUSTOMER]]></ObjectName>
+				<TableType><![CDATA[COLUMN TABLE]]></TableType>
+				<Location><![CDATA[hxehost:39001]]></Location>
+				<ExecutionTime>
+					<Exclusive Unit="ms">0.354</Exclusive>
+					<Inclusive Unit="ms">0.556</Inclusive>
+					<Timestamps>[{"Pop":[{"name":"execution","start":1520955852669683,"end":1520955852670037}]},{"PlanVizOverhead":[{"name":"planviz","start":1520955852670037,"end":1520955852670239}]}]</Timestamps>
+				</ExecutionTime>
+				<Details><![CDATA[{"FunctionProfiler":"[{\"Start Time\":\"2018-03-13 16:44:12.644\",\"Steps\":[{\"Children\":0.1719999999999999,\"Name\":\"QO [SYSTEM:CUSTOMER[0]ITAB_IN: ForAllEntriesItab:0x7f50ce6eea20(C_CITY) \",\"Self\":0.017,\"Steps\":[{\"Children\":0.076,\"Name\":\"evaluate\",\"Self\":0.003,\"Steps\":[{\"Children\":0.072,\"Name\":\"evaluateTerm [0]\",\"Self\":0.004,\"Steps\":[{\"Children\":0.066,\"Name\":\"doSearch\",\"Self\":0.006,\"Steps\":[{\"Children\":0.05,\"Name\":\"ae.searchDocs [vec]\",\"Self\":0.016,\"Steps\":[{\"Children\":0.046,\"Name\":\"IndDocuments::scan(values,vector)\",\"Self\":0.004,\"Steps\":[{\"Name\":\"IndirectScanVecOutHelper\",\"Total\":0.045},{\"Name\":\"postProcessScanVecResult()\",\"Total\":0.001}],\"Total\":0.05},{\"Count\":2370,\"Name\":\"result size\"}],\"Total\":0.066},{\"Count\":2370,\"Name\":\"result size\"}],\"Total\":0.072}],\"Total\":0.076},{\"Count\":2370,\"Name\":\"result size\"}],\"Total\":0.079},{\"Children\":0.038,\"Name\":\"estimate\",\"Self\":0.003,\"Steps\":[{\"Children\":0.034,\"Name\":\"estimateTree\",\"Self\":0.004,\"Steps\":[{\"Name\":\"estimateTerm [0]\",\"Total\":0.034}],\"Total\":0.038}],\"Total\":0.041},{\"Name\":\"validate [udivMgr]\",\"Steps\":[{\"Count\":2370,\"Name\":\"result size\"}],\"Total\":0.023},{\"Children\":0.015,\"Name\":\"buildTree\",\"Self\":0.004,\"Steps\":[{\"Name\":\"initialTree\",\"Total\":0.008},{\"Children\":0.005,\"Name\":\"optimizeTree\",\"Self\":0.002,\"Steps\":[{\"Name\":\"setupTermNodes\",\"Total\":0.005}],\"Total\":0.007}],\"Total\":0.019},{\"Name\":\"finalize planviz\",\"Total\":0.00899999999999999},{\"Name\":\"materializeResult\",\"Total\":0.001}],\"Total\":0.189}],\"Thread\":2609},{\"Start Time\":\"2018-03-13 16:44:12.645\",\"Steps\":[{\"Name\":\"QO [SYSTEM:CUSTOMER$delta_1$[0]ITAB_IN: ForAllEntriesItab:0x7f50ce6eea20(C_CITY) \",\"Total\":0.006}],\"Thread\":2609}]"}]]></Details>
+				<InnerPlans>
+					<Plan ID="cs_plan300_hxehost_39001" PlanType="Column" />
+					<Plan ID="cs_plan301_hxehost_39001" PlanType="Column" />
+				</InnerPlans>
+			</Relation>
+		</Plan>
+
+		<Plan ID="cs_plan305_hxehost_39001" Type="Executed" PlanType="Column">
+			<RootRelation ID="cs_plan305_hxehost_39001_result1" Status="Finished">
+				<Name>Result</Name>
+				<Location><![CDATA[hxehost:39001]]></Location>
+				<Child ID="cs_plan305_hxehost_39001_oltpSearchNode1">
+					<ConnectorName><![CDATA[SearchAPI::SearchResults]]></ConnectorName>
+					<ExecutedOutputCardinality>31</ExecutedOutputCardinality>
+					<Payload Unit="bytes">200</Payload>
+				</Child>
+			</RootRelation>
+			<Relation ID="cs_plan305_hxehost_39001_oltpSearchNode1" TypeName="FAST_SEARCH" Status="Finished">
+				<Name><![CDATA[dynamic search]]></Name>
+				<Summary><![CDATA[estimate first & optimize search accordingly]]></Summary>
+				<Schema><![CDATA[SYSTEM]]></Schema>
+				<ObjectName><![CDATA[DIM_DATE]]></ObjectName>
+				<TableType><![CDATA[COLUMN TABLE]]></TableType>
+				<Location><![CDATA[hxehost:39001]]></Location>
+				<ExecutionTime>
+					<Exclusive Unit="ms">0.189</Exclusive>
+					<Inclusive Unit="ms">0.318</Inclusive>
+					<Timestamps>[{"Pop":[{"name":"execution","start":1520955852670949,"end":1520955852671138}]},{"PlanVizOverhead":[{"name":"planviz","start":1520955852671138,"end":1520955852671267}]}]</Timestamps>
+				</ExecutionTime>
+				<Details><![CDATA[{"FunctionProfiler":"[{\"Start Time\":\"2018-03-13 16:44:12.646\",\"Steps\":[{\"Children\":0.065,\"Name\":\"QO [SYSTEM:DIM_DATE[0]D_YEARMONTH(207):'Dec1997'[EQ]<TA:> \",\"Self\":0.00899999999999999,\"Steps\":[{\"Children\":0.02,\"Name\":\"evaluate\",\"Self\":0.002,\"Steps\":[{\"Children\":0.017,\"Name\":\"evaluateTerm [0]\",\"Self\":0.003,\"Steps\":[{\"Children\":0.014,\"Name\":\"doSearch\",\"Self\":0.003,\"Steps\":[{\"Name\":\"ae.searchDocs [vec]\",\"Steps\":[{\"Count\":31,\"Name\":\"result size\"}],\"Total\":0.014},{\"Count\":31,\"Name\":\"result size\"}],\"Total\":0.017}],\"Total\":0.02},{\"Count\":31,\"Name\":\"result size\"}],\"Total\":0.02199999999999999},{\"Children\":0.017,\"Name\":\"estimate\",\"Self\":0.002,\"Steps\":[{\"Children\":0.014,\"Name\":\"estimateTree\",\"Self\":0.003,\"Steps\":[{\"Name\":\"estimateTerm [0]\",\"Total\":0.014}],\"Total\":0.017}],\"Total\":0.019},{\"Name\":\"validate [udivMgr]\",\"Steps\":[{\"Count\":31,\"Name\":\"result size\"}],\"Total\":0.00899999999999999},{\"Children\":0.003,\"Name\":\"buildTree\",\"Self\":0.005,\"Steps\":[{\"Children\":0.001,\"Name\":\"optimizeTree\",\"Self\":0.002,\"Steps\":[{\"Name\":\"setupTermNodes\",\"Total\":0.001}],\"Total\":0.003}],\"Total\":0.008},{\"Name\":\"finalize planviz\",\"Total\":0.006},{\"Name\":\"materializeResult\",\"Total\":0.001}],\"Total\":0.074}],\"Thread\":2609},{\"Start Time\":\"2018-03-13 16:44:12.646\",\"Steps\":[{\"Name\":\"QO [SYSTEM:DIM_DATE$delta_1$[0]D_YEARMONTH(207):'Dec1997'[EQ]<TA:> \",\"Total\":0.005}],\"Thread\":2609}]"}]]></Details>
+				<InnerPlans>
+					<Plan ID="cs_plan306_hxehost_39001" PlanType="Column" />
+					<Plan ID="cs_plan307_hxehost_39001" PlanType="Column" />
+				</InnerPlans>
+			</Relation>
+		</Plan>
+
+		<Plan ID="cs_plan302_hxehost_39001" Type="Executed" PlanType="Column">
+			<RootRelation ID="cs_plan302_hxehost_39001_result1" Status="Finished">
+				<Name>Result</Name>
+				<Location><![CDATA[hxehost:39001]]></Location>
+				<Child ID="cs_plan302_hxehost_39001_oltpSearchNode1">
+					<ConnectorName><![CDATA[SearchAPI::SearchResults]]></ConnectorName>
+					<ExecutedOutputCardinality>164</ExecutedOutputCardinality>
+					<Payload Unit="bytes">200</Payload>
+				</Child>
+			</RootRelation>
+			<Relation ID="cs_plan302_hxehost_39001_oltpSearchNode1" TypeName="FAST_SEARCH" Status="Finished">
+				<Name><![CDATA[dynamic search]]></Name>
+				<Summary><![CDATA[estimate first & optimize search accordingly]]></Summary>
+				<Schema><![CDATA[SYSTEM]]></Schema>
+				<ObjectName><![CDATA[SUPPLIER]]></ObjectName>
+				<TableType><![CDATA[COLUMN TABLE]]></TableType>
+				<Location><![CDATA[hxehost:39001]]></Location>
+				<ExecutionTime>
+					<Exclusive Unit="ms">0.207</Exclusive>
+					<Inclusive Unit="ms">0.350</Inclusive>
+					<Timestamps>[{"Pop":[{"name":"execution","start":1520955852670544,"end":1520955852670751}]},{"PlanVizOverhead":[{"name":"planviz","start":1520955852670751,"end":1520955852670894}]}]</Timestamps>
+				</ExecutionTime>
+				<Details><![CDATA[{"FunctionProfiler":"[{\"Start Time\":\"2018-03-13 16:44:12.645\",\"Steps\":[{\"Children\":0.083,\"Name\":\"QO [SYSTEM:SUPPLIER[0]ITAB_IN: ForAllEntriesItab:0x7f51c2888f60(S_CITY) \",\"Self\":0.00899999999999999,\"Steps\":[{\"Children\":0.032,\"Name\":\"evaluate\",\"Self\":0.002,\"Steps\":[{\"Children\":0.03,\"Name\":\"evaluateTerm [0]\",\"Self\":0.002,\"Steps\":[{\"Children\":0.026,\"Name\":\"doSearch\",\"Self\":0.004,\"Steps\":[{\"Children\":0.01799999999999999,\"Name\":\"ae.searchDocs [vec]\",\"Self\":0.008,\"Steps\":[{\"Children\":0.015,\"Name\":\"IndDocuments::scan(values,vector)\",\"Self\":0.003,\"Steps\":[{\"Name\":\"IndirectScanVecOutHelper\",\"Total\":0.015},{\"Name\":\"postProcessScanVecResult()\",\"Total\":0.0}],\"Total\":0.01799999999999999},{\"Count\":164,\"Name\":\"result size\"}],\"Total\":0.026},{\"Count\":164,\"Name\":\"result size\"}],\"Total\":0.03}],\"Total\":0.032},{\"Count\":164,\"Name\":\"result size\"}],\"Total\":0.034},{\"Children\":0.02,\"Name\":\"estimate\",\"Self\":0.002,\"Steps\":[{\"Children\":0.01799999999999999,\"Name\":\"estimateTree\",\"Self\":0.002,\"Steps\":[{\"Name\":\"estimateTerm [0]\",\"Total\":0.01799999999999999}],\"Total\":0.02}],\"Total\":0.02199999999999999},{\"Name\":\"validate [udivMgr]\",\"Steps\":[{\"Count\":164,\"Name\":\"result size\"}],\"Total\":0.01},{\"Children\":0.007,\"Name\":\"buildTree\",\"Self\":0.003,\"Steps\":[{\"Children\":0.003,\"Name\":\"optimizeTree\",\"Self\":0.001,\"Steps\":[{\"Name\":\"setupTermNodes\",\"Total\":0.003}],\"Total\":0.004},{\"Name\":\"initialTree\",\"Total\":0.003}],\"Total\":0.01},{\"Name\":\"finalize planviz\",\"Total\":0.006},{\"Name\":\"materializeResult\",\"Total\":0.001}],\"Total\":0.092}],\"Thread\":2609},{\"Start Time\":\"2018-03-13 16:44:12.645\",\"Steps\":[{\"Name\":\"QO [SYSTEM:SUPPLIER$delta_1$[0]ITAB_IN: ForAllEntriesItab:0x7f51c2888f60(S_CITY) \",\"Total\":0.004}],\"Thread\":2609}]"}]]></Details>
+				<InnerPlans>
+					<Plan ID="cs_plan303_hxehost_39001" PlanType="Column" />
+					<Plan ID="cs_plan304_hxehost_39001" PlanType="Column" />
+				</InnerPlans>
+			</Relation>
+		</Plan>
+
+		<Plan ID="cs_plan300_hxehost_39001" Type="Executed" PlanType="Column">
+			<RootRelation ID="cs_plan300_hxehost_39001_result1" Status="Finished">
+				<Name>Result</Name>
+				<Child ID="cs_plan300_hxehost_39001_qoTableSearch1_qoTableSearchNode1">
+					<ConnectorName><![CDATA[rows]]></ConnectorName>
+					<ExecutedOutputCardinality>2370</ExecutedOutputCardinality>
+				</Child>
+			</RootRelation>
+			<Relation ID="cs_plan300_hxehost_39001_qoTableSearch1" Status="Finished" Physical="False">
+				<Name><![CDATA[Search on table]]></Name>
+				<Summary><![CDATA[(1 node) ]]></Summary>
+				<Schema><![CDATA[SYSTEM]]></Schema>
+				<ObjectName><![CDATA[CUSTOMER]]></ObjectName>
+				<ExecutionTime>
+					<Exclusive Unit="ms">0.103</Exclusive>
+					<Inclusive Unit="ms">0.109</Inclusive>
+					<Timestamps>[{"Pop":[{"start":1520955852669755,"end":1520955852669784}]},{"Pop":[{"start":1520955852669790,"end":1520955852669864}]}]</Timestamps>
+				</ExecutionTime>
+				<Details><![CDATA[{"nodes":"1","table/column processed":"CUSTOMER","schema":"SYSTEM"}]]></Details>
+				<InnerPlans>
+					<Plan ID="subplan_cs_plan300_hxehost_39001_qoTableSearch1" PlanType="Column">
+						<Relation ID="cs_plan300_hxehost_39001_qoTableSearch1_qoTableSearchNode1" TypeName="QO3_SEARCH" Status="Finished">
+							<Name><![CDATA[IN predicate]]></Name>
+							<Summary><![CDATA[C_CITY IN ('UNITED KI1', 'UNITED KI5')]]></Summary>
+							<Schema><![CDATA[SYSTEM]]></Schema>
+							<ObjectName><![CDATA[CUSTOMER]]></ObjectName>
+							<TableType><![CDATA[COLUMN TABLE]]></TableType>
+							<Location><![CDATA[hxehost:39001]]></Location>
+							<ExecutionTime>
+								<Exclusive Unit="ms">0.103</Exclusive>
+								<Inclusive Unit="ms">0.109</Inclusive>
+								<Timestamps>[{"Pop":[{"name":"estimation","start":1520955852669755,"end":1520955852669784}]},{"Pop":[{"name":"evaluation","start":1520955852669790,"end":1520955852669864}]}]</Timestamps>
+							</ExecutionTime>
+							<Details><![CDATA[{"Block index":"no index existing","Estimated result size":"2400","Estimation time":"0.029 ms","Evaluation time":"0.074 ms"}]]></Details>
+						</Relation>
+					</Plan>
+				</InnerPlans>
+			</Relation>
+		</Plan>
+
+		<Plan ID="cs_plan301_hxehost_39001" Type="Executed" PlanType="Column">
+			<RootRelation ID="cs_plan301_hxehost_39001_result1" Status="Finished">
+				<Name>Result</Name>
+				<Child ID="cs_plan301_hxehost_39001_qoTableSearch1_qoTableSearchNode1">
+					<ConnectorName><![CDATA[rows]]></ConnectorName>
+					<ExecutedOutputCardinality>0</ExecutedOutputCardinality>
+				</Child>
+			</RootRelation>
+			<Relation ID="cs_plan301_hxehost_39001_qoTableSearch1" Status="Finished" Physical="False">
+				<Name><![CDATA[Search on Delta 1]]></Name>
+				<Summary><![CDATA[(1 node) is empty]]></Summary>
+				<Schema><![CDATA[SYSTEM]]></Schema>
+				<ObjectName><![CDATA[CUSTOMER]]></ObjectName>
+				<ExecutionTime>
+					<Exclusive Unit="ms">0.000</Exclusive>
+					<Inclusive Unit="ms">0.000</Inclusive>
+					<Timestamps>[{"Pop":[{"start":1520955852670018,"end":1520955852670018}]}]</Timestamps>
+				</ExecutionTime>
+				<Details><![CDATA[{"nodes":"1","table/column processed":"CUSTOMER","schema":"SYSTEM"}]]></Details>
+				<InnerPlans>
+					<Plan ID="subplan_cs_plan301_hxehost_39001_qoTableSearch1" PlanType="Column">
+						<Relation ID="cs_plan301_hxehost_39001_qoTableSearch1_qoTableSearchNode1" TypeName="QO3_SEARCH" Status="Finished">
+							<Name><![CDATA[Search on Delta 1]]></Name>
+							<Summary><![CDATA[is empty]]></Summary>
+							<Schema><![CDATA[SYSTEM]]></Schema>
+							<ObjectName><![CDATA[CUSTOMER]]></ObjectName>
+							<TableType><![CDATA[COLUMN TABLE]]></TableType>
+							<Location><![CDATA[hxehost:39001]]></Location>
+							<ExecutionTime>
+								<Exclusive Unit="ms">0.000</Exclusive>
+								<Inclusive Unit="ms">0.000</Inclusive>
+								<Timestamps>[{"Pop":[{"name":"evaluation","start":1520955852670018,"end":1520955852670018}]}]</Timestamps>
+							</ExecutionTime>
+							<Details><![CDATA[{"Block index":"no info available","Inverted index":"no info available"}]]></Details>
+						</Relation>
+					</Plan>
+				</InnerPlans>
+			</Relation>
+		</Plan>
+
+		<Plan ID="cs_plan306_hxehost_39001" Type="Executed" PlanType="Column">
+			<RootRelation ID="cs_plan306_hxehost_39001_result1" Status="Finished">
+				<Name>Result</Name>
+				<Child ID="cs_plan306_hxehost_39001_qoTableSearch1_qoTableSearchNode1">
+					<ConnectorName><![CDATA[rows]]></ConnectorName>
+					<ExecutedOutputCardinality>31</ExecutedOutputCardinality>
+				</Child>
+			</RootRelation>
+			<Relation ID="cs_plan306_hxehost_39001_qoTableSearch1" Status="Finished" Physical="False">
+				<Name><![CDATA[Search on table]]></Name>
+				<Summary><![CDATA[(1 node) ]]></Summary>
+				<Schema><![CDATA[SYSTEM]]></Schema>
+				<ObjectName><![CDATA[DIM_DATE]]></ObjectName>
+				<ExecutionTime>
+					<Exclusive Unit="ms">0.031</Exclusive>
+					<Inclusive Unit="ms">0.035</Inclusive>
+					<Timestamps>[{"Pop":[{"start":1520955852670983,"end":1520955852670995}]},{"Pop":[{"start":1520955852670999,"end":1520955852671018}]}]</Timestamps>
+				</ExecutionTime>
+				<Details><![CDATA[{"nodes":"1","table/column processed":"DIM_DATE","schema":"SYSTEM"}]]></Details>
+				<InnerPlans>
+					<Plan ID="subplan_cs_plan306_hxehost_39001_qoTableSearch1" PlanType="Column">
+						<Relation ID="cs_plan306_hxehost_39001_qoTableSearch1_qoTableSearchNode1" TypeName="QO3_SEARCH" Status="Finished">
+							<Name><![CDATA[Basic predicate]]></Name>
+							<Summary><![CDATA[D_YEARMONTH = 'Dec1997']]></Summary>
+							<Schema><![CDATA[SYSTEM]]></Schema>
+							<ObjectName><![CDATA[DIM_DATE]]></ObjectName>
+							<TableType><![CDATA[COLUMN TABLE]]></TableType>
+							<Location><![CDATA[hxehost:39001]]></Location>
+							<ExecutionTime>
+								<Exclusive Unit="ms">0.031</Exclusive>
+								<Inclusive Unit="ms">0.035</Inclusive>
+								<Timestamps>[{"Pop":[{"name":"estimation","start":1520955852670983,"end":1520955852670995}]},{"Pop":[{"name":"evaluation","start":1520955852670999,"end":1520955852671018}]}]</Timestamps>
+							</ExecutionTime>
+							<Details><![CDATA[{"Estimated result size":"30","Estimation time":"0.012 ms","Evaluation time":"0.019 ms","Inverted index":"no index existing"}]]></Details>
+						</Relation>
+					</Plan>
+				</InnerPlans>
+			</Relation>
+		</Plan>
+
+		<Plan ID="cs_plan307_hxehost_39001" Type="Executed" PlanType="Column">
+			<RootRelation ID="cs_plan307_hxehost_39001_result1" Status="Finished">
+				<Name>Result</Name>
+				<Child ID="cs_plan307_hxehost_39001_qoTableSearch1_qoTableSearchNode1">
+					<ConnectorName><![CDATA[rows]]></ConnectorName>
+					<ExecutedOutputCardinality>0</ExecutedOutputCardinality>
+				</Child>
+			</RootRelation>
+			<Relation ID="cs_plan307_hxehost_39001_qoTableSearch1" Status="Finished" Physical="False">
+				<Name><![CDATA[Search on Delta 1]]></Name>
+				<Summary><![CDATA[(1 node) is empty]]></Summary>
+				<Schema><![CDATA[SYSTEM]]></Schema>
+				<ObjectName><![CDATA[DIM_DATE]]></ObjectName>
+				<ExecutionTime>
+					<Exclusive Unit="ms">0.000</Exclusive>
+					<Inclusive Unit="ms">0.000</Inclusive>
+					<Timestamps>[{"Pop":[{"start":1520955852671125,"end":1520955852671125}]}]</Timestamps>
+				</ExecutionTime>
+				<Details><![CDATA[{"nodes":"1","table/column processed":"DIM_DATE","schema":"SYSTEM"}]]></Details>
+				<InnerPlans>
+					<Plan ID="subplan_cs_plan307_hxehost_39001_qoTableSearch1" PlanType="Column">
+						<Relation ID="cs_plan307_hxehost_39001_qoTableSearch1_qoTableSearchNode1" TypeName="QO3_SEARCH" Status="Finished">
+							<Name><![CDATA[Search on Delta 1]]></Name>
+							<Summary><![CDATA[is empty]]></Summary>
+							<Schema><![CDATA[SYSTEM]]></Schema>
+							<ObjectName><![CDATA[DIM_DATE]]></ObjectName>
+							<TableType><![CDATA[COLUMN TABLE]]></TableType>
+							<Location><![CDATA[hxehost:39001]]></Location>
+							<ExecutionTime>
+								<Exclusive Unit="ms">0.000</Exclusive>
+								<Inclusive Unit="ms">0.000</Inclusive>
+								<Timestamps>[{"Pop":[{"name":"evaluation","start":1520955852671125,"end":1520955852671125}]}]</Timestamps>
+							</ExecutionTime>
+							<Details><![CDATA[{"Block index":"no info available","Inverted index":"no info available"}]]></Details>
+						</Relation>
+					</Plan>
+				</InnerPlans>
+			</Relation>
+		</Plan>
+
+		<Plan ID="cs_plan303_hxehost_39001" Type="Executed" PlanType="Column">
+			<RootRelation ID="cs_plan303_hxehost_39001_result1" Status="Finished">
+				<Name>Result</Name>
+				<Child ID="cs_plan303_hxehost_39001_qoTableSearch1_qoTableSearchNode1">
+					<ConnectorName><![CDATA[rows]]></ConnectorName>
+					<ExecutedOutputCardinality>164</ExecutedOutputCardinality>
+				</Child>
+			</RootRelation>
+			<Relation ID="cs_plan303_hxehost_39001_qoTableSearch1" Status="Finished" Physical="False">
+				<Name><![CDATA[Search on table]]></Name>
+				<Summary><![CDATA[(1 node) ]]></Summary>
+				<Schema><![CDATA[SYSTEM]]></Schema>
+				<ObjectName><![CDATA[SUPPLIER]]></ObjectName>
+				<ExecutionTime>
+					<Exclusive Unit="ms">0.046</Exclusive>
+					<Inclusive Unit="ms">0.050</Inclusive>
+					<Timestamps>[{"Pop":[{"start":1520955852670581,"end":1520955852670596}]},{"Pop":[{"start":1520955852670600,"end":1520955852670631}]}]</Timestamps>
+				</ExecutionTime>
+				<Details><![CDATA[{"nodes":"1","table/column processed":"SUPPLIER","schema":"SYSTEM"}]]></Details>
+				<InnerPlans>
+					<Plan ID="subplan_cs_plan303_hxehost_39001_qoTableSearch1" PlanType="Column">
+						<Relation ID="cs_plan303_hxehost_39001_qoTableSearch1_qoTableSearchNode1" TypeName="QO3_SEARCH" Status="Finished">
+							<Name><![CDATA[IN predicate]]></Name>
+							<Summary><![CDATA[S_CITY IN ('UNITED KI1', 'UNITED KI5')]]></Summary>
+							<Schema><![CDATA[SYSTEM]]></Schema>
+							<ObjectName><![CDATA[SUPPLIER]]></ObjectName>
+							<TableType><![CDATA[COLUMN TABLE]]></TableType>
+							<Location><![CDATA[hxehost:39001]]></Location>
+							<ExecutionTime>
+								<Exclusive Unit="ms">0.046</Exclusive>
+								<Inclusive Unit="ms">0.050</Inclusive>
+								<Timestamps>[{"Pop":[{"name":"estimation","start":1520955852670581,"end":1520955852670596}]},{"Pop":[{"name":"evaluation","start":1520955852670600,"end":1520955852670631}]}]</Timestamps>
+							</ExecutionTime>
+							<Details><![CDATA[{"Block index":"no index existing","Estimated result size":"160","Estimation time":"0.015 ms","Evaluation time":"0.031 ms"}]]></Details>
+						</Relation>
+					</Plan>
+				</InnerPlans>
+			</Relation>
+		</Plan>
+
+		<Plan ID="cs_plan304_hxehost_39001" Type="Executed" PlanType="Column">
+			<RootRelation ID="cs_plan304_hxehost_39001_result1" Status="Finished">
+				<Name>Result</Name>
+				<Child ID="cs_plan304_hxehost_39001_qoTableSearch1_qoTableSearchNode1">
+					<ConnectorName><![CDATA[rows]]></ConnectorName>
+					<ExecutedOutputCardinality>0</ExecutedOutputCardinality>
+				</Child>
+			</RootRelation>
+			<Relation ID="cs_plan304_hxehost_39001_qoTableSearch1" Status="Finished" Physical="False">
+				<Name><![CDATA[Search on Delta 1]]></Name>
+				<Summary><![CDATA[(1 node) is empty]]></Summary>
+				<Schema><![CDATA[SYSTEM]]></Schema>
+				<ObjectName><![CDATA[SUPPLIER]]></ObjectName>
+				<ExecutionTime>
+					<Exclusive Unit="ms">0.000</Exclusive>
+					<Inclusive Unit="ms">0.000</Inclusive>
+					<Timestamps>[{"Pop":[{"start":1520955852670737,"end":1520955852670737}]}]</Timestamps>
+				</ExecutionTime>
+				<Details><![CDATA[{"nodes":"1","table/column processed":"SUPPLIER","schema":"SYSTEM"}]]></Details>
+				<InnerPlans>
+					<Plan ID="subplan_cs_plan304_hxehost_39001_qoTableSearch1" PlanType="Column">
+						<Relation ID="cs_plan304_hxehost_39001_qoTableSearch1_qoTableSearchNode1" TypeName="QO3_SEARCH" Status="Finished">
+							<Name><![CDATA[Search on Delta 1]]></Name>
+							<Summary><![CDATA[is empty]]></Summary>
+							<Schema><![CDATA[SYSTEM]]></Schema>
+							<ObjectName><![CDATA[SUPPLIER]]></ObjectName>
+							<TableType><![CDATA[COLUMN TABLE]]></TableType>
+							<Location><![CDATA[hxehost:39001]]></Location>
+							<ExecutionTime>
+								<Exclusive Unit="ms">0.000</Exclusive>
+								<Inclusive Unit="ms">0.000</Inclusive>
+								<Timestamps>[{"Pop":[{"name":"evaluation","start":1520955852670737,"end":1520955852670737}]}]</Timestamps>
+							</ExecutionTime>
+							<Details><![CDATA[{"Block index":"no info available","Inverted index":"no info available"}]]></Details>
+						</Relation>
+					</Plan>
+				</InnerPlans>
+			</Relation>
+		</Plan>
+
+	</ReferencedPlans>
+</Plan>
