@@ -19,16 +19,15 @@ titlepage-rule-height: 1
 - Memory Zugrigge
 
 # Star Schema Benchmark (SSBM)
-<!-- Star Schema Benchmark (https://www.cs.umb.edu/~poneil/StarSchemaB.PDF) als Quelle einfügen und einarbeiten -->
+<!-- Star Schema Benchmark (https://www.cs.umb.edu/~poneil/StarSchemaB.PDF) als Quelle einfügen und einarbeiten (Vergleiche Quelle 9)-->
+
+<!-- Quelle zu TPC-H Benchmark: www.tpc.org/tpch/ (Vergleiche Quelle 14)-->
 
 <!-- Quelle 1 Anfang: [Adjoined Dimension Column Index (ADC Index) to Improve Star Schema Query Performance](https://www.cs.umb.edu/~xuedchen/research/publications/SSBPaperICDE08_7_full_paper.doc) -->
 
-TODO: Der Star-Schema-Benchmark [9] oder SSB wurde entwickelt, um die Datenbanksystemleistung von Star-Schema-Data-Mart-Abfragen zu bewerten. Das Schema für SSB basiert auf dem TPC-H-Benchmark, allerdings in stark modifizierter Form. Die Details dieser Änderung können für Data Warehouse-Experten hilfreich sein, um einen Einblick in eine wichtige Frage zu geben: Wie kann ein Datenbankschema in normalisierter Form in Sternschemaform (oder mehrere Sternschemas mit gemeinsamen Dimensionen) umgewandelt werden? ohne Verlust wichtiger Abfrageinformationen? Wir geben hier eine sehr kurze Beschreibung der SSB-Transformation, aber eine vollständige Beschreibung finden Sie im Internet unter [9].
-Abbildung 3.1 zeigt das Schema-Layout des TPC-H-Benchmarks aus [14]. 
+Der Star Schema Benchmark (SSB) wurde von Pat O'Neil, Betty O'Neil und Quedong Chen entwickelt, um die Performance von Datenbanksystemen, welche mit Data-Marts nach dem Star Schema arbeiten, zu ermitteln und Vergleichbar zu machen [Star Schema Benchmark Quelle]. Dabei nutzen sie das bekannte TPC-H Benchmark [TPCH Quelle] als Grundlage für ihr Star Schema Benchmark, modifizieren es jedoch vielfach zugunsten eines guten Star Schemas.
 
--- Hier TPC-H Schema Abbildung einfügen --
-
-<!--Erklärung der Abkürzungen aus Paper: Wir gehen davon aus, dass der Leser mit TPC-H-Schemakonventionen vertraut ist. Beispiel: P_NAME ist eine Spalte in der PART-Tabelle, SF steht für den Skalierungsfaktor des Benchmarks und die LINEITEM-Tabelle hat 6.000.000 Zeilen in einem Benchmark mit SF = 1. aber 600.000.000 in einem Benchmark mit SF = 100.-->
+<!-- Hier kurz TPC-H aufgreifen und Abbildung einfügen für spätere Vergleiche -->
 
 **TPC-H zu SSB-Transformation**
 
@@ -51,7 +50,7 @@ Im Folgenden sind die wichtigsten Änderungen kurz zusammengefasst:
   <!-- Quelle 1 Ende -->
 
 - Warum SSBM? Für Dimensionale Modellierung, interessant für OLAP
-- Unterschiede zu TPC-H
+- Unterschiede zu TPC-H ausarbeiten anhand SSB-M Schema, Quellen, Bilder
 - Generierung von SSBM-Tabellen
 - Tabellen in HANA laden
 
