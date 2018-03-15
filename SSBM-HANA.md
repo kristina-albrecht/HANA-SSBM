@@ -56,10 +56,15 @@ Die Anzahl der Indizes kann erheblich reduziert werden. Bei der spaltenorientier
 Warum Komprimierung?
 Daten eignen sich. / CPU aufwand?
 Bei der spaltenorientierten Speicherung ist es möglich Daten zu Komprimieren. Dadurch wird Speicherplatz gespart und Zugriffszeiten verringert. Es gibt zwei mögliche Komprimierungen:
+
 • Dictonary compression: 
+
 Diese Methode wird auf alle Spalten angewandt. Alle verschiedenen Spaltenwerte werden aufeinanderfolgenden Zahlen zugeordnet. Anstatt nun die verschiedenen Werte zu speichern werden stattdessen die viel kleiner Zahlen gespeichert. Dadurch wird die Zahl der Datenzugriffe minimiert und es gibt weniger Cache Fehler, da mehrere Informationen in einer Cache-Line vorhanden sind. Außerdem ist es möglich Operationen direkt auf die komprimierten Daten auszuführen.
+
 • Advanced compression:
+
 Die einzelnen Zeilen selbst können durch verschiedene Komprimierungsmethoden weiter verkleinert werden. Dazu gehören: 
+
 o prefix encoding:
 Spalte enthält eine dominante Value / andere Values selten
 	ein Wert wird sehr oft unkomprimiert gespeichert
@@ -87,6 +92,7 @@ Wenn ein Cluster nur einen Wert hat wird er durch eine 1 ersetzt.
 Wurde er nicht ersetzt steht dort eine 0.
  
 o sparse encoding: 
+
 o inderict encoding:
 Ist gut wenn verschiedene Values oft vorkommen  BSP: bei zusammenhängenden Spalten. Nach Land Sortiert und auf Namensspalte zugreifen
 Wie bei Cluster encoding  N Datenblöcke mit fester Anzahl Elementen (1024)
