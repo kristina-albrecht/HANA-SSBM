@@ -1,0 +1,249 @@
+<?Version 22?>
+<Plan ID="ID_691B2FCE775FE44AA17C0C9C912FB3E4_0" xmlns="http://www.sap.com/ndb/planviz" Type="Executed" PlanType="QoExec">
+<SystemVersion><![CDATA[{"Version":"2.00.023.00.1513691289","CompileType":"rel"}]]></SystemVersion>
+<SQL><![CDATA[select c_city, s_city, d_year, sum(lo_revenue) as revenue
+from customer
+join lineorder
+on lo_custkey = c_customerkey
+join supplier
+on lo_suppkey = s_suppkey
+join dim_date
+on lo_orderdatekey = d_datekey
+where c_nation = 'UNITED STATES'
+and s_nation = 'UNITED STATES'
+and d_year >= 1992
+and d_year <= 1997
+group by c_city, s_city, d_year
+order by d_year asc, revenue desc]]></SQL>
+<CompileTime>
+	<Start Unit="us">1521219656683677</Start>
+	<End Unit="us">1521219656684140</End>
+</CompileTime>
+<StmtStats><![CDATA[]]></StmtStats>
+<StmtMemStats><![CDATA[[{"Allocated Count":371,"Allocated Size":3146312,"Allocator Name":"WorkloadCtx/281483566979100/Statement/484600063866813","Count in Use":368,"Deallocated Count":227,"Deallocated Size":2232072,"Depth":3,"Max Allocation Size (estimate)":914800,"Max Single Allocation Size":1048576,"Size in Use":914016},{"Allocated Count":5,"Allocated Size":15008,"Allocator Name":"WorkloadCtx/281483566979100/Statement/484600063866813/Pool/RowEngine/QueryExecution","Count in Use":5,"Deallocated Count":0,"Deallocated Size":0,"Depth":4,"Max Allocation Size (estimate)":15008,"Max Single Allocation Size":12288,"Size in Use":15008},{"Allocated Count":393,"Allocated Size":3133960,"Allocator Name":"WorkloadCtx/281483566979100/Statement/484600063866813/IMPLICIT","Count in Use":390,"Deallocated Count":228,"Deallocated Size":2232088,"Depth":4,"Max Allocation Size (estimate)":902432,"Max Single Allocation Size":1048576,"Size in Use":901648}]]]></StmtMemStats>
+<CompileSummary><![CDATA[{}]]></CompileSummary>
+	<RootRelation ID="ID_691B2FCE775FE44AA17C0C9C912FB3E4_0" TypeName="PROJECT" InternalBufferId="11" Status="Finished">
+		<Name>ROW SEARCH</Name>
+		<ExecutionType>ROW</ExecutionType>
+		<Summary><![CDATA[CUSTOMER.C_CITY, SUPPLIER.S_CITY, DIM_DATE.D_YEAR, SUM(LINEORDER.LO_REVENUE)]]></Summary>
+		<Location>hxehost:39001</Location>
+		<EstimatedCost>
+			<Inclusive Unit="us">211350</Inclusive>
+		</EstimatedCost>
+		<EstimatedOutputCardinality>5925.89</EstimatedOutputCardinality>
+		<ExecutionTime>
+			<Start Unit="us">1521219656803045</Start>
+			<End Unit="us">1521219656931729</End>
+			<Exclusive Unit="us">332</Exclusive>
+			<Inclusive Unit="us">128684</Inclusive>
+			<Timestamps>[{"Open": [{"start":1521219656803045,"end":1521219656803100,"thread":5039},{"start":1521219656889511,"end":1521219656889513,"thread":5039}]},{"Fetch": [{"start":1521219656889582,"end":1521219656889597,"thread":5039},{"start":1521219656889602,"end":1521219656889615,"thread":5039},{"start":1521219656931366,"end":1521219656931408,"thread":5039},{"start":1521219656931448,"end":1521219656931646,"thread":5039},{"start":1521219656931646,"end":1521219656931649,"thread":5039}]},{"Close": [{"start":1521219656931664,"end":1521219656931667,"thread":5039},{"start":1521219656931728,"end":1521219656931729,"thread":5039}]}]</Timestamps>
+		</ExecutionTime>
+		<MemoryUsage>
+			<Max>0</Max>
+		</MemoryUsage>
+		<KernelCPUTime Unit="ms">0.000</KernelCPUTime>
+		<UserCPUTime Unit="ms">0.306</UserCPUTime>
+		<Details><![CDATA[{"Projected Cols":"CUSTOMER.C_CITY, SUPPLIER.S_CITY, DIM_DATE.D_YEAR, SUM(LINEORDER.LO_REVENUE)"}]]></Details>
+		<Child ID="ID_691B2FCE775FE44AA17C0C9C912FB3E4_1" >
+			<ExecutedOutputCardinality>599</ExecutedOutputCardinality>
+			<FetchCallCount>2</FetchCallCount>
+		</Child>
+	</RootRelation>
+	<Relation ID="ID_691B2FCE775FE44AA17C0C9C912FB3E4_1" TypeName="ORDER_BY" InternalBufferId="10" Status="Finished">
+		<Name>ORDER BY</Name>
+		<ExecutionType>ROW</ExecutionType>
+		<Summary><![CDATA[DIM_DATE.D_YEAR ASC, SUM(LINEORDER.LO_REVENUE) DESC]]></Summary>
+		<Location>hxehost:39001</Location>
+		<EstimatedCost>
+			<Inclusive Unit="us">191889</Inclusive>
+		</EstimatedCost>
+		<EstimatedOutputCardinality>5925.89</EstimatedOutputCardinality>
+		<ExecutionTime>
+			<Start Unit="us">1521219656803103</Start>
+			<End Unit="us">1521219656931725</End>
+			<Exclusive Unit="us">809</Exclusive>
+			<Inclusive Unit="us">128622</Inclusive>
+			<Timestamps>[{"Open": [{"start":1521219656803103,"end":1521219656803110,"thread":5039},{"start":1521219656888734,"end":1521219656888738,"thread":5039},{"start":1521219656888757,"end":1521219656888759,"thread":5039},{"start":1521219656888759,"end":1521219656889510,"thread":5039}]},{"Fetch": [{"start":1521219656889597,"end":1521219656889601,"thread":5039},{"start":1521219656931409,"end":1521219656931447,"thread":5039}]},{"Close": [{"start":1521219656931667,"end":1521219656931669,"thread":5039},{"start":1521219656931724,"end":1521219656931725,"thread":5039}]}]</Timestamps>
+		</ExecutionTime>
+		<MemoryUsage>
+			<Max>0</Max>
+		</MemoryUsage>
+		<KernelCPUTime Unit="ms">0.000</KernelCPUTime>
+		<UserCPUTime Unit="ms">0.798</UserCPUTime>
+		<Details><![CDATA[{"Execution time detail":[{"child fetch time (real)":"0 ms"},{"sort buffer preparation time (real)":"0 ms"},{"sorting time (real)":"0 ms"}],"Runtime information":[{"#fetch thread":"1 "},{"#prepare thread":"1 "},{"#sort thread":"1 "}],"Sort Cols":"DIM_DATE.D_YEAR ASC, SUM(LINEORDER.LO_REVENUE) DESC"}]]></Details>
+		<Child ID="ID_691B2FCE775FE44AA17C0C9C912FB3E4_3" >
+			<ExecutedOutputCardinality>599</ExecutedOutputCardinality>
+			<FetchCallCount>1</FetchCallCount>
+		</Child>
+	</Relation>
+	<Relation ID="ID_691B2FCE775FE44AA17C0C9C912FB3E4_3" TypeName="GROUP_BY" InternalBufferId="8" Status="Finished">
+		<Name>AGGREGATION</Name>
+		<ExecutionType>ROW</ExecutionType>
+		<Summary><![CDATA[SUM(LINEORDER.LO_REVENUE)]]></Summary>
+		<Location>hxehost:39001</Location>
+		<EstimatedCost>
+			<Inclusive Unit="us">179816</Inclusive>
+		</EstimatedCost>
+		<EstimatedOutputCardinality>5925.89</EstimatedOutputCardinality>
+		<ExecutionTime>
+			<Start Unit="us">1521219656803111</Start>
+			<End Unit="us">1521219656931721</End>
+			<Exclusive Unit="us">5039</Exclusive>
+			<Inclusive Unit="us">128610</Inclusive>
+			<Timestamps>[{"Open": [{"start":1521219656803111,"end":1521219656803116,"thread":5039},{"start":1521219656813333,"end":1521219656813343,"thread":5039},{"start":1521219656877560,"end":1521219656879952,"thread":5039},{"start":1521219656886111,"end":1521219656888442,"thread":5039},{"start":1521219656888454,"end":1521219656888674,"thread":5039},{"start":1521219656888674,"end":1521219656888733,"thread":5039}]},{"Fetch": [{"start":1521219656888739,"end":1521219656888757,"thread":5039}]},{"Close": [{"start":1521219656931670,"end":1521219656931672,"thread":5039},{"start":1521219656931719,"end":1521219656931721,"thread":5039}]}]</Timestamps>
+		</ExecutionTime>
+		<MemoryUsage>
+			<Max>0</Max>
+		</MemoryUsage>
+		<KernelCPUTime Unit="ms">0.000</KernelCPUTime>
+		<UserCPUTime Unit="ms">5.030</UserCPUTime>
+		<Details><![CDATA[{"Execution time detail":[{"grouping time (real)":"75 ms"},{"merge time (real)":"0 ms"}],"Runtime information":[{"#grouping threads":"1 "},{"#merge threads":"1 "}],"Grouping Cols":"CUSTOMER.C_CITY, SUPPLIER.S_CITY, DIM_DATE.D_YEAR, ","Aggregation Cols":"SUM(LINEORDER.LO_REVENUE)"}]]></Details>
+		<Child ID="ID_691B2FCE775FE44AA17C0C9C912FB3E4_52" >
+			<ExecutedOutputCardinality>8541</ExecutedOutputCardinality>
+			<FetchCallCount>3</FetchCallCount>
+		</Child>
+	</Relation>
+	<Relation ID="ID_691B2FCE775FE44AA17C0C9C912FB3E4_52" TypeName="INDEX_JOIN" InternalBufferId="6" Status="Finished">
+		<Name>BTREE INDEX JOIN</Name>
+		<ExecutionType>ROW</ExecutionType>
+		<Summary><![CDATA[_SYS_TREE_RS_#175622_#0_#P0, INDEX CONDITION: LINEORDER.LO_ORDERDATEKEY = DIM_DATE.D_DATEKEY, INDEX FILTER: DIM_DATE.D_YEAR >= 1992 AND DIM_DATE.D_YEAR <= 1997]]></Summary>
+		<Schema><![CDATA[SYSTEM]]></Schema>
+		<ObjectName><![CDATA[DIM_DATE]]></ObjectName>
+		<TableType><![CDATA[ROW TABLE]]></TableType>
+		<Location>hxehost:39001</Location>
+		<EstimatedCost>
+			<Inclusive Unit="us">164517</Inclusive>
+		</EstimatedCost>
+		<EstimatedOutputCardinality>6237.77</EstimatedOutputCardinality>
+		<ExecutionTime>
+			<Start Unit="us">1521219656803117</Start>
+			<End Unit="us">1521219656931717</End>
+			<Exclusive Unit="us">4929</Exclusive>
+			<Inclusive Unit="us">128600</Inclusive>
+			<Timestamps>[{"Open": [{"start":1521219656803117,"end":1521219656803121,"thread":5039},{"start":1521219656813324,"end":1521219656813332,"thread":5039}]},{"Fetch": [{"start":1521219656813349,"end":1521219656813355,"thread":5039},{"start":1521219656853913,"end":1521219656856377,"thread":5039},{"start":1521219656875698,"end":1521219656877556,"thread":5039},{"start":1521219656877556,"end":1521219656877559,"thread":5039},{"start":1521219656879953,"end":1521219656880007,"thread":5039},{"start":1521219656885592,"end":1521219656886107,"thread":5039},{"start":1521219656886108,"end":1521219656886110,"thread":5039},{"start":1521219656888443,"end":1521219656888452,"thread":5039},{"start":1521219656888452,"end":1521219656888454,"thread":5039}]},{"Close": [{"start":1521219656931673,"end":1521219656931676,"thread":5039},{"start":1521219656931716,"end":1521219656931717,"thread":5039}]}]</Timestamps>
+		</ExecutionTime>
+		<MemoryUsage>
+			<Max>0</Max>
+		</MemoryUsage>
+		<KernelCPUTime Unit="ms">0.000</KernelCPUTime>
+		<UserCPUTime Unit="ms">4.909</UserCPUTime>
+		<Details><![CDATA[{"Index Name":"_SYS_TREE_RS_#175622_#0_#P0","Index Condition":"LINEORDER.LO_ORDERDATEKEY = DIM_DATE.D_DATEKEY","Right Filter":"DIM_DATE.D_YEAR >= 1992 AND DIM_DATE.D_YEAR <= 1997"}]]></Details>
+		<Child ID="ID_691B2FCE775FE44AA17C0C9C912FB3E4_7" >
+			<ExecutedOutputCardinality>9417</ExecutedOutputCardinality>
+			<FetchCallCount>3</FetchCallCount>
+		</Child>
+	</Relation>
+	<Relation ID="ID_691B2FCE775FE44AA17C0C9C912FB3E4_7" TypeName="HASH_JOIN" InternalBufferId="4" Status="Finished">
+		<Name>HASH JOIN</Name>
+		<ExecutionType>ROW</ExecutionType>
+		<Summary><![CDATA[LINEORDER.LO_CUSTKEY = CUSTOMER.C_CUSTOMERKEY]]></Summary>
+		<Location>hxehost:39001</Location>
+		<EstimatedCost>
+			<Inclusive Unit="us">156528</Inclusive>
+		</EstimatedCost>
+		<EstimatedOutputCardinality>7646.81</EstimatedOutputCardinality>
+		<ExecutionTime>
+			<Start Unit="us">1521219656803123</Start>
+			<End Unit="us">1521219656931710</End>
+			<Exclusive Unit="us">37146</Exclusive>
+			<Inclusive Unit="us">128587</Inclusive>
+			<Timestamps>[{"Open": [{"start":1521219656803123,"end":1521219656803127,"thread":5039},{"start":1521219656803156,"end":1521219656803357,"thread":5039},{"start":1521219656812588,"end":1521219656812626,"thread":5039},{"start":1521219656812681,"end":1521219656813323,"thread":5039}]},{"Fetch": [{"start":1521219656813356,"end":1521219656813360,"thread":5039},{"start":1521219656814719,"end":1521219656815820,"thread":5039},{"start":1521219656816536,"end":1521219656817631,"thread":5039},{"start":1521219656818335,"end":1521219656819409,"thread":5039},{"start":1521219656820120,"end":1521219656821195,"thread":5039},{"start":1521219656821908,"end":1521219656822999,"thread":5039},{"start":1521219656823713,"end":1521219656824792,"thread":5039},{"start":1521219656825520,"end":1521219656826586,"thread":5039},{"start":1521219656827299,"end":1521219656828374,"thread":5039},{"start":1521219656829093,"end":1521219656830201,"thread":5039},{"start":1521219656830918,"end":1521219656831982,"thread":5039},{"start":1521219656832700,"end":1521219656833793,"thread":5039},{"start":1521219656834493,"end":1521219656835596,"thread":5039},{"start":1521219656836308,"end":1521219656837379,"thread":5039},{"start":1521219656838104,"end":1521219656839185,"thread":5039},{"start":1521219656839881,"end":1521219656840956,"thread":5039},{"start":1521219656841676,"end":1521219656842759,"thread":5039},{"start":1521219656843479,"end":1521219656844621,"thread":5039},{"start":1521219656845255,"end":1521219656846008,"thread":5039},{"start":1521219656846576,"end":1521219656847333,"thread":5039},{"start":1521219656847902,"end":1521219656848653,"thread":5039},{"start":1521219656849219,"end":1521219656849959,"thread":5039},{"start":1521219656850438,"end":1521219656851024,"thread":5039},{"start":1521219656851505,"end":1521219656852110,"thread":5039},{"start":1521219656852589,"end":1521219656853172,"thread":5039},{"start":1521219656853651,"end":1521219656853912,"thread":5039},{"start":1521219656856378,"end":1521219656856695,"thread":5039},{"start":1521219656857140,"end":1521219656857630,"thread":5039},{"start":1521219656858059,"end":1521219656858540,"thread":5039},{"start":1521219656858973,"end":1521219656859451,"thread":5039},{"start":1521219656859882,"end":1521219656860290,"thread":5039},{"start":1521219656860681,"end":1521219656861074,"thread":5039},{"start":1521219656861472,"end":1521219656861882,"thread":5039},{"start":1521219656862271,"end":1521219656862666,"thread":5039},{"start":1521219656863057,"end":1521219656863461,"thread":5039},{"start":1521219656863853,"end":1521219656864266,"thread":5039},{"start":1521219656864660,"end":1521219656865062,"thread":5039},{"start":1521219656865447,"end":1521219656865840,"thread":5039},{"start":1521219656866228,"end":1521219656866614,"thread":5039},{"start":1521219656867001,"end":1521219656867381,"thread":5039},{"start":1521219656867770,"end":1521219656868156,"thread":5039},{"start":1521219656868542,"end":1521219656868927,"thread":5039},{"start":1521219656869315,"end":1521219656869687,"thread":5039},{"start":1521219656870077,"end":1521219656870449,"thread":5039},{"start":1521219656870834,"end":1521219656871215,"thread":5039},{"start":1521219656871599,"end":1521219656871989,"thread":5039},{"start":1521219656872374,"end":1521219656872768,"thread":5039},{"start":1521219656873161,"end":1521219656873544,"thread":5039},{"start":1521219656873929,"end":1521219656874323,"thread":5039},{"start":1521219656874711,"end":1521219656875104,"thread":5039},{"start":1521219656875488,"end":1521219656875697,"thread":5039},{"start":1521219656880008,"end":1521219656880202,"thread":5039},{"start":1521219656880592,"end":1521219656880999,"thread":5039},{"start":1521219656881387,"end":1521219656881815,"thread":5039},{"start":1521219656882199,"end":1521219656882592,"thread":5039},{"start":1521219656882976,"end":1521219656883377,"thread":5039},{"start":1521219656883767,"end":1521219656884168,"thread":5039},{"start":1521219656884552,"end":1521219656884941,"thread":5039},{"start":1521219656885275,"end":1521219656885587,"thread":5039},{"start":1521219656885588,"end":1521219656885592,"thread":5039}]},{"Close": [{"start":1521219656931676,"end":1521219656931680,"thread":5039},{"start":1521219656931707,"end":1521219656931710,"thread":5039}]}]</Timestamps>
+		</ExecutionTime>
+		<MemoryUsage>
+			<Max>0</Max>
+		</MemoryUsage>
+		<KernelCPUTime Unit="ms">0.000</KernelCPUTime>
+		<UserCPUTime Unit="ms">37.020</UserCPUTime>
+		<Details><![CDATA[{"Execution time detail":[{"fetch time (real)":"9 ms"},{"hash build time (real)":"0 ms"}],"Runtime information":[{"#fetch thread":"4 "},{"#hash build thread":"1 "}],"Hash Build On":"RIGHT","Join Condition":"LINEORDER.LO_CUSTKEY = CUSTOMER.C_CUSTOMERKEY"}]]></Details>
+		<Child ID="ID_691B2FCE775FE44AA17C0C9C912FB3E4_40" >
+			<ExecutedOutputCardinality>228745</ExecutedOutputCardinality>
+			<FetchCallCount>56</FetchCallCount>
+		</Child>
+		<Child ID="ID_691B2FCE775FE44AA17C0C9C912FB3E4_5" >
+			<ExecutedOutputCardinality>1260</ExecutedOutputCardinality>
+			<FetchCallCount>4</FetchCallCount>
+		</Child>
+	</Relation>
+	<Relation ID="ID_691B2FCE775FE44AA17C0C9C912FB3E4_40" TypeName="INDEX_JOIN" InternalBufferId="2" Status="Finished">
+		<Name>CPBTREE INDEX JOIN</Name>
+		<ExecutionType>ROW</ExecutionType>
+		<Summary><![CDATA[IDX_LO_SUPPKEY, INDEX CONDITION: SUPPLIER.S_SUPPKEY = LINEORDER.LO_SUPPKEY]]></Summary>
+		<Schema><![CDATA[SYSTEM]]></Schema>
+		<ObjectName><![CDATA[LINEORDER]]></ObjectName>
+		<TableType><![CDATA[ROW TABLE]]></TableType>
+		<Location>hxehost:39001</Location>
+		<EstimatedCost>
+			<Inclusive Unit="us">753.529</Inclusive>
+		</EstimatedCost>
+		<EstimatedOutputCardinality>196072</EstimatedOutputCardinality>
+		<ExecutionTime>
+			<Start Unit="us">1521219656812628</Start>
+			<End Unit="us">1521219656931698</End>
+			<Exclusive Unit="us">28557</Exclusive>
+			<Inclusive Unit="us">119070</Inclusive>
+			<Timestamps>[{"Open": [{"start":1521219656812628,"end":1521219656812636,"thread":5039},{"start":1521219656812663,"end":1521219656812681,"thread":5039}]},{"Fetch": [{"start":1521219656813361,"end":1521219656813365,"thread":5039},{"start":1521219656813942,"end":1521219656814717,"thread":5039},{"start":1521219656815823,"end":1521219656816535,"thread":5039},{"start":1521219656817634,"end":1521219656818334,"thread":5039},{"start":1521219656819411,"end":1521219656820119,"thread":5039},{"start":1521219656821197,"end":1521219656821907,"thread":5039},{"start":1521219656823001,"end":1521219656823712,"thread":5039},{"start":1521219656824794,"end":1521219656825518,"thread":5039},{"start":1521219656826588,"end":1521219656827298,"thread":5039},{"start":1521219656828377,"end":1521219656829092,"thread":5039},{"start":1521219656830203,"end":1521219656830917,"thread":5039},{"start":1521219656831984,"end":1521219656832699,"thread":5039},{"start":1521219656833796,"end":1521219656834492,"thread":5039},{"start":1521219656835598,"end":1521219656836307,"thread":5039},{"start":1521219656837382,"end":1521219656838103,"thread":5039},{"start":1521219656839187,"end":1521219656839880,"thread":5039},{"start":1521219656840958,"end":1521219656841675,"thread":5039},{"start":1521219656842762,"end":1521219656843477,"thread":5039},{"start":1521219656844623,"end":1521219656845255,"thread":5039},{"start":1521219656846010,"end":1521219656846575,"thread":5039},{"start":1521219656847334,"end":1521219656847902,"thread":5039},{"start":1521219656848655,"end":1521219656849218,"thread":5039},{"start":1521219656849960,"end":1521219656850437,"thread":5039},{"start":1521219656851025,"end":1521219656851504,"thread":5039},{"start":1521219656852111,"end":1521219656852589,"thread":5039},{"start":1521219656853173,"end":1521219656853650,"thread":5039},{"start":1521219656856695,"end":1521219656857139,"thread":5039},{"start":1521219656857630,"end":1521219656858059,"thread":5039},{"start":1521219656858541,"end":1521219656858973,"thread":5039},{"start":1521219656859452,"end":1521219656859882,"thread":5039},{"start":1521219656860291,"end":1521219656860681,"thread":5039},{"start":1521219656861075,"end":1521219656861472,"thread":5039},{"start":1521219656861883,"end":1521219656862271,"thread":5039},{"start":1521219656862667,"end":1521219656863057,"thread":5039},{"start":1521219656863462,"end":1521219656863852,"thread":5039},{"start":1521219656864267,"end":1521219656864659,"thread":5039},{"start":1521219656865063,"end":1521219656865447,"thread":5039},{"start":1521219656865841,"end":1521219656866227,"thread":5039},{"start":1521219656866615,"end":1521219656867001,"thread":5039},{"start":1521219656867381,"end":1521219656867769,"thread":5039},{"start":1521219656868156,"end":1521219656868542,"thread":5039},{"start":1521219656868928,"end":1521219656869315,"thread":5039},{"start":1521219656869687,"end":1521219656870076,"thread":5039},{"start":1521219656870449,"end":1521219656870834,"thread":5039},{"start":1521219656871215,"end":1521219656871599,"thread":5039},{"start":1521219656871990,"end":1521219656872374,"thread":5039},{"start":1521219656872768,"end":1521219656873161,"thread":5039},{"start":1521219656873544,"end":1521219656873929,"thread":5039},{"start":1521219656874324,"end":1521219656874711,"thread":5039},{"start":1521219656875105,"end":1521219656875487,"thread":5039},{"start":1521219656880203,"end":1521219656880592,"thread":5039},{"start":1521219656881000,"end":1521219656881387,"thread":5039},{"start":1521219656881816,"end":1521219656882199,"thread":5039},{"start":1521219656882593,"end":1521219656882976,"thread":5039},{"start":1521219656883377,"end":1521219656883766,"thread":5039},{"start":1521219656884169,"end":1521219656884552,"thread":5039},{"start":1521219656884942,"end":1521219656885271,"thread":5039},{"start":1521219656885271,"end":1521219656885274,"thread":5039}]},{"Close": [{"start":1521219656931681,"end":1521219656931684,"thread":5039},{"start":1521219656931692,"end":1521219656931698,"thread":5039}]}]</Timestamps>
+		</ExecutionTime>
+		<MemoryUsage>
+			<Max>0</Max>
+		</MemoryUsage>
+		<KernelCPUTime Unit="ms">0.000</KernelCPUTime>
+		<UserCPUTime Unit="ms">28.446</UserCPUTime>
+		<Details><![CDATA[{"Index Name":"IDX_LO_SUPPKEY","Index Condition":"SUPPLIER.S_SUPPKEY = LINEORDER.LO_SUPPKEY"}]]></Details>
+		<Child ID="ID_691B2FCE775FE44AA17C0C9C912FB3E4_8" >
+			<ExecutedOutputCardinality>76</ExecutedOutputCardinality>
+			<FetchCallCount>1</FetchCallCount>
+		</Child>
+	</Relation>
+	<Relation ID="ID_691B2FCE775FE44AA17C0C9C912FB3E4_8" TypeName="TABLE" InternalBufferId="1" Status="Finished">
+		<Name>TABLE SCAN</Name>
+		<ExecutionType>ROW</ExecutionType>
+		<Summary><![CDATA[SUPPLIER.S_NATION = 'UNITED STATES']]></Summary>
+		<Schema><![CDATA[SYSTEM]]></Schema>
+		<ObjectName><![CDATA[SUPPLIER]]></ObjectName>
+		<TableType><![CDATA[ROW TABLE]]></TableType>
+		<Location>hxehost:39001</Location>
+		<EstimatedCost>
+			<Inclusive Unit="us">610.539</Inclusive>
+		</EstimatedCost>
+		<EstimatedOutputCardinality>72</EstimatedOutputCardinality>
+		<ExecutionTime>
+			<Start Unit="us">1521219656812637</Start>
+			<End Unit="us">1521219656931688</End>
+			<Exclusive Unit="us">602</Exclusive>
+			<Inclusive Unit="us">119051</Inclusive>
+			<Timestamps>[{"Open": [{"start":1521219656812637,"end":1521219656812662,"thread":5039}]},{"Fetch": [{"start":1521219656813366,"end":1521219656813940,"thread":5039}]},{"Close": [{"start":1521219656931685,"end":1521219656931688,"thread":5039}]}]</Timestamps>
+		</ExecutionTime>
+		<MemoryUsage>
+			<Max>0</Max>
+		</MemoryUsage>
+		<KernelCPUTime Unit="ms">0.000</KernelCPUTime>
+		<UserCPUTime Unit="ms">0.598</UserCPUTime>
+		<Details><![CDATA[{"Filter":"SUPPLIER.S_NATION = 'UNITED STATES'"}]]></Details>
+	</Relation>
+	<Relation ID="ID_691B2FCE775FE44AA17C0C9C912FB3E4_5" TypeName="TABLE" InternalBufferId="3" Status="Finished">
+		<Name>TABLE SCAN</Name>
+		<ExecutionType>ROW</ExecutionType>
+		<Summary><![CDATA[CUSTOMER.C_NATION = 'UNITED STATES']]></Summary>
+		<Schema><![CDATA[SYSTEM]]></Schema>
+		<ObjectName><![CDATA[CUSTOMER]]></ObjectName>
+		<TableType><![CDATA[ROW TABLE]]></TableType>
+		<Location>hxehost:39001</Location>
+		<EstimatedCost>
+			<Inclusive Unit="us">9167.29</Inclusive>
+		</EstimatedCost>
+		<EstimatedOutputCardinality>1170</EstimatedOutputCardinality>
+		<ExecutionTime>
+			<Start Unit="us">1521219656803128</Start>
+			<End Unit="us">1521219656931705</End>
+			<Exclusive Unit="us">8256</Exclusive>
+			<Inclusive Unit="us">128577</Inclusive>
+			<Timestamps>[{"Open": [{"start":1521219656803128,"end":1521219656803154,"thread":5039}]},{"OpenIterator": [{"start":1521219656803499,"end":1521219656803511,"thread":5039}]},{"Fetch": [{"start":1521219656810286,"end":1521219656812282,"thread":15347}]},{"CloseIterator": [{"start":1521219656812533,"end":1521219656812549,"thread":5039}]},{"OpenIterator": [{"start":1521219656803530,"end":1521219656803536,"thread":5039}]},{"Fetch": [{"start":1521219656808181,"end":1521219656810246,"thread":15347}]},{"CloseIterator": [{"start":1521219656812554,"end":1521219656812557,"thread":5039}]},{"OpenIterator": [{"start":1521219656803543,"end":1521219656803549,"thread":5039}]},{"Fetch": [{"start":1521219656805804,"end":1521219656808134,"thread":15347}]},{"CloseIterator": [{"start":1521219656812560,"end":1521219656812563,"thread":5039}]},{"OpenIterator": [{"start":1521219656803555,"end":1521219656803561,"thread":5039}]},{"Fetch": [{"start":1521219656803954,"end":1521219656805734,"thread":15347}]},{"CloseIterator": [{"start":1521219656812566,"end":1521219656812569,"thread":5039}]},{"Close": [{"start":1521219656931701,"end":1521219656931705,"thread":5039}]}]</Timestamps>
+		</ExecutionTime>
+		<MemoryUsage>
+			<Max>0</Max>
+		</MemoryUsage>
+		<KernelCPUTime Unit="ms">0.000</KernelCPUTime>
+		<UserCPUTime Unit="ms">0.026</UserCPUTime>
+		<Details><![CDATA[{"Filter":"CUSTOMER.C_NATION = 'UNITED STATES'"}]]></Details>
+	</Relation>
+</Plan>
