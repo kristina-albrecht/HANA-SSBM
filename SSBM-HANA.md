@@ -16,7 +16,7 @@ titlepage-rule-height: 1
 
 # Generell HANA als in-memory Datenbank
 
- SAP Hana (Die High Performance Analytic Appliance) ist eine Entwicklungsplattform und bestehtim Kern aus einer „in-memory“ Datenbank.
+SAP Hana (Die High Performance Analytic Appliance) ist eine Entwicklungsplattform und bestehtim Kern aus einer „in-memory“ Datenbank.
 
 Transaktionen und Analysen werden aufeiner einzigen, singulären Datenkopie im Hauptspeicher verarbeitet, anstatt dieFestplatte als Datenspeicher zu benutzen. Dadurch ist es möglich sehr komplexeAbfragen und Datenbankoperationen mit sehr hohen Durchsatz auszuführen.
 
@@ -42,7 +42,67 @@ Um nun aber dem „D“ des ACID Prinzips gerechtzu werden reicht eine Speicheru
 
  
 
+# Row-Column based / Indizes
+
+Die Daten werden in der SAP Hana Datenbank in zwei verschiedenen Formaten abgelegt. Hierbei handelt es sich um die spalten- und zeilenorientierte Speicherung.  Sollen beispielsweise transaktionale Prozesse (OLTP) durchgeführt werden, bietet sich die Verwendung der zeilenorientierten Speicherung an, da das Aktualisieren und Hinzufügen der Daten durch die Zeilen Anordnung vereinfacht wird. 
+Für Lesezugriffe ist diese Art der Speicherung nicht geeignet, da jede Zeile gelesen werden muss, was sehr unperformant ist. Es müssten Daten gelesen werden, die für die bestimmte Abfrage nicht von Relevanz sind. Daher werden Lesezugriffe und Analyseabfragen auf die spaltenorientierte Speicherung ausgeführt und somit wird nur auf die relevanten Daten zugegriffen. Dies hat eine enorme Performance zur Folge.
+Durch die spaltenorientierte Speicherung erreicht man neben der Zugriffsbeschleunigung auch eine höhere Kompression der Daten. Die Daten können gut komprimiert werden, da Tabellenspalten häufig gleiche Werte enthalten. 
  
+
+Die Anzahl der Indizes kann erheblich reduziert werden. Bei der spaltenorientierten Speicherung kann jedes Attribut als Index verwendet werden. Da jedoch die gesamten Daten im Speicher vorhanden sind und die Daten einer Spalte alle aufeinanderfolgend gespeichert sind ist die Geschwindigkeit eines vollen sequentiellen Scans eines Attributs ausreichend in den meisten Fällen. Falls es nicht schnell genug ist können zusätzlich Indizes benutzt werden.
+
+# Komprimierungen und Referenzen
+
+Warum Komprimierung?
+Daten eignen sich. / CPU aufwand?
+Bei der spaltenorientierten Speicherung ist es möglich Daten zu Komprimieren. Dadurch wird Speicherplatz gespart und Zugriffszeiten verringert. Es gibt zwei mögliche Komprimierungen:
+
+• Dictonary compression: 
+
+Diese Methode wird auf alle Spalten angewandt. Alle verschiedenen Spaltenwerte werden aufeinanderfolgenden Zahlen zugeordnet. Anstatt nun die verschiedenen Werte zu speichern werden stattdessen die viel kleiner Zahlen gespeichert. Dadurch wird die Zahl der Datenzugriffe minimiert und es gibt weniger Cache Fehler, da mehrere Informationen in einer Cache-Line vorhanden sind. Außerdem ist es möglich Operationen direkt auf die komprimierten Daten auszuführen.
+
+• Advanced compression:
+
+Die einzelnen Zeilen selbst können durch verschiedene Komprimierungsmethoden weiter verkleinert werden. Dazu gehören: 
+
+o prefix encoding:
+Spalte enthält eine dominante Value / andere Values selten
+	ein Wert wird sehr oft unkomprimiert gespeichert
+datenset muss sortiert werden nach der Spalte mit der dominanten Value & der Attribut Vektor muss mit dem dominanten starten.
+Zur Komprimierung sollte die dominante Value nicht jedes mal explizit gespeichert werden wenn sie auftritt. 
+	Speichern der Nummer der Auftretungen der dominanten Value und eine Instanz der Value selbst im Attribut Vektor.
+Prefix encoded Attribut Vektor enthält folgende Informationen:
+	Nummer der Auftretungen der dominanten Value 
+	valueID der dominanten Value aus dem Dictonary
+	valueIDs der fehlenden Values
+ 
+
+o run length encoding:
+Gut wenn ein Paar Werte mit hohem Aufkommen
+Sollte nach Werten sortiert sein für eine maximale Komprimierung
+Anstatt alle Werte einer Spalte zu Speichern werden lediglich 2 Vektoren gespeichert.
+Einer mit allen verschiedenen Values
+Einer mit der Startposition der Value 
+ 
+
+o cluster encoding:
+Ist gut wenn eine Spalte viele identische Werte hat die hinternander stehen.
+Attribut Vektor is partitioniert in n Blöcke mit fester Größe (tipischerweise 1024 Elements)
+Wenn ein Cluster nur einen Wert hat wird er durch eine 1 ersetzt.
+Wurde er nicht ersetzt steht dort eine 0.
+ 
+o sparse encoding: 
+
+o inderict encoding:
+Ist gut wenn verschiedene Values oft vorkommen  BSP: bei zusammenhängenden Spalten. Nach Land Sortiert und auf Namensspalte zugreifen
+Wie bei Cluster encoding  N Datenblöcke mit fester Anzahl Elementen (1024)
+ 
+
+Die SAP Hana Datenbank benutzt Algorithmen um zu entscheiden, welche der Komprimierungsmethoden am angebrachtesten für die verschiedenen Spalten ist.
+Bei jeder „delta merge“ Operation wird die Datenkompression automatisch evaluiert, optimiert und ausgeführt. 
+
+
+
 
 - In-Memory Datenbank
 - Column-Based Architektur
