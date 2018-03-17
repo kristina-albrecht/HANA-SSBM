@@ -1,10 +1,10 @@
 ---
-title: "SSMB Benchmark für SAP HANA"
+title: "Star Schema Benchmark für SAP HANA"
 author: [Jan Hofmeier, Marius Jochheim, Lion Scherer, Kristina Albrecht]
 date: 2018-03-06
 subject: "Hana"
 tags: [Hana, SSBM]
-subtitle: "Datenbanken"
+subtitle: "Data Warehouse"
 titlepage: true
 titlepage-color: 06386e
 titlepage-text-color: FFFFFF
@@ -16,13 +16,13 @@ titlepage-rule-height: 1
 
 # Generell HANA als in-memory Datenbank
 
-SAP Hana (Die High Performance Analytic Appliance) ist eine Entwicklungsplattform und bestehtim Kern aus einer „in-memory“ Datenbank.
+SAP Hana (Die High Performance Analytic Appliance) ist eine Entwicklungsplattform und besteht im Kern aus einer „in-memory“ Datenbank.
 
-Transaktionen und Analysen werden aufeiner einzigen, singulären Datenkopie im Hauptspeicher verarbeitet, anstatt dieFestplatte als Datenspeicher zu benutzen. Dadurch ist es möglich sehr komplexeAbfragen und Datenbankoperationen mit sehr hohen Durchsatz auszuführen.
+Transaktionen und Analysen werden auf einer einzigen, singulären Datenkopie im Hauptspeicher verarbeitet, anstatt die Festplatte als Datenspeicher zu benutzen. Dadurch ist es möglich sehr komplexe Abfragen und Datenbankoperationen mit sehr hohem Durchsatz auszuführen.
 
-Hana verbindet OLTP, durch die SQL undACID (Atomicity, Consistency, Isolation andDurability) Kompatibilität, und OLAP durch das „in-memory“ feature.Durch das ACID Prinzips ist die Datenbank geeignet um Unternehmensinterne Datenzu speichern. Es ist nicht nötig Datenanalysen über einen ETL Prozess an einDatawarehouse weiterzuleiten. Komplexe Echtzeit Analysen [[1\]](#_ftn1)könnennun direkt durch SAP Hana durchgeführt werden. Das erspart die erheblichenKosten und vor allem Zeit.
+Hana verbindet OLTP, durch die SQL undACID (Atomicity, Consistency, Isolation andDurability) Kompatibilität, und OLAP durch das „in-memory“ feature.Durch das ACID Prinzips ist die Datenbank geeignet um Unternehmensinterne Datenzu speichern. Es ist nicht nötig Datenanalysen über einen ETL Prozess an ein Datawarehouse weiterzuleiten. Komplexe Echtzeit Analysen [[1\]](#_ftn1)können nun direkt durch SAP Hana durchgeführt werden. Das erspart die erheblichen Kosten und vor allem Zeit.
 
-Beim der „in-memory“ Technologie werdendie Daten im Hauptspeicher anstatt auf elektromagnetischen Festplattengespeichert. Antwortzeiten und Auswertungen können dadurch schneller als beigewöhnlichen Festplatten durch den Prozessor vorgenommen werden. Dadurch, dassder Zugriff auf die Festplatte nun wegfällt, verkürzt sich dieDatenzugriffszeit bis auf das Fünffache. 
+Beim der „in-memory“ Technologie werden die Daten im Hauptspeicher anstatt auf elektromagnetischen Festplatten gespeichert. Antwortzeiten und Auswertungen können dadurch schneller als bei gewöhnlichen Festplatten durch den Prozessor vorgenommen werden. Dadurch, dass der Zugriff auf die Festplatte nun wegfällt, verkürzt sich dieDatenzugriffszeit bis auf das Fünffache. 
 
 ![img](file:///C:/Users/IBM_ADMIN/AppData/Local/Temp/OICE_16_974FA576_32C1D314_1CA5/msohtmlclip1/01/clip_image001.png)
 
@@ -47,7 +47,7 @@ Um nun aber dem „D“ des ACID Prinzips gerechtzu werden reicht eine Speicheru
 Die Daten werden in der SAP Hana Datenbank in zwei verschiedenen Formaten abgelegt. Hierbei handelt es sich um die spalten- und zeilenorientierte Speicherung.  Sollen beispielsweise transaktionale Prozesse (OLTP) durchgeführt werden, bietet sich die Verwendung der zeilenorientierten Speicherung an, da das Aktualisieren und Hinzufügen der Daten durch die Zeilen Anordnung vereinfacht wird. 
 Für Lesezugriffe ist diese Art der Speicherung nicht geeignet, da jede Zeile gelesen werden muss, was sehr unperformant ist. Es müssten Daten gelesen werden, die für die bestimmte Abfrage nicht von Relevanz sind. Daher werden Lesezugriffe und Analyseabfragen auf die spaltenorientierte Speicherung ausgeführt und somit wird nur auf die relevanten Daten zugegriffen. Dies hat eine enorme Performance zur Folge.
 Durch die spaltenorientierte Speicherung erreicht man neben der Zugriffsbeschleunigung auch eine höhere Kompression der Daten. Die Daten können gut komprimiert werden, da Tabellenspalten häufig gleiche Werte enthalten. 
- 
+
 
 Die Anzahl der Indizes kann erheblich reduziert werden. Bei der spaltenorientierten Speicherung kann jedes Attribut als Index verwendet werden. Da jedoch die gesamten Daten im Speicher vorhanden sind und die Daten einer Spalte alle aufeinanderfolgend gespeichert sind ist die Geschwindigkeit eines vollen sequentiellen Scans eines Attributs ausreichend in den meisten Fällen. Falls es nicht schnell genug ist können zusätzlich Indizes benutzt werden.
 
@@ -75,7 +75,7 @@ Prefix encoded Attribut Vektor enthält folgende Informationen:
 	Nummer der Auftretungen der dominanten Value 
 	valueID der dominanten Value aus dem Dictonary
 	valueIDs der fehlenden Values
- 
+
 
 o run length encoding:
 Gut wenn ein Paar Werte mit hohem Aufkommen
@@ -83,20 +83,20 @@ Sollte nach Werten sortiert sein für eine maximale Komprimierung
 Anstatt alle Werte einer Spalte zu Speichern werden lediglich 2 Vektoren gespeichert.
 Einer mit allen verschiedenen Values
 Einer mit der Startposition der Value 
- 
+
 
 o cluster encoding:
 Ist gut wenn eine Spalte viele identische Werte hat die hinternander stehen.
 Attribut Vektor is partitioniert in n Blöcke mit fester Größe (tipischerweise 1024 Elements)
 Wenn ein Cluster nur einen Wert hat wird er durch eine 1 ersetzt.
 Wurde er nicht ersetzt steht dort eine 0.
- 
+
 o sparse encoding: 
 
 o inderict encoding:
 Ist gut wenn verschiedene Values oft vorkommen  BSP: bei zusammenhängenden Spalten. Nach Land Sortiert und auf Namensspalte zugreifen
 Wie bei Cluster encoding  N Datenblöcke mit fester Anzahl Elementen (1024)
- 
+
 
 Die SAP Hana Datenbank benutzt Algorithmen um zu entscheiden, welche der Komprimierungsmethoden am angebrachtesten für die verschiedenen Spalten ist.
 Bei jeder „delta merge“ Operation wird die Datenkompression automatisch evaluiert, optimiert und ausgeführt. 
