@@ -1,5 +1,5 @@
 #from terminaltables import AsciiTable as Table
-from numpy import median, average, std
+from numpy import median, average, std, arange, sum
 from .table import display_table
 import re
 import json
@@ -201,6 +201,20 @@ class Comparison:
         for statistical in self.get_statisticals():
             plt.plot(statistical.get_times(), label=statistical.get_name())
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+        plt.show()
+    
+    def compare_visually_bar(self):
+        fig, ax = plt.subplots()
+        #plt.xlabel("Repetition")
+        bar_pos = arange(len(self.get_statisticals())) # the x locations for the groups
+        bar_width = 0.15 # the width of the bars
+        ax.set_xticks(bar_pos)
+        labels=[stat.get_name() for stat in self.get_statisticals()]
+        ax.set_xticklabels(labels)
+        ax.set_ylabel("Time in msec")
+        ax.set_title(self.title)
+        values = [sum(stat.get_times()) for stat in self.get_statisticals()]
+        ax.bar(bar_pos - bar_width/2, values, color='rgbkymc')
         plt.show()
 
     def _create_headings(self, *benchmarks):

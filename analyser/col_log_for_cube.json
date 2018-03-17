@@ -1,0 +1,3507 @@
+{
+	"General":	{
+		"Repetitions:": "10"
+	},
+	"col":	{
+		"no_index": {
+			"no_hint": {
+				"repetitions": [
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.sql",
+							"times":	" 29291;7996;7708;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.1.sql",
+							"times":	" 13648;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.2.sql",
+							"times":	" 5420;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.3.sql",
+							"times":	" 5345;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.sql",
+							"times":	" 13945;171;9558;99;5386;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.1.sql",
+							"times":	" 14527;174;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.2.sql",
+							"times":	" 10068;104;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.3.sql",
+							"times":	" 6001;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.sql",
+							"times":	" 21404;149;20793;290;6758;6488;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.1.sql",
+							"times":	" 20110;141;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.2.sql",
+							"times":	" 21586;305;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.3.sql",
+							"times":	" 6912;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.4.sql",
+							"times":	" 6268;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.sql",
+							"times":	" 22311;107;23749;143;14787;292;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.1.sql",
+							"times":	" 21695;106;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.2.sql",
+							"times":	" 22786;140;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.3.sql",
+							"times":	" 15410;271;"
+						}
+					],
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.sql",
+							"times":	" 10625;4717;4744;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.1.sql",
+							"times":	" 11262;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.2.sql",
+							"times":	" 5568;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.3.sql",
+							"times":	" 5209;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.sql",
+							"times":	" 13882;166;9794;100;5173;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.1.sql",
+							"times":	" 12826;169;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.2.sql",
+							"times":	" 9357;103;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.3.sql",
+							"times":	" 5348;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.sql",
+							"times":	" 20357;140;20062;291;7251;6494;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.1.sql",
+							"times":	" 19893;138;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.2.sql",
+							"times":	" 18820;277;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.3.sql",
+							"times":	" 6793;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.4.sql",
+							"times":	" 6498;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.sql",
+							"times":	" 22302;101;22673;137;15221;267;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.1.sql",
+							"times":	" 22449;105;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.2.sql",
+							"times":	" 23069;134;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.3.sql",
+							"times":	" 17183;292;"
+						}
+					],
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.sql",
+							"times":	" 11039;5291;4911;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.1.sql",
+							"times":	" 11122;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.2.sql",
+							"times":	" 5578;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.3.sql",
+							"times":	" 5119;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.sql",
+							"times":	" 14295;179;9867;102;5486;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.1.sql",
+							"times":	" 12698;178;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.2.sql",
+							"times":	" 9907;105;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.3.sql",
+							"times":	" 5691;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.sql",
+							"times":	" 20385;147;20918;276;7104;7028;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.1.sql",
+							"times":	" 19598;139;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.2.sql",
+							"times":	" 18932;278;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.3.sql",
+							"times":	" 6989;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.4.sql",
+							"times":	" 6884;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.sql",
+							"times":	" 22684;106;23382;145;15487;309;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.1.sql",
+							"times":	" 23088;101;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.2.sql",
+							"times":	" 23251;125;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.3.sql",
+							"times":	" 18741;333;"
+						}
+					],
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.sql",
+							"times":	" 11002;5135;6035;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.1.sql",
+							"times":	" 10886;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.2.sql",
+							"times":	" 5056;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.3.sql",
+							"times":	" 5734;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.sql",
+							"times":	" 13493;166;10523;97;7677;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.1.sql",
+							"times":	" 13026;152;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.2.sql",
+							"times":	" 9966;98;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.3.sql",
+							"times":	" 6895;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.sql",
+							"times":	" 21753;141;22692;279;7113;6251;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.1.sql",
+							"times":	" 19680;139;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.2.sql",
+							"times":	" 20807;278;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.3.sql",
+							"times":	" 6931;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.4.sql",
+							"times":	" 6436;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.sql",
+							"times":	" 21871;105;22513;140;14780;270;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.1.sql",
+							"times":	" 21475;108;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.2.sql",
+							"times":	" 22679;138;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.3.sql",
+							"times":	" 16523;338;"
+						}
+					],
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.sql",
+							"times":	" 10912;4883;4851;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.1.sql",
+							"times":	" 10809;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.2.sql",
+							"times":	" 5574;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.3.sql",
+							"times":	" 5252;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.sql",
+							"times":	" 14569;167;9816;115;5530;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.1.sql",
+							"times":	" 13500;172;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.2.sql",
+							"times":	" 9532;101;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.3.sql",
+							"times":	" 5683;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.sql",
+							"times":	" 20935;138;19591;277;6942;6518;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.1.sql",
+							"times":	" 19776;155;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.2.sql",
+							"times":	" 18987;256;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.3.sql",
+							"times":	" 7170;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.4.sql",
+							"times":	" 6980;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.sql",
+							"times":	" 22448;104;23505;137;18350;288;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.1.sql",
+							"times":	" 21973;102;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.2.sql",
+							"times":	" 23063;145;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.3.sql",
+							"times":	" 15592;315;"
+						}
+					],
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.sql",
+							"times":	" 10633;4898;4869;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.1.sql",
+							"times":	" 11035;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.2.sql",
+							"times":	" 5825;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.3.sql",
+							"times":	" 5170;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.sql",
+							"times":	" 13231;166;9644;116;5542;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.1.sql",
+							"times":	" 13205;163;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.2.sql",
+							"times":	" 9525;106;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.3.sql",
+							"times":	" 5673;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.sql",
+							"times":	" 20214;158;20687;269;7029;6965;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.1.sql",
+							"times":	" 19837;150;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.2.sql",
+							"times":	" 18955;275;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.3.sql",
+							"times":	" 7252;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.4.sql",
+							"times":	" 6569;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.sql",
+							"times":	" 22153;102;23041;132;15078;284;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.1.sql",
+							"times":	" 21604;120;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.2.sql",
+							"times":	" 22964;139;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.3.sql",
+							"times":	" 15788;310;"
+						}
+					],
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.sql",
+							"times":	" 10577;5422;4855;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.1.sql",
+							"times":	" 11290;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.2.sql",
+							"times":	" 5508;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.3.sql",
+							"times":	" 4985;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.sql",
+							"times":	" 13318;161;9667;100;5532;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.1.sql",
+							"times":	" 13853;162;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.2.sql",
+							"times":	" 10067;104;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.3.sql",
+							"times":	" 6908;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.sql",
+							"times":	" 22376;145;23195;304;9109;8075;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.1.sql",
+							"times":	" 21918;134;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.2.sql",
+							"times":	" 20907;317;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.3.sql",
+							"times":	" 6709;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.4.sql",
+							"times":	" 8544;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.sql",
+							"times":	" 22552;108;23251;136;15089;262;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.1.sql",
+							"times":	" 21210;105;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.2.sql",
+							"times":	" 23195;141;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.3.sql",
+							"times":	" 15438;299;"
+						}
+					],
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.sql",
+							"times":	" 10428;4731;5104;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.1.sql",
+							"times":	" 11718;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.2.sql",
+							"times":	" 5206;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.3.sql",
+							"times":	" 5271;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.sql",
+							"times":	" 14128;168;9203;100;5525;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.1.sql",
+							"times":	" 13742;160;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.2.sql",
+							"times":	" 9991;104;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.3.sql",
+							"times":	" 5784;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.sql",
+							"times":	" 21027;148;20572;278;7069;8157;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.1.sql",
+							"times":	" 20624;139;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.2.sql",
+							"times":	" 20747;268;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.3.sql",
+							"times":	" 7341;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.4.sql",
+							"times":	" 7507;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.sql",
+							"times":	" 22085;109;23669;142;15494;270;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.1.sql",
+							"times":	" 21634;100;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.2.sql",
+							"times":	" 23203;138;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.3.sql",
+							"times":	" 17308;310;"
+						}
+					],
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.sql",
+							"times":	" 10550;5237;4678;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.1.sql",
+							"times":	" 11173;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.2.sql",
+							"times":	" 5712;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.3.sql",
+							"times":	" 5102;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.sql",
+							"times":	" 14245;166;9896;94;5430;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.1.sql",
+							"times":	" 13133;178;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.2.sql",
+							"times":	" 9986;104;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.3.sql",
+							"times":	" 5468;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.sql",
+							"times":	" 20914;142;18875;285;6736;6373;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.1.sql",
+							"times":	" 19812;141;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.2.sql",
+							"times":	" 21416;268;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.3.sql",
+							"times":	" 6834;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.4.sql",
+							"times":	" 7069;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.sql",
+							"times":	" 21553;105;23428;142;15120;318;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.1.sql",
+							"times":	" 21680;107;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.2.sql",
+							"times":	" 23876;144;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.3.sql",
+							"times":	" 16352;326;"
+						}
+					],
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.sql",
+							"times":	" 10393;5281;5082;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.1.sql",
+							"times":	" 11479;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.2.sql",
+							"times":	" 5327;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.3.sql",
+							"times":	" 5083;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.sql",
+							"times":	" 13194;163;11169;100;6847;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.1.sql",
+							"times":	" 13659;175;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.2.sql",
+							"times":	" 9890;106;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.3.sql",
+							"times":	" 5623;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.sql",
+							"times":	" 21912;252;21447;285;6961;6589;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.1.sql",
+							"times":	" 19761;137;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.2.sql",
+							"times":	" 21667;287;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.3.sql",
+							"times":	" 7024;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.4.sql",
+							"times":	" 6562;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.sql",
+							"times":	" 22404;107;23311;139;15081;270;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.1.sql",
+							"times":	" 23242;121;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.2.sql",
+							"times":	" 23860;141;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.3.sql",
+							"times":	" 16518;323;"
+						}
+					]
+				]
+			},
+			"olap_hint":	{
+				"repetitions": [
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.sql",
+							"times":	" 11768;5763;5263;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.1.sql",
+							"times":	" 11802;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.2.sql",
+							"times":	" 5722;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.3.sql",
+							"times":	" 4854;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.sql",
+							"times":	" 17230;173;13622;109;9858;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.1.sql",
+							"times":	" 14311;174;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.2.sql",
+							"times":	" 9919;107;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.3.sql",
+							"times":	" 8688;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.sql",
+							"times":	" 22162;137;10688;320;8712;8307;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.1.sql",
+							"times":	" 20059;142;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.2.sql",
+							"times":	" 10060;303;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.3.sql",
+							"times":	" 7704;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.4.sql",
+							"times":	" 7857;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.sql",
+							"times":	" 23068;100;28735;140;15997;326;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.1.sql",
+							"times":	" 21496;103;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.2.sql",
+							"times":	" 22823;144;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.3.sql",
+							"times":	" 11343;331;"
+						}
+					],
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.sql",
+							"times":	" 13858;5294;4739;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.1.sql",
+							"times":	" 11548;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.2.sql",
+							"times":	" 5176;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.3.sql",
+							"times":	" 4937;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.sql",
+							"times":	" 13196;159;9751;104;8346;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.1.sql",
+							"times":	" 13376;173;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.2.sql",
+							"times":	" 10045;112;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.3.sql",
+							"times":	" 8696;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.sql",
+							"times":	" 20393;144;9604;295;8372;7793;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.1.sql",
+							"times":	" 19773;147;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.2.sql",
+							"times":	" 9981;317;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.3.sql",
+							"times":	" 23878;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.4.sql",
+							"times":	" 12789;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.sql",
+							"times":	" 33620;100;23304;136;11076;353;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.1.sql",
+							"times":	" 22007;108;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.2.sql",
+							"times":	" 24215;140;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.3.sql",
+							"times":	" 11884;363;"
+						}
+					],
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.sql",
+							"times":	" 10803;4840;4810;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.1.sql",
+							"times":	" 12705;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.2.sql",
+							"times":	" 5260;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.3.sql",
+							"times":	" 4958;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.sql",
+							"times":	" 13629;171;10148;110;9022;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.1.sql",
+							"times":	" 13593;163;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.2.sql",
+							"times":	" 10031;105;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.3.sql",
+							"times":	" 8884;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.sql",
+							"times":	" 21018;143;9665;271;8099;7792;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.1.sql",
+							"times":	" 46564;137;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.2.sql",
+							"times":	" 9796;308;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.3.sql",
+							"times":	" 7853;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.4.sql",
+							"times":	" 7559;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.sql",
+							"times":	" 23310;104;24004;141;11779;331;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.1.sql",
+							"times":	" 21410;104;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.2.sql",
+							"times":	" 23691;139;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.3.sql",
+							"times":	" 11716;339;"
+						}
+					],
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.sql",
+							"times":	" 10081;4792;4715;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.1.sql",
+							"times":	" 11156;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.2.sql",
+							"times":	" 5385;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.3.sql",
+							"times":	" 4631;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.sql",
+							"times":	" 13689;164;9862;101;8565;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.1.sql",
+							"times":	" 12249;165;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.2.sql",
+							"times":	" 10000;106;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.3.sql",
+							"times":	" 9107;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.sql",
+							"times":	" 21826;146;10002;294;8417;7751;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.1.sql",
+							"times":	" 19553;135;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.2.sql",
+							"times":	" 10046;299;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.3.sql",
+							"times":	" 7863;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.4.sql",
+							"times":	" 7671;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.sql",
+							"times":	" 22470;114;24092;133;11238;350;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.1.sql",
+							"times":	" 22122;105;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.2.sql",
+							"times":	" 23156;140;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.3.sql",
+							"times":	" 11944;331;"
+						}
+					],
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.sql",
+							"times":	" 10837;5065;4582;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.1.sql",
+							"times":	" 11431;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.2.sql",
+							"times":	" 5789;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.3.sql",
+							"times":	" 4922;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.sql",
+							"times":	" 14392;170;9302;103;8753;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.1.sql",
+							"times":	" 13159;170;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.2.sql",
+							"times":	" 10099;104;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.3.sql",
+							"times":	" 9094;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.sql",
+							"times":	" 21895;143;9998;274;8314;7941;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.1.sql",
+							"times":	" 19785;145;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.2.sql",
+							"times":	" 10067;299;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.3.sql",
+							"times":	" 7527;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.4.sql",
+							"times":	" 7931;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.sql",
+							"times":	" 22386;108;23155;135;11300;347;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.1.sql",
+							"times":	" 21760;104;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.2.sql",
+							"times":	" 23796;164;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.3.sql",
+							"times":	" 11571;343;"
+						}
+					],
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.sql",
+							"times":	" 11143;4785;4002;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.1.sql",
+							"times":	" 10885;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.2.sql",
+							"times":	" 4978;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.3.sql",
+							"times":	" 4535;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.sql",
+							"times":	" 14319;168;10207;102;8587;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.1.sql",
+							"times":	" 13213;164;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.2.sql",
+							"times":	" 10143;102;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.3.sql",
+							"times":	" 9017;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.sql",
+							"times":	" 22598;156;10223;268;8611;8027;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.1.sql",
+							"times":	" 19680;140;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.2.sql",
+							"times":	" 9811;298;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.3.sql",
+							"times":	" 8011;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.4.sql",
+							"times":	" 7559;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.sql",
+							"times":	" 22573;107;23595;145;11136;317;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.1.sql",
+							"times":	" 21450;104;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.2.sql",
+							"times":	" 23001;136;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.3.sql",
+							"times":	" 11617;365;"
+						}
+					],
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.sql",
+							"times":	" 10616;4790;4244;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.1.sql",
+							"times":	" 11440;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.2.sql",
+							"times":	" 5454;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.3.sql",
+							"times":	" 4856;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.sql",
+							"times":	" 13049;159;9883;108;8286;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.1.sql",
+							"times":	" 13506;184;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.2.sql",
+							"times":	" 9846;102;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.3.sql",
+							"times":	" 8708;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.sql",
+							"times":	" 20353;141;9893;267;8569;8149;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.1.sql",
+							"times":	" 19764;139;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.2.sql",
+							"times":	" 9715;328;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.3.sql",
+							"times":	" 8176;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.4.sql",
+							"times":	" 7598;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.sql",
+							"times":	" 21958;109;23533;133;10976;326;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.1.sql",
+							"times":	" 21532;106;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.2.sql",
+							"times":	" 23725;139;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.3.sql",
+							"times":	" 11593;373;"
+						}
+					],
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.sql",
+							"times":	" 10406;5165;4688;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.1.sql",
+							"times":	" 11470;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.2.sql",
+							"times":	" 5414;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.3.sql",
+							"times":	" 4832;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.sql",
+							"times":	" 14329;169;10657;104;8729;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.1.sql",
+							"times":	" 13699;157;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.2.sql",
+							"times":	" 10030;108;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.3.sql",
+							"times":	" 9167;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.sql",
+							"times":	" 20750;141;10740;282;8047;7827;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.1.sql",
+							"times":	" 19520;152;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.2.sql",
+							"times":	" 9986;275;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.3.sql",
+							"times":	" 7713;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.4.sql",
+							"times":	" 8068;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.sql",
+							"times":	" 23124;107;23655;142;11498;354;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.1.sql",
+							"times":	" 21634;103;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.2.sql",
+							"times":	" 23011;140;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.3.sql",
+							"times":	" 11344;342;"
+						}
+					],
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.sql",
+							"times":	" 10564;5453;4520;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.1.sql",
+							"times":	" 11239;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.2.sql",
+							"times":	" 5376;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.3.sql",
+							"times":	" 4751;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.sql",
+							"times":	" 14494;180;9640;100;8571;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.1.sql",
+							"times":	" 13614;277;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.2.sql",
+							"times":	" 9698;106;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.3.sql",
+							"times":	" 8886;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.sql",
+							"times":	" 20941;149;9764;284;8219;7573;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.1.sql",
+							"times":	" 20024;140;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.2.sql",
+							"times":	" 9739;294;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.3.sql",
+							"times":	" 7662;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.4.sql",
+							"times":	" 7548;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.sql",
+							"times":	" 22220;108;23389;137;10977;300;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.1.sql",
+							"times":	" 21251;108;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.2.sql",
+							"times":	" 23522;143;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.3.sql",
+							"times":	" 11556;354;"
+						}
+					],
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.sql",
+							"times":	" 10532;5141;4855;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.1.sql",
+							"times":	" 11282;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.2.sql",
+							"times":	" 5360;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.3.sql",
+							"times":	" 4472;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.sql",
+							"times":	" 14212;166;9731;103;8791;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.1.sql",
+							"times":	" 13070;162;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.2.sql",
+							"times":	" 10223;106;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.3.sql",
+							"times":	" 9140;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.sql",
+							"times":	" 20678;140;9795;276;8586;7687;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.1.sql",
+							"times":	" 20218;149;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.2.sql",
+							"times":	" 10092;308;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.3.sql",
+							"times":	" 7635;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.4.sql",
+							"times":	" 7284;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.sql",
+							"times":	" 22752;105;23159;129;11183;324;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.1.sql",
+							"times":	" 21577;102;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.2.sql",
+							"times":	" 23145;141;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.3.sql",
+							"times":	" 11214;335;"
+						}
+					]
+				]
+			}
+		},
+		"basic_index": {
+			"no_hint": {
+				"repetitions": [
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.sql",
+							"times":	" 11578;5607;4877;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.1.sql",
+							"times":	" 11544;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.2.sql",
+							"times":	" 5289;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.3.sql",
+							"times":	" 2647;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.sql",
+							"times":	" 17089;161;18255;105;6231;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.1.sql",
+							"times":	" 13513;168;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.2.sql",
+							"times":	" 10097;115;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.3.sql",
+							"times":	" 2918;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.sql",
+							"times":	" 21191;134;22730;280;9588;10367;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.1.sql",
+							"times":	" 21856;145;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.2.sql",
+							"times":	" 21892;299;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.3.sql",
+							"times":	" 6622;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.4.sql",
+							"times":	" 6618;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.sql",
+							"times":	" 28496;123;38012;188;31051;360;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.1.sql",
+							"times":	" 25031;122;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.2.sql",
+							"times":	" 25975;149;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.3.sql",
+							"times":	" 20071;503;"
+						}
+					],
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.sql",
+							"times":	" 11901;5249;2606;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.1.sql",
+							"times":	" 11764;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.2.sql",
+							"times":	" 5201;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.3.sql",
+							"times":	" 2610;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.sql",
+							"times":	" 13709;170;10840;109;2805;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.1.sql",
+							"times":	" 14769;169;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.2.sql",
+							"times":	" 9744;103;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.3.sql",
+							"times":	" 2681;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.sql",
+							"times":	" 20343;138;18797;275;6513;5831;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.1.sql",
+							"times":	" 19653;141;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.2.sql",
+							"times":	" 19366;251;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.3.sql",
+							"times":	" 6401;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.4.sql",
+							"times":	" 6251;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.sql",
+							"times":	" 21881;100;23035;131;15734;292;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.1.sql",
+							"times":	" 21742;103;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.2.sql",
+							"times":	" 22697;171;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.3.sql",
+							"times":	" 17166;289;"
+						}
+					],
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.sql",
+							"times":	" 10543;5247;2493;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.1.sql",
+							"times":	" 11412;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.2.sql",
+							"times":	" 5305;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.3.sql",
+							"times":	" 2610;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.sql",
+							"times":	" 13313;170;9342;101;2731;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.1.sql",
+							"times":	" 13513;166;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.2.sql",
+							"times":	" 9615;102;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.3.sql",
+							"times":	" 2651;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.sql",
+							"times":	" 20564;144;18856;281;7107;5914;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.1.sql",
+							"times":	" 19757;135;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.2.sql",
+							"times":	" 18681;285;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.3.sql",
+							"times":	" 6519;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.4.sql",
+							"times":	" 6378;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.sql",
+							"times":	" 22224;107;23261;143;16333;272;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.1.sql",
+							"times":	" 21495;115;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.2.sql",
+							"times":	" 24083;141;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.3.sql",
+							"times":	" 17777;317;"
+						}
+					],
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.sql",
+							"times":	" 10783;5559;2445;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.1.sql",
+							"times":	" 11329;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.2.sql",
+							"times":	" 5310;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.3.sql",
+							"times":	" 2567;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.sql",
+							"times":	" 13262;163;9530;101;2593;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.1.sql",
+							"times":	" 13407;157;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.2.sql",
+							"times":	" 9773;104;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.3.sql",
+							"times":	" 2821;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.sql",
+							"times":	" 20495;149;18915;288;6797;5937;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.1.sql",
+							"times":	" 20066;144;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.2.sql",
+							"times":	" 20348;282;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.3.sql",
+							"times":	" 6626;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.4.sql",
+							"times":	" 6564;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.sql",
+							"times":	" 22532;105;23828;152;16470;303;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.1.sql",
+							"times":	" 21770;104;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.2.sql",
+							"times":	" 24701;139;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.3.sql",
+							"times":	" 17197;322;"
+						}
+					],
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.sql",
+							"times":	" 10925;5598;2573;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.1.sql",
+							"times":	" 11696;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.2.sql",
+							"times":	" 5320;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.3.sql",
+							"times":	" 2615;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.sql",
+							"times":	" 13836;164;9748;103;2609;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.1.sql",
+							"times":	" 13472;167;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.2.sql",
+							"times":	" 9950;103;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.3.sql",
+							"times":	" 2733;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.sql",
+							"times":	" 20865;146;18454;289;6851;5802;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.1.sql",
+							"times":	" 19816;141;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.2.sql",
+							"times":	" 19413;301;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.3.sql",
+							"times":	" 6580;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.4.sql",
+							"times":	" 6564;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.sql",
+							"times":	" 23330;108;23574;138;16864;309;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.1.sql",
+							"times":	" 21325;110;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.2.sql",
+							"times":	" 23928;137;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.3.sql",
+							"times":	" 17862;340;"
+						}
+					],
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.sql",
+							"times":	" 10760;5182;2621;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.1.sql",
+							"times":	" 11647;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.2.sql",
+							"times":	" 5185;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.3.sql",
+							"times":	" 2639;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.sql",
+							"times":	" 14386;164;9707;102;2665;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.1.sql",
+							"times":	" 14849;172;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.2.sql",
+							"times":	" 9501;105;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.3.sql",
+							"times":	" 2520;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.sql",
+							"times":	" 21105;150;20024;276;6683;5794;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.1.sql",
+							"times":	" 20450;138;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.2.sql",
+							"times":	" 20241;296;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.3.sql",
+							"times":	" 6400;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.4.sql",
+							"times":	" 6353;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.sql",
+							"times":	" 21977;105;23155;141;16433;272;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.1.sql",
+							"times":	" 21765;104;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.2.sql",
+							"times":	" 22483;134;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.3.sql",
+							"times":	" 16335;278;"
+						}
+					],
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.sql",
+							"times":	" 11134;5185;2574;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.1.sql",
+							"times":	" 11163;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.2.sql",
+							"times":	" 4871;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.3.sql",
+							"times":	" 2363;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.sql",
+							"times":	" 13447;166;10555;100;2951;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.1.sql",
+							"times":	" 13978;152;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.2.sql",
+							"times":	" 10797;111;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.3.sql",
+							"times":	" 2741;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.sql",
+							"times":	" 21991;138;19498;269;6791;5749;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.1.sql",
+							"times":	" 20415;137;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.2.sql",
+							"times":	" 19874;289;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.3.sql",
+							"times":	" 6428;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.4.sql",
+							"times":	" 6417;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.sql",
+							"times":	" 22552;108;23963;137;16981;292;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.1.sql",
+							"times":	" 21880;108;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.2.sql",
+							"times":	" 23883;141;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.3.sql",
+							"times":	" 16750;298;"
+						}
+					],
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.sql",
+							"times":	" 11176;5245;2496;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.1.sql",
+							"times":	" 11577;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.2.sql",
+							"times":	" 5444;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.3.sql",
+							"times":	" 2622;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.sql",
+							"times":	" 14314;176;9781;99;2594;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.1.sql",
+							"times":	" 13106;162;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.2.sql",
+							"times":	" 9836;106;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.3.sql",
+							"times":	" 2727;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.sql",
+							"times":	" 20767;141;18715;304;6258;5877;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.1.sql",
+							"times":	" 20177;143;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.2.sql",
+							"times":	" 18950;261;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.3.sql",
+							"times":	" 6604;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.4.sql",
+							"times":	" 6507;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.sql",
+							"times":	" 23049;108;23312;140;16933;283;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.1.sql",
+							"times":	" 21707;104;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.2.sql",
+							"times":	" 24154;144;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.3.sql",
+							"times":	" 17448;289;"
+						}
+					],
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.sql",
+							"times":	" 10438;5126;2508;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.1.sql",
+							"times":	" 11637;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.2.sql",
+							"times":	" 5231;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.3.sql",
+							"times":	" 2590;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.sql",
+							"times":	" 13898;164;9670;106;2598;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.1.sql",
+							"times":	" 13082;170;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.2.sql",
+							"times":	" 10229;108;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.3.sql",
+							"times":	" 2602;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.sql",
+							"times":	" 22587;152;19858;296;6703;5892;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.1.sql",
+							"times":	" 19691;142;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.2.sql",
+							"times":	" 19215;301;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.3.sql",
+							"times":	" 6534;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.4.sql",
+							"times":	" 6524;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.sql",
+							"times":	" 22920;111;23611;137;16599;312;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.1.sql",
+							"times":	" 21864;101;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.2.sql",
+							"times":	" 23124;135;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.3.sql",
+							"times":	" 16631;318;"
+						}
+					],
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.sql",
+							"times":	" 10648;5346;2495;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.1.sql",
+							"times":	" 11542;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.2.sql",
+							"times":	" 5243;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.3.sql",
+							"times":	" 2593;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.sql",
+							"times":	" 13160;163;9691;100;2495;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.1.sql",
+							"times":	" 13482;160;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.2.sql",
+							"times":	" 10396;109;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q2_bench/q2.3.sql",
+							"times":	" 2746;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.sql",
+							"times":	" 24191;152;19800;240;6674;5908;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.1.sql",
+							"times":	" 20121;151;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.2.sql",
+							"times":	" 20319;278;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.3.sql",
+							"times":	" 6307;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q3_bench/q3.4.sql",
+							"times":	" 6565;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.sql",
+							"times":	" 22336;105;22975;133;16120;289;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.1.sql",
+							"times":	" 21755;111;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.2.sql",
+							"times":	" 24048;143;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q4_bench/q4.3.sql",
+							"times":	" 17860;319;"
+						}
+					]
+				]
+			},
+			"olap_hint":	{
+				"repetitions": [
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.sql",
+							"times":	" 11590;5603;5312;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.1.sql",
+							"times":	" 11411;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.2.sql",
+							"times":	" 5354;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.3.sql",
+							"times":	" 4428;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.sql",
+							"times":	" 16110;178;13510;101;9554;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.1.sql",
+							"times":	" 13374;164;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.2.sql",
+							"times":	" 10163;109;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.3.sql",
+							"times":	" 8983;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.sql",
+							"times":	" 21399;133;11531;296;9158;9121;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.1.sql",
+							"times":	" 21585;152;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.2.sql",
+							"times":	" 10311;287;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.3.sql",
+							"times":	" 7733;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.4.sql",
+							"times":	" 7662;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.sql",
+							"times":	" 22677;100;29891;142;16454;353;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.1.sql",
+							"times":	" 21716;109;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.2.sql",
+							"times":	" 23822;140;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.3.sql",
+							"times":	" 11693;344;"
+						}
+					],
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.sql",
+							"times":	" 11012;5494;5133;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.1.sql",
+							"times":	" 11244;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.2.sql",
+							"times":	" 5385;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.3.sql",
+							"times":	" 4998;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.sql",
+							"times":	" 14573;163;9854;100;8441;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.1.sql",
+							"times":	" 13597;164;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.2.sql",
+							"times":	" 9883;104;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.3.sql",
+							"times":	" 9081;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.sql",
+							"times":	" 20598;141;10113;283;8471;7978;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.1.sql",
+							"times":	" 19958;141;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.2.sql",
+							"times":	" 10185;274;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.3.sql",
+							"times":	" 7800;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.4.sql",
+							"times":	" 7798;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.sql",
+							"times":	" 22937;109;23410;140;11107;319;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.1.sql",
+							"times":	" 22012;104;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.2.sql",
+							"times":	" 23440;147;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.3.sql",
+							"times":	" 11682;346;"
+						}
+					],
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.sql",
+							"times":	" 10849;5402;4644;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.1.sql",
+							"times":	" 11483;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.2.sql",
+							"times":	" 5157;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.3.sql",
+							"times":	" 4808;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.sql",
+							"times":	" 14474;169;9891;103;8355;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.1.sql",
+							"times":	" 13707;168;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.2.sql",
+							"times":	" 10062;107;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.3.sql",
+							"times":	" 8837;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.sql",
+							"times":	" 21117;141;10026;292;8244;7763;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.1.sql",
+							"times":	" 19494;140;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.2.sql",
+							"times":	" 9877;286;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.3.sql",
+							"times":	" 7789;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.4.sql",
+							"times":	" 9591;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.sql",
+							"times":	" 22161;103;27984;125;11560;316;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.1.sql",
+							"times":	" 22883;100;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.2.sql",
+							"times":	" 24242;148;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.3.sql",
+							"times":	" 12138;474;"
+						}
+					],
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.sql",
+							"times":	" 10842;5279;4655;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.1.sql",
+							"times":	" 11763;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.2.sql",
+							"times":	" 5780;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.3.sql",
+							"times":	" 4833;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.sql",
+							"times":	" 14455;171;10690;102;8579;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.1.sql",
+							"times":	" 13248;172;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.2.sql",
+							"times":	" 9460;105;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.3.sql",
+							"times":	" 8598;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.sql",
+							"times":	" 20195;163;9532;291;8521;8061;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.1.sql",
+							"times":	" 19873;144;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.2.sql",
+							"times":	" 10285;299;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.3.sql",
+							"times":	" 7757;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.4.sql",
+							"times":	" 7759;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.sql",
+							"times":	" 23087;109;23826;136;11060;344;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.1.sql",
+							"times":	" 21237;103;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.2.sql",
+							"times":	" 23662;140;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.3.sql",
+							"times":	" 11892;347;"
+						}
+					],
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.sql",
+							"times":	" 11005;5390;4818;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.1.sql",
+							"times":	" 11689;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.2.sql",
+							"times":	" 5197;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.3.sql",
+							"times":	" 4801;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.sql",
+							"times":	" 13148;179;9983;121;8752;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.1.sql",
+							"times":	" 13632;169;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.2.sql",
+							"times":	" 9937;117;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.3.sql",
+							"times":	" 9232;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.sql",
+							"times":	" 21723;138;9859;285;8972;7948;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.1.sql",
+							"times":	" 20103;139;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.2.sql",
+							"times":	" 10460;303;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.3.sql",
+							"times":	" 7594;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.4.sql",
+							"times":	" 7898;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.sql",
+							"times":	" 23487;104;23537;138;11518;320;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.1.sql",
+							"times":	" 21799;111;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.2.sql",
+							"times":	" 23788;139;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.3.sql",
+							"times":	" 11466;358;"
+						}
+					],
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.sql",
+							"times":	" 10532;5573;4372;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.1.sql",
+							"times":	" 11490;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.2.sql",
+							"times":	" 5763;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.3.sql",
+							"times":	" 4719;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.sql",
+							"times":	" 14251;162;9827;105;8674;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.1.sql",
+							"times":	" 14034;165;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.2.sql",
+							"times":	" 9982;105;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.3.sql",
+							"times":	" 9285;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.sql",
+							"times":	" 22298;145;10043;255;8519;8098;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.1.sql",
+							"times":	" 19808;140;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.2.sql",
+							"times":	" 9822;309;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.3.sql",
+							"times":	" 7686;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.4.sql",
+							"times":	" 7612;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.sql",
+							"times":	" 22678;110;24169;139;11354;324;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.1.sql",
+							"times":	" 22329;125;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.2.sql",
+							"times":	" 24470;133;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.3.sql",
+							"times":	" 11384;364;"
+						}
+					],
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.sql",
+							"times":	" 13267;5167;4497;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.1.sql",
+							"times":	" 11445;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.2.sql",
+							"times":	" 5398;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.3.sql",
+							"times":	" 5078;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.sql",
+							"times":	" 14106;169;9812;100;8733;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.1.sql",
+							"times":	" 13733;159;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.2.sql",
+							"times":	" 10167;105;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.3.sql",
+							"times":	" 8972;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.sql",
+							"times":	" 21171;150;9880;283;8510;7989;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.1.sql",
+							"times":	" 20068;144;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.2.sql",
+							"times":	" 10263;292;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.3.sql",
+							"times":	" 7936;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.4.sql",
+							"times":	" 8138;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.sql",
+							"times":	" 23102;122;23366;137;11127;328;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.1.sql",
+							"times":	" 22100;104;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.2.sql",
+							"times":	" 23363;137;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.3.sql",
+							"times":	" 12102;342;"
+						}
+					],
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.sql",
+							"times":	" 10463;5538;4620;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.1.sql",
+							"times":	" 11644;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.2.sql",
+							"times":	" 5525;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.3.sql",
+							"times":	" 4766;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.sql",
+							"times":	" 13234;169;9524;102;8618;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.1.sql",
+							"times":	" 14469;166;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.2.sql",
+							"times":	" 9953;105;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.3.sql",
+							"times":	" 9059;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.sql",
+							"times":	" 20994;141;9585;276;8265;7956;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.1.sql",
+							"times":	" 20284;148;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.2.sql",
+							"times":	" 10216;289;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.3.sql",
+							"times":	" 8054;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.4.sql",
+							"times":	" 7841;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.sql",
+							"times":	" 22998;106;23752;139;11507;327;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.1.sql",
+							"times":	" 22107;109;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.2.sql",
+							"times":	" 23905;136;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.3.sql",
+							"times":	" 12159;341;"
+						}
+					],
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.sql",
+							"times":	" 11034;5247;4835;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.1.sql",
+							"times":	" 11443;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.2.sql",
+							"times":	" 5474;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.3.sql",
+							"times":	" 4708;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.sql",
+							"times":	" 14449;161;9810;105;8313;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.1.sql",
+							"times":	" 13971;175;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.2.sql",
+							"times":	" 9856;112;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.3.sql",
+							"times":	" 9480;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.sql",
+							"times":	" 20785;146;10513;279;8553;7702;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.1.sql",
+							"times":	" 20957;139;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.2.sql",
+							"times":	" 10097;289;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.3.sql",
+							"times":	" 7735;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.4.sql",
+							"times":	" 8032;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.sql",
+							"times":	" 22545;116;23609;144;11075;342;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.1.sql",
+							"times":	" 21751;104;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.2.sql",
+							"times":	" 24616;141;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.3.sql",
+							"times":	" 12438;350;"
+						}
+					],
+					[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.sql",
+							"times":	" 10668;5331;4407;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.1.sql",
+							"times":	" 11705;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.2.sql",
+							"times":	" 5432;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q1_bench/q1.3.sql",
+							"times":	" 4762;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.sql",
+							"times":	" 14241;168;9736;117;8636;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.1.sql",
+							"times":	" 13269;164;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.2.sql",
+							"times":	" 9948;106;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q2_bench/q2.3.sql",
+							"times":	" 8718;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.sql",
+							"times":	" 20526;144;10059;282;8580;7779;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.1.sql",
+							"times":	" 19930;143;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.2.sql",
+							"times":	" 10598;305;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.3.sql",
+							"times":	" 7954;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q3_bench/q3.4.sql",
+							"times":	" 8001;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.sql",
+							"times":	" 22660;105;23851;146;11095;334;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.1.sql",
+							"times":	" 21709;108;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.2.sql",
+							"times":	" 23887;141;"
+						},
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark_olap/q4_bench/q4.3.sql",
+							"times":	" 12219;361;"
+						}
+					]
+				]
+			}
+		}
+	}
+}
