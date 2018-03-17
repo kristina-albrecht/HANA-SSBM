@@ -1,0 +1,113 @@
+{
+	"General": {
+		"Repetitions:": "100",
+		"ScaleFactor": "1"
+	},
+	"row":[
+		{
+			"index1":[
+				{
+					"NoHint":[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.sql",
+							"times": " 1244556;952611;941983;"
+						},
+						{
+							"Type": "exec_file",
+                			"Filename": "./sql/benchmark/q1_bench/q1.1.sql",
+    
+							"times": " 1318369;"
+            			},
+            			{
+                			"Type": "exec_file",
+                			"Filename": "./sql/benchmark/q1_bench/q1.2.sql",
+                			"times": " 1059509;"
+            			},
+            			{
+                			"Type": "exec_file",
+                			"Filename": "./sql/benchmark/q1_bench/q1.3.sql",
+                			"times": " 998552;"
+            			}
+        			]
+				},
+				{
+					"OlapHint":[
+            			{
+                			"Type": "exec_file",
+                			"Filename": "./sql/benchmark/q1_bench/q1.sql",
+                			"times": " 1255807;979764;970210;"
+            			},
+						{
+							"Type": "exec_file",
+                			"Filename": "./sql/benchmark/q1_bench/q1.1.sql",
+                			"times": " 1318369;"
+            			},
+            			{
+                			"Type": "exec_file",
+                			"Filename": "./sql/benchmark/q1_bench/q1.2.sql",
+                			"times": " 1059509;"
+            			},
+            			{
+                			"Type": "exec_file",
+                			"Filename": "./sql/benchmark/q1_bench/q1.3.sql",
+                			"times": " 998552;"
+            			}
+					],
+				}
+				]
+		},{
+			"index2":[
+				{
+					"NoHint":[
+						{
+							"Type": "exec_file",
+							"Filename": "./sql/benchmark/q1_bench/q1.sql",
+							"times": " 1244556;952611;941983;"
+						},
+						{
+							"Type": "exec_file",
+                			"Filename": "./sql/benchmark/q1_bench/q1.1.sql",
+    
+							"times": " 1318369;"
+            			},
+            			{
+                			"Type": "exec_file",
+                			"Filename": "./sql/benchmark/q1_bench/q1.2.sql",
+                			"times": " 1059509;"
+            			},
+            			{
+                			"Type": "exec_file",
+                			"Filename": "./sql/benchmark/q1_bench/q1.3.sql",
+                			"times": " 998552;"
+            			}
+        			]
+				},
+				{
+					"OlapHint":[
+            			{
+                			"Type": "exec_file",
+                			"Filename": "./sql/benchmark/q1_bench/q1.sql",
+                			"times": " 1255807;979764;970210;"
+            			},
+						{
+							"Type": "exec_file",
+                			"Filename": "./sql/benchmark/q1_bench/q1.1.sql",
+                			"times": " 1318369;"
+            			},
+            			{
+                			"Type": "exec_file",
+                			"Filename": "./sql/benchmark/q1_bench/q1.2.sql",
+                			"times": " 1059509;"
+            			},
+            			{
+                			"Type": "exec_file",
+                			"Filename": "./sql/benchmark/q1_bench/q1.3.sql",
+                			"times": " 998552;"
+            			}
+					],
+				}
+				]
+		}
+	]
+}

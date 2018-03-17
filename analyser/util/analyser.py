@@ -5,6 +5,7 @@ import re
 import json
 from functools import reduce
 import matplotlib.pyplot as plt
+import pdb
 
 class Statistical:
     """
@@ -330,6 +331,8 @@ class Benchmark(Statistical):
 
     def _get_repetition_time(self, repetition):
         f = list(filter(lambda x: re.search("^\\.?[^.]*\\.[^.]*$", x["Filename"]), repetition))
+        #f = list(filter(lambda x: re.search("^\\.?[^.]*\\.[^.]*\\.[^.]*$", x["Filename"]), repetition))
+        #pdb.set_trace()
         return reduce(lambda x, y: x + y or 0, map(lambda z: self._extract_time(z), f))
 
     def _query_to_stat(self, name, query):
