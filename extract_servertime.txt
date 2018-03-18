@@ -1,0 +1,1 @@
+awk /::GET SERVER PROCESSING TIME.*/,/TIME:s*([0-9]*)susec/ test.log | grep -o TIME:s*[0-9]*s*usec | grep -o [1-9][0-9]* | tr n
