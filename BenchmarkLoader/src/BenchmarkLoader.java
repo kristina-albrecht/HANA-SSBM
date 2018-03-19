@@ -50,9 +50,10 @@ public class BenchmarkLoader implements AutoCloseable {
 	}
 
 	private int getKey(PreparedStatement ps, String val) throws SQLException {
-		ps.setString(1, val);
+		ps.setString(1, val.toUpperCase());
 		try (ResultSet rs = ps.executeQuery()) {
 			if (!rs.next()) {
+				System.err.println(val);
 				// create dim entry
 			}
 			return rs.getInt(1);
@@ -104,17 +105,19 @@ public class BenchmarkLoader implements AutoCloseable {
 				int threads = run.getInt("Threads");
 				Map<String, List<Measurement>> repetitions = new TreeMap<>();
 				for (JsonValue repV : run.getJsonArray("repetitions")) {
-					JsonObject rep = repV.asJsonObject();
-					String query = rep.getString("Filename");
-					query = query.substring(query.lastIndexOf("/q"), query.length() - ".sql".length());
-					if(!query.matches("\\d\\.\\d"))
-						continue;
-					String[] times = rep.getString("times").split(";");
-					List<Measurement> repList = repetitions.get(query);
-					if (repList == null)
-						repetitions.put(query, repList = new ArrayList<>());
-					repList.add(new Measurement(Integer.parseInt(times[0].trim()),
-							times.length > 1 ? times[1].length() : 0));
+					for (JsonValue q : repV.asJsonArray()) {
+						JsonObject rep = q.asJsonObject();
+						String query = rep.getString("Filename");
+						query = query.substring(query.lastIndexOf("/q")+2, query.length() - ".sql".length());
+						if (!query.matches("\\d\\.\\d"))
+							continue;
+						String[] times = rep.getString("times").split(";");
+						List<Measurement> repList = repetitions.get(query);
+						if (repList == null)
+							repetitions.put(query, repList = new ArrayList<>());
+						repList.add(new Measurement(Integer.parseInt(times[0].trim()),
+								times.length > 1 ? times[1].length() : 0));
+					}
 				}
 
 				for (String query : repetitions.keySet()) {
@@ -122,7 +125,9 @@ public class BenchmarkLoader implements AutoCloseable {
 				}
 			}
 			con.commit();
-		} catch (Exception e) {
+		} catch (
+
+		Exception e) {
 			con.rollback();
 			throw e;
 		}
