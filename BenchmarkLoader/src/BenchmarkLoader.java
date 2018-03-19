@@ -1,13 +1,19 @@
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
 import javax.json.Json;
+import javax.json.JsonObject;
 import javax.json.JsonReader;
-import javax.json.JsonStructure;
+import javax.json.JsonValue;
 
 public class BenchmarkLoader implements AutoCloseable {
 
@@ -54,7 +60,7 @@ public class BenchmarkLoader implements AutoCloseable {
 	}
 
 	public void insertRepetitions(int scaleFactor, boolean column, String indexConfig, int cpu, int thread, String hint,
-			String query, Measurement[] repetitionts) throws SQLException {
+			String query, List<Measurement> repetitionts) throws SQLException {
 
 		indexKeyStatement.setString(1, indexConfig);
 		hintKeyStatement.setString(1, hint);
@@ -81,7 +87,47 @@ public class BenchmarkLoader implements AutoCloseable {
 		}
 		insertStatement.executeBatch();
 	}
-	
+
+	public void loadFormJson(InputStream is) throws SQLException {
+		try (JsonReader json = Json.createReader(is)) {
+			JsonObject root = json.readObject();
+			JsonObject general = root.getJsonObject("General");
+			int scaleFactor = general.getInt("ScalingFactor");
+			for (String key : root.keySet()) {
+				if ("General".equals(key))
+					continue;
+				JsonObject run = root.getJsonObject(key);
+				boolean column = run.getBoolean("column");
+				String index = run.getString("index");
+				String hint = run.getString("hint");
+				int cpu = run.getInt("CPU");
+				int threads = run.getInt("Threads");
+				Map<String, List<Measurement>> repetitions = new TreeMap<>();
+				for (JsonValue repV : run.getJsonArray("repetitions")) {
+					JsonObject rep = repV.asJsonObject();
+					String query = rep.getString("Filename");
+					query = query.substring(query.lastIndexOf("/q"), query.length() - ".sql".length());
+					if(!query.matches("\\d\\.\\d"))
+						continue;
+					String[] times = rep.getString("times").split(";");
+					List<Measurement> repList = repetitions.get(query);
+					if (repList == null)
+						repetitions.put(query, repList = new ArrayList<>());
+					repList.add(new Measurement(Integer.parseInt(times[0].trim()),
+							times.length > 1 ? times[1].length() : 0));
+				}
+
+				for (String query : repetitions.keySet()) {
+					insertRepetitions(scaleFactor, column, index, cpu, threads, hint, query, repetitions.get(query));
+				}
+			}
+			con.commit();
+		} catch (Exception e) {
+			con.rollback();
+			throw e;
+		}
+
+	}
 
 	@Override
 	public void close() throws Exception {
@@ -93,15 +139,15 @@ public class BenchmarkLoader implements AutoCloseable {
 	}
 
 	public static void main(String[] args) throws Exception {
-		if (args.length < 5) {
-			System.out.println("Usage: BenchmarkLoader host instance database user password");
+		if (args.length < 6) {
+			System.out.println("Usage: BenchmarkLoader host instance database user password logfile");
 			System.exit(-1);
 		}
 
-		try (BenchmarkLoader bl = new BenchmarkLoader(args[0], Integer.parseInt(args[1]), args[2], args[3], args[4])) {
-			Measurement[] m = { new Measurement(100, 10), new Measurement(110, 20) };
-			bl.insertRepetitions(1, true, "NONE", 8, 8, "NONE", "1.1", m);
-			bl.con.commit();
+		try (InputStream is = new FileInputStream(args[5]);
+				BenchmarkLoader bl = new BenchmarkLoader(args[0], Integer.parseInt(args[1]), args[2], args[3],
+						args[4])) {
+			bl.loadFormJson(is);
 		}
 	}
 }
