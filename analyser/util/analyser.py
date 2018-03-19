@@ -203,7 +203,7 @@ class Comparison:
         plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
         plt.show()
     
-    def compare_visually_bar(self):
+    def compare_bar_plot_aggr(self):
         fig, ax = plt.subplots()
         #plt.xlabel("Repetition")
         bar_pos = arange(len(self.get_statisticals())) # the x locations for the groups
@@ -214,7 +214,25 @@ class Comparison:
         ax.set_ylabel("Time in msec")
         ax.set_title(self.title)
         values = [sum(stat.get_times()) for stat in self.get_statisticals()]
-        ax.bar(bar_pos - bar_width/2, values, color='rgbkymc')
+        my_colors = [(x/10.0, x/20.0, 0.75) for x in range(len(labels))]
+        ax.bar(bar_pos - bar_width/2, values, color='rgbkymc') #'rgbkymc'
+        plt.show()
+
+    def compare_bar_plot(self):
+        fig, ax = plt.subplots()
+        #plt.xlabel("Repetition")
+        for statistical in self.get_statisticals():
+            bar_pos = arange(statistical.count_repetitions()) # the x locations for the groups
+            bar_width = 0.15 # the width of the bars
+            ax.set_xticks(bar_pos)
+            labels=[i for i in range(statistical.count_repetitions())]
+            ax.set_xticklabels(labels)
+            ax.set_ylabel("Time in msec")
+            ax.set_title(self.title)
+            pdb.set_trace()
+            values = [stat.get_all_times() for stat in statistical.get_repetitions()]
+            #my_colors = [(x/10.0, x/20.0, 0.75) for x in range(len(labels))]
+            ax.bar(bar_pos - bar_width/2, values, color='rgbkymc') #'rgbkymc'
         plt.show()
 
     def _create_headings(self, *benchmarks):
