@@ -116,7 +116,7 @@ public class BenchmarkLoader implements AutoCloseable {
 						if (repList == null)
 							repetitions.put(query, repList = new ArrayList<>());
 						repList.add(new Measurement(Integer.parseInt(times[0].trim()),
-								times.length > 1 ? times[1].length() : 0));
+								times.length > 1 ? Integer.parseInt(times[1]) : 0));
 					}
 				}
 
@@ -144,6 +144,7 @@ public class BenchmarkLoader implements AutoCloseable {
 	}
 
 	public static void main(String[] args) throws Exception {
+		long start=System.currentTimeMillis();
 		if (args.length < 6) {
 			System.out.println("Usage: BenchmarkLoader host instance database user password logfile");
 			System.exit(-1);
@@ -154,5 +155,6 @@ public class BenchmarkLoader implements AutoCloseable {
 						args[4])) {
 			bl.loadFormJson(is);
 		}
+		System.out.println("finished after "+ (System.currentTimeMillis()-start) +" msec");
 	}
 }
