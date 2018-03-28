@@ -16,13 +16,13 @@ titlepage-rule-height: 1
 
 # Generell HANA als in-memory Datenbank
 
-SAP Hana (Die High Performance Analytic Appliance) ist eine Entwicklungsplattform und besteht im Kern aus einer „in-memory“ Datenbank.
+SAP Hana (Die High Performance Analytic Appliance) ist eine Entwicklungsplattform und besteht im Kern aus einer "in-memory" Datenbank.
 
 Transaktionen und Analysen werden auf einer einzigen, singulären Datenkopie im Hauptspeicher verarbeitet, anstatt die Festplatte als Datenspeicher zu benutzen. Dadurch ist es möglich sehr komplexe Abfragen und Datenbankoperationen mit sehr hohem Durchsatz auszuführen.
 
-Hana verbindet OLTP, durch die SQL undACID (Atomicity, Consistency, Isolation andDurability) Kompatibilität, und OLAP durch das „in-memory“ feature.Durch das ACID Prinzips ist die Datenbank geeignet um Unternehmensinterne Datenzu speichern. Es ist nicht nötig Datenanalysen über einen ETL Prozess an ein Datawarehouse weiterzuleiten. Komplexe Echtzeit Analysen [[1\]](#_ftn1)können nun direkt durch SAP Hana durchgeführt werden. Das erspart die erheblichen Kosten und vor allem Zeit.
+Hana verbindet OLTP, durch die SQL undACID (Atomicity, Consistency, Isolation andDurability) Kompatibilität, und OLAP durch das "in-memory" feature.Durch das ACID Prinzips ist die Datenbank geeignet um Unternehmensinterne Datenzu speichern. Es ist nicht nötig Datenanalysen über einen ETL Prozess an ein Datawarehouse weiterzuleiten. Komplexe Echtzeit Analysen [[1\]](#_ftn1)können nun direkt durch SAP Hana durchgeführt werden. Das erspart die erheblichen Kosten und vor allem Zeit.
 
-Beim der „in-memory“ Technologie werden die Daten im Hauptspeicher anstatt auf elektromagnetischen Festplatten gespeichert. Antwortzeiten und Auswertungen können dadurch schneller als bei gewöhnlichen Festplatten durch den Prozessor vorgenommen werden. Dadurch, dass der Zugriff auf die Festplatte nun wegfällt, verkürzt sich dieDatenzugriffszeit bis auf das Fünffache. 
+Beim der "in-memory" Technologie werden die Daten im Hauptspeicher anstatt auf elektromagnetischen Festplatten gespeichert. Antwortzeiten und Auswertungen können dadurch schneller als bei gewöhnlichen Festplatten durch den Prozessor vorgenommen werden. Dadurch, dass der Zugriff auf die Festplatte nun wegfällt, verkürzt sich dieDatenzugriffszeit bis auf das Fünffache. 
 
 ![img](file:///C:/Users/IBM_ADMIN/AppData/Local/Temp/OICE_16_974FA576_32C1D314_1CA5/msohtmlclip1/01/clip_image001.png)
 
@@ -30,7 +30,7 @@ Beim der „in-memory“ Technologie werden die Daten im Hauptspeicher anstatt a
 
 <https://intellipaat.com/blog/what-is-sap-hana/> 
 
-Um nun aber dem „D“ des ACID Prinzips gerechtzu werden reicht eine Speicherung im füchtigen Hauptspeicher nicht. Für die Datensicherungmüssen deshalb traditionelle Festplatten benutzt werden. Diese werden bei derreinen Analyse von Daten nicht berücksichtigt. Wenn Transaktionen getätigtwerden, müssen die regelmäßig an das nicht flüchtige Speichermedium übergebenwerden. Außerdem wird dort zu jeder Transaktion ein Protokolleintraghinterlegt.
+Um nun aber dem "D" des ACID Prinzips gerechtzu werden reicht eine Speicherung im füchtigen Hauptspeicher nicht. Für die Datensicherungmüssen deshalb traditionelle Festplatten benutzt werden. Diese werden bei derreinen Analyse von Daten nicht berücksichtigt. Wenn Transaktionen getätigtwerden, müssen die regelmäßig an das nicht flüchtige Speichermedium übergebenwerden. Außerdem wird dort zu jeder Transaktion ein Protokolleintraghinterlegt.
 
 ------
 
@@ -57,27 +57,26 @@ Warum Komprimierung?
 Daten eignen sich. / CPU aufwand?
 Bei der spaltenorientierten Speicherung ist es möglich Daten zu Komprimieren. Dadurch wird Speicherplatz gespart und Zugriffszeiten verringert. Es gibt zwei mögliche Komprimierungen:
 
-• Dictonary compression: 
+## Dictonary compression: 
 
 Diese Methode wird auf alle Spalten angewandt. Alle verschiedenen Spaltenwerte werden aufeinanderfolgenden Zahlen zugeordnet. Anstatt nun die verschiedenen Werte zu speichern werden stattdessen die viel kleiner Zahlen gespeichert. Dadurch wird die Zahl der Datenzugriffe minimiert und es gibt weniger Cache Fehler, da mehrere Informationen in einer Cache-Line vorhanden sind. Außerdem ist es möglich Operationen direkt auf die komprimierten Daten auszuführen.
 
-• Advanced compression:
+## Advanced compression:
 
 Die einzelnen Zeilen selbst können durch verschiedene Komprimierungsmethoden weiter verkleinert werden. Dazu gehören: 
 
-o prefix encoding:
+### prefix encoding:
 Spalte enthält eine dominante Value / andere Values selten
-	ein Wert wird sehr oft unkomprimiert gespeichert
+- ein Wert wird sehr oft unkomprimiert gespeichert
 datenset muss sortiert werden nach der Spalte mit der dominanten Value & der Attribut Vektor muss mit dem dominanten starten.
 Zur Komprimierung sollte die dominante Value nicht jedes mal explizit gespeichert werden wenn sie auftritt. 
-	Speichern der Nummer der Auftretungen der dominanten Value und eine Instanz der Value selbst im Attribut Vektor.
+		Speichern der Nummer der Auftretungen der dominanten Value und eine Instanz der Value selbst im Attribut Vektor.
 Prefix encoded Attribut Vektor enthält folgende Informationen:
-	Nummer der Auftretungen der dominanten Value 
-	valueID der dominanten Value aus dem Dictonary
-	valueIDs der fehlenden Values
+		Nummer der Auftretungen der dominanten Value 
+		valueID der dominanten Value aus dem Dictonary
+		valueIDs der fehlenden Values
 
-
-o run length encoding:
+### run length encoding:
 Gut wenn ein Paar Werte mit hohem Aufkommen
 Sollte nach Werten sortiert sein für eine maximale Komprimierung
 Anstatt alle Werte einer Spalte zu Speichern werden lediglich 2 Vektoren gespeichert.
@@ -85,17 +84,18 @@ Einer mit allen verschiedenen Values
 Einer mit der Startposition der Value 
 
 
-o cluster encoding:
+### cluster encoding:
 Ist gut wenn eine Spalte viele identische Werte hat die hinternander stehen.
 Attribut Vektor is partitioniert in n Blöcke mit fester Größe (tipischerweise 1024 Elements)
 Wenn ein Cluster nur einen Wert hat wird er durch eine 1 ersetzt.
 Wurde er nicht ersetzt steht dort eine 0.
 
-o sparse encoding: 
+### sparse encoding: 
 
 o inderict encoding:
-Ist gut wenn verschiedene Values oft vorkommen  BSP: bei zusammenhängenden Spalten. Nach Land Sortiert und auf Namensspalte zugreifen
-Wie bei Cluster encoding  N Datenblöcke mit fester Anzahl Elementen (1024)
+Ist gut wenn verschiedene Values oft vorkommen 
+BSP: bei zusammenhängenden Spalten. Nach Land Sortiert und auf Namensspalte zugreifen
+Wie bei Cluster encoding N Datenblöcke mit fester Anzahl Elementen (1024)
 
 
 Die SAP Hana Datenbank benutzt Algorithmen um zu entscheiden, welche der Komprimierungsmethoden am angebrachtesten für die verschiedenen Spalten ist.
@@ -145,22 +145,96 @@ Im Folgenden sind die wichtigsten Änderungen kurz zusammengefasst:
 - Generierung von SSBM-Tabellen
 - Tabellen in HANA laden
 
-# SQL-Abfragen für SSBM
-- Anpassung der TPC-H Queries auf SSBM
-- Generierung von Abfragen mit Qgen
+# Durchführung von Benchmarks
 
-# Durchführung von Benchmarks 
-### Aufsetzen von HANA: Installation, Beschreibung vom System (Prozessoren, RAM, OS, Festplattenspeicher etc.)
-### Durchführung von Performance Tests und Auswertung der Query Execution Plans
-- Row vs. Column Store
-- Wie kann man durch Indizes oder Hints beschleunigen?
-- Parallele Zugriffe (Concurrency, unter Umständen)
+## Aufsetzen von HANA: Installation, Beschreibung vom System (Prozessoren, RAM, OS, Festplattenspeicher etc.)
+
+Für die Durchführung vom Benchmark wurde auf einem Dell Latitude E5570 verwendet.
+Die wichtigsten Merkmale:
+CPU: Intel i7-6820HQ CPU @ 2.70 GHz (4 Cores, 8 Threads)
+RAM: 16GB DDR3 @ 2133Mhz
+Storage: USB3.0-SSD 
+
+HANA wurde in Form einer Virtuellen Maschine über den HXEDownloader von http://sap.com/sap-hana-express bezogen. Die VM gibt es in einer Server only Version und einer Server + Applications Version. Die Tests wurden auf der Server + Applications Version durchgeführt. Um Overhead durch die Virtualisierung zu verhindern, wurde das Festplattenimage der VM auf die SSD extrahiert und das System von dort gebootet. Zum extrahieren wurde quem-img verwendet:
+
+```bash
+sudo qemu-img convert -O raw hxexsa.vmdk /dev/sdb
+```
+
+Das Betriebsystem ist SUSE Linux Enterprise Server 12 SP2. Wegen Hardware Kompatibilitätsproblemen wurde der Kernel nachträglich auf 4.4.117-3 aktualisiert.
+
+## Durchführung von Performance Tests 
+
+### Vorbereitung 
+
+In der HANA-Datenbank wurde das SSBM-Schema angelegt. Die Tabellen den für SSBM-Benchmark wurden mit Hilfe von SSBM-Tabellengenerator dbgen generiert (mit Scaling Factor 1 für 1GB Daten) (https://github.com/electrum/ssb-dbgen). 
+
+```dbgen -s 1 -T a```
+
+Die generierten CSV-Tabellen wurden dann in die Datenbank geladen.
+
+```sql
+IMPORT FROM CSV FILE '/hana/shared/HXE/HDB90/work/date.tbl' INTO "SYSTEM"."DIM_DATE" 
+WITH
+
+record delimited by '\n' 
+field delimited by '|';
+```
+
+Dieses Vorgehen, die Tabellen komplett mit einem Import-Statement zu laden hat zur Folge, dass bei den Abfragen die gesamten Daten in der Basis-Tabelle waren und die Delta-Tabelle leer war.
+
+### Vorgehensweise
+
+Getestet wurde die Performance von HANA-Datenbank mit folgenden Testvariablen:
+
+- Tabellengröße (Scaling Factor)
+- Tabellenorganisation
+- Indizes
+- Hints
+- Anzahl von CPUs.
+
+Der Schwerpunkt lag dabei beim Vergleich zwischen Spalten- und Zeilen-basierten Tabellnorganisation. 
+
+#### Ladezeiten von Tabellen und Indizes
+
+Bereits beim Laden der Tabellen wurde der Unterschied zwischen Spalten- und Zeilen-basierten Speicherung festgestellt. Der Ladeprozess bei der Spalten-basierten Tabellenorganisation hat 27% weniger Zeit benötig (81 Sekunden für Column Store und 112 Sekunden für Row Store). Ein möglicher Grund ist die Kompression, die dafür sorgt, dass weniger Daten geschrieben werden müssen.
+
+Als nächtes haben wir die Ladezeiten für das Anlegen der Indizes gemessen. Es wurden Indizes für  Spalten mit unterschidlich vielen einmaligen Werten in unterschiedlich großen Tabellen ausgewählt (LO_ORDERKEY und LO_DISCOUNT auf der Faktentabelle und D_YEAR auf einer Dimensionstabelle).
+
+Bei Spalten-basierten Tabellen war das Anlegen von Indizes um einiges schneller. Der Unterschied war um so größer je weniger verschiedene Werte in der Spalte vorhanden waren (um Faktor 14 bei LO_ORDERKEY und um den Faktor 37 bei LO_DISCOUNT).
+
+Bei D_YEAR war das Erstellen vom Index bei den Zeilen-orientierten Tabellenorganisation schneller. Da das Anlegen von diesem Index jedoch insgesamt sehr schnell war, kann das darauf zurückzuführen sein, dass der Overhead zu groß ist und dass dagegen die eigentliche Zeit zum Erstellen von Indizes verschwindend gering ist. Um eine genauere Aussage treffen zu können, sind weitere Informationen über die internen Datenstrukturen der HANA-Datenbank notwendig, zu denen uns keine Dokumentation vorliegt. 
+
+#### Indizes
+
+Die Indizes wurden in verschiedene Kategorien eingeordnet. Zunächst wurden Indizes auf die Fremdschlüssel-Spalten in der Faktentabelle angelegt. Danach wurden zusätzliche Indizes auf die Attributen der Faktentabelle hinzugefügt. Indizes auf Primärschlüssel erstellt HANA implizit, deshalb wurden sie nicht explizit getestet [###].
+
+Bei den Dimensionstabellen wurden Indizes auf restriktive und weniger restriktive Spalten getestet. So schränkt eine Bedingung auf die Region kaum ein weil eine Region sehr groß ist im Vergleich zu einer Stadt, die die Treffermenge stark einschränkt.
 
 
-# Fragen
-- Out of Memory Problem
-- Zugriff auf HANA an der DH
-- Gibt es Standard-Queries für SSBM? 
-- Wie viele Queries? Skalierung?
-- Welche Metriken sind bei dem Benchmark wichtig?
-Laufzeit, (Systembelastung)
+
+### Testanalyse Auswertung der Query Execution Plans
+
+Ohne Indizes schneidet der Column Store mit großem Abstand bei jeder SQL-Query besser ab als Row Store. Wenn man die Indizes hinzufügt, 
+
+Mit Fremdschlüssel perfromt CS immer gut, Bei RS ist die Performance stark von den Queries abhöngig, bie manchen Queries performt RS gut, und kommt manchmal an die Performance von CS, aber aber oft wesentlich schlechter.
+
+Auffällig war, dass RS mit Indizes manchmal schlechter performt als ohne Indizes. 
+
+Beispiel: Q3.1 und Q3.3
+
+CS profitiert von Indizes, allerdings nicht so stark als RS
+
+ **// TODO**
+
+- Q3.1 vs. Q3.3 mit QEP
+- Column Store mit Indizes schneller, aber QEPs sind gleich
+- HINTs
+- CPUs
+- Cube
+- Excel
+
+
+
+# Fazit
+

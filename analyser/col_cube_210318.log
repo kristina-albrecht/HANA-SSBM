@@ -9,18 +9,12 @@
 "row_benchmark_fk":
 {
 "column": false,
-"index": FK,
-"hint": none,
-"repetitions":
-[
-[
+"index": "FK",
+"hint": "none",
+"repetitions":[[
 {
-"Type":
-exec_file
-,
-"Filename":
-./sql/benchmark/q1_bench/q1.sql
-,
+"Type":exec_file,
+"Filename": "./sql/benchmark/q1_bench/q1.sql",
 "times":
 "
 205266;17518;4187;"
