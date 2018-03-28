@@ -158,7 +158,7 @@ Storage: USB3.0-SSD
 HANA wurde in Form einer Virtuellen Maschine über den HXEDownloader von http://sap.com/sap-hana-express bezogen. Die VM gibt es in einer Server only Version und einer Server + Applications Version. Die Tests wurden auf der Server + Applications Version durchgeführt. Um Overhead durch die Virtualisierung zu verhindern, wurde das Festplattenimage der VM auf die SSD extrahiert und das System von dort gebootet. Zum extrahieren wurde quem-img verwendet:
 
 ```bash
-sudo qemu-img convert -O raw hxexsa.vmdk /dev/sdb
+sudo qemu-img convert -O raw hxexsa-disk1.vmdk /dev/sdb
 ```
 
 Das Betriebsystem ist SUSE Linux Enterprise Server 12 SP2. Wegen Hardware Kompatibilitätsproblemen wurde der Kernel nachträglich auf 4.4.117-3 aktualisiert.
