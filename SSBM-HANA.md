@@ -230,17 +230,60 @@ Im Folgeneden wird die Auswahl von Indizes, der BenchmarkLoader und der virtuell
 
 Die Indizes wurden in verschiedene Kategorien eingeordnet. Zunächst wurden Indizes auf die Fremdschlüssel-Spalten in der Faktentabelle angelegt. Danach wurden zusätzliche Indizes auf die Attributen der Faktentabelle hinzugefügt. Indizes auf Primärschlüssel erstellt HANA implizit, deshalb wurden sie nicht explizit getestet [###].
 
+
+
+```sql 
+LO_CUSTKEY
+LO_SUPPKEY
+LO_PARTKEY
+LO_ORDERDATEKEY
+LO_COMMITDATEKEY
+				+
+				LO_QUANTITY
+				LO_EXTENDEDPRICE
+				LO_DISCOUNT
+								+
+								C_REGION
+								C_MRKTSEGMENT
+								P_MFGR
+								P_CATEGORY
+								S_NATION
+								S_REGION
+								D_YEAR
+												+
+												C_CITY
+												P_BRAND
+												S_CITY
+												D_YEARMONTHNUM
+												D_YEARMONTH
+												D_DAYNUMINYEAR
+								
+- remove all fact table indices = DimOnly
+```
+
+
+
 Bei den Dimensionstabellen wurden Indizes auf restriktive und weniger restriktive Spalten getestet. So schränkt beispielsweise eine Bedingung auf die Region kaum ein, weil eine Region sehr groß ist im Vergleich zu einer Stadt, die die Treffermenge stark einschränkt.
+
+
+
+
+
+
 
 ### BenchmarkLoader
 
 
 
-## Cube
+## Benchmark-Cube
 
-Die Benchmark-Ergebnisse sind multidimensionale Daten. Jede Testvariable entspricht einer Dimension.
+Die Bechmark-Daten wurden in der HANA-Datenbank in einem Star Schema gespeichert. Die Messdaten in der Faktentabelle sind die Ausführungszeiten, die vom Server reportet werden *TOTALTIME* (*RUNTIME* + *CURSTIME* , Runtime ist die Server-Zeit, um die Ergebnisse zu berechnen, und die Curstime - um die Ergebnisse auszuliefern). Die Benchmark-Ergebnisse sind multidimensionale Daten. Jede Testvariable entspricht einer Dimension: Tabellenorganisation (Row- oder Columnsstore), SSBM-Queries, Indizes und  Hints.
 
-Man soll jedoch vermeiden, dass der Cube sparse besetzt ist (wenn Daten zu bestimmten Testvariablen fehlen), und möglichst nach verschiedenen Parametern filtern, um keine falschen Schlussfolgerungen zu ziehen. Des Weiteren soll bei der Auswertung der Messungen die Durchschnittszeiten und keine Summe verglichen werden, um zu vermeiden, dass die Tests, die öfter durchgeführt werden, größere Werte liefern (z.B. wenn Columnstore mehr als mit Rowstore getestet wurde)
+![Benchmark-Cube](BenchmarkCube.PNG)
+
+
+
+Man soll jedoch vermeiden, dass der Cube sparse besetzt ist (wenn Daten zu bestimmten Testvariablen fehlen), und möglichst nach verschiedenen Parametern filtern, um keine falschen Schlussfolgerungen zu ziehen. Des Weiteren soll bei der Auswertung der Messungen die Durchschnittszeiten und keine Summe verglichen werden, um zu vermeiden, dass die Tests, die öfter durchgeführt werden, größere Werte liefern (z.B. wenn Columnstore mehr als mit Rowstore getestet wurde).
 
 
 
