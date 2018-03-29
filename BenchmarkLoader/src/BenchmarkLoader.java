@@ -23,13 +23,20 @@ public class BenchmarkLoader implements AutoCloseable {
 	PreparedStatement indexKeyStatement;
 	PreparedStatement hintKeyStatement;
 	PreparedStatement queryKeyStatement;
+	boolean delete;
 
-	public BenchmarkLoader(String host, int instance, String database, String user, String password)
+	public BenchmarkLoader(String host, int instance, String database, String user, String password, boolean delete)
 			throws SQLException {
 		con = DriverManager.getConnection("jdbc:sap://" + host + ":3" + instance + "13/?databaseName=" + database
 				+ "&autocommit=false&currentSchema=BENCHMARKS", user, password);
-		insertStatement = con.prepareStatement(
-				"INSERT INTO MEASUREMENTS (M_ScaleFactor, M_Column, M_IndexConfigKey, M_CpuCount, M_ThreadCount, M_HintKey, M_QueryKey, M_Repetition, M_RunTime, M_CursTIme) VALUES(?,?,?,?,?,?,?,?,?,?)");
+		this.delete = delete;
+		if (delete) {
+			System.out.println("Deletemode");
+			insertStatement = con.prepareStatement(
+					"DELETE FROM MEASUREMENTS WHERE M_ScaleFactor=? AND M_Column=? AND M_IndexConfigKey=? AND M_CpuCount=? AND M_ThreadCount=? AND M_HintKey=? AND M_QueryKey=? AND M_Repetition=? AND M_RunTime=? AND M_CursTIme=?");
+		} else
+			insertStatement = con.prepareStatement(
+					"INSERT INTO MEASUREMENTS (M_ScaleFactor, M_Column, M_IndexConfigKey, M_CpuCount, M_ThreadCount, M_HintKey, M_QueryKey, M_Repetition, M_RunTime, M_CursTIme) VALUES(?,?,?,?,?,?,?,?,?,?)");
 		maxRepetionStatement = con.prepareStatement(
 				"SELECT IFNULL(MAX(M_Repetition),0) FROM Measurements WHERE M_ScaleFactor=? AND M_Column=? AND M_IndexConfigKey=? AND M_CpuCount=? AND M_ThreadCount=? AND M_HintKey=? AND M_QUERYKEY=?");
 		indexKeyStatement = con.prepareStatement("SELECT I_ConfigKey FROM indices WHERE I_ConfigName=?");
@@ -75,10 +82,13 @@ public class BenchmarkLoader implements AutoCloseable {
 		try (ResultSet rs = maxRepetionStatement.executeQuery()) {
 			rs.next();
 			lastRepetition = rs.getInt(1);
-		}
+		}	
+		if(delete)
+			lastRepetition-=repetitionts.size();
 
 		setDims(insertStatement, scaleFactor, column, indexKey, cpu, thread, hintKey, queryKey);
 
+		
 		for (Measurement m : repetitionts) {
 			lastRepetition++;
 			insertStatement.setInt(8, lastRepetition);
@@ -97,6 +107,7 @@ public class BenchmarkLoader implements AutoCloseable {
 			for (String key : root.keySet()) {
 				if ("General".equals(key))
 					continue;
+				System.out.println(key);
 				JsonObject run = root.getJsonObject(key);
 				boolean column = run.getBoolean("column");
 				String index = run.getString("index");
@@ -108,7 +119,7 @@ public class BenchmarkLoader implements AutoCloseable {
 					for (JsonValue q : repV.asJsonArray()) {
 						JsonObject rep = q.asJsonObject();
 						String query = rep.getString("Filename");
-						query = query.substring(query.lastIndexOf("/q")+2, query.length() - ".sql".length());
+						query = query.substring(query.lastIndexOf("/q") + 2, query.length() - ".sql".length());
 						if (!query.matches("\\d\\.\\d"))
 							continue;
 						String[] times = rep.getString("times").split(";");
@@ -144,17 +155,17 @@ public class BenchmarkLoader implements AutoCloseable {
 	}
 
 	public static void main(String[] args) throws Exception {
-		long start=System.currentTimeMillis();
+		long start = System.currentTimeMillis();
 		if (args.length < 6) {
 			System.out.println("Usage: BenchmarkLoader host instance database user password logfile");
 			System.exit(-1);
 		}
 
 		try (InputStream is = new FileInputStream(args[5]);
-				BenchmarkLoader bl = new BenchmarkLoader(args[0], Integer.parseInt(args[1]), args[2], args[3],
-						args[4])) {
+				BenchmarkLoader bl = new BenchmarkLoader(args[0], Integer.parseInt(args[1]), args[2], args[3], args[4],
+						args.length > 6 && args[6].equals("DELETE"))) {
 			bl.loadFormJson(is);
 		}
-		System.out.println("finished after "+ (System.currentTimeMillis()-start) +" msec");
+		System.out.println("finished after " + (System.currentTimeMillis() - start) + " msec");
 	}
 }
