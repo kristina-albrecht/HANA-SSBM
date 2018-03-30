@@ -165,7 +165,7 @@ Das Betriebsystem ist SUSE Linux Enterprise Server 12 SP2. Wegen Hardware Kompat
 
 ## Durchführung von Performance Tests 
 
-### Vorbereitung 
+### Vorbereitung
 
 In der HANA-Datenbank wurde das SSBM-Schema angelegt. Die Tabellen den für SSBM-Benchmark wurden mit Hilfe von SSBM-Tabellengenerator dbgen generiert (mit Scaling Factor 1 für 1GB Daten) (https://github.com/electrum/ssb-dbgen). 
 
@@ -183,33 +183,107 @@ field delimited by '|';
 
 Dieses Vorgehen, die Tabellen komplett mit einem Import-Statement zu laden hat zur Folge, dass bei den Abfragen die gesamten Daten in der Basis-Tabelle waren und die Delta-Tabelle leer war.
 
+### Ladezeiten von Tabellen und Indizes
+
+Bereits beim Laden der Tabellen wurde der Unterschied zwischen Spalten- und Zeilen-basierten Speicherung festgestellt. Der Ladeprozess bei der Spalten-basierten Tabellenorganisation hat 27% weniger Zeit benötig (81 Sekunden für Column Store und 112 Sekunden für Row Store). Ein möglicher Grund ist die Kompression, die dafür sorgt, dass weniger Daten geschrieben werden müssen.
+
+Als nächtes haben wir die Ladezeiten für das Anlegen der Indizes gemessen. Es wurden Indizes für  Spalten mit unterschidlich vielen einmaligen Werten in unterschiedlich großen Tabellen ausgewählt (*LO_ORDERKEY* und *LO_DISCOUNT* auf der Faktentabelle und *D_YEAR* auf einer Dimensionstabelle).
+
+Bei Spalten-basierten Tabellen war das Anlegen von Indizes um einiges schneller. Der Unterschied war um so größer je weniger verschiedene Werte in der Spalte vorhanden waren (um Faktor 14 bei *LO_ORDERKEY* und um den Faktor 37 bei *LO_DISCOUNT*).
+
+Bei D_YEAR war das Erstellen vom Index bei den Zeilen-orientierten Tabellenorganisation schneller. Da das Anlegen von diesem Index jedoch insgesamt sehr schnell war, kann das darauf zurückzuführen sein, dass der Overhead zu groß ist und dass dagegen die eigentliche Zeit zum Erstellen von Indizes verschwindend gering ist. Um eine genauere Aussage treffen zu können, sind weitere Informationen über die internen Datenstrukturen der HANA-Datenbank notwendig, zu denen uns keine Dokumentation vorliegt. 
+
 ### Vorgehensweise
 
-Getestet wurde die Performance von HANA-Datenbank mit folgenden Testvariablen:
+Das Ziel des Benchmarks war, Star Schema auf HANA-Datenbank zu testen. Der Schwerpunkt lag dabei beim Vergleich zwischen Spalten- und Zeilen-basierten Tabellnorganisation. Es ging vor allem darum, am Beispiel von HANA In-Memory-Datenbank zu testen, ob Columnstore sich besser für Data Warehouse bzw. OLAP-Zwecke eignet als Zeilen-basierte Datenspeicherung. Desweiteren wurde der Einfluss von Indizes auf die Performance von HANA-Datenbank bei Column- und Rowstore analysiert.
 
-- Tabellengröße (Scaling Factor)
+Der Benchmark wurde mit folgenden Testvariablen durchgeführt:
+
 - Tabellenorganisation
 - Indizes
 - Hints
 - Anzahl von CPUs.
 
-Der Schwerpunkt lag dabei beim Vergleich zwischen Spalten- und Zeilen-basierten Tabellnorganisation. 
+Die Tests wurden iterativ mit verschiedenen Kombinationen der Testvariablen durchgeführt. Die Durchführung des Benchmarks lässt sich in folgende Schritte unterteilen:
 
-#### Ladezeiten von Tabellen und Indizes
+1. Erzeugung vom Schema und Datenimport (Wechsel zwischen Column- und Rowstore)
+2. Erstellen von Indizes
+3. Durchführung von Benchmarks (jeweils 100 Iterationen):
+   - ohne Hints
+   - mit Hint USE_OLAP_PLAN
+   - mit Hint NO_USE_OLAP_PLAN
+4. Speicherung der Daten in einer Log-Datei
+5. Importieren der Daten in den Cube
+6. Analyse und Auswertung der Ergebnisse 
 
-Bereits beim Laden der Tabellen wurde der Unterschied zwischen Spalten- und Zeilen-basierten Speicherung festgestellt. Der Ladeprozess bei der Spalten-basierten Tabellenorganisation hat 27% weniger Zeit benötig (81 Sekunden für Column Store und 112 Sekunden für Row Store). Ein möglicher Grund ist die Kompression, die dafür sorgt, dass weniger Daten geschrieben werden müssen.
+Um den Einfluss von asynchronen Prozessen auf die Testergebnisse zu vermeiden, wurden die Benchmarks für Row- und Columnstore getrennt durchgeführt. Die Erzeigung vom Column- bzw. Row-Schema und der Datenimport (Schritt 1) erfolgten daher manuell. 
 
-Als nächtes haben wir die Ladezeiten für das Anlegen der Indizes gemessen. Es wurden Indizes für  Spalten mit unterschidlich vielen einmaligen Werten in unterschiedlich großen Tabellen ausgewählt (LO_ORDERKEY und LO_DISCOUNT auf der Faktentabelle und D_YEAR auf einer Dimensionstabelle).
+Schritte 2-4 wurden automatisiert mit einem bash-Skript ausgeführt. Für die Durchführung des Benchmarks wuden SQL-Abfragen zum Anlegen und Entfernen von Indizes, sowie SSBM-Abfragen (mit und ohne Hints) vorbereitet, die im bash-Skript nacheinander ausgeführt wurden. Benchmarks mit unterschiedlichen Indizes wurden jeweils ohne Hints sowie mit und ohne OLAP-Hint durchgeführt. 
 
-Bei Spalten-basierten Tabellen war das Anlegen von Indizes um einiges schneller. Der Unterschied war um so größer je weniger verschiedene Werte in der Spalte vorhanden waren (um Faktor 14 bei LO_ORDERKEY und um den Faktor 37 bei LO_DISCOUNT).
+Damit der Benchmark zuverlässige Ergebnisse liefert, wurden alle Kombinationen der Testvariablen jeweils 100 mal ausgeführt. Mehrere Iterationen sind hilfreich, um Anomalien und zufällige Einflussfaktoren bei der Durchführung der Tests auszuschließen. 
 
-Bei D_YEAR war das Erstellen vom Index bei den Zeilen-orientierten Tabellenorganisation schneller. Da das Anlegen von diesem Index jedoch insgesamt sehr schnell war, kann das darauf zurückzuführen sein, dass der Overhead zu groß ist und dass dagegen die eigentliche Zeit zum Erstellen von Indizes verschwindend gering ist. Um eine genauere Aussage treffen zu können, sind weitere Informationen über die internen Datenstrukturen der HANA-Datenbank notwendig, zu denen uns keine Dokumentation vorliegt. 
+Die Ergebnisse der Tests wurden in eine Log-Datei geschrieben, die mit Hilfe von einem selbsterstellten Java-Programm (BenchmarkLoader) geparst und in einen virtuellen Cube in die HANA-Datenbank geladen wurden. Der Cube eignet sich gut für die Auswertung der Benchmark-Ergebnisse, da wir unterschiedliche Testvariablen haben, die in verschiedenen Kombinationen getestet werden.
 
-#### Indizes
+Im Folgeneden wird die Auswahl von Indizes, der BenchmarkLoader und der virtuelle Cube beschrieben.
+
+### Auswahl der Indizes
 
 Die Indizes wurden in verschiedene Kategorien eingeordnet. Zunächst wurden Indizes auf die Fremdschlüssel-Spalten in der Faktentabelle angelegt. Danach wurden zusätzliche Indizes auf die Attributen der Faktentabelle hinzugefügt. Indizes auf Primärschlüssel erstellt HANA implizit, deshalb wurden sie nicht explizit getestet [###].
 
-Bei den Dimensionstabellen wurden Indizes auf restriktive und weniger restriktive Spalten getestet. So schränkt eine Bedingung auf die Region kaum ein weil eine Region sehr groß ist im Vergleich zu einer Stadt, die die Treffermenge stark einschränkt.
+
+
+```sql 
+LO_CUSTKEY
+LO_SUPPKEY
+LO_PARTKEY
+LO_ORDERDATEKEY
+LO_COMMITDATEKEY
+				+
+				LO_QUANTITY
+				LO_EXTENDEDPRICE
+				LO_DISCOUNT
+								+
+								C_REGION
+								C_MRKTSEGMENT
+								P_MFGR
+								P_CATEGORY
+								S_NATION
+								S_REGION
+								D_YEAR
+												+
+												C_CITY
+												P_BRAND
+												S_CITY
+												D_YEARMONTHNUM
+												D_YEARMONTH
+												D_DAYNUMINYEAR
+								
+- remove all fact table indices = DimOnly
+```
+
+
+
+Bei den Dimensionstabellen wurden Indizes auf restriktive und weniger restriktive Spalten getestet. So schränkt beispielsweise eine Bedingung auf die Region kaum ein, weil eine Region sehr groß ist im Vergleich zu einer Stadt, die die Treffermenge stark einschränkt.
+
+
+
+
+
+
+
+### BenchmarkLoader
+
+
+
+## Benchmark-Cube
+
+Die Bechmark-Daten wurden in der HANA-Datenbank in einem Star Schema gespeichert. Die Messdaten in der Faktentabelle sind die Ausführungszeiten, die vom Server reportet werden *TOTALTIME* (*RUNTIME* + *CURSTIME* , Runtime ist die Server-Zeit, um die Ergebnisse zu berechnen, und die Curstime - um die Ergebnisse auszuliefern). Die Benchmark-Ergebnisse sind multidimensionale Daten. Jede Testvariable entspricht einer Dimension: Tabellenorganisation (Row- oder Columnsstore), SSBM-Queries, Indizes und  Hints.
+
+![Benchmark-Cube](BenchmarkCube.PNG)
+
+
+
+Man soll jedoch vermeiden, dass der Cube sparse besetzt ist (wenn Daten zu bestimmten Testvariablen fehlen), und möglichst nach verschiedenen Parametern filtern, um keine falschen Schlussfolgerungen zu ziehen. Des Weiteren soll bei der Auswertung der Messungen die Durchschnittszeiten und keine Summe verglichen werden, um zu vermeiden, dass die Tests, die öfter durchgeführt werden, größere Werte liefern (z.B. wenn Columnstore mehr als mit Rowstore getestet wurde).
 
 
 
@@ -217,13 +291,13 @@ Bei den Dimensionstabellen wurden Indizes auf restriktive und weniger restriktiv
 
 Ohne Indizes schneidet der Column Store mit großem Abstand bei jeder SQL-Query besser ab als Row Store. Wenn man die Indizes hinzufügt, 
 
-Mit Fremdschlüssel perfromt CS immer gut, Bei RS ist die Performance stark von den Queries abhöngig, bie manchen Queries performt RS gut, und kommt manchmal an die Performance von CS, aber aber oft wesentlich schlechter.
+Mit Fremdschlüssel perfromt Columnstore immer gut, Bei Rowstore ist die Performance stark von den Queries abhängig. Bei manchen Queries performt Rowstore gut, und kommt manchmal an die Performance von Columnstore, aber aber oft wesentlich schlechter.
 
-Auffällig war, dass RS mit Indizes manchmal schlechter performt als ohne Indizes. 
+Auffällig war, dass Rowstore mit Indizes manchmal schlechter performt als ohne Indizes. 
 
 Beispiel: Q3.1 und Q3.3
 
-CS profitiert von Indizes, allerdings nicht so stark als RS
+Columnstore profitiert von Indizes, allerdings nicht so stark als Rowstore.
 
  **// TODO**
 
@@ -237,4 +311,71 @@ CS profitiert von Indizes, allerdings nicht so stark als RS
 
 
 # Fazit
+
+
+
+# Anhang
+
+
+
+```json
+{"General": {
+        "Repetitions": 100,
+        "ScalingFactor": 1
+    },
+    "column_benchmark_no_index": {
+        "column": true,
+        "index": "none",
+        "hint": "none",
+		"CPU": 4,
+        "Threads": 8,
+        "repetitions": [
+            [
+                {
+                    "Type": "exec_file",
+                    "Filename": "./sql/benchmark/q1_bench/q1.1.sql",
+                    "times": " 13732;"
+                },
+                {
+                    "Type": "exec_file",
+                    "Filename": "./sql/benchmark/q1_bench/q1.2.sql",
+                    "times": " 14713;"
+                },
+				...
+                {
+                    "Type": "exec_file",
+                    "Filename": "./sql/benchmark/q4_bench/q4.3.sql",
+                    "times": " 20654;333;"
+                }
+            ],
+            [
+                {
+                    "Type": "exec_file",
+                    "Filename": "./sql/benchmark/q1_bench/q1.sql",
+                    "times": " 12546;12788;9118;"
+                },
+                {
+                    "Type": "exec_file",
+                    "Filename": "./sql/benchmark/q1_bench/q1.1.sql",
+                    "times": " 14242;"
+                }
+				...
+			]
+		]
+    },
+    "column_benchmark_no_index_noolap": {
+        "column": true,
+        "index": "none",
+        "hint": "NO_USE_OLAP_PLAN",
+		"CPU": 4,
+        "Threads": 8,
+        "repetitions": [
+            [
+			...
+			]
+		]
+	}
+	...
+}
+```
 

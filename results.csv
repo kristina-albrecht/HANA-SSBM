@@ -1,0 +1,97 @@
+  ,H_HINTNAME      ,I_CONFIGNAME,TO_TABORGNAME,M_CPUCOUNT,M_THREADCOUNT,M_SCALEFACTOR,COUNT(*),
+1,NO_USE_OLAP_PLAN,ADVANCED    ,COLUMN       ,4,8,1,1,300
+2,NO_USE_OLAP_PLAN,BASIC       ,COLUMN       ,4,8,1,1,300
+3,NO_USE_OLAP_PLAN,DIMONLY     ,COLUMN       ,4,8,1,1,300
+4,NO_USE_OLAP_PLAN,DIMONLY     ,COLUMN       ,4,8,10,1,300
+5,NO_USE_OLAP_PLAN,FAKTENONLY  ,COLUMN       ,4,8,1,1,300
+6,NO_USE_OLAP_PLAN,FAKTENONLY  ,COLUMN       ,4,8,10,1,300
+7,NO_USE_OLAP_PLAN,FK          ,COLUMN       ,1,1,1,1,300
+8,NO_USE_OLAP_PLAN,FK          ,COLUMN       ,1,2,1,1,300
+9,NO_USE_OLAP_PLAN,FK          ,COLUMN       ,2,2,1,1,300
+10,NO_USE_OLAP_PLAN,FK          ,COLUMN       ,2,4,1,1,300
+11,NO_USE_OLAP_PLAN,FK          ,COLUMN       ,4,4,1,1,300
+12,NO_USE_OLAP_PLAN,FK          ,COLUMN       ,4,8,1,1,300
+13,NO_USE_OLAP_PLAN,FK          ,COLUMN       ,1,1,10,1,300
+14,NO_USE_OLAP_PLAN,FK          ,COLUMN       ,1,2,10,1,300
+15,NO_USE_OLAP_PLAN,FK          ,COLUMN       ,2,2,10,1,300
+16,NO_USE_OLAP_PLAN,FK          ,COLUMN       ,2,4,10,1,300
+17,NO_USE_OLAP_PLAN,FK          ,COLUMN       ,4,4,10,1,300
+18,NO_USE_OLAP_PLAN,FK          ,COLUMN       ,4,8,10,1,300
+19,NO_USE_OLAP_PLAN,FT          ,COLUMN       ,4,8,1,1,300
+20,NO_USE_OLAP_PLAN,FT          ,COLUMN       ,4,8,10,1,300
+21,NO_USE_OLAP_PLAN,NONE        ,COLUMN       ,4,8,1,1,300
+22,NO_USE_OLAP_PLAN,NONE        ,COLUMN       ,4,8,10,1,300
+23,NO_USE_OLAP_PLAN,RESTRDIM    ,COLUMN       ,4,8,1,1,300
+24,NO_USE_OLAP_PLAN,RESTRDIM    ,COLUMN       ,4,8,10,1,300
+25,NONE            ,ADVANCED    ,COLUMN       ,4,8,1,1,300
+26,NONE            ,BASIC       ,COLUMN       ,4,8,1,1,300
+27,NONE            ,DIMONLY     ,COLUMN       ,4,8,1,1,300
+28,NONE            ,DIMONLY     ,COLUMN       ,4,8,10,1,300
+29,NONE            ,FAKTENONLY  ,COLUMN       ,4,8,1,1,300
+30,NONE            ,FAKTENONLY  ,COLUMN       ,4,8,10,1,300
+31,NONE            ,FK          ,COLUMN       ,1,1,1,1,300
+32,NONE            ,FK          ,COLUMN       ,1,2,1,1,300
+33,NONE            ,FK          ,COLUMN       ,2,2,1,1,300
+34,NONE            ,FK          ,COLUMN       ,2,4,1,1,300
+35,NONE            ,FK          ,COLUMN       ,4,4,1,1,300
+36,NONE            ,FK          ,COLUMN       ,4,8,1,1,300
+37,NONE            ,FK          ,COLUMN       ,1,1,10,1,300
+38,NONE            ,FK          ,COLUMN       ,1,2,10,1,300
+39,NONE            ,FK          ,COLUMN       ,2,2,10,1,300
+40,NONE            ,FK          ,COLUMN       ,2,4,10,1,300
+41,NONE            ,FK          ,COLUMN       ,4,4,10,1,300
+42,NONE            ,FK          ,COLUMN       ,4,8,10,1,300
+43,NONE            ,FT          ,COLUMN       ,4,8,1,1,300
+44,NONE            ,FT          ,COLUMN       ,4,8,10,1,300
+45,NONE            ,NONE        ,COLUMN       ,4,8,1,1,300
+46,NONE            ,NONE        ,COLUMN       ,4,8,10,1,300
+47,NONE            ,RESTRDIM    ,COLUMN       ,4,8,1,1,300
+48,NONE            ,RESTRDIM    ,COLUMN       ,4,8,10,1,300
+49,USE_OLAP_PLAN   ,ADVANCED    ,COLUMN       ,4,8,1,1,300
+50,USE_OLAP_PLAN   ,BASIC       ,COLUMN       ,4,8,1,1,300
+51,USE_OLAP_PLAN   ,DIMONLY     ,COLUMN       ,4,8,1,1,300
+52,USE_OLAP_PLAN   ,DIMONLY     ,COLUMN       ,4,8,10,1,300
+53,USE_OLAP_PLAN   ,FAKTENONLY  ,COLUMN       ,4,8,1,1,300
+54,USE_OLAP_PLAN   ,FAKTENONLY  ,COLUMN       ,4,8,10,1,300
+55,USE_OLAP_PLAN   ,FK          ,COLUMN       ,1,1,1,1,300
+56,USE_OLAP_PLAN   ,FK          ,COLUMN       ,1,2,1,1,300
+57,USE_OLAP_PLAN   ,FK          ,COLUMN       ,2,2,1,1,300
+58,USE_OLAP_PLAN   ,FK          ,COLUMN       ,2,4,1,1,300
+59,USE_OLAP_PLAN   ,FK          ,COLUMN       ,4,4,1,1,300
+60,USE_OLAP_PLAN   ,FK          ,COLUMN       ,4,8,1,1,300
+61,USE_OLAP_PLAN   ,FK          ,COLUMN       ,1,1,10,1,300
+62,USE_OLAP_PLAN   ,FK          ,COLUMN       ,1,2,10,1,300
+63,USE_OLAP_PLAN   ,FK          ,COLUMN       ,2,2,10,1,300
+64,USE_OLAP_PLAN   ,FK          ,COLUMN       ,2,4,10,1,300
+65,USE_OLAP_PLAN   ,FK          ,COLUMN       ,4,4,10,1,300
+66,USE_OLAP_PLAN   ,FK          ,COLUMN       ,4,8,10,1,300
+67,USE_OLAP_PLAN   ,FT          ,COLUMN       ,4,8,1,1,300
+68,USE_OLAP_PLAN   ,FT          ,COLUMN       ,4,8,10,1,300
+69,USE_OLAP_PLAN   ,NONE        ,COLUMN       ,4,8,1,1,300
+70,USE_OLAP_PLAN   ,NONE        ,COLUMN       ,4,8,10,1,300
+71,USE_OLAP_PLAN   ,RESTRDIM    ,COLUMN       ,4,8,1,1,300
+72,USE_OLAP_PLAN   ,RESTRDIM    ,COLUMN       ,4,8,10,1,300
+73,NO_USE_OLAP_PLAN,ADVANCED    ,ROW          ,4,8,1,1,300
+74,NO_USE_OLAP_PLAN,BASIC       ,ROW          ,4,8,1,1,300
+75,NO_USE_OLAP_PLAN,DIMONLY     ,ROW          ,4,8,1,1,300
+76,NO_USE_OLAP_PLAN,FAKTENONLY  ,ROW          ,4,8,1,1,300
+77,NO_USE_OLAP_PLAN,FK          ,ROW          ,4,8,1,1,300
+78,NO_USE_OLAP_PLAN,FT          ,ROW          ,4,8,1,1,300
+79,NO_USE_OLAP_PLAN,NONE        ,ROW          ,4,8,1,1,300
+80,NO_USE_OLAP_PLAN,RESTRDIM    ,ROW          ,4,8,1,1,300
+81,NONE            ,ADVANCED    ,ROW          ,4,8,1,1,300
+82,NONE            ,BASIC       ,ROW          ,4,8,1,1,300
+83,NONE            ,DIMONLY     ,ROW          ,4,8,1,1,300
+84,NONE            ,FAKTENONLY  ,ROW          ,4,8,1,1,300
+85,NONE            ,FK          ,ROW          ,4,8,1,1,300
+86,NONE            ,FT          ,ROW          ,4,8,1,1,300
+87,NONE            ,NONE        ,ROW          ,4,8,1,1,300
+88,NONE            ,RESTRDIM    ,ROW          ,4,8,1,1,300
+89,USE_OLAP_PLAN   ,ADVANCED    ,ROW          ,4,8,1,1,300
+90,USE_OLAP_PLAN   ,BASIC       ,ROW          ,4,8,1,1,300
+91,USE_OLAP_PLAN   ,DIMONLY     ,ROW          ,4,8,1,1,300
+92,USE_OLAP_PLAN   ,FAKTENONLY  ,ROW          ,4,8,1,1,300
+93,USE_OLAP_PLAN   ,FK          ,ROW          ,4,8,1,1,300
+94,USE_OLAP_PLAN   ,FT          ,ROW          ,4,8,1,1,300
+95,USE_OLAP_PLAN   ,NONE        ,ROW          ,4,8,1,1,300
+96,USE_OLAP_PLAN   ,RESTRDIM    ,ROW          ,4,8,1,1,300
