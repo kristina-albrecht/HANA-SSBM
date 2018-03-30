@@ -24,6 +24,8 @@ public class BenchmarkLoader implements AutoCloseable {
 	PreparedStatement hintKeyStatement;
 	PreparedStatement queryKeyStatement;
 	boolean delete;
+	
+	final String TABLE="NEWMEASUREMENTS";
 
 	public BenchmarkLoader(String host, int instance, String database, String user, String password, boolean delete)
 			throws SQLException {
@@ -33,12 +35,12 @@ public class BenchmarkLoader implements AutoCloseable {
 		if (delete) {
 			System.out.println("Deletemode");
 			insertStatement = con.prepareStatement(
-					"DELETE FROM MEASUREMENTS WHERE M_ScaleFactor=? AND M_Column=? AND M_IndexConfigKey=? AND M_CpuCount=? AND M_ThreadCount=? AND M_HintKey=? AND M_QueryKey=? AND M_Repetition=? AND M_RunTime=? AND M_CursTIme=?");
+					"DELETE FROM " +TABLE +" WHERE M_ScaleFactor=? AND M_Column=? AND M_IndexConfigKey=? AND M_CpuCount=? AND M_ThreadCount=? AND M_HintKey=? AND M_QueryKey=? AND M_Repetition=? AND M_RunTime=? AND M_CursTIme=?");
 		} else
 			insertStatement = con.prepareStatement(
-					"INSERT INTO MEASUREMENTS (M_ScaleFactor, M_Column, M_IndexConfigKey, M_CpuCount, M_ThreadCount, M_HintKey, M_QueryKey, M_Repetition, M_RunTime, M_CursTIme) VALUES(?,?,?,?,?,?,?,?,?,?)");
+					"INSERT INTO " +TABLE +" (M_ScaleFactor, M_Column, M_IndexConfigKey, M_CpuCount, M_ThreadCount, M_HintKey, M_QueryKey, M_Repetition, M_RunTime, M_CursTIme) VALUES(?,?,?,?,?,?,?,?,?,?)");
 		maxRepetionStatement = con.prepareStatement(
-				"SELECT IFNULL(MAX(M_Repetition),0) FROM Measurements WHERE M_ScaleFactor=? AND M_Column=? AND M_IndexConfigKey=? AND M_CpuCount=? AND M_ThreadCount=? AND M_HintKey=? AND M_QUERYKEY=?");
+				"SELECT IFNULL(MAX(M_Repetition),0) FROM " +TABLE +" WHERE M_ScaleFactor=? AND M_Column=? AND M_IndexConfigKey=? AND M_CpuCount=? AND M_ThreadCount=? AND M_HintKey=? AND M_QUERYKEY=?");
 		indexKeyStatement = con.prepareStatement("SELECT I_ConfigKey FROM indices WHERE I_ConfigName=?");
 		hintKeyStatement = con.prepareStatement("SELECT H_HintKey FROM hints WHERE H_HintName=?");
 		queryKeyStatement = con.prepareStatement("SELECT Q_QueryKey FROM queries WHERE Q_Query=?");
