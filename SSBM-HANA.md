@@ -302,18 +302,32 @@ Die gute Performance des RS mit FK Indezes bei manchen Queries kann dadurch erkl
 Die Queries, welche negativ von den Indezes betroffen sind, haben nur eine schwache Einschränkung auf der jeweiligen Dimension. (Jahr (1.1), Region (3.1, 4.1, 4.2 )). Hier hat sich der Optimizer laut QEP trotz der großen Treffermemge für einen Index Join entschieden. Auffällig ist, dass der Optimizer immer die vorhandeten Indezes verwendet hat und sich nie auf Grund der großen Treffermenge dagegenentscheidet. In den Zeiten wären dann ähnliche Zeiten für mit oder ohne Index zu erwarten gewesen.
 Über den Hint NO_INDEX_JOIN kann die verwendung von Hash Joins bei den betroffenen Queries erzwungen werden um eine verschlechterung der Performance zu verhindern. 
 
+
+
 ##### CS
 
-Im Gegensatz zu RS haben FK Indezes bei Column Store keine negativen Auswirkungen. Dir Performance verbessert sich je nach Query leicht bis stark, jedoch nicht stark wie bei RS. Sogar bei Querys, bei denen sich RS mit den Indezes verschlechtert hat, konnte CS leicht davon profitieren. Das widerspricht den Erwartungen. Da RS ein Full Scan tendenziell teurer ist, wäre zu erwarten, dass sich hier ein Index Zugriff noch bei einer größeren Treffermenge lohnt als bei CS. Die Beobachtung ist aber genau das Gegenteil. Eine mögliche erklärung wäre dass CS in diesen fällen keinen Index Join macht, sondern nur von zusätztlichen Metadaten der Indezes verwendet. Die QEPbei CS geben das genaue JOIN Verfahren nicht preis und unterscheiden sich nur in der Ausführungszeit, daher können keine genaueren Aussagen getroffen werden.
-Auffällig ist Query 3.3 und 3.4, bei denen CS sehr stark von den Indezes profitiert, vergleichbar mit RS, jedoch etwas schwächer.
+Im Gegensatz zu RS haben FK Indezes bei Column Store keine negativen Auswirkungen. Dir Performance verbessert sich je nach Query leicht bis stark, jedoch nicht stark wie bei RS. Sogar bei Querys, bei denen sich RS mit den Indezes verschlechtert hat, konnte CS leicht davon profitieren. Das widerspricht den Erwartungen. Da RS ein Full Scan tendenziell teurer ist, wäre zu erwarten, dass sich hier ein Index Zugriff noch bei einer größeren Treffermenge lohnt als bei CS. Die Beobachtung ist aber genau das Gegenteil. Eine mögliche erklärung wäre dass CS in diesen fällen keinen Index Join macht, sondern nur von zusätztlichen Metadaten der Indezes verwendet. Einzig bei Query 3.2 sind die Zeiten mit und ohne Indezes identisch.
+Die QEPs bei CS geben das genaue JOIN Verfahren nicht preis und unterscheiden sich nur in der Ausführungszeit, daher können keine genaueren Aussagen getroffen werden.
 
-Einzig bei Query 3.2 sind die Zeiten mit und ohne Indezes identisch.
+qep_3.1row_4core_noht.plv
 
 
 
-Beispiel: Q3.1 und Q3.3
+#### Query Execution
 
-Columnstore profitiert von Indizes, allerdings nicht so stark als Rowstore.
+Werden Hash Joins verwendet, werden auf den Einschränkenden Dimensionen zunächst die Hashtabellen aufgebaut. Diese fungieren dann wie Filter, durch die dann die einzelen Spalten der Faktentabelle "gepiped" werden ohne zwischenresultate zu bilden. Für das filtern der Faktentabelle aber auch das erstellen Hashtabellen zu großen Dimenesionen kommen mehre Threads zum einsatz.
+
+--- Time Line ---
+
+#### Column Engines
+
+Der Optimizer entscheidet sich zwischen 
+
+Die Queries, welche bei RS schlecht mit FK performt haben, performen auch schlecht mit der JE (NO_USE_OLAP_PLAN)
+
+
+
+
 
  **// TODO**
 
