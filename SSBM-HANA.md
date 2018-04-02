@@ -291,9 +291,25 @@ Man soll jedoch vermeiden, dass der Cube sparse besetzt ist (wenn Daten zu besti
 
 Ohne Indizes schneidet der Column Store mit großem Abstand bei jeder SQL-Query besser ab als Row Store. 
 
-Mit Fremdschlüssel Indezes perfromt Columnstore immer gut, Bei Rowstore ist die Performance stark von den Queries abhängig. Bei der Merheit der Queries performt Rowstore vergleichbar mit dem Column Store (1.2, 1.3, 2.1, 2.2, 2.3, 3.3, 3.4), und kann Column Store ohne Indezes sogar in manchen Fällen schlagen (1.3, 2.2, 3.3, 3.4). Im Gesammtbild bleibt der Row Store aber wesentlich langsamer als Column Store. Besonders bei der vierten Query Gruppe. Teilweise verschlechtern die Indezes die Zeiten des RS sogar (1.1, 3.1, 4.1, 4.2)
+#### FK
 
-Die gute Performance des RS mit FK Indezes bei manchen Queries kann dadurch erklärt werden, dass die betroffenen Queries starke einschränkungen auf einer Dimension haben. Bei Gruppe 1 wird auf einen Monat (1.2) bzw eine Woche (1.3) eingeschränkt. Der unterschied zwischen Monat und Woche ist ebenfalls deutlich sichtbar. Query Gruppe 2, welche starke Einschränkungen auf der PART Dimension hat, ergibt ein ähnliches Bild, 2.1 schränkt auf eine Kategorie ein, 2.2 auf mehre Marken und 2.3 auf eine Marke. 2.3 ist mit FK Indezes am schnellsten, gefolgt von 2.2 und mit etwas größerem Abstand 2.1. Gruppe 3 schränkt auf der Customer und Supplier Dimension ein. 3.2 schränkt nur auf eine Nation ein und kann deshalb nicht ganz so stark provitieren wie 3.3 und 3.4, welche auf je 2 Städte einschränken. Bei Gruppe 4 ist nur bei 4.3 ein geringer psoitiver Effekt durch die FK Indezes sichtbar, hier wird nur auf der Supplier Dimension nach Nation eingeschränkt. ein Die Verwendung der Indezes ist ist auch in den QEPs, in Form eines "Cpbtree Index Join" an Stelle eines Hash Join sichtbar. 
+##### RS
+
+Bei Rowstore ist die Performance mit Fremdschlüssel Indezes stark von den Queries abhängig. Bei der Merheit der Queries performt Rowstore vergleichbar mit dem Column Store (1.2, 1.3, 2.1, 2.2, 2.3, 3.3, 3.4), und kann Column Store ohne Indezes sogar in manchen Fällen schlagen (1.3, 2.2, 3.3, 3.4). Im Gesammtbild bleibt der Row Store aber wesentlich langsamer als Column Store. Besonders bei der vierten Query Gruppe. Teilweise verschlechtern die Indezes die Zeiten des RS sogar (1.1, 3.1, 4.1, 4.2)
+
+Die gute Performance des RS mit FK Indezes bei manchen Queries kann dadurch erklärt werden, dass die betroffenen Queries starke einschränkungen auf einer Dimension haben. Bei Gruppe 1 wird auf einen Monat (1.2) bzw eine Woche (1.3) eingeschränkt. Der unterschied zwischen Monat und Woche ist ebenfalls deutlich sichtbar. Query Gruppe 2, welche starke Einschränkungen auf der PART Dimension hat, ergibt ein ähnliches Bild, 2.1 schränkt auf eine Kategorie ein, 2.2 auf mehre Marken und 2.3 auf eine Marke. 2.3 ist mit FK Indezes am schnellsten, gefolgt von 2.2 und mit etwas größerem Abstand 2.1. Gruppe 3 schränkt auf der Customer und Supplier Dimension ein. 3.2 schränkt nur auf eine Nation ein und kann deshalb nicht ganz so stark provitieren wie 3.3 und 3.4, welche auf je 2 Städte einschränken. Bei Gruppe 4 ist nur bei 4.3 ein geringer psoitiver Effekt durch die FK Indezes sichtbar, hier wird nur auf der Supplier Dimension nach Nation eingeschränkt. ein Die Verwendung der Indezes ist ist auch in den QEPs, in Form eines "Cpbtree Index Join" an Stelle eines Hash Join sichtbar.
+
+Die Queries, welche negativ von den Indezes betroffen sind, haben nur eine schwache Einschränkung auf der jeweiligen Dimension. (Jahr (1.1), Region (3.1, 4.1, 4.2 )). Hier hat sich der Optimizer laut QEP trotz der großen Treffermemge für einen Index Join entschieden. Auffällig ist, dass der Optimizer immer die vorhandeten Indezes verwendet hat und sich nie auf Grund der großen Treffermenge dagegenentscheidet. In den Zeiten wären dann ähnliche Zeiten für mit oder ohne Index zu erwarten gewesen.
+Über den Hint NO_INDEX_JOIN kann die verwendung von Hash Joins bei den betroffenen Queries erzwungen werden um eine verschlechterung der Performance zu verhindern. 
+
+##### CS
+
+Im Gegensatz zu RS haben FK Indezes bei Column Store keine negativen Auswirkungen. Dir Performance verbessert sich je nach Query leicht bis stark, jedoch nicht stark wie bei RS. Sogar bei Querys, bei denen sich RS mit den Indezes verschlechtert hat, konnte CS leicht davon profitieren. Das widerspricht den Erwartungen. Da RS ein Full Scan tendenziell teurer ist, wäre zu erwarten, dass sich hier ein Index Zugriff noch bei einer größeren Treffermenge lohnt als bei CS. Die Beobachtung ist aber genau das Gegenteil. Eine mögliche erklärung wäre dass CS in diesen fällen keinen Index Join macht, sondern nur von zusätztlichen Metadaten der Indezes verwendet. Die QEPbei CS geben das genaue JOIN Verfahren nicht preis und unterscheiden sich nur in der Ausführungszeit, daher können keine genaueren Aussagen getroffen werden.
+Auffällig ist Query 3.3 und 3.4, bei denen CS sehr stark von den Indezes profitiert, vergleichbar mit RS, jedoch etwas schwächer.
+
+Einzig bei Query 3.2 sind die Zeiten mit und ohne Indezes identisch.
+
+
 
 Beispiel: Q3.1 und Q3.3
 
@@ -314,7 +330,7 @@ Columnstore profitiert von Indizes, allerdings nicht so stark als Rowstore.
 
 RS kann stark von Indezes profitieren (je nachdem wie restriktiv -> wie erwartet), CS auch etwas.
 
-Der Optimizer bei RS weiß nicht wann er keine Indezes verwenden sollte
+Der Optimizer bei RS weiß nicht wann er keine Indezes verwenden sollte (SAP hat den Fokus wohl mehr auf CS)
 
 # Anhang
 
