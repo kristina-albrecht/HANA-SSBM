@@ -1,0 +1,530 @@
+{
+	"column_benchmark_no_index": {
+		"./sql/benchmark/q1_bench/q1.sql": {
+			"average": 113014.02,
+			"max": 207672,
+			"min": 105860
+		},
+		"./sql/benchmark/q1_bench/q1.1.sql": {
+			"average": 44545.06,
+			"max": 48825,
+			"min": 40992
+		},
+		"./sql/benchmark/q1_bench/q1.2.sql": {
+			"average": 43811.5,
+			"max": 45959,
+			"min": 42931
+		},
+		"./sql/benchmark/q1_bench/q1.3.sql": {
+			"average": 21601.32,
+			"max": 22475,
+			"min": 21029
+		},
+		"./sql/benchmark/q2_bench/q2.sql": {
+			"average": 76353.4,
+			"max": 96382,
+			"min": 69737
+		},
+		"./sql/benchmark/q2_bench/q2.1.sql": {
+			"average": 33911.56,
+			"max": 41287,
+			"min": 30781
+		},
+		"./sql/benchmark/q2_bench/q2.2.sql": {
+			"average": 30920.98,
+			"max": 35566,
+			"min": 28085
+		},
+		"./sql/benchmark/q2_bench/q2.3.sql": {
+			"average": 10985.82,
+			"max": 14812,
+			"min": 10297
+		},
+		"./sql/benchmark/q3_bench/q3.sql": {
+			"average": 107856.46,
+			"max": 129267,
+			"min": 101395
+		},
+		"./sql/benchmark/q3_bench/q3.1.sql": {
+			"average": 39233.56,
+			"max": 46426,
+			"min": 34882
+		},
+		"./sql/benchmark/q3_bench/q3.2.sql": {
+			"average": 30637.66,
+			"max": 42417,
+			"min": 28890
+		},
+		"./sql/benchmark/q3_bench/q3.3.sql": {
+			"average": 19538.98,
+			"max": 20140,
+			"min": 19006
+		},
+		"./sql/benchmark/q3_bench/q3.4.sql": {
+			"average": 19139.4,
+			"max": 19874,
+			"min": 18626
+		},
+		"./sql/benchmark/q4_bench/q4.sql": {
+			"average": 137249.06,
+			"max": 151911,
+			"min": 130020
+		},
+		"./sql/benchmark/q4_bench/q4.1.sql": {
+			"average": 56942.96,
+			"max": 65424,
+			"min": 53497
+		},
+		"./sql/benchmark/q4_bench/q4.2.sql": {
+			"average": 51269.44,
+			"max": 57140,
+			"min": 47680
+		},
+		"./sql/benchmark/q4_bench/q4.3.sql": {
+			"average": 29207.28,
+			"max": 29908,
+			"min": 28541
+		},
+		"total": 866218.46
+	},
+	"column_benchmark_index": {
+		"./sql/benchmark/q1_bench/q1.sql": {
+			"average": 82615.96,
+			"max": 116067,
+			"min": 77186
+		},
+		"./sql/benchmark/q1_bench/q1.1.sql": {
+			"average": 45009.28,
+			"max": 51279,
+			"min": 41253
+		},
+		"./sql/benchmark/q1_bench/q1.2.sql": {
+			"average": 19913.52,
+			"max": 22229,
+			"min": 19217
+		},
+		"./sql/benchmark/q1_bench/q1.3.sql": {
+			"average": 15848.68,
+			"max": 18222,
+			"min": 15268
+		},
+		"./sql/benchmark/q2_bench/q2.sql": {
+			"average": 72199.04,
+			"max": 80201,
+			"min": 66148
+		},
+		"./sql/benchmark/q2_bench/q2.1.sql": {
+			"average": 34227.88,
+			"max": 38891,
+			"min": 30790
+		},
+		"./sql/benchmark/q2_bench/q2.2.sql": {
+			"average": 31136.6,
+			"max": 33558,
+			"min": 28407
+		},
+		"./sql/benchmark/q2_bench/q2.3.sql": {
+			"average": 6731.96,
+			"max": 7204,
+			"min": 6307
+		},
+		"./sql/benchmark/q3_bench/q3.sql": {
+			"average": 66215.66,
+			"max": 80078,
+			"min": 62143
+		},
+		"./sql/benchmark/q3_bench/q3.1.sql": {
+			"average": 39153.24,
+			"max": 47839,
+			"min": 34702
+		},
+		"./sql/benchmark/q3_bench/q3.2.sql": {
+			"average": 23443.54,
+			"max": 25843,
+			"min": 22074
+		},
+		"./sql/benchmark/q3_bench/q3.3.sql": {
+			"average": 2865.26,
+			"max": 3953,
+			"min": 2563
+		},
+		"./sql/benchmark/q3_bench/q3.4.sql": {
+			"average": 2456.2,
+			"max": 3084,
+			"min": 2247
+		},
+		"./sql/benchmark/q4_bench/q4.sql": {
+			"average": 127693,
+			"max": 145079,
+			"min": 120754
+		},
+		"./sql/benchmark/q4_bench/q4.1.sql": {
+			"average": 56875.44,
+			"max": 66373,
+			"min": 53818
+		},
+		"./sql/benchmark/q4_bench/q4.2.sql": {
+			"average": 51868,
+			"max": 57413,
+			"min": 47970
+		},
+		"./sql/benchmark/q4_bench/q4.3.sql": {
+			"average": 18910.44,
+			"max": 21455,
+			"min": 18277
+		},
+		"total": 697163.7
+	},
+	"column_benchmark_index_adv": {
+		"./sql/benchmark/q1_bench/q1.sql": {
+			"average": 81803.66,
+			"max": 114697,
+			"min": 76000
+		},
+		"./sql/benchmark/q1_bench/q1.1.sql": {
+			"average": 44461.82,
+			"max": 51301,
+			"min": 41472
+		},
+		"./sql/benchmark/q1_bench/q1.2.sql": {
+			"average": 19818.22,
+			"max": 23333,
+			"min": 19228
+		},
+		"./sql/benchmark/q1_bench/q1.3.sql": {
+			"average": 15868.78,
+			"max": 16474,
+			"min": 15402
+		},
+		"./sql/benchmark/q2_bench/q2.sql": {
+			"average": 72351.72,
+			"max": 102414,
+			"min": 64957
+		},
+		"./sql/benchmark/q2_bench/q2.1.sql": {
+			"average": 34559.7,
+			"max": 43103,
+			"min": 30522
+		},
+		"./sql/benchmark/q2_bench/q2.2.sql": {
+			"average": 30887.7,
+			"max": 35698,
+			"min": 28420
+		},
+		"./sql/benchmark/q2_bench/q2.3.sql": {
+			"average": 6687,
+			"max": 7086,
+			"min": 6077
+		},
+		"./sql/benchmark/q3_bench/q3.sql": {
+			"average": 66237.06,
+			"max": 76126,
+			"min": 61327
+		},
+		"./sql/benchmark/q3_bench/q3.1.sql": {
+			"average": 39497.44,
+			"max": 46930,
+			"min": 34500
+		},
+		"./sql/benchmark/q3_bench/q3.2.sql": {
+			"average": 23349.64,
+			"max": 25309,
+			"min": 22263
+		},
+		"./sql/benchmark/q3_bench/q3.3.sql": {
+			"average": 2872.22,
+			"max": 3365,
+			"min": 2563
+		},
+		"./sql/benchmark/q3_bench/q3.4.sql": {
+			"average": 2354.92,
+			"max": 2654,
+			"min": 2110
+		},
+		"./sql/benchmark/q4_bench/q4.sql": {
+			"average": 127197.96,
+			"max": 132299,
+			"min": 120929
+		},
+		"./sql/benchmark/q4_bench/q4.1.sql": {
+			"average": 57097.7,
+			"max": 64996,
+			"min": 53396
+		},
+		"./sql/benchmark/q4_bench/q4.2.sql": {
+			"average": 51230.34,
+			"max": 55427,
+			"min": 48057
+		},
+		"./sql/benchmark/q4_bench/q4.3.sql": {
+			"average": 18861.32,
+			"max": 19515,
+			"min": 18229
+		},
+		"total": 695137.1999999998
+	},
+	"row_benchmark_no_index": {
+		"./sql/benchmark/q1_bench/q1.sql": {
+			"average": 567702.26,
+			"max": 915108,
+			"min": 546838
+		},
+		"./sql/benchmark/q1_bench/q1.1.sql": {
+			"average": 199781.98,
+			"max": 321914,
+			"min": 191843
+		},
+		"./sql/benchmark/q1_bench/q1.2.sql": {
+			"average": 183055.94,
+			"max": 218525,
+			"min": 179130
+		},
+		"./sql/benchmark/q1_bench/q1.3.sql": {
+			"average": 173806.34,
+			"max": 206273,
+			"min": 170370
+		},
+		"./sql/benchmark/q2_bench/q2.sql": {
+			"average": 461228.52,
+			"max": 491067,
+			"min": 440987
+		},
+		"./sql/benchmark/q2_bench/q2.1.sql": {
+			"average": 186264,
+			"max": 220325,
+			"min": 176231
+		},
+		"./sql/benchmark/q2_bench/q2.2.sql": {
+			"average": 145090.7,
+			"max": 189822,
+			"min": 134971
+		},
+		"./sql/benchmark/q2_bench/q2.3.sql": {
+			"average": 132265.18,
+			"max": 153868,
+			"min": 124182
+		},
+		"./sql/benchmark/q3_bench/q3.sql": {
+			"average": 668600.54,
+			"max": 723208,
+			"min": 645508
+		},
+		"./sql/benchmark/q3_bench/q3.1.sql": {
+			"average": 280896.16,
+			"max": 333500,
+			"min": 271867
+		},
+		"./sql/benchmark/q3_bench/q3.2.sql": {
+			"average": 147763.6,
+			"max": 168495,
+			"min": 141200
+		},
+		"./sql/benchmark/q3_bench/q3.3.sql": {
+			"average": 120190.48,
+			"max": 135559,
+			"min": 114020
+		},
+		"./sql/benchmark/q3_bench/q3.4.sql": {
+			"average": 110665.16,
+			"max": 128515,
+			"min": 105824
+		},
+		"./sql/benchmark/q4_bench/q4.sql": {
+			"average": 650451.64,
+			"max": 755760,
+			"min": 632281
+		},
+		"./sql/benchmark/q4_bench/q4.1.sql": {
+			"average": 268247.26,
+			"max": 308938,
+			"min": 257816
+		},
+		"./sql/benchmark/q4_bench/q4.2.sql": {
+			"average": 226840.42,
+			"max": 307156,
+			"min": 216446
+		},
+		"./sql/benchmark/q4_bench/q4.3.sql": {
+			"average": 160817.98,
+			"max": 201970,
+			"min": 153419
+		},
+		"total": 4683668.160000001
+	},
+	"row_benchmark_index": {
+		"./sql/benchmark/q1_bench/q1.sql": {
+			"average": 245785.24,
+			"max": 253460,
+			"min": 241061
+		},
+		"./sql/benchmark/q1_bench/q1.1.sql": {
+			"average": 221792.24,
+			"max": 230964,
+			"min": 217795
+		},
+		"./sql/benchmark/q1_bench/q1.2.sql": {
+			"average": 18127.22,
+			"max": 18953,
+			"min": 17578
+		},
+		"./sql/benchmark/q1_bench/q1.3.sql": {
+			"average": 4345.22,
+			"max": 4619,
+			"min": 4150
+		},
+		"./sql/benchmark/q2_bench/q2.sql": {
+			"average": 118526.94,
+			"max": 122256,
+			"min": 115266
+		},
+		"./sql/benchmark/q2_bench/q2.1.sql": {
+			"average": 93211.18,
+			"max": 97754,
+			"min": 91599
+		},
+		"./sql/benchmark/q2_bench/q2.2.sql": {
+			"average": 21465.26,
+			"max": 22942,
+			"min": 20861
+		},
+		"./sql/benchmark/q2_bench/q2.3.sql": {
+			"average": 5002.02,
+			"max": 5252,
+			"min": 4738
+		},
+		"./sql/benchmark/q3_bench/q3.sql": {
+			"average": 574257.38,
+			"max": 587519,
+			"min": 562934
+		},
+		"./sql/benchmark/q3_bench/q3.1.sql": {
+			"average": 493281.8,
+			"max": 503804,
+			"min": 484563
+		},
+		"./sql/benchmark/q3_bench/q3.2.sql": {
+			"average": 58227.44,
+			"max": 60588,
+			"min": 56866
+		},
+		"./sql/benchmark/q3_bench/q3.3.sql": {
+			"average": 9111.48,
+			"max": 9525,
+			"min": 8788
+		},
+		"./sql/benchmark/q3_bench/q3.4.sql": {
+			"average": 13348.8,
+			"max": 14478,
+			"min": 12896
+		},
+		"./sql/benchmark/q4_bench/q4.sql": {
+			"average": 922491.08,
+			"max": 945358,
+			"min": 910210
+		},
+		"./sql/benchmark/q4_bench/q4.1.sql": {
+			"average": 509795.38,
+			"max": 521883,
+			"min": 501139
+		},
+		"./sql/benchmark/q4_bench/q4.2.sql": {
+			"average": 357957.5,
+			"max": 399730,
+			"min": 351531
+		},
+		"./sql/benchmark/q4_bench/q4.3.sql": {
+			"average": 55959.18,
+			"max": 58574,
+			"min": 54878
+		},
+		"total": 3722685.36
+	},
+	"row_benchmark_index_adv": {
+		"./sql/benchmark/q1_bench/q1.sql": {
+			"average": 245072.22,
+			"max": 252599,
+			"min": 240952
+		},
+		"./sql/benchmark/q1_bench/q1.1.sql": {
+			"average": 221157.6,
+			"max": 228504,
+			"min": 217270
+		},
+		"./sql/benchmark/q1_bench/q1.2.sql": {
+			"average": 18108.14,
+			"max": 18950,
+			"min": 17431
+		},
+		"./sql/benchmark/q1_bench/q1.3.sql": {
+			"average": 4109.98,
+			"max": 4412,
+			"min": 3918
+		},
+		"./sql/benchmark/q2_bench/q2.sql": {
+			"average": 116622.22,
+			"max": 122700,
+			"min": 113731
+		},
+		"./sql/benchmark/q2_bench/q2.1.sql": {
+			"average": 92856.82,
+			"max": 98189,
+			"min": 90754
+		},
+		"./sql/benchmark/q2_bench/q2.2.sql": {
+			"average": 21227.88,
+			"max": 22256,
+			"min": 20664
+		},
+		"./sql/benchmark/q2_bench/q2.3.sql": {
+			"average": 3095.76,
+			"max": 3204,
+			"min": 2878
+		},
+		"./sql/benchmark/q3_bench/q3.sql": {
+			"average": 574706.82,
+			"max": 592504,
+			"min": 563726
+		},
+		"./sql/benchmark/q3_bench/q3.1.sql": {
+			"average": 496903.46,
+			"max": 567039,
+			"min": 487436
+		},
+		"./sql/benchmark/q3_bench/q3.2.sql": {
+			"average": 56486.16,
+			"max": 60572,
+			"min": 54979
+		},
+		"./sql/benchmark/q3_bench/q3.3.sql": {
+			"average": 9085.1,
+			"max": 9709,
+			"min": 8762
+		},
+		"./sql/benchmark/q3_bench/q3.4.sql": {
+			"average": 13373.92,
+			"max": 13995,
+			"min": 12875
+		},
+		"./sql/benchmark/q4_bench/q4.sql": {
+			"average": 923541.08,
+			"max": 1102697,
+			"min": 907360
+		},
+		"./sql/benchmark/q4_bench/q4.1.sql": {
+			"average": 508350.42,
+			"max": 523597,
+			"min": 500716
+		},
+		"./sql/benchmark/q4_bench/q4.2.sql": {
+			"average": 358286.96,
+			"max": 378136,
+			"min": 352532
+		},
+		"./sql/benchmark/q4_bench/q4.3.sql": {
+			"average": 56003.66,
+			"max": 59754,
+			"min": 54353
+		},
+		"total": 3718988.1999999997
+	}
+}

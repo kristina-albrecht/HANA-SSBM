@@ -1,0 +1,10 @@
+ALTER TABLE  customer COLUMN;
+
+ALTER TABLE  part COLUMN;
+
+ALTER TABLE  supplier COLUMN;
+
+ALTER TABLE  dim_date COLUMN;
+
+ALTER TABLE lineorder COLUMN;
+
