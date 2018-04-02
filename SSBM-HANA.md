@@ -325,7 +325,7 @@ Der Optimizer entscheidet sich zwischen
 
 Die Queries, welche bei RS schlecht mit FK performt haben, performen auch schlecht mit der JE (NO_USE_OLAP_PLAN)
 
-
+Die OLAP Engine performt fast immer besser, außer bei 2.3, 3.3 und 3.4. Bei 2.3 ist JE sogar schneller.
 
 
 
