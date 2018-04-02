@@ -311,7 +311,7 @@ Die QEPs bei CS geben das genaue JOIN Verfahren nicht preis und unterscheiden si
 
 qep_3.1row_4core_noht.plv
 
-
+Der CS kann seinen Vorteil vor allem bei den Queries auspielen, bei denen keine starke Eingrenzung stattfindet, wodurch sich Index zugriffe nicht lohnen. 
 
 #### Query Execution
 
@@ -345,6 +345,8 @@ Die OLAP Engine performt fast immer besser, außer bei 2.3, 3.3 und 3.4. Bei 2.3
 RS kann stark von Indezes profitieren (je nachdem wie restriktiv -> wie erwartet), CS auch etwas.
 
 Der Optimizer bei RS weiß nicht wann er keine Indezes verwenden sollte (SAP hat den Fokus wohl mehr auf CS)
+
+Der CS kann seinen Vorteil vor allem bei den Queries auspielen, bei denen keine starke Eingrenzung stattfindet, wodurch sich Index zugriffe nicht lohnen. 
 
 # Anhang
 
