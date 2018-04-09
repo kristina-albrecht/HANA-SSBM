@@ -181,7 +181,7 @@ record delimited by '\n'
 field delimited by '|';
 ```
 
-Dieses Vorgehen, die Tabellen komplett mit einem Import-Statement zu laden, hat zur Folge, dass bei den Abfragen die gesamten Daten in der Basis-Tabelle waren und die Delta-Tabelle leer war.
+Dieses Vorgehen, die Tabellen komplett mit einem Import-Statement zu laden hat zur Folge, dass bei den Abfragen die gesamten Daten in der Basis-Tabelle waren und die Delta-Tabelle leer war.
 
 ### Ladezeiten von Tabellen und Indizes
 
@@ -216,7 +216,7 @@ Die Tests wurden iterativ mit verschiedenen Kombinationen der Testvariablen durc
 5. Importieren der Daten in den Cube
 6. Analyse und Auswertung der Ergebnisse 
 
-Um den Einfluss von asynchronen Prozessen auf die Testergebnisse zu vermeiden, wurden die Benchmarks für Row- und Columnstore getrennt durchgeführt. Die Erzeugung vom Column- bzw. Row-Schema und der Datenimport (Schritt 1) erfolgten daher manuell. 
+Um den Einfluss von asynchronen Prozessen auf die Testergebnisse zu vermeiden, wurden die Benchmarks für Row- und Columnstore getrennt durchgeführt. Die Erzeigung vom Column- bzw. Row-Schema und der Datenimport (Schritt 1) erfolgten daher manuell. 
 
 Schritte 2-4 wurden automatisiert mit einem bash-Skript ausgeführt. Für die Durchführung des Benchmarks wuden SQL-Abfragen zum Anlegen und Entfernen von Indizes, sowie SSBM-Abfragen (mit und ohne Hints) vorbereitet, die im bash-Skript nacheinander ausgeführt wurden. Benchmarks mit unterschiedlichen Indizes wurden jeweils ohne Hints sowie mit und ohne OLAP-Hint durchgeführt. 
 
@@ -267,13 +267,17 @@ Bei den Dimensionstabellen wurden Indizes auf restriktive und weniger restriktiv
 
 
 
+
+
+
+
 ### BenchmarkLoader
 
 
 
 ## Benchmark-Cube
 
-Die Bechmark-Daten wurden in der HANA-Datenbank in einem Star Schema gespeichert. Die Messdaten in der Faktentabelle sind die Ausführungszeiten, die vom Server reportet werden *TOTALTIME* (*RUNTIME* + *CURSTIME* , Runtime ist die Server-Zeit, um die Ergebnisse zu berechnen, und die Curstime - um die Ergebnisse auszuliefern). Die Benchmark-Ergebnisse sind multidimensionale Daten. Jede Testvariable entspricht einer Dimension: Tabellenorganisation (Row- oder Columnsstore), SSBM-Queries, Indizes und  Hints.
+Die Bechmark-Daten wurden in der HANA-Datenbank in einem Star Schema gespeichert. Die Messdaten in der Faktentabelle sind die Ausführungszeiten, die vom Server reportet werden *TOTALTIME* (*RUNTIME* + *CURSTIME* , Runtime ist die Server-Zeit, um die Ergebnisse zu berechnen, und die Curstime - um die Ergebnisse auszuliefern). Die Benchmark-Ergebnisse sind multidimensionale Daten. Jede Testvariable entspricht einer Dimension: Tabellenorganisation (Row- oder Columnsstore), SSBM-Queries, Indizes und  Hints. CPUCOUNT und THREADCOUNT sind degenerierte Dimensionen. Es wäre auch denkbar gewesen, diese in einer CPU Konfiguration Dimension zusammenzufassen, worauf aber verzichtet wurde um es einfach zu halten.
 
 ![Benchmark-Cube](BenchmarkCube.PNG)
 
@@ -285,24 +289,24 @@ Man soll jedoch vermeiden, dass der Cube sparse besetzt ist (wenn Daten zu besti
 
 ### Testanalyse Auswertung der Query Execution Plans
 
-Ohne Indizes schneidet der Columnstore mit großem Abstand bei jeder SQL-Query besser ab als Row Store. 
+Ohne Indizes schneidet der Column Store mit großem Abstand bei jeder SQL-Query besser ab als Row Store. 
 
 #### FK
 
 ##### RS
 
-Bei Rowstore ist die Performance mit Fremdschlüssel Indezes stark von den Queries abhängig. Bei der Merheit der Queries performt Rowstore vergleichbar mit dem Columnstore (1.2, 1.3, 2.1, 2.2, 2.3, 3.3, 3.4), und kann Columnstore ohne Indezes sogar in manchen Fällen schlagen (1.3, 2.2, 3.3, 3.4). Im Gesammtbild bleibt der Rowstore aber wesentlich langsamer als Columnstore. Besonders bei der vierten Query Gruppe. Teilweise verschlechtern die Indezes die Zeiten des RS sogar (1.1, 3.1, 4.1, 4.2)
+Bei Rowstore ist die Performance mit Fremdschlüssel Indezes stark von den Queries abhängig. Bei der Merheit der Queries performt Rowstore vergleichbar mit dem Column Store (1.2, 1.3, 2.1, 2.2, 2.3, 3.3, 3.4), und kann Column Store ohne Indezes sogar in manchen Fällen schlagen (1.3, 2.2, 3.3, 3.4). Im Gesammtbild bleibt der Row Store aber wesentlich langsamer als Column Store. Besonders bei der vierten Query Gruppe. Teilweise verschlechtern die Indezes die Zeiten des RS sogar (1.1, 3.1, 4.1, 4.2)
 
-Die gute Performance von Rowstore mit Fremdschlüssel-Indezes auf der Faktentabelle bei manchen Queries kann dadurch erklärt werden, dass die betroffenen Queries starke einschränkungen auf einer Dimension haben. Bei Gruppe 1 wird auf einen Monat (1.2) bzw eine Woche (1.3) eingeschränkt. Der unterschied zwischen Monat und Woche ist ebenfalls deutlich sichtbar. Query Gruppe 2, welche starke Einschränkungen auf der PART Dimension hat, ergibt ein ähnliches Bild, 2.1 schränkt auf eine Kategorie ein, 2.2 auf mehre Marken und 2.3 auf eine Marke. 2.3 ist mit FK-Indizes am schnellsten, gefolgt von 2.2 und mit etwas größerem Abstand 2.1. Gruppe 3 schränkt auf der Customer und Supplier Dimension ein. 3.2 schränkt nur auf eine Nation ein und kann deshalb nicht ganz so stark profitieren wie 3.3 und 3.4, welche auf je 2 Städte einschränken. Bei Gruppe 4 ist nur bei 4.3 ein geringer positiver Effekt durch die FK-Indizes sichtbar, hier wird nur auf der Supplier Dimension nach Nation eingeschränkt. Die Verwendung der Indizes ist auch in den QEPs, in Form eines "Cpbtree Index Join" an Stelle eines Hash Join sichtbar.
+Die gute Performance des RS mit FK Indezes bei manchen Queries kann dadurch erklärt werden, dass die betroffenen Queries starke einschränkungen auf einer Dimension haben. Bei Gruppe 1 wird auf einen Monat (1.2) bzw eine Woche (1.3) eingeschränkt. Der unterschied zwischen Monat und Woche ist ebenfalls deutlich sichtbar. Query Gruppe 2, welche starke Einschränkungen auf der PART Dimension hat, ergibt ein ähnliches Bild, 2.1 schränkt auf eine Kategorie ein, 2.2 auf mehre Marken und 2.3 auf eine Marke. 2.3 ist mit FK Indezes am schnellsten, gefolgt von 2.2 und mit etwas größerem Abstand 2.1. Gruppe 3 schränkt auf der Customer und Supplier Dimension ein. 3.2 schränkt nur auf eine Nation ein und kann deshalb nicht ganz so stark provitieren wie 3.3 und 3.4, welche auf je 2 Städte einschränken. Bei Gruppe 4 ist nur bei 4.3 ein geringer psoitiver Effekt durch die FK Indezes sichtbar, hier wird nur auf der Supplier Dimension nach Nation eingeschränkt. ein Die Verwendung der Indezes ist ist auch in den QEPs, in Form eines "Cpbtree Index Join" an Stelle eines Hash Join sichtbar.
 
-Die Queries, welche negativ von den Indizes betroffen sind, haben nur eine schwache Einschränkung auf der jeweiligen Dimension. (Jahr (1.1), Region (3.1, 4.1, 4.2 )). Hier hat sich der Optimizer laut QEP trotz der großen Treffermemge für einen Index Join entschieden. Auffällig ist, dass der Optimizer immer die vorhandeten Indezes verwendet hat und sich nie auf Grund der großen Treffermenge dagegenentscheidet. In den Zeiten wären dann ähnliche Zeiten für mit oder ohne Index zu erwarten gewesen.
+Die Queries, welche negativ von den Indezes betroffen sind, haben nur eine schwache Einschränkung auf der jeweiligen Dimension. (Jahr (1.1), Region (3.1, 4.1, 4.2 )). Hier hat sich der Optimizer laut QEP trotz der großen Treffermemge für einen Index Join entschieden. Auffällig ist, dass der Optimizer immer die vorhandeten Indezes verwendet hat und sich nie auf Grund der großen Treffermenge dagegenentscheidet. In den Zeiten wären dann ähnliche Zeiten für mit oder ohne Index zu erwarten gewesen.
 Über den Hint NO_INDEX_JOIN kann die verwendung von Hash Joins bei den betroffenen Queries erzwungen werden um eine verschlechterung der Performance zu verhindern. 
 
 
 
-##### Columnstore 
+##### CS
 
-Im Gegensatz zu Rowstore haben FK-Indezes bei Columnstore keine negativen Auswirkungen. Dir Performance verbessert sich je nach Query, jedoch nicht so stark wie bei Rowstore. Sogar bei Queries, bei denen sich Rowstore mit den Indizes verschlechtert hat, konnte Columnstore leicht davon profitieren. Das widerspricht den Erwartungen. Da ein Full Scan bei Rowstore tendenziell teurer ist, wäre zu erwarten, dass sich hier ein Index-Zugriff noch bei einer größeren Treffermenge lohnt als bei CS. Die Beobachtung ist aber genau das Gegenteil. Eine mögliche erklärung wäre dass CS in diesen fällen keinen Index Join macht, sondern nur von zusätztlichen Metadaten der Indezes verwendet. Einzig bei Query 3.2 sind die Zeiten mit und ohne Indezes identisch.
+Im Gegensatz zu RS haben FK Indezes bei Column Store keine negativen Auswirkungen. Dir Performance verbessert sich je nach Query leicht bis stark, jedoch nicht stark wie bei RS. Sogar bei Querys, bei denen sich RS mit den Indezes verschlechtert hat, konnte CS leicht davon profitieren. Das widerspricht den Erwartungen. Da RS ein Full Scan tendenziell teurer ist, wäre zu erwarten, dass sich hier ein Index Zugriff noch bei einer größeren Treffermenge lohnt als bei CS. Die Beobachtung ist aber genau das Gegenteil. Eine mögliche erklärung wäre dass CS in diesen fällen keinen Index Join macht, sondern nur von zusätztlichen Metadaten der Indezes verwendet. Einzig bei Query 3.2 sind die Zeiten mit und ohne Indezes identisch.
 Die QEPs bei CS geben das genaue JOIN Verfahren nicht preis und unterscheiden sich nur in der Ausführungszeit, daher können keine genaueren Aussagen getroffen werden.
 
 qep_3.1row_4core_noht.plv
@@ -325,24 +329,21 @@ Die OLAP Engine performt fast immer besser, außer bei 2.3, 3.3 und 3.4. Bei 2.3
 
 
 
+### CPU Konfiguration
+
+
+
+
+
  **// TODO**
 
 - Q3.1 vs. Q3.3 mit QEP
 - Column Store mit Indizes schneller, aber QEPs sind gleich
-- HINTs (Columnstore profitiert stark von OLAP Engine)
+- HINTs
 - CPUs
 - Cube
 - Excel
 
-
-
-
-Aussagen:
-
-1. CS ist schneller als RS
-2. CS profiitert von Indizes, allerdings nicht so stark wie RS
-3. CS profitiert sehr stark von OLAP-Plan
-4. ​
 
 
 # Fazit
