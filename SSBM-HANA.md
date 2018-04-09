@@ -118,13 +118,17 @@ Bei jeder „delta merge“ Operation wird die Datenkompression automatisch eval
 
 Der Star Schema Benchmark (SSB) wurde von Pat O'Neil, Betty O'Neil und Quedong Chen entwickelt, um die Performance von Datenbanksystemen, welche mit Data-Marts nach dem Star Schema arbeiten, zu ermitteln und Vergleichbar zu machen [Star Schema Benchmark Quelle]. Dabei nutzen sie das bekannte TPC-H Benchmark [TPCH Quelle] als Grundlage für ihr Star Schema Benchmark, modifizieren es jedoch vielfach zugunsten eines guten Star Schemas.
 
-<!-- Hier kurz TPC-H aufgreifen und Abbildung einfügen für spätere Vergleiche -->
+![TPC-H_Schema](bilder/TPC-H_Schema.png)
+
+<!-- TPC-H Schema Bild Quelle: http://www.tpc.org/tpc_documents_current_versions/pdf/tpc-h_v2.17.1.pdf -->
 
 **TPC-H zu SSB-Transformation**
 
 Die von Chen, O'Neil und O'Neil durchgeführten Transformationen von TPC-H zu SSB wurden an die von Kimball und Ross erläuterten Prinzipien zur Dimensionalen Modellierung [**The Data Warehouse Toolkit Second Edition - Quelle einfügen**] angelehnt. 
 
---- Hier SSB-M Schema Grafik einfügen ---
+![SSB_Schema](bilder/SSB_Schema.png)
+
+<!-- Source for picture: https://www.cs.umb.edu/~poneil/StarSchemaB.PDF -->
 
 Im Folgenden sind die wichtigsten Änderungen kurz zusammengefasst:
 
