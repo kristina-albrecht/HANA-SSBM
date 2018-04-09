@@ -236,38 +236,29 @@ Im Folgeneden wird die Auswahl von Indizes, der BenchmarkLoader und der virtuell
 
 Die Indizes wurden in verschiedene Kategorien eingeordnet. Zunächst wurden Indizes auf die Fremdschlüssel-Spalten in der Faktentabelle angelegt. Danach wurden zusätzliche Indizes auf die Attributen der Faktentabelle hinzugefügt. Indizes auf Primärschlüssel erstellt HANA implizit, deshalb wurden sie nicht explizit getestet [###].
 
-
-
-```sql 
-LO_CUSTKEY
-LO_SUPPKEY
-LO_PARTKEY
-LO_ORDERDATEKEY
-LO_COMMITDATEKEY
-				+
-				LO_QUANTITY
-				LO_EXTENDEDPRICE
-				LO_DISCOUNT
-								+
-								C_REGION
-								C_MRKTSEGMENT
-								P_MFGR
-								P_CATEGORY
-								S_NATION
-								S_REGION
-								D_YEAR
-												+
-												C_CITY
-												P_BRAND
-												S_CITY
-												D_YEARMONTHNUM
-												D_YEARMONTH
-												D_DAYNUMINYEAR
-								
-- remove all fact table indices = DimOnly
-```
-
-
+| Indizes          | Keine Indizes (None) | Fremdschlüssel (FK) | Faktentabelle (FT) | Restriktive Indizes auf Dimensionen (RestrDim) | Nur Dimensionen (DimOnly) |
+| ---------------- | -------------------- | ------------------- | ------------------ | ---------------------------------------------- | ------------------------- |
+| LO_CUSTKEY       |                      | x                   | x                  | x                                              |                           |
+| LO_SUPPKEY       |                      | x                   | x                  | x                                              |                           |
+| LO_PARTKEY       |                      | x                   | x                  | x                                              |                           |
+| LO_ORDERDATEKEY  |                      | x                   | x                  | x                                              |                           |
+| LO_COMMITDATEKEY |                      | x                   | x                  | x                                              |                           |
+| LO_QUANTITY      |                      |                     | x                  | x                                              |                           |
+| LO_EXTENDEDPRICE |                      |                     | x                  | x                                              |                           |
+| LO_DISCOUNT      |                      |                     | x                  | x                                              |                           |
+| C_REGION         |                      |                     |                    |                                                | x                         |
+| C_MRKTSEGMENT    |                      |                     |                    |                                                | x                         |
+| P_MFGR           |                      |                     |                    |                                                | x                         |
+| P_CATEGORY       |                      |                     |                    |                                                | x                         |
+| S_NATION         |                      |                     |                    |                                                | x                         |
+| S_REGION         |                      |                     |                    |                                                | x                         |
+| D_YEAR           |                      |                     |                    |                                                | x                         |
+| C_CITY           |                      |                     |                    | x                                              | x                         |
+| P_BRAND          |                      |                     |                    | x                                              | x                         |
+| S_CITY           |                      |                     |                    | x                                              | x                         |
+| D_YEARMONTHNUM   |                      |                     |                    | x                                              | x                         |
+| D_YEARMONTH      |                      |                     |                    | x                                              | x                         |
+| D_DAYNUMINYEAR   |                      |                     |                    | x                                              | x                         |
 
 Bei den Dimensionstabellen wurden Indizes auf restriktive und weniger restriktive Spalten getestet. So schränkt beispielsweise eine Bedingung auf die Region kaum ein, weil eine Region sehr groß ist im Vergleich zu einer Stadt, die die Treffermenge stark einschränkt.
 
@@ -279,23 +270,35 @@ Bei den Dimensionstabellen wurden Indizes auf restriktive und weniger restriktiv
 
 ## Benchmark-Cube
 
-Die Bechmark-Daten wurden in der HANA-Datenbank in einem Star Schema gespeichert. Die Messdaten in der Faktentabelle sind die Ausführungszeiten, die vom Server reportet werden *TOTALTIME* (*RUNTIME* + *CURSTIME* , Runtime ist die Server-Zeit, um die Ergebnisse zu berechnen, und die Curstime - um die Ergebnisse auszuliefern). Die Benchmark-Ergebnisse sind multidimensionale Daten. Jede Testvariable entspricht einer Dimension: Tabellenorganisation (Row- oder Columnsstore), SSBM-Queries, Indizes und  Hints.
+Die Bechmark-Daten wurden in der HANA-Datenbank in einem Star Schema gespeichert. Die Messdaten in der Faktentabelle sind die Ausführungszeiten, die vom Server reportet werden: *TOTALTIME* (*RUNTIME* + *CURSTIME)*. Runtime ist die Server-Zeit, um die Ergebnisse zu berechnen, und die Curstime - um die Ergebnisse auszuliefern. Die Benchmark-Ergebnisse sind multidimensionale Daten. Jede Testvariable entspricht einer Dimension: Tabellenorganisation (Row- oder Columnsstore), SSBM-Queries, Indizes und  Hints. CPUCOUNT und THREADCOUNT sind degenerierte Dimensionen. Es wäre auch denkbar gewesen, diese in einer CPU Konfiguration Dimension zusammenzufassen, worauf aber verzichtet wurde um es einfach zu halten.
+
 
 ![Benchmark-Cube](BenchmarkCube.PNG)
 
 
 
-Man soll jedoch vermeiden, dass der Cube sparse besetzt ist (wenn Daten zu bestimmten Testvariablen fehlen), und möglichst nach verschiedenen Parametern filtern, um keine falschen Schlussfolgerungen zu ziehen. Des Weiteren soll bei der Auswertung der Messungen die Durchschnittszeiten und keine Summe verglichen werden, um zu vermeiden, dass die Tests, die öfter durchgeführt werden, größere Werte liefern (z.B. wenn Columnstore mehr als mit Rowstore getestet wurde).
+Man soll jedoch vermeiden, dass der Cube sparse besetzt ist (wenn Daten zu bestimmten Testvariablen fehlen), und möglichst nach verschiedenen Parametern filtern, um keine falschen Schlussfolgerungen zu ziehen. Des Weiteren soll bei der Auswertung der Messungen die Durchschnittszeiten und keine Summe verglichen werden, um zu vermeiden, dass die Tests die öfter durchgeführt werden, größere Werte liefern (z.B. wenn Columnstore mehr als mit Rowstore getestet wurde).
 
 
 
-### Testanalyse Auswertung der Query Execution Plans
+### Benchmark-Analyse und Auswertung der Query Execution Plans
 
-Ohne Indizes schneidet der Columnstore mit großem Abstand bei jeder SQL-Query besser ab als Row Store. 
+Die Benchmark-Ergebnisse lassen folgende Schlussfolgerungen zu:
+1. Columnstore ist generell schneller als Rowstore
+2. Indizes sind mehr für Rowstore als für Columnstore relevant
+3. Columnsstore profitiert stark vom OLAP-Engine.
 
-#### FK
+Diese Aussagen werden nun näher erläutert.  
 
-##### RS
+### Columnstore ist schneller als Rowstore
+
+
+### Einfluss von Indizes bei Row- und Columnstore
+
+
+#### Indizes auf Fremdschlüssel in der Faktentabelle
+
+##### Rowstore
 
 Bei Rowstore ist die Performance mit Fremdschlüssel Indezes stark von den Queries abhängig. Bei der Merheit der Queries performt Rowstore vergleichbar mit dem Columnstore (1.2, 1.3, 2.1, 2.2, 2.3, 3.3, 3.4), und kann Columnstore ohne Indezes sogar in manchen Fällen schlagen (1.3, 2.2, 3.3, 3.4). Im Gesammtbild bleibt der Rowstore aber wesentlich langsamer als Columnstore. Besonders bei der vierten Query Gruppe. Teilweise verschlechtern die Indezes die Zeiten des RS sogar (1.1, 3.1, 4.1, 4.2)
 
@@ -305,8 +308,7 @@ Die Queries, welche negativ von den Indizes betroffen sind, haben nur eine schwa
 Über den Hint NO_INDEX_JOIN kann die verwendung von Hash Joins bei den betroffenen Queries erzwungen werden um eine verschlechterung der Performance zu verhindern. 
 
 
-
-##### Columnstore 
+##### Columnstore
 
 Im Gegensatz zu Rowstore haben FK-Indezes bei Columnstore keine negativen Auswirkungen. Dir Performance verbessert sich je nach Query, jedoch nicht so stark wie bei Rowstore. Sogar bei Queries, bei denen sich Rowstore mit den Indizes verschlechtert hat, konnte Columnstore leicht davon profitieren. Das widerspricht den Erwartungen. Da ein Full Scan bei Rowstore tendenziell teurer ist, wäre zu erwarten, dass sich hier ein Index-Zugriff noch bei einer größeren Treffermenge lohnt als bei CS. Die Beobachtung ist aber genau das Gegenteil. Eine mögliche erklärung wäre dass CS in diesen fällen keinen Index Join macht, sondern nur von zusätztlichen Metadaten der Indezes verwendet. Einzig bei Query 3.2 sind die Zeiten mit und ohne Indezes identisch.
 Die QEPs bei CS geben das genaue JOIN Verfahren nicht preis und unterscheiden sich nur in der Ausführungszeit, daher können keine genaueren Aussagen getroffen werden.
@@ -321,7 +323,7 @@ Werden Hash Joins verwendet, werden auf den Einschränkenden Dimensionen zunäch
 
 --- Time Line ---
 
-#### Column Engines
+#### Rolle von OLAP-Engine bei Columnstore
 
 Der Optimizer entscheidet sich zwischen 
 
