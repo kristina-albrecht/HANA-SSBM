@@ -142,14 +142,14 @@ Im Folgenden sind die wichtigsten Änderungen kurz zusammengefasst:
 
   Die Autoren des SSB-M argumentieren, dass die PARTSUPP Tabelle im Kontext eines Data Marts unnötig ist, woraus die Löschung der Tabelle erfolgt. Stattdessen wird eine Spalte SUPPLYCOST aus der Tabelle zu jeder LINEORDER Zeile im neuen Schema hinzugefügt. Dadurch wird die Korrektheit der Information in Bezug zur Bestellzeit sicher gestellt.
 
-  TODO: Für andere Transformationsdetails von TPC-H zu SSB verweisen wir den Leser auf [Star Schema Benchmark]. Beispielsweise werden die Spalten TPC-H SHIPDATE, RECEIPTDATE und RETURNFLAG gelöscht, da die Bestellinformationen vor dem Versand abgefragt werden müssen, und wir wollten uns nicht mit einer Folge von Faktentabellen befassen, wie in [Kimball, Ross], pg. 94. Außerdem hat TPC-H keine Spalten mit relativ kleinem Filterfaktor, daher fügen wir eine Anzahl von Rollup-Spalten hinzu, wie P_BRAND1 (mit 1000 Werten), S_CITY und C_CITY und so weiter.
+  Weiterhin werden die Spalten des TPC-H Schemas SHIPDATE, RECEIPTDATE und RETURNFLAG gelöscht, da die Bestellinformationen vor dem Versand abgefragt werden müssen. Zudem fehlen dem TPC-H Schema Spalten mit kleinem Filterfaktor, deswegen gibt es in dem SSB Schema nun Rollup-Spalten wie etwa P_BRAND1, S_CITY und C_CITY.
+
+  Weitergehende Änderungen können in der Veröffentlichung der Autoren unter **[Link]** nachgelesen werden.
 
   <!-- Quelle 1 Ende -->
 
 - Warum SSBM? Für Dimensionale Modellierung, interessant für OLAP
-- Unterschiede zu TPC-H ausarbeiten anhand SSB-M Schema, Quellen, Bilder
-- Generierung von SSBM-Tabellen
-- Tabellen in HANA laden
+- Unterschiede zu TPC-H ausarbeiten anhand SSB-M Schema, Quellen
 
 # Durchführung von Benchmarks
 
