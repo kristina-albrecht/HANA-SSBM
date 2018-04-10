@@ -244,13 +244,13 @@ Die Indizes wurden in verschiedene Kategorien eingeordnet. Zunächst wurden Indi
 | LO_QUANTITY      |                      |                     | x                  | x                                              |                           |
 | LO_EXTENDEDPRICE |                      |                     | x                  | x                                              |                           |
 | LO_DISCOUNT      |                      |                     | x                  | x                                              |                           |
-| C_REGION         |                      |                     |                    |                                                | x                         |
-| C_MRKTSEGMENT    |                      |                     |                    |                                                | x                         |
-| P_MFGR           |                      |                     |                    |                                                | x                         |
-| P_CATEGORY       |                      |                     |                    |                                                | x                         |
-| S_NATION         |                      |                     |                    |                                                | x                         |
-| S_REGION         |                      |                     |                    |                                                | x                         |
-| D_YEAR           |                      |                     |                    |                                                | x                         |
+| C_REGION         |                      |                     |                    | x                                              | x                         |
+| C_MRKTSEGMENT    |                      |                     |                    | x                                              | x                         |
+| P_MFGR           |                      |                     |                    | x                                              | x                         |
+| P_CATEGORY       |                      |                     |                    | x                                              | x                         |
+| S_NATION         |                      |                     |                    | x                                              | x                         |
+| S_REGION         |                      |                     |                    | x                                              | x                         |
+| D_YEAR           |                      |                     |                    | x                                              | x                         |
 | C_CITY           |                      |                     |                    | x                                              | x                         |
 | P_BRAND          |                      |                     |                    | x                                              | x                         |
 | S_CITY           |                      |                     |                    | x                                              | x                         |
