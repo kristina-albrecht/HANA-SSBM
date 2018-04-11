@@ -12,6 +12,20 @@ titlepage-rule-color: FFFFFF
 titlepage-rule-height: 1
 ...
 
+# Einleitung
+
+## Motivation
+
+
+
+## Ziele
+
+Ziel dieser Arbeit ist die Durchführung eines Performance Benchmarks von SAP HANA anhand des Star Schema Benchmarks (SSB). Zunächst wird dafür eine kurze Einleitung in SAP HANA und das Star Schema Benchmark gegeben. Anschließend werden notwendige Schritte zur Einrichtung des Systems beschrieben, sowie die Vorgehensweise zur Erstellung des Schemas in SAP HANA und unseren Testaufbau.
+
+Im Anschluss werden die Queries des SSB ausgeführt und die Ergebnisse gespeichert. Zum Analysieren der Testergebnisse wird ein Benchmark-Cube erstellt, dessen Aufbau ebenfalls beschrieben werden soll.
+
+Bei den Tests wurde besonderen Wert auf die Unterschiede zwischen den Ausführungszeiten der Queries auf Column- und Rowstores gelegt. Dabei soll auch die Auswirkung von Indizes auf Column- und Rowstores näher untersucht werden.
+
 # SAP HANA
 
 # Generell HANA als in-memory Datenbank
