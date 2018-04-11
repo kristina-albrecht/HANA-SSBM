@@ -24,7 +24,7 @@ Ziel dieser Arbeit ist die Durchführung eines Performance Benchmarks von SAP HA
 
 Im Anschluss werden die Queries des SSB ausgeführt und die Ergebnisse gespeichert. Zum Analysieren der Testergebnisse wird ein Benchmark-Cube erstellt, dessen Aufbau ebenfalls beschrieben werden soll.
 
-Bei den Tests wurde besonderen Wert auf die Unterschiede zwischen den Ausführungszeiten der Queries auf Column- und Rowstores gelegt. Dabei soll auch die Auswirkung von Indizes auf Column- und Rowstores näher untersucht werden.
+Bei den Tests wurde besonderen Wert auf die Unterschiede zwischen den Ausführungszeiten der Queries bei Column- und Rowstores gelegt. Dabei soll auch die Auswirkung von Indizes auf Column- und Rowstores näher untersucht werden.
 
 # SAP HANA
 
@@ -384,6 +384,17 @@ RS kann stark von Indizes profitieren (je nachdem wie restriktiv -> wie erwartet
 Der Optimizer bei RS weiß nicht wann er keine Indizes verwenden sollte (SAP hat den Fokus wohl mehr auf CS)
 
 Der CS kann seinen Vorteil vor allem bei den Queries auspielen, bei denen keine starke Eingrenzung stattfindet, wodurch sich Index zugriffe nicht lohnen. 
+
+# Autoren
+
+| Name            | Matrikelnummer | Kapitel |
+| --------------- | -------------- | ------- |
+| Marius Jochheim | 1240352        |         |
+|                 |                |         |
+|                 |                |         |
+|                 |                |         |
+
+
 
 # Anhang
 
