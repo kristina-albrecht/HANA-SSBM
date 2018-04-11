@@ -146,9 +146,6 @@ Im Folgenden sind die wichtigsten Änderungen kurz zusammengefasst:
 
   <!-- Quelle 1 Ende -->
 
-- Warum SSBM? Für Dimensionale Modellierung, interessant für OLAP
-- Unterschiede zu TPC-H ausarbeiten anhand SSB-M Schema, Quellen
-
 # Durchführung von Benchmarks
 
 ## Aufsetzen von HANA: Installation, Beschreibung vom System (Prozessoren, RAM, OS, Festplattenspeicher etc.)
