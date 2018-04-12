@@ -42,7 +42,12 @@ Hana verbindet OLTP, durch die SQL und ACID (Atomicity, Consistency, Isolation a
 
 Bei der "in-memory" Technologie werden die Daten im Hauptspeicher gehalten, anstatt sie auf elektromagnetischen Festplatten zu speichern. Antwortzeiten und Auswertungen können dadurch schneller als bei gewöhnlichen Festplatten durch den Prozessor vorgenommen werden. Dadurch, dass der Zugriff auf die Festplatte nun wegfällt, verkürzt sich die Datenzugriffszeit bis auf das Fünffache. 
 
-![img](file:///C:/Users/IBM_ADMIN/AppData/Local/Temp/OICE_16_974FA576_32C1D314_1CA5/msohtmlclip1/01/clip_image001.png)
+| Speicherkomponenten in der  Systemarchitektur | Größenordnung der Zugriffszeit |
+| --------------------------------------------- | ------------------------------ |
+| Zugriff auf CPU L1-/L2-/ L3 Cache             | 0,5 / 7,0 / 15 ns              |
+| Zugriff auf Hauptarbeitspeicher               | 100 ns                         |
+| Zugriff auf  Solid-State-Festplatte (SSD)     | 150.000 ns                     |
+| Festplattenzugriff                            | 10.000.000 ns                  |
 
  
 
@@ -66,6 +71,8 @@ Die Daten können in SAP HANA in zwei verschiedenen Formaten abgelegt werden. Hi
 Für Lesezugriffe ist diese Art der Speicherung nicht geeignet, da jede Zeile gelesen werden muss, was sehr unperformant ist. Es müssten Daten gelesen werden, die für die bestimmte Abfrage nicht von Relevanz sind. Daher werden Lesezugriffe und Analyseabfragen auf die spaltenorientierte Speicherung ausgeführt und somit wird nur auf die relevanten Daten zugegriffen. Dies hat eine Performancesteigerung zur Folge.
 Durch die spaltenorientierte Speicherung erreicht man neben der Zugriffsbeschleunigung auch eine höhere Kompression der Daten, da Tabellenspalten häufig gleiche Werte enthalten. 
 
+![Spalten- vs Zeilenbasierte Speicherung](bilder/ZeilenSpaltenSpeicherung.png)
+
 
 Die Anzahl der Indizes kann erheblich reduziert werden. Bei der spaltenorientierten Speicherung kann jedes Attribut als Index verwendet werden. Da jedoch die gesamten Daten im Speicher vorhanden sind und die Daten einer Spalte alle aufeinanderfolgend gespeichert sind ist die Geschwindigkeit eines vollen sequentiellen Scans eines Attributs ausreichend in den meisten Fällen. Falls es nicht schnell genug ist können zusätzlich Indizes benutzt werden.
 
@@ -79,6 +86,8 @@ Bei der spaltenorientierten Speicherung ist es möglich Daten zu Komprimieren. D
 
 Diese Methode wird auf alle Spalten angewandt. Alle verschiedenen Spaltenwerte werden aufeinanderfolgenden Zahlen zugeordnet. Anstatt nun die verschiedenen Werte zu speichern werden stattdessen die viel kleiner Zahlen gespeichert. Dadurch wird die Zahl der Datenzugriffe minimiert und es gibt weniger Cache Fehler, da mehrere Informationen in einer Cache-Line vorhanden sind. Außerdem ist es möglich Operationen direkt auf die komprimierten Daten auszuführen.
 
+![TPC-H_Schema](bilder/DictonaryCompression.png)
+
 ### Advanced compression:
 
 Die einzelnen Zeilen selbst können durch verschiedene Komprimierungsmethoden weiter verkleinert werden. Dazu gehören: 
@@ -86,13 +95,15 @@ Die einzelnen Zeilen selbst können durch verschiedene Komprimierungsmethoden we
 #### prefix encoding:
 Spalte enthält eine dominante Value / andere Values selten
 - ein Wert wird sehr oft unkomprimiert gespeichert
-datenset muss sortiert werden nach der Spalte mit der dominanten Value & der Attribut Vektor muss mit dem dominanten starten.
-Zur Komprimierung sollte die dominante Value nicht jedes mal explizit gespeichert werden wenn sie auftritt. 
-		Speichern der Nummer der Auftretungen der dominanten Value und eine Instanz der Value selbst im Attribut Vektor.
-Prefix encoded Attribut Vektor enthält folgende Informationen:
-		Nummer der Auftretungen der dominanten Value 
-		valueID der dominanten Value aus dem Dictonary
-		valueIDs der fehlenden Values
+  datenset muss sortiert werden nach der Spalte mit der dominanten Value & der Attribut Vektor muss mit dem dominanten starten.
+  Zur Komprimierung sollte die dominante Value nicht jedes mal explizit gespeichert werden wenn sie auftritt. 
+  	Speichern der Nummer der Auftretungen der dominanten Value und eine Instanz der Value selbst im Attribut Vektor.
+  Prefix encoded Attribut Vektor enthält folgende Informationen:
+  	Nummer der Auftretungen der dominanten Value 
+  	valueID der dominanten Value aus dem Dictonary
+  	valueIDs der fehlenden Values
+
+![TPC-H_Schema](bilder/prefixEncoding.png)
 
 #### run length encoding:
 Gut wenn ein Paar Werte mit hohem Aufkommen
@@ -101,12 +112,16 @@ Anstatt alle Werte einer Spalte zu Speichern werden lediglich 2 Vektoren gespeic
 Einer mit allen verschiedenen Values
 Einer mit der Startposition der Value 
 
+![TPC-H_Schema](bilder/runlengthEncoding.png)
+
 
 #### cluster encoding:
 Ist gut wenn eine Spalte viele identische Werte hat die hinternander stehen.
 Attribut Vektor is partitioniert in n Blöcke mit fester Größe (tipischerweise 1024 Elements)
 Wenn ein Cluster nur einen Wert hat wird er durch eine 1 ersetzt.
 Wurde er nicht ersetzt steht dort eine 0.
+
+![TPC-H_Schema](bilder/ClusterEncoding.png)
 
 #### sparse encoding: 
 
@@ -115,9 +130,18 @@ Ist gut wenn verschiedene Values oft vorkommen
 BSP: bei zusammenhängenden Spalten. Nach Land Sortiert und auf Namensspalte zugreifen
 Wie bei Cluster encoding N Datenblöcke mit fester Anzahl Elementen (1024)
 
+![TPC-H_Schema](bilder/SparseEncoding.jpg)
 
 Die SAP Hana Datenbank benutzt Algorithmen um zu entscheiden, welche der Komprimierungsmethoden am angebrachtesten für die verschiedenen Spalten ist.
 Bei jeder „delta merge“ Operation wird die Datenkompression automatisch evaluiert, optimiert und ausgeführt. 
+
+
+
+# Architektur
+
+![TPC-H_Schema](bilder/Architektur.png)
+
+
 
 
 
