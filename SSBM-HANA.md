@@ -133,7 +133,7 @@ Wie bei Cluster encoding N Datenblöcke mit fester Anzahl Elementen (1024)
 ![TPC-H_Schema](bilder/SparseEncoding.jpg)
 
 Die SAP Hana Datenbank benutzt Algorithmen um zu entscheiden, welche der Komprimierungsmethoden am angebrachtesten für die verschiedenen Spalten ist.
-Bei jeder „delta merge“ Operation wird die Datenkompression automatisch evaluiert, optimiert und ausgeführt. 
+Bei jeder "delta merge" Operation wird die Datenkompression automatisch evaluiert, optimiert und ausgeführt. 
 
 
 
@@ -406,10 +406,6 @@ Aussagen:
    Rowstore, Beispiel 3.1, 3.3 
 
 3. CS profitiert sehr stark von OLAP-Plan
-
-   ​
-
-   ​
 
 
 # Fazit
