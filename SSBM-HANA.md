@@ -14,15 +14,31 @@ titlepage-rule-height: 1
 
 # Einleitung
 
+ Heißt es SSB oder SSBM? Stoße oft auf beides? - Marius
+
+Column und Row Store einheitlich schreiben  -Kristina
+
+Abkürzungen einführen vor Nutzung - Alle für sich
+
+Bildquellen fixen, Größe anpassen - Alle für sich
+
+Quellen - Jeder für sich
+
+- Kristina: Q3.1 vs. Q3.3 mit QEP
+- Kristina: Column Store mit Indizes schneller, aber QEPs sind gleich
+- Kristina: HINTs (Columnstore profitiert stark von OLAP Engine)
+- Jan: CPUs
+- Jan: Excelanbindung
+- Jan: BenchmarkLoader
+- Marius: Query Beschreibung 
+- Marius: Fazit
+- Marius: Motivation 
+
 ## Motivation
 
-<!-- Todo: Heißt es SSB oder SSBM? Stoße oft auf beides? -->
 
-<!-- Todo: Abkürzungen einführen vor Nutzung -->
 
-<!-- Todo: Bildquellen fixen -->
-
-## Ziele
+## Ziele und Struktur
 
 Ziel dieser Arbeit ist die Durchführung eines Performance Benchmarks von SAP HANA anhand des Star Schema Benchmarks (SSB). Zunächst wird dafür eine kurze Einleitung in SAP HANA und das Star Schema Benchmark gegeben. Anschließend werden notwendige Schritte zur Einrichtung des Systems beschrieben, sowie die Vorgehensweise zur Erstellung des Schemas in SAP HANA und unserem Testaufbau.
 
@@ -34,11 +50,13 @@ Bei den Tests wurde besonderer Wert auf die Unterschiede zwischen den Ausführun
 
 ## Überblick
 
+<!-- Anführungszeichen für "in-memory" rausnehmen -->
+
 SAP Hana (Die High Performance Analytic Appliance) ist eine Entwicklungsplattform und besteht im Kern aus einer "in-memory" Datenbank.
 
 Transaktionen und Analysen werden auf einer einzigen, singulären Datenkopie im Hauptspeicher verarbeitet, anstatt die Festplatte als Datenspeicher zu benutzen. Dadurch ist es möglich sehr komplexe Abfragen und Datenbankoperationen mit sehr hohem Durchsatz auszuführen.
 
-Hana verbindet OLTP, durch die SQL und ACID (Atomicity, Consistency, Isolation andDurability) Kompatibilität, und OLAP durch die in-memory Datenhaltung. Durch das Einhalten des ACID Prinzips ist die Datenbank geeignet um Unternehmensinterne Daten zu speichern. Es ist nicht nötig Datenanalysen über einen ETL Prozess an ein Datawarehouse weiterzuleiten. Komplexe Echtzeit-Analysen [[1\]](#_ftn1)können nun direkt durch SAP Hana durchgeführt werden. Das erspart die erheblichen Kosten und vor allem Zeit.
+Hana verbindet OLTP, durch die SQL und ACID (Atomicity, Consistency, Isolation andDurability) Kompatibilität, und OLAP durch die in-memory Datenhaltung. Durch das Einhalten des ACID Prinzips ist die Datenbank geeignet um Unternehmensinterne Daten zu speichern. Es ist nicht nötig Datenanalysen über einen ETL Prozess an ein Datawarehouse weiterzuleiten. Komplexe Echtzeit-Analysen [[1\]](#_ftn1) können nun direkt durch SAP Hana durchgeführt werden. Das erspart die erheblichen Kosten und vor allem Zeit.
 
 Bei der "in-memory" Technologie werden die Daten im Hauptspeicher gehalten, anstatt sie auf elektromagnetischen Festplatten zu speichern. Antwortzeiten und Auswertungen können dadurch schneller als bei gewöhnlichen Festplatten durch den Prozessor vorgenommen werden. Dadurch, dass der Zugriff auf die Festplatte nun wegfällt, verkürzt sich die Datenzugriffszeit bis auf das Fünffache. 
 
@@ -130,16 +148,16 @@ Ist gut wenn verschiedene Values oft vorkommen
 BSP: bei zusammenhängenden Spalten. Nach Land Sortiert und auf Namensspalte zugreifen
 Wie bei Cluster encoding N Datenblöcke mit fester Anzahl Elementen (1024)
 
-![TPC-H_Schema](bilder/SparseEncoding.jpg)
+![Compression](bilder/SparseEncoding.jpg)
 
 Die SAP Hana Datenbank benutzt Algorithmen um zu entscheiden, welche der Komprimierungsmethoden am angebrachtesten für die verschiedenen Spalten ist.
-Bei jeder "delta merge" Operation wird die Datenkompression automatisch evaluiert, optimiert und ausgeführt. 
+Bei jeder „delta merge“ Operation wird die Datenkompression automatisch evaluiert, optimiert und ausgeführt. 
 
 
 
 # Architektur
 
-![TPC-H_Schema](bilder/Architektur.png)
+![Architektur SQL Optimizer](bilder/Architektur.png)
 
 
 
@@ -149,7 +167,7 @@ Bei jeder "delta merge" Operation wird die Datenkompression automatisch evaluier
 - In-Memory Datenbank
 - Column-Based Architektur
 - Komprimierung
-- Memory Zugrigge
+- Memory Zugriffe
 
 # Star Schema Benchmark (SSBM)
 <!-- Star Schema Benchmark (https://www.cs.umb.edu/~poneil/StarSchemaB.PDF) als Quelle einfügen und einarbeiten (Vergleiche Quelle 9)-->
@@ -188,9 +206,11 @@ Im Folgenden sind die wichtigsten Änderungen kurz zusammengefasst:
 
   <!-- Quelle 1 Ende -->
 
+  <!-- Queries Marius -->
+
 # Durchführung von Benchmarks
 
-## Aufsetzen von HANA: Installation, Beschreibung vom System (Prozessoren, RAM, OS, Festplattenspeicher etc.)
+## Beschreibung der Testumgebung
 
 Für die Durchführung vom Benchmark wurde auf einem Dell Latitude E5570 verwendet.
 Die wichtigsten Merkmale:
@@ -224,9 +244,7 @@ record delimited by '\n'
 field delimited by '|';
 ```
 
-Dieses Vorgehen, die Tabellen komplett mit einem Import-Statement zu laden, hat zur Folge, dass bei den Abfragen die gesamten Daten in der Basis-Tabelle waren und die Delta-Tabelle leer war.
-
-***Verbesserungsvorschlag (Marius): Das Laden der Tabellen mit einem Import-Statement führt dazu, dass alle Daten in der Basis-Tabelle liegen und die Delta-Tabelle leer bleibt.***
+Das Laden der Daten mit einem einzigen Import-Statement pro Tabelle führt dazu, dass alle Daten in der Basis-Tabelle liegen und die Delta-Tabelle leer bleibt.
 
 ### Ladezeiten von Tabellen und Indizes
 
@@ -254,9 +272,9 @@ Die Tests wurden iterativ mit verschiedenen Kombinationen der Testvariablen durc
 1. Erzeugung vom Schema und Datenimport (Wechsel zwischen Column- und Rowstore)
 2. Erstellen von Indizes
 3. Durchführung von Benchmarks (jeweils 100 Iterationen):
-   - ohne Hints
-   - mit Hint USE_OLAP_PLAN
-   - mit Hint NO_USE_OLAP_PLAN
+   1. ohne Hints
+   2. mit Hint USE_OLAP_PLAN
+   3. mit Hint NO_USE_OLAP_PLAN
 4. Speicherung der Daten in einer Log-Datei
 5. Importieren der Daten in den Cube
 6. Analyse und Auswertung der Ergebnisse 
@@ -275,33 +293,35 @@ Im Folgenden wird die Auswahl von Indizes, der BenchmarkLoader und der virtuelle
 
 Die Indizes wurden in verschiedene Kategorien eingeordnet. Zunächst wurden Indizes auf die Fremdschlüssel-Spalten in der Faktentabelle angelegt. Danach wurden zusätzliche Indizes auf die Attributen der Faktentabelle hinzugefügt. Indizes auf Primärschlüssel erstellt HANA implizit, deshalb wurden sie nicht explizit getestet [###].
 
-| Indizes          | Keine Indizes (None) | Fremdschlüssel (FK) | Faktentabelle (FT) | Restriktive Indizes auf Dimensionen (RestrDim) | Nur Dimensionen (DimOnly) |
-| ---------------- | -------------------- | ------------------- | ------------------ | ---------------------------------------------- | ------------------------- |
-| LO_CUSTKEY       |                      | x                   | x                  | x                                              |                           |
-| LO_SUPPKEY       |                      | x                   | x                  | x                                              |                           |
-| LO_PARTKEY       |                      | x                   | x                  | x                                              |                           |
-| LO_ORDERDATEKEY  |                      | x                   | x                  | x                                              |                           |
-| LO_COMMITDATEKEY |                      | x                   | x                  | x                                              |                           |
-| LO_QUANTITY      |                      |                     | x                  | x                                              |                           |
-| LO_EXTENDEDPRICE |                      |                     | x                  | x                                              |                           |
-| LO_DISCOUNT      |                      |                     | x                  | x                                              |                           |
-| C_REGION         |                      |                     |                    | x                                              | x                         |
-| C_MRKTSEGMENT    |                      |                     |                    | x                                              | x                         |
-| P_MFGR           |                      |                     |                    | x                                              | x                         |
-| P_CATEGORY       |                      |                     |                    | x                                              | x                         |
-| S_NATION         |                      |                     |                    | x                                              | x                         |
-| S_REGION         |                      |                     |                    | x                                              | x                         |
-| D_YEAR           |                      |                     |                    | x                                              | x                         |
-| C_CITY           |                      |                     |                    | x                                              | x                         |
-| P_BRAND          |                      |                     |                    | x                                              | x                         |
-| S_CITY           |                      |                     |                    | x                                              | x                         |
-| D_YEARMONTHNUM   |                      |                     |                    | x                                              | x                         |
-| D_YEARMONTH      |                      |                     |                    | x                                              | x                         |
-| D_DAYNUMINYEAR   |                      |                     |                    | x                                              | x                         |
+| Indizes          | Keine Indizes (None) | Fremd-schlüssel (FK) | Fakten-tabelle (FT) | Restriktive Indizes auf Dimensionen (RestrDim) | Nur Dimensionen (DimOnly) |
+| ---------------- | -------------------- | -------------------- | ------------------- | ---------------------------------------------- | ------------------------- |
+| LO_CUSTKEY       |                      | x                    | x                   | x                                              |                           |
+| LO_SUPPKEY       |                      | x                    | x                   | x                                              |                           |
+| LO_PARTKEY       |                      | x                    | x                   | x                                              |                           |
+| LO_ORDERDATEKEY  |                      | x                    | x                   | x                                              |                           |
+| LO_COMMITDATEKEY |                      | x                    | x                   | x                                              |                           |
+| LO_QUANTITY      |                      |                      | x                   | x                                              |                           |
+| LO_EXTENDEDPRICE |                      |                      | x                   | x                                              |                           |
+| LO_DISCOUNT      |                      |                      | x                   | x                                              |                           |
+| C_REGION         |                      |                      |                     | x                                              | x                         |
+| C_MRKTSEGMENT    |                      |                      |                     | x                                              | x                         |
+| P_MFGR           |                      |                      |                     | x                                              | x                         |
+| P_CATEGORY       |                      |                      |                     | x                                              | x                         |
+| S_NATION         |                      |                      |                     | x                                              | x                         |
+| S_REGION         |                      |                      |                     | x                                              | x                         |
+| D_YEAR           |                      |                      |                     | x                                              | x                         |
+| C_CITY           |                      |                      |                     | x                                              | x                         |
+| P_BRAND          |                      |                      |                     | x                                              | x                         |
+| S_CITY           |                      |                      |                     | x                                              | x                         |
+| D_YEARMONTHNUM   |                      |                      |                     | x                                              | x                         |
+| D_YEARMONTH      |                      |                      |                     | x                                              | x                         |
+| D_DAYNUMINYEAR   |                      |                      |                     | x                                              | x                         |
 
 Bei den Dimensionstabellen wurden Indizes auf restriktive und weniger restriktive Spalten getestet. So schränkt beispielsweise eine Bedingung auf die Region kaum ein, weil eine Region sehr groß ist im Vergleich zu einer Stadt, die die Treffermenge stark einschränkt.
 
 ### BenchmarkLoader
+
+<!-- TODO Jan -->
 
 # Analyse der Ergebnisse
 
@@ -329,7 +349,7 @@ Diese Aussagen werden nun näher erläutert.
 
 Wenn man Optimierungen durch Indizes oder Hints nicht in Betracht zieht, schneidet der Columnstore mit großem Abstand bei jeder SQL-Query besser ab als Rowstore. Bei den Auswertungen wurden die durchschnittlichen Ausführungszeiten der SSBM-Queries genommen. 
 
-![](RS-CS-Index-NoIndex.png)
+![Column vs. Row Store Performance](RS-CS-Index-NoIndex.png)
 
 Die Performance von Columnstore ist im Durchschnitt um den Faktor ### schneller. Das Gesamtbild relativiert sich durch die Verwendung von Indizes, die besonders bei Rowstore eine Rolle spielen, was im Weiteren ausführlicher erläutert wird. 
 
@@ -347,9 +367,8 @@ Die gute Performance des RS mit FK Indizes bei manchen Queries kann dadurch erkl
 Die Queries, welche negativ von den Indizes betroffen sind, haben nur eine schwache Einschränkung auf der jeweiligen Dimension. (Jahr (1.1), Region (3.1, 4.1, 4.2 )). Das kann man an dem Beispiel von der Query 3.1 beobachten. Beim QEP ohne Index sieht man, dass der Optimizer zuerst die Dimensionstabellen entsprechend den Restriktionen scannt und daraus die Hash-Tables für die Hash-Joins baut. Dann geht er mit mehreren Threads parallel über die Faktentabelle und filtert sie dann anhand der Hash-Tabellen. Aus den verbleibenden Zeilen bildet er ein Aggregat und ordnet das Result Set.
 
 
-| ![](/home/kristina/git/SSBM-HANA/qep_3.1row_4core_noht.png) | ![](/home/kristina/git/SSBM-HANA/qep_3.1row_4core_noht_index.png) |
-| ----------------------------------------------------------- | ------------------------------------------------------------ |
-|                                                             |                                                              |
+| ![QEP 3.1 ohne Indizes](qep_3.1row_4core_noht.png) | ![QEP 3.1 mit Indizes](qep_3.1row_4core_noht_index.png) |
+| -------------------------------------------------- | ------------------------------------------------------- |
 
 Bei dem Query Execution Plan mit Index sieht man: für den Join zwischen der Faktentabelle der Supplier-Dimensionstabelle wird ein Index-Join verwendet. Dabei scannt er zuerst die Suplier-Tabelle und wendet die Region-Restriktion an. Daraus bekommt er die Primary-Keys von den Suppliern, und sucht die entsprechende Fremdschlüssel im Index der Faktentabelle. Darüber erhält er dann die entsprechenden Zeilen der Faktentabelle, die er weiter (wie im QEP ohne Index) mit Hilfe der Hash-Tabellen nach den anderen Dimensionen filtert. Man sieht hier allerdings, dass der Optimizer sich laut Query Execution Plan trotz der relativ großen Treffermemge auf der Supplier-Dimension für einen Index Join entschieden hat, was anscheinend die Performance beeinträchtigt. 
 
@@ -359,17 +378,19 @@ Auffällig ist, dass der Optimizer immer die vorhandeten Indizes verwendet hat u
 
 ##### Columnstore
 
-Im Gegensatz zu RS haben FK Indizes bei Columnstore keine negativen Auswirkungen. Die Performance verbessert sich je nach Query leicht bis stark, jedoch nicht stark wie bei RS. Sogar bei Querys, bei denen sich RS mit den Indizes verschlechtert hat, konnte CS leicht davon profitieren. Das widerspricht den Erwartungen. <!-- Verstehe folgenden Satz nicht -->Da RS ein Full Scan tendenziell teurer ist, wäre zu erwarten, dass sich hier ein Index Zugriff noch bei einer größeren Treffermenge lohnt als bei CS. Die Beobachtung ist aber genau das Gegenteil. Eine mögliche erklärung wäre, dass CS in diesen Fällen keinen Index Join macht, sondern nur zusätzliche Metadaten der Indizes verwendet. Einzig bei Query 3.2 sind die Zeiten mit und ohne Indizes identisch.
+Im Gegensatz zu Rowstore haben FK Indizes bei Columnstore keine negativen Auswirkungen. Die Performance verbessert sich je nach Query leicht bis stark, jedoch nicht stark wie bei Rowstore. Sogar bei Querys, bei denen sich Rowstore mit den Indizes verschlechtert hat, konnte Columnstore leicht davon profitieren. Das widerspricht den Erwartungen. <!-- Verstehe folgenden Satz nicht -->Da bei Rowstore ein Full Scan tendenziell teurer ist, wäre zu erwarten, dass sich hier ein Index Zugriff noch bei einer größeren Treffermenge lohnt als bei Columnstore. Die Beobachtung ist aber genau das Gegenteil. Eine mögliche erklärung wäre, dass Columnstore in diesen Fällen keinen Index Join macht, sondern nur zusätzliche Metadaten der Indizes verwendet. Einzig bei Query 3.2 sind die Zeiten mit und ohne Indizes identisch.
 
-Die QEPs bei CS geben das genaue JOIN Verfahren nicht preis und unterscheiden sich nur in der Ausführungszeit, daher können keine genaueren Aussagen getroffen werden.
+Die QEPs bei Columnstore geben das genaue JOIN Verfahren nicht preis und unterscheiden sich nur in der Ausführungszeit, daher können keine genaueren Aussagen getroffen werden.
 
-qep_3.1row_4core_noht.plv
+![QEP 3.1 Rowstore](qep_3.1row_4core_noht.png)
 
 Der CS kann seinen Vorteil vor allem bei den Queries auspielen, bei denen keine starke Eingrenzung stattfindet, wodurch sich Index Zugriffe nicht lohnen. 
 
 #### Query Execution
 
-Bei der Verwendung von Hash Joins werden auf den einschränkenden Dimensionen zunächst die Hashtabellen aufgebaut. Diese fungieren wie Filter, durch die dann die einzelnen Spalten der Faktentabelle "gepiped" werden ohne Zwischenresultate zu bilden. <!-- Nächster Satz ist unverständlich --> Für das Filtern der Faktentabelle aber auch das erstellen Hashtabellen zu großen Dimensionen kommen mehrere Threads zum Einsatz.
+Bei der Verwendung von Hash Joins werden auf den einschränkenden Dimensionen zunächst die Hashtabellen aufgebaut. Diese fungieren wie Filter, durch die dann die einzelnen Spalten der Faktentabelle "gepiped" werden ohne Zwischenresultate zu bilden. <!-- Nächster Satz ist unverständlich --> Für das Filtern der Faktentabelle, aber auch für das Erstellen großer Hashtabellen, kommen mehrere Threads zum Einsatz <!-- Todo Jan: Satz korrigieren -->.
+
+<!-- Todo: Jan -->
 
 --- Time Line ---
 
@@ -381,19 +402,19 @@ Die Queries, welche bei RS schlecht mit FK performt haben, performen auch schlec
 
 Die OLAP Engine performt fast immer besser, außer bei 2.3, 3.3 und 3.4. Bei 2.3 ist JE sogar schneller.
 
+ <!-- TODO Kristina -->
 
-
- **// TODO**
-
-- Q3.1 vs. Q3.3 mit QEP
-- Column Store mit Indizes schneller, aber QEPs sind gleich
-- HINTs (Columnstore profitiert stark von OLAP Engine)
-- CPUs
-- Cube
-- Excel
+#### Skalierung von HANA (CPU)
 
 
 
+# Fazit
+
+RS kann stark von Indizes profitieren (je nachdem wie restriktiv -> wie erwartet), CS auch etwas.
+
+Der Optimizer bei RS weiß nicht wann er keine Indizes verwenden sollte (SAP hat den Fokus wohl mehr auf CS)
+
+Der CS kann seinen Vorteil vor allem bei den Queries auspielen, bei denen keine starke Eingrenzung stattfindet, wodurch sich Index zugriffe nicht lohnen. 
 
 Aussagen:
 
@@ -406,15 +427,6 @@ Aussagen:
    Rowstore, Beispiel 3.1, 3.3 
 
 3. CS profitiert sehr stark von OLAP-Plan
-
-
-# Fazit
-
-RS kann stark von Indizes profitieren (je nachdem wie restriktiv -> wie erwartet), CS auch etwas.
-
-Der Optimizer bei RS weiß nicht wann er keine Indizes verwenden sollte (SAP hat den Fokus wohl mehr auf CS)
-
-Der CS kann seinen Vorteil vor allem bei den Queries auspielen, bei denen keine starke Eingrenzung stattfindet, wodurch sich Index zugriffe nicht lohnen. 
 
 # Autoren
 
