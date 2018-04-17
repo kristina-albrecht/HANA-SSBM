@@ -34,6 +34,10 @@ Quellen - Jeder für sich
 - Marius: Fazit
 - Marius: Motivation 
 
+
+
+Kapitelzuweisung, wer hat was gemacht?
+
 ## Motivation
 
 
@@ -430,12 +434,23 @@ Aussagen:
 
 # Autoren
 
-| Name            | Matrikelnummer | Kapitel |
-| --------------- | -------------- | ------- |
-| Marius Jochheim | 1240352        |         |
-|                 |                |         |
-|                 |                |         |
-|                 |                |         |
+| Kapitel                          | Kristina Albrecht (2835001) | Jan Hofmeier (5822161) | Marius Jochheim (1240352) | Lion Scherer (XXXXXXX) |
+| -------------------------------- | --------------------------- | ---------------------- | ------------------------- | ---------------------- |
+| 1 Einleitung                     |                             |                        | X                         |                        |
+| 2 SAP HANA                       |                             |                        |                           | X                      |
+| 3 SSBM                           |                             |                        | X                         |                        |
+| 4 Aufsetzen                      |                             | X                      |                           |                        |
+| 4 Column- vs Row Store           | X                           | X                      | X                         |                        |
+| 4 Indizes                        | X                           | X                      |                           |                        |
+| 4 Hints                          | X                           |                        |                           |                        |
+| 4 Benchmark Cube                 | X                           |                        |                           |                        |
+| 4 Excel                          |                             | X                      |                           |                        |
+| 4 BenchmarkLoader                |                             | X                      |                           |                        |
+| 4 Laden von Tabellen und Indizes | X                           |                        |                           |                        |
+| 4 Vorgehensweise                 | X                           |                        |                           |                        |
+| 5 Fazit                          |                             |                        | X                         |                        |
+
+
 
 # Literatur
 
