@@ -1,4 +1,3 @@
----
 title: "Star Schema Benchmark für SAP HANA"
 author: [Jan Hofmeier, Marius Jochheim, Lion Scherer, Kristina Albrecht]
 date: 2018-03-06
@@ -10,7 +9,6 @@ titlepage-color: 06386e
 titlepage-text-color: FFFFFF
 titlepage-rule-color: FFFFFF
 titlepage-rule-height: 1
----
 
 # Einleitung
 
@@ -318,7 +316,7 @@ Der HANA MDX-Provder ist im "Data Connection Wizard" von Excel unter "Other/Adva
 
 Im nächsten Schritt erfolgt die Anmeldung über einen HANA-User. Darauf folgt die auswahl des Cubes. Excel erstellt eine Pivot Tabelle, welche ihre Daten aus dem Cube bezieht.
 
-![MDX-Pivot-Table](/home/kristina/git/SSBM-HANA/bilder/MDX-Pivot-Table.PNG)
+![MDX-Pivot-Table](bilder/MDX-Pivot-Table.PNG)
 
 
 
@@ -345,7 +343,7 @@ Im Vergleich zu Rowstore braucht der Columnstore meist nur einen Bruchteil der Z
 
 ####Auswahl der Indizes
 
-Die Indizes wurden in verschiedene Kategorien eingeordnet. Zunächst wurden Indizes auf die Fremdschlüssel-Spalten in der Faktentabelle angelegt. Danach wurden zusätzliche Indizes auf die Attributen der Faktentabelle hinzugefügt. Indizes auf Primärschlüssel erstellt HANA implizit, deshalb wurden sie nicht explizit getestet [###].
+Die Indizes wurden in verschiedene Kategorien eingeordnet. Zunächst wurden Indizes auf die Fremdschlüssel-Spalten in der Faktentabelle angelegt. Danach wurden zusätzliche Indizes auf die Attributen der Faktentabelle hinzugefügt. Indizes auf Primärschlüssel erstellt HANA implizit, deshalb wurden sie nicht explizit getestet.
 
 | Indizes          | Keine Indizes (None) | Fremd-schlüssel (FK) | Fakten-tabelle (FT) | Restriktive Indizes auf Dimensionen (RestrDim) | Nur Dimensionen (DimOnly) |
 | ---------------- | -------------------- | -------------------- | ------------------- | ---------------------------------------------- | ------------------------- |
@@ -385,6 +383,8 @@ Die gute Performance des RS mit FK Indizes bei manchen Queries kann dadurch erkl
 
 Die Queries, welche negativ von den Indizes betroffen sind, haben nur eine schwache Einschränkung auf der jeweiligen Dimension. (Jahr (1.1), Region (3.1, 4.1, 4.2 )). Das kann man an dem Beispiel von der Query 3.1 beobachten. Beim QEP ohne Index sieht man, dass der Optimizer zuerst die Dimensionstabellen entsprechend den Restriktionen scannt und daraus die Hash-Tables für die Hash-Joins baut. Dann geht er mit mehreren Threads parallel über die Faktentabelle und filtert sie dann anhand der Hash-Tabellen. Aus den verbleibenden Zeilen bildet er ein Aggregat und ordnet das Result Set.
 
+Bei der Verwendung von Hash Joins werden auf den einschränkenden Dimensionen zunächst die Hashtabellen aufgebaut. Diese fungieren wie Filter, durch die dann die einzelnen Spalten der Faktentabelle "gepiped" werden ohne Zwischenresultate zu bilden. Für das Filtern der Faktentabelle, aber auch für das Erstellen großer Hashtabellen, kommen mehrere Threads zum Einsatz.
+
 
 | ![QEP 3.1 ohne Indizes](qep_3.1row_4core_noht.png){ width=50% } | ![QEP 3.1 mit Indizes](qep_3.1row_4core_noht_index.png){ width=50% }  |
 | -------------------------------------------------- | ------------------------------------------------------- |
@@ -397,7 +397,7 @@ Auffällig ist, dass der Optimizer immer die vorhandeten Indizes verwendet hat u
 
 ##### Columnstore
 
-Im Gegensatz zu Rowstore haben FK Indizes bei Columnstore keine negativen Auswirkungen. Die Performance verbessert sich je nach Query leicht bis stark, jedoch nicht stark wie bei Rowstore. Sogar bei Querys, bei denen sich Rowstore mit den Indizes verschlechtert hat, konnte Columnstore leicht davon profitieren. Das widerspricht den Erwartungen. <!-- Verstehe folgenden Satz nicht -->Da bei Rowstore ein Full Scan tendenziell teurer ist, wäre zu erwarten, dass sich hier ein Index Zugriff noch bei einer größeren Treffermenge lohnt als bei Columnstore. Die Beobachtung ist aber genau das Gegenteil. Eine mögliche erklärung wäre, dass Columnstore in diesen Fällen keinen Index Join macht, sondern nur zusätzliche Metadaten der Indizes verwendet. Einzig bei Query 3.2 sind die Zeiten mit und ohne Indizes identisch.
+Im Gegensatz zu Rowstore haben FK Indizes bei Columnstore keine negativen Auswirkungen. Die Performance verbessert sich je nach Query leicht bis stark, jedoch nicht stark wie bei Rowstore. Sogar bei Querys, bei denen sich Rowstore mit den Indizes verschlechtert hat, konnte Columnstore leicht davon profitieren. Das widerspricht den Erwartungen. Da bei Rowstore ein Full Scan tendenziell teurer ist, wäre zu erwarten, dass sich hier ein Index Zugriff noch bei einer größeren Treffermenge lohnt als bei Columnstore. Die Beobachtung ist aber genau das Gegenteil. Eine mögliche erklärung wäre, dass Columnstore in diesen Fällen keinen Index Join macht, sondern nur zusätzliche Metadaten der Indizes verwendet. Einzig bei Query 3.2 sind die Zeiten mit und ohne Indizes identisch.
 
 Die QEPs bei Columnstore geben das genaue JOIN Verfahren nicht preis und unterscheiden sich nur in der Ausführungszeit, daher können keine genaueren Aussagen getroffen werden.
 
@@ -405,25 +405,25 @@ Die QEPs bei Columnstore geben das genaue JOIN Verfahren nicht preis und untersc
 
 Der CS kann seinen Vorteil vor allem bei den Queries auspielen, bei denen keine starke Eingrenzung stattfindet, wodurch sich Index Zugriffe nicht lohnen. 
 
-#### Query Execution
-
-Bei der Verwendung von Hash Joins werden auf den einschränkenden Dimensionen zunächst die Hashtabellen aufgebaut. Diese fungieren wie Filter, durch die dann die einzelnen Spalten der Faktentabelle "gepiped" werden ohne Zwischenresultate zu bilden. <!-- Nächster Satz ist unverständlich --> Für das Filtern der Faktentabelle, aber auch für das Erstellen großer Hashtabellen, kommen mehrere Threads zum Einsatz <!-- Todo Jan: Satz korrigieren -->.
-
-<!-- Todo: Jan -->
-
---- Time Line ---
-
 #### Rolle von OLAP-Engine bei Columnstore
 
-Der Optimizer entscheidet sich zwischen 
+Beim Columnstore entscheidet sich der Optimizer je nach Abfrage, ob Join-Engine oder OLAP-Engine verwendet wird. Mit den Hints *USE_OLAP_PLAN* und *NO_USE_OLAP_PLAN* lässt sich die Verwendung vom OLAP-Engine durch den Optimizer beim Columnstore entweder erzwingen oder verhindern. 
 
-Die Queries, welche bei RS schlecht mit FK performt haben, performen auch schlecht mit der JE (NO_USE_OLAP_PLAN)
+In der Regel performt OLAP-Engine fast immer besser, außer bei 2.3, 3.3 und 3.4. Bei 2.3 ist JE sogar schneller. 
 
-Die OLAP Engine performt fast immer besser, außer bei 2.3, 3.3 und 3.4. Bei 2.3 ist JE sogar schneller.
+![](bilder/hintquerycol.png)
 
- <!-- TODO Kristina -->
+Interessante Feststellung war, dass die Queries, welche bei Rowstore schlecht mit Indizes (Foreign Key Indizes) performt haben, auch mit Join-Engine (NO_USE_OLAP_PLAN) deutlich langsamer waren.
 
-#### Skalierung von HANA (CPU)
+Wenn man Rowstore mit Indizes und Columnstore ohne OLAP-Engine (*NO_USE_OLAP_PLAN*) miteinander vergleicht, ist zwar Columnstore immer noch schneller, allerdings ist der Unterschied nicht so drastisch wie mit dem OLAP-Plan, woraus sich schließen lässt, dass Columnstore sehr stark vom OLAP-Engine profitiert.
+
+
+
+In keinem Fall konnte mit einem der beiden Hints eine bessere Performance erziehlt werden als ohne. Das lässt darauf schließen, dass der Optimizer von selbst die bestmögliche Entscheidung trifft.  
+
+ 
+
+<!-- TODO Jan: Skalierung von HANA (CPU) -->
 
 
 
