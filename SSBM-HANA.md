@@ -10,7 +10,7 @@ titlepage-color: 06386e
 titlepage-text-color: FFFFFF
 titlepage-rule-color: FFFFFF
 titlepage-rule-height: 1
-...
+---
 
 # Einleitung
 
@@ -24,12 +24,9 @@ Bildquellen fixen, Größe anpassen - Alle für sich
 
 Quellen - Jeder für sich
 
-- Kristina: Q3.1 vs. Q3.3 mit QEP
+- Kristina: Q3.1 vs. Q3.3 mit QEP ?
 - Kristina: Column Store mit Indizes schneller, aber QEPs sind gleich
 - Kristina: HINTs (Columnstore profitiert stark von OLAP Engine)
-- Jan: CPUs
-- Jan: Excelanbindung
-- Jan: BenchmarkLoader
 - Marius: Query Beschreibung 
 - Marius: Fazit
 - Marius: Motivation 
@@ -108,7 +105,7 @@ Bei der spaltenorientierten Speicherung ist es möglich Daten zu Komprimieren. D
 
 Diese Methode wird auf alle Spalten angewandt. Alle verschiedenen Spaltenwerte werden aufeinanderfolgenden Zahlen zugeordnet. Anstatt nun die verschiedenen Werte zu speichern werden stattdessen die viel kleiner Zahlen gespeichert. Dadurch wird die Zahl der Datenzugriffe minimiert und es gibt weniger Cache Fehler, da mehrere Informationen in einer Cache-Line vorhanden sind. Außerdem ist es möglich Operationen direkt auf die komprimierten Daten auszuführen.
 
-![TPC-H_Schema](bilder/DictonaryCompression.png)
+![TPC-H_Schema](bilder/DictonaryCompression.png){width=50%}
 
 ### Advanced compression:
 
@@ -125,7 +122,7 @@ Spalte enthält eine dominante Value / andere Values selten
   	valueID der dominanten Value aus dem Dictonary
   	valueIDs der fehlenden Values
 
-![TPC-H_Schema](bilder/prefixEncoding.png)
+![TPC-H_Schema](bilder/prefixEncoding.png){width=50%}
 
 #### run length encoding:
 Gut wenn ein Paar Werte mit hohem Aufkommen
@@ -134,7 +131,7 @@ Anstatt alle Werte einer Spalte zu Speichern werden lediglich 2 Vektoren gespeic
 Einer mit allen verschiedenen Values
 Einer mit der Startposition der Value 
 
-![TPC-H_Schema](bilder/runlengthEncoding.png)
+![TPC-H_Schema](bilder/runlengthEncoding.png){width=50%}
 
 
 #### cluster encoding:
@@ -143,7 +140,7 @@ Attribut Vektor is partitioniert in n Blöcke mit fester Größe (tipischerweise
 Wenn ein Cluster nur einen Wert hat wird er durch eine 1 ersetzt.
 Wurde er nicht ersetzt steht dort eine 0.
 
-![TPC-H_Schema](bilder/ClusterEncoding.png)
+![TPC-H_Schema](bilder/ClusterEncoding.png){width=50%}
 
 #### sparse encoding: 
 
@@ -152,7 +149,7 @@ Ist gut wenn verschiedene Values oft vorkommen
 BSP: bei zusammenhängenden Spalten. Nach Land Sortiert und auf Namensspalte zugreifen
 Wie bei Cluster encoding N Datenblöcke mit fester Anzahl Elementen (1024)
 
-![Compression](bilder/SparseEncoding.jpg)
+![Compression](bilder/SparseEncoding.jpg){ width=20% }
 
 Die SAP Hana Datenbank benutzt Algorithmen um zu entscheiden, welche der Komprimierungsmethoden am angebrachtesten für die verschiedenen Spalten ist.
 Bei jeder „delta merge“ Operation wird die Datenkompression automatisch evaluiert, optimiert und ausgeführt. 
@@ -161,7 +158,7 @@ Bei jeder „delta merge“ Operation wird die Datenkompression automatisch eval
 
 # Architektur
 
-![Architektur SQL Optimizer](bilder/Architektur.png)
+![Architektur SQL Optimizer](bilder/Architektur.png){ width=50%}
 
 
 
@@ -182,7 +179,7 @@ Bei jeder „delta merge“ Operation wird die Datenkompression automatisch eval
 
 Der Star Schema Benchmark (SSB) wurde von Pat O'Neil, Betty O'Neil und Quedong Chen entwickelt, um die Performance von Datenbanksystemen, welche mit Data-Marts nach dem Star Schema arbeiten, zu ermitteln und Vergleichbar zu machen [Star Schema Benchmark Quelle]. Dabei nutzen sie das bekannte TPC-H Benchmark [TPCH Quelle] als Grundlage für ihr Star Schema Benchmark, modifizieren es jedoch vielfach zugunsten eines guten Star Schemas.
 
-![TPC-H_Schema](bilder/TPC-H_Schema.png)
+![TPC-H_Schema](bilder/TPC-H_Schema.png){width=50%}
 
 <!-- TPC-H Schema Bild Quelle: http://www.tpc.org/tpc_documents_current_versions/pdf/tpc-h_v2.17.1.pdf -->
 
@@ -190,7 +187,7 @@ Der Star Schema Benchmark (SSB) wurde von Pat O'Neil, Betty O'Neil und Quedong C
 
 Die von Chen, O'Neil und O'Neil durchgeführten Transformationen von TPC-H zu SSB wurden an die von Kimball und Ross erläuterten Prinzipien zur Dimensionalen Modellierung [**The Data Warehouse Toolkit Second Edition - Quelle einfügen**] angelehnt. 
 
-![SSB_Schema](bilder/SSB_Schema.png)
+![SSB_Schema](bilder/SSB_Schema.png){width=50%}
 
 <!-- Source for picture: https://www.cs.umb.edu/~poneil/StarSchemaB.PDF -->
 
@@ -289,11 +286,64 @@ Schritte 2-4 wurden automatisiert mit einem bash-Skript ausgeführt. Für die Du
 
 Damit der Benchmark zuverlässige Ergebnisse liefert, wurden alle Kombinationen der Testvariablen jeweils 100 mal ausgeführt. Mehrere Iterationen sind hilfreich, um Anomalien und zufällige Einflussfaktoren bei der Durchführung der Tests auszuschließen. 
 
-Die Ergebnisse der Tests wurden in eine Log-Datei geschrieben, die mit Hilfe von einem selbsterstellten Java-Programm (BenchmarkLoader) geparst und in einen virtuellen Cube in die HANA-Datenbank geladen wurden. Der Cube eignet sich gut für die Auswertung der Benchmark-Ergebnisse, da wir unterschiedliche Testvariablen haben, die in verschiedenen Kombinationen getestet werden.
+Die Ergebnisse der Tests wurden in eine Log-Datei geschrieben, die mit Hilfe von einem selbsterstellten Java-Programm (BenchmarkLoader) geparst und in einen virtuellen Cube in die HANA-Datenbank geladen wurden. Der BenchmarkLoader liest die Benchmark-Ergebnisse aus den Log-Dateien, wandelt diese in die SQL-Statements um und führt die entsprechenden Insert-Befehle auf der Datenbank aus.
 
-Im Folgenden wird die Auswahl von Indizes, der BenchmarkLoader und der virtuelle Cube beschrieben.
+Der Cube eignet sich gut für die Auswertung der Benchmark-Ergebnisse, da wir unterschiedliche Testvariablen haben, die in verschiedenen Kombinationen getestet werden.
 
-### Auswahl der Indizes
+#### Benchmark-Cube
+
+<!-- HANA unterstützt nur Cubes auf CS -->
+
+Die Benchmark-Daten wurden in der HANA-Datenbank in einem Star Schema gespeichert. Die Messdaten in der Faktentabelle sind die Ausführungszeiten, die vom Server gemeldet werden: *TOTALTIME* (*RUNTIME* + *CURSTIME)*. Runtime ist die benötigte Server-Zeit zur Berechnung der Ergebnisse und Curstime die zur Auslieferung der Ergebnisse benötigte Server-Zeit. Die Benchmark-Ergebnisse sind multidimensionale Daten. Jede Testvariable entspricht einer Dimension: Tabellenorganisation (Row- oder Columnsstore), SSBM-Queries, Indizes und  Hints. CPUCOUNT und THREADCOUNT sind degenerierte Dimensionen. Es wäre auch denkbar gewesen, diese in einer CPU Konfiguration Dimension zusammenzufassen, worauf aber verzichtet wurde um es einfach zu halten.
+
+![Benchmark-Cube](/home/kristina/git/SSBM-HANA/BenchmarkCube.PNG)
+
+Man sollte jedoch vermeiden, dass der Cube sparse besetzt ist (wenn Daten zu bestimmten Testvariablen fehlen), und möglichst nach verschiedenen Parametern filtern, um keine falschen Schlussfolgerungen zu ziehen. Des Weiteren soll bei der Auswertung der Messungen die Durchschnittszeiten und keine Summe verglichen werden, um zu vermeiden, dass die Tests die öfter durchgeführt werden, größere Werte liefern (z.B. wenn Columnstore mehr als Rowstore getestet wurde).
+
+#### Excel
+
+Die Daten aus den virtuellen Cubes können mit Excel angezeigt und ausgewertet werden. Dabei stellt Excel MDX-Abfragen an die HANA-Datenbank. HANA erlaubt Abfragen über MDX an den virtuellen Cube. Dafür kann man in Excel entsprechenden MDX Provider von HANA verwenden.
+
+Zunächst muss der HANA MDX-Provider, welcher in Form einer DDL kommt registiert werden:
+
+````bash
+Regsvr32 "C:\Program Files (x86)\sap\hdbclient\SAPNewDBMDXProvider.dll"
+````
+
+Da der MDX-Provider mit Excel 2016 nicht mehr funktioniert wurde Excel 2010 verwendet.
+
+Der HANA MDX-Provder ist im "Data Connection Wizard" von Excel unter "Other/Advanced" zu finden. 
+
+| ![](bilder/HANA_MDX_Provider.PNG){width=40%} | ![](bilder/MDX-Connection.PNG){width=40%}|
+
+Im nächsten Schritt erfolgt die Anmeldung über einen HANA-User. Darauf folgt die auswahl des Cubes. Excel erstellt eine Pivot Tabelle, welche ihre Daten aus dem Cube bezieht.
+
+![MDX-Pivot-Table](/home/kristina/git/SSBM-HANA/bilder/MDX-Pivot-Table.PNG)
+
+
+
+# Benchmark-Analyse und Auswertung der Query Execution Plans
+
+Die Benchmark-Ergebnisse lassen folgende Schlussfolgerungen zu:
+
+1. Columnstore ist generell schneller als Rowstore
+2. Indizes sind mehr für Rowstore als für Columnstore relevant
+3. Columnstore profitiert stark von der OLAP-Engine.
+
+Diese Aussagen werden nun näher erläutert. 
+
+### Columnstore ist schneller als Rowstore
+
+Wenn man Optimierungen durch Indizes oder Hints nicht in Betracht zieht, schneidet der Columnstore mit großem Abstand bei jeder SQL-Query besser ab als Rowstore. Bei den Auswertungen wurden die durchschnittlichen Ausführungszeiten der SSBM-Queries genommen. 
+
+![Column vs. Row Store Performance](RS-CS-Index-NoIndex.png)
+
+Im Vergleich zu Rowstore braucht der Columnstore meist nur einen Bruchteil der Zeit. Das Gesamtbild relativiert sich etwas durch die Verwendung von Indizes, die besonders bei Rowstore eine Rolle spielen, was im Weiteren ausführlicher erläutert wird. Nichts desto trotz kann man generell aus den Benchmark-Ergebnissen schließen, dass der Columnstore wesentlich besser performt.
+
+
+### Einfluss von Indizes bei Row- und Columnstore
+
+####Auswahl der Indizes
 
 Die Indizes wurden in verschiedene Kategorien eingeordnet. Zunächst wurden Indizes auf die Fremdschlüssel-Spalten in der Faktentabelle angelegt. Danach wurden zusätzliche Indizes auf die Attributen der Faktentabelle hinzugefügt. Indizes auf Primärschlüssel erstellt HANA implizit, deshalb wurden sie nicht explizit getestet [###].
 
@@ -323,42 +373,7 @@ Die Indizes wurden in verschiedene Kategorien eingeordnet. Zunächst wurden Indi
 
 Bei den Dimensionstabellen wurden Indizes auf restriktive und weniger restriktive Spalten getestet. So schränkt beispielsweise eine Bedingung auf die Region kaum ein, weil eine Region sehr groß ist im Vergleich zu einer Stadt, die die Treffermenge stark einschränkt.
 
-### BenchmarkLoader
 
-<!-- TODO Jan -->
-
-# Analyse der Ergebnisse
-
-## Benchmark-Cube
-
-Die Benchmark-Daten wurden in der HANA-Datenbank in einem Star Schema gespeichert. Die Messdaten in der Faktentabelle sind die Ausführungszeiten, die vom Server gemeldet werden: *TOTALTIME* (*RUNTIME* + *CURSTIME)*. Runtime ist die benötigte Server-Zeit zur Berechnung der Ergebnisse und Curstime die zur Auslieferung der Ergebnisse benötigte Server-Zeit. Die Benchmark-Ergebnisse sind multidimensionale Daten. Jede Testvariable entspricht einer Dimension: Tabellenorganisation (Row- oder Columnsstore), SSBM-Queries, Indizes und  Hints. CPUCOUNT und THREADCOUNT sind degenerierte Dimensionen. Es wäre auch denkbar gewesen, diese in einer CPU Konfiguration Dimension zusammenzufassen, worauf aber verzichtet wurde um es einfach zu halten.
-
-![Benchmark-Cube](BenchmarkCube.PNG)
-
-Man sollte jedoch vermeiden, dass der Cube sparse besetzt ist (wenn Daten zu bestimmten Testvariablen fehlen), und möglichst nach verschiedenen Parametern filtern, um keine falschen Schlussfolgerungen zu ziehen. Des Weiteren soll bei der Auswertung der Messungen die Durchschnittszeiten und keine Summe verglichen werden, um zu vermeiden, dass die Tests die öfter durchgeführt werden, größere Werte liefern (z.B. wenn Columnstore mehr als Rowstore getestet wurde).
-
-
-
-## Benchmark-Analyse und Auswertung der Query Execution Plans
-
-Die Benchmark-Ergebnisse lassen folgende Schlussfolgerungen zu:
-
-1. Columnstore ist generell schneller als Rowstore
-2. Indizes sind mehr für Rowstore als für Columnstore relevant
-3. Columnstore profitiert stark von der OLAP-Engine.
-
-Diese Aussagen werden nun näher erläutert. 
-
-### Columnstore ist schneller als Rowstore
-
-Wenn man Optimierungen durch Indizes oder Hints nicht in Betracht zieht, schneidet der Columnstore mit großem Abstand bei jeder SQL-Query besser ab als Rowstore. Bei den Auswertungen wurden die durchschnittlichen Ausführungszeiten der SSBM-Queries genommen. 
-
-![Column vs. Row Store Performance](RS-CS-Index-NoIndex.png)
-
-Die Performance von Columnstore ist im Durchschnitt um den Faktor ### schneller. Das Gesamtbild relativiert sich durch die Verwendung von Indizes, die besonders bei Rowstore eine Rolle spielen, was im Weiteren ausführlicher erläutert wird. 
-
-
-### Einfluss von Indizes bei Row- und Columnstore
 
 #### Indizes auf Fremdschlüssel in der Faktentabelle
 
@@ -371,7 +386,7 @@ Die gute Performance des RS mit FK Indizes bei manchen Queries kann dadurch erkl
 Die Queries, welche negativ von den Indizes betroffen sind, haben nur eine schwache Einschränkung auf der jeweiligen Dimension. (Jahr (1.1), Region (3.1, 4.1, 4.2 )). Das kann man an dem Beispiel von der Query 3.1 beobachten. Beim QEP ohne Index sieht man, dass der Optimizer zuerst die Dimensionstabellen entsprechend den Restriktionen scannt und daraus die Hash-Tables für die Hash-Joins baut. Dann geht er mit mehreren Threads parallel über die Faktentabelle und filtert sie dann anhand der Hash-Tabellen. Aus den verbleibenden Zeilen bildet er ein Aggregat und ordnet das Result Set.
 
 
-| ![QEP 3.1 ohne Indizes](qep_3.1row_4core_noht.png) | ![QEP 3.1 mit Indizes](qep_3.1row_4core_noht_index.png) |
+| ![QEP 3.1 ohne Indizes](qep_3.1row_4core_noht.png){ width=50% } | ![QEP 3.1 mit Indizes](qep_3.1row_4core_noht_index.png){ width=50% }  |
 | -------------------------------------------------- | ------------------------------------------------------- |
 
 Bei dem Query Execution Plan mit Index sieht man: für den Join zwischen der Faktentabelle der Supplier-Dimensionstabelle wird ein Index-Join verwendet. Dabei scannt er zuerst die Suplier-Tabelle und wendet die Region-Restriktion an. Daraus bekommt er die Primary-Keys von den Suppliern, und sucht die entsprechende Fremdschlüssel im Index der Faktentabelle. Darüber erhält er dann die entsprechenden Zeilen der Faktentabelle, die er weiter (wie im QEP ohne Index) mit Hilfe der Hash-Tabellen nach den anderen Dimensionen filtert. Man sieht hier allerdings, dass der Optimizer sich laut Query Execution Plan trotz der relativ großen Treffermemge auf der Supplier-Dimension für einen Index Join entschieden hat, was anscheinend die Performance beeinträchtigt. 
@@ -386,7 +401,7 @@ Im Gegensatz zu Rowstore haben FK Indizes bei Columnstore keine negativen Auswir
 
 Die QEPs bei Columnstore geben das genaue JOIN Verfahren nicht preis und unterscheiden sich nur in der Ausführungszeit, daher können keine genaueren Aussagen getroffen werden.
 
-![QEP 3.1 Rowstore](qep_3.1row_4core_noht.png)
+![QEP 3.1 Rowstore](qep_3.1row_4core_noht.png){ width=50%}
 
 Der CS kann seinen Vorteil vor allem bei den Queries auspielen, bei denen keine starke Eingrenzung stattfindet, wodurch sich Index Zugriffe nicht lohnen. 
 
