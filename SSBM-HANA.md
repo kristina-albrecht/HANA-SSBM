@@ -421,23 +421,13 @@ In keinem Fall konnte mit einem der beiden Hints eine bessere Performance erzieh
 
 # Fazit
 
-RS kann stark von Indizes profitieren (je nachdem wie restriktiv -> wie erwartet), CS auch etwas.
+Insgesamt hat sich gezeigt, dass eine spaltenbasierte Speicherung im Benchmark schnellere Ergebnisse gezeigt hat als die zeilenbasierte.
 
-Der Optimizer bei RS weiß nicht wann er keine Indizes verwenden sollte (SAP hat den Fokus wohl mehr auf CS)
+Unsere Untersuchungen zur Nutzung von Indizes haben ergeben, dass eine zeilenbasierte Speicherung stark von Indizes profitiert. Bei der spaltenbasierten Speicherung war der Unterschied durch Indizies nicht so hoch, doch auch hier konnte im Durchschnitt eine Verbesserung festgestellt werden.
 
-Der CS kann seinen Vorteil vor allem bei den Queries auspielen, bei denen keine starke Eingrenzung stattfindet, wodurch sich Index zugriffe nicht lohnen. 
+Auffällig ist hierbei, dass der Optimizer für zeilenbasierte Speicherung nicht feststellen kann, ob er die Indizes auch verwenden sollte, wenn vorhanden werden sie genutzt.
 
-Aussagen:
-
-1. CS ist schneller als RS
-
-2. CS profiitert von Indizes, allerdings nicht so stark wie RS
-
-   Beispiel 3.3 CS, QEP
-
-   Row Store, Beispiel 3.1, 3.3 
-
-3. CS profitiert sehr stark von OLAP-Plan
+Der Columnstore kann seinen Vorteil vor allem bei den Queries ausspielen, bei denen keine starke Eingrenzung stattfindet, wodurch sich Index zugriffe nicht lohnen. Er profitiert jedoch sehr stark von der Nutzung eines OLAP-Plans in der Ausführung.
 
 # Autoren
 
