@@ -1,7 +1,7 @@
 ---
 title: "Star Schema Benchmark für SAP HANA"
 author: [Jan Hofmeier, Marius Jochheim, Lion Scherer, Kristina Albrecht]
-date: 2018-03-06
+date: 2018-04-20
 subject: "Hana"
 tags: [Hana, SSBM]
 subtitle: "Data Warehouse"
@@ -16,23 +16,21 @@ titlepage-rule-height: 1
 
 # Einleitung
 
- Heißt es SSB oder SSBM? Stoße oft auf beides? - Marius
+ <!-- Heißt es SSB oder SSBM? Stoße oft auf beides? - Marius -->
 
-Abkürzungen einführen vor Nutzung - Alle für sich
+<!-- Abkürzungen einführen vor Nutzung - Alle für sich -->
 
-Bildquellen fixen, Größe anpassen - Alle für sich
+<!-- Bildquellen fixen, Größe anpassen - Alle für sich -->
 
-Quellen - Jeder für sich
+<!-- Quellen - Jeder für sich -->
 
-- Kristina: Q3.1 vs. Q3.3 mit QEP ?
-- Kristina: HINTs (Column Store profitiert stark von OLAP Engine)
-- Marius: Query Beschreibung 
-- Marius: Fazit
-- Marius: Motivation 
+<!-- Kristina: Q3.1 vs. Q3.3 mit QEP ? -->
 
+<!-- Marius: Query Beschreibung  -->
 
+<!-- Marius: Fazit -->
 
-Kapitelzuweisung, wer hat was gemacht?
+<!-- Marius: Motivation  -->
 
 ## Motivation
 
@@ -155,7 +153,7 @@ Bei jeder „delta merge“ Operation wird die Datenkompression automatisch eval
 
 
 
-# Architektur
+## SAP HANA Architektur
 
 ![Architektur SQL Optimizer](bilder/Architektur.png){ width=50%}
 
@@ -295,7 +293,7 @@ Der Cube eignet sich gut für die Auswertung der Benchmark-Ergebnisse, da wir un
 
 Die Benchmark-Daten wurden in der HANA-Datenbank in einem Star Schema gespeichert. Die Messdaten in der Faktentabelle sind die Ausführungszeiten, die vom Server gemeldet werden: *TOTALTIME* (*RUNTIME* + *CURSTIME)*. Runtime ist die benötigte Server-Zeit zur Berechnung der Ergebnisse und Curstime die zur Auslieferung der Ergebnisse benötigte Server-Zeit. Die Benchmark-Ergebnisse sind multidimensionale Daten. Jede Testvariable entspricht einer Dimension: Tabellenorganisation (Row- oder Columnsstore), SSBM-Queries, Indizes und  Hints. CPUCOUNT und THREADCOUNT sind degenerierte Dimensionen. Es wäre auch denkbar gewesen, diese in einer CPU Konfiguration Dimension zusammenzufassen, worauf aber verzichtet wurde um es einfach zu halten.
 
-![Benchmark-Cube](/home/kristina/git/SSBM-HANA/BenchmarkCube.PNG)
+![Benchmark-Cube](bilder/BenchmarkCube.PNG)
 
 Man sollte jedoch vermeiden, dass der Cube sparse besetzt ist (wenn Daten zu bestimmten Testvariablen fehlen), und möglichst nach verschiedenen Parametern filtern, um keine falschen Schlussfolgerungen zu ziehen. Des Weiteren soll bei der Auswertung der Messungen die Durchschnittszeiten und keine Summe verglichen werden, um zu vermeiden, dass die Tests die öfter durchgeführt werden, größere Werte liefern (z.B. wenn Column Store mehr als Row Store getestet wurde).
 
@@ -331,16 +329,15 @@ Die Benchmark-Ergebnisse lassen folgende Schlussfolgerungen zu:
 
 Diese Aussagen werden nun näher erläutert. 
 
-### Column Store ist schneller als Row Store
+## Column Store ist schneller als Row Store
 
 Wenn man Optimierungen durch Indizes oder Hints nicht in Betracht zieht, schneidet der Column Store mit großem Abstand bei jeder SQL-Query besser ab als Row Store. Bei den Auswertungen wurden die durchschnittlichen Ausführungszeiten der SSBM-Queries genommen. 
 
-![Column vs. Row Store Performance](RS-CS-Index-NoIndex.png)
+![Column vs. Row Store Performance](bilder/RS-CS-Index-NoIndex.png)
 
 Im Vergleich zu Row Store braucht der Column Store meist nur einen Bruchteil der Zeit. Das Gesamtbild relativiert sich etwas durch die Verwendung von Indizes, die besonders bei Row Store eine Rolle spielen, was im Weiteren ausführlicher erläutert wird. Nichts desto trotz kann man generell aus den Benchmark-Ergebnissen schließen, dass der Column Store wesentlich besser performt.
 
-
-### Einfluss von Indizes bei Row- und Column Store
+## Einfluss von Indizes bei Row- und Column Store
 
 ####Auswahl der Indizes
 
@@ -380,14 +377,14 @@ Bei den Dimensionstabellen wurden Indizes auf restriktive und weniger restriktiv
 
 Bei Row Store ist die Performance mit Indizes auf Fremdschlüsseln stark von den Queries abhängig. Bei der Merheit der Queries performt Row Store vergleichbar mit dem Column Store (1.2, 1.3, 2.1, 2.2, 2.3, 3.3, 3.4), und kann Column Store ohne Indizes sogar in manchen Fällen schlagen (1.3, 2.2, 3.3, 3.4). Im Gesamtbild bleibt der Row Store aber wesentlich langsamer als der Column Store. Besonders bei der vierten Query Gruppe. Teilweise verschlechtern die Indizes die Zeiten des Row Stores sogar (1.1, 3.1, 4.1, 4.2)
 
-Die gute Performance von Row Store mit Foreagn Key Indizes bei manchen Queries kann dadurch erklärt werden, dass die betroffenen Queries starke Einschränkungen auf einer Dimension haben. Bei Gruppe 1 wird auf einen Monat (1.2) bzw eine Woche (1.3) eingeschränkt. Der Unterschied zwischen Monat und Woche ist ebenfalls deutlich sichtbar. Query Gruppe 2, welche starke Einschränkungen auf der PART Dimension hat, ergibt ein ähnliches Bild: 2.1 schränkt auf eine Kategorie ein, 2.2 auf mehre Marken und 2.3 auf eine Marke. 2.3 ist mit FK Indizes am schnellsten, gefolgt von 2.2 und mit etwas größerem Abstand 2.1. Gruppe 3 schränkt auf der Customer und Supplier Dimension ein. 3.2 schränkt nur auf eine Nation ein und kann deshalb nicht ganz so stark profitieren wie 3.3 und 3.4, welche auf je 2 Städte einschränken. Bei Gruppe 4 ist nur bei 4.3 ein geringer positiver Effekt durch die FK Indizes sichtbar, hier wird nur auf der Supplier Dimension nach Nation eingeschränkt. Die Verwendung der Indizes ist auch in den QEPs, in Form eines "Cpbtree Index Join", an Stelle eines Hash Join sichtbar.
+Die gute Performance von Row Store mit Foreign Key Indizes bei manchen Queries kann dadurch erklärt werden, dass die betroffenen Queries starke Einschränkungen auf einer Dimension haben. Bei Gruppe 1 wird auf einen Monat (1.2) bzw eine Woche (1.3) eingeschränkt. Der Unterschied zwischen Monat und Woche ist ebenfalls deutlich sichtbar. Query Gruppe 2, welche starke Einschränkungen auf der PART Dimension hat, ergibt ein ähnliches Bild: 2.1 schränkt auf eine Kategorie ein, 2.2 auf mehre Marken und 2.3 auf eine Marke. 2.3 ist mit Foreign Key Indizes am schnellsten, gefolgt von 2.2 und mit etwas größerem Abstand 2.1. Gruppe 3 schränkt auf der Customer und Supplier Dimension ein. 3.2 schränkt nur auf eine Nation ein und kann deshalb nicht ganz so stark profitieren wie 3.3 und 3.4, welche auf je 2 Städte einschränken. Bei Gruppe 4 ist nur bei 4.3 ein geringer positiver Effekt durch die Foreign KeyIndizes sichtbar, hier wird nur auf der Supplier Dimension nach Nation eingeschränkt. Die Verwendung der Indizes ist auch in den QEPs, in Form eines "Cpbtree Index Join", an Stelle eines Hash Join sichtbar.
 
 Die Queries, welche negativ von den Indizes betroffen sind, haben nur eine schwache Einschränkung auf der jeweiligen Dimension. (Jahr (1.1), Region (3.1, 4.1, 4.2 )). Das kann man an dem Beispiel von der Query 3.1 beobachten. Beim QEP ohne Index sieht man, dass der Optimizer zuerst die Dimensionstabellen entsprechend den Restriktionen scannt und daraus die Hash-Tables für die Hash-Joins baut. Dann geht er mit mehreren Threads parallel über die Faktentabelle und filtert sie dann anhand der Hash-Tabellen. Aus den verbleibenden Zeilen bildet er ein Aggregat und ordnet das Result Set.
 
 Bei der Verwendung von Hash Joins werden auf den einschränkenden Dimensionen zunächst die Hashtabellen aufgebaut. Diese fungieren wie Filter, durch die dann die einzelnen Spalten der Faktentabelle "gepiped" werden ohne Zwischenresultate zu bilden. Für das Filtern der Faktentabelle, aber auch für das Erstellen großer Hashtabellen, kommen mehrere Threads zum Einsatz.
 
 
-| ![QEP 3.1 ohne Indizes](qep_3.1row_4core_noht.png){ width=50% } | ![QEP 3.1 mit Indizes](qep_3.1row_4core_noht_index.png){ width=50% }  |
+| ![QEP 3.1 ohne Indizes](bilder/qep_3.1row_4core_noht.png){ width=50% } | ![QEP 3.1 mit Indizes](bilder/qep_3.1row_4core_noht_index.png){ width=50% }  |
 | -------------------------------------------------- | ------------------------------------------------------- |
 
 Bei dem Query Execution Plan mit Index sieht man: für den Join zwischen der Faktentabelle der Supplier-Dimensionstabelle wird ein Index-Join verwendet. Dabei scannt er zuerst die Suplier-Tabelle und wendet die Region-Restriktion an. Daraus bekommt er die Primary-Keys von den Suppliern, und sucht die entsprechende Fremdschlüssel im Index der Faktentabelle. Darüber erhält er dann die entsprechenden Zeilen der Faktentabelle, die er weiter (wie im QEP ohne Index) mit Hilfe der Hash-Tabellen nach den anderen Dimensionen filtert. Man sieht hier allerdings, dass der Optimizer sich laut Query Execution Plan trotz der relativ großen Treffermemge auf der Supplier-Dimension für einen Index Join entschieden hat, was anscheinend die Performance beeinträchtigt. 
@@ -398,15 +395,15 @@ Auffällig ist, dass der Optimizer immer die vorhandeten Indizes verwendet hat u
 
 ##### Column Store
 
-Im Gegensatz zu Row Store haben FK Indizes bei Column Store keine negativen Auswirkungen. Die Performance verbessert sich je nach Query leicht bis stark, jedoch nicht stark wie bei Row Store. Sogar bei Querys, bei denen sich Row Store mit den Indizes verschlechtert hat, konnte Column Store leicht davon profitieren. Das widerspricht den Erwartungen. Da bei Row Store ein Full Scan tendenziell teurer ist, wäre zu erwarten, dass sich hier ein Index Zugriff noch bei einer größeren Treffermenge lohnt als bei Column Store. Die Beobachtung ist aber genau das Gegenteil. Eine mögliche erklärung wäre, dass Column Store in diesen Fällen keinen Index Join macht, sondern nur zusätzliche Metadaten der Indizes verwendet. Einzig bei Query 3.2 sind die Zeiten mit und ohne Indizes identisch.
+Im Gegensatz zu Row Store haben Foreign KeyIndizes bei Column Store keine negativen Auswirkungen. Die Performance verbessert sich je nach Query leicht bis stark, jedoch nicht stark wie bei Row Store. Sogar bei Querys, bei denen sich Row Store mit den Indizes verschlechtert hat, konnte Column Store leicht davon profitieren. Das widerspricht den Erwartungen. Da bei Row Store ein Full Scan tendenziell teurer ist, wäre zu erwarten, dass sich hier ein Index Zugriff noch bei einer größeren Treffermenge lohnt als bei Column Store. Die Beobachtung ist aber genau das Gegenteil. Eine mögliche erklärung wäre, dass Column Store in diesen Fällen keinen Index Join macht, sondern nur zusätzliche Metadaten der Indizes verwendet. Einzig bei Query 3.2 sind die Zeiten mit und ohne Indizes identisch.
 
 Die QEPs bei Column Store geben das genaue JOIN Verfahren nicht preis und unterscheiden sich nur in der Ausführungszeit, daher können keine genaueren Aussagen getroffen werden.
 
-![QEP 3.1 Row Store](qep_3.1row_4core_noht.png){ width=50%}
+![QEP 3.1 Row Store](bilder/qep_3.1row_4core_noht.png){ width=50%}
 
 Der Column Store kann seinen Vorteil vor allem bei den Queries auspielen, bei denen keine starke Eingrenzung stattfindet, wodurch sich Index Zugriffe nicht lohnen. 
 
-#### Rolle von OLAP-Engine bei Column Store
+## Rolle von OLAP-Engine bei Column Store
 
 Beim Column Store entscheidet sich der Optimizer je nach Abfrage, ob Join-Engine oder OLAP-Engine verwendet wird. Mit den Hints *USE_OLAP_PLAN* und *NO_USE_OLAP_PLAN* lässt sich die Verwendung vom OLAP-Engine durch den Optimizer beim Column Store entweder erzwingen oder verhindern. 
 
@@ -416,15 +413,15 @@ In der Regel performt OLAP-Engine fast immer besser, außer bei 2.3, 3.3 und 3.4
 
 Interessante Feststellung war, dass die Queries, welche bei Row Store schlecht mit Indizes (Foreign Key Indizes) performt haben, auch mit Join-Engine (NO_USE_OLAP_PLAN) deutlich langsamer waren.
 
-Wenn man Row Store mit Indizes und Column Store ohne OLAP-Engine (*NO_USE_OLAP_PLAN*) miteinander vergleicht, ist zwar Column Store immer noch schneller, allerdings ist der Unterschied nicht so drastisch wie mit dem OLAP-Plan, woraus sich schließen lässt, dass Column Store sehr stark vom OLAP-Engine profitiert.
+Wenn man Row Store und Column Store ohne OLAP-Engine (*NO_USE_OLAP_PLAN*) miteinander vergleicht, ist festzustellen, dass Column Store sogar langsamer ist, woraus sich schließen lässt, dass Column Store sehr stark vom OLAP-Engine profitiert.
+
+![Vergleich von OLAP-Hints bei Column Store mit Row Store Performance](bilder/hints.jpg)
 
 
 
 In keinem Fall konnte mit einem der beiden Hints eine bessere Performance erziehlt werden als ohne. Das lässt darauf schließen, dass der Optimizer von selbst die bestmögliche Entscheidung trifft.  
 
- 
 
-<!-- TODO Jan: Skalierung von HANA (CPU) -->
 
 
 
@@ -453,17 +450,22 @@ Aussagen:
 | Kapitel                          | Kristina Albrecht (2835001) | Jan Hofmeier (5822161) | Marius Jochheim (1240352) | Lion Scherer (XXXXXXX) |
 | -------------------------------- | --------------------------- | ---------------------- | ------------------------- | ---------------------- |
 | 1 Einleitung                     |                             |                        | X                         |                        |
-| 2 SAP HANA                       |                             |                        |                           | X                      |
+| 2 SAP HANA: Überblick            |                             |                        |                           | X                      |
+| 2 Zeilen- und Spaltenbasierte Speicherung |                             |                        |                           | X                       |
+| 2 Komprimierung und Referenzen   |                             |                        |                           | X                      |
+| 2 SAP HANA Architektur           |                             |                        |                           | X                      |
 | 3 SSBM                           |                             |                        | X                         |                        |
 | 4 Aufsetzen                      |                             | X                      |                           |                        |
 | 4 Column- vs Row Store           | X                           | X                      | X                         |                        |
 | 4 Indizes                        | X                           | X                      |                           |                        |
 | 4 Hints                          | X                           |                        |                           |                        |
 | 4 Benchmark Cube                 | X                           |                        |                           |                        |
-| 4 Excel                          |                             | X                      |                           |                        |
-| 4 BenchmarkLoader                |                             | X                      |                           |                        |
+|   Excel Anbindung                |                             | X                      |                           |                        |
+|   BenchmarkLoader                |                             | X                      |                           |                        |
+|   Query Execution Plans          |                             | X                      | X                         |                        |
 | 4 Laden von Tabellen und Indizes | X                           |                        |                           |                        |
 | 4 Vorgehensweise                 | X                           |                        |                           |                        |
+| 4 Benchmark-Analyse              | X                           | X                      | X                         |                        |
 | 5 Fazit                          |                             |                        | X                         |                        |
 
 
