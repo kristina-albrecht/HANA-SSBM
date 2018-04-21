@@ -1,3 +1,4 @@
+---
 title: "Star Schema Benchmark für SAP HANA"
 author: [Jan Hofmeier, Marius Jochheim, Lion Scherer, Kristina Albrecht]
 date: 2018-03-06
@@ -9,12 +10,13 @@ titlepage-color: 06386e
 titlepage-text-color: FFFFFF
 titlepage-rule-color: FFFFFF
 titlepage-rule-height: 1
+---
+
+
 
 # Einleitung
 
  Heißt es SSB oder SSBM? Stoße oft auf beides? - Marius
-
-Column und Row Store einheitlich schreiben  -Kristina
 
 Abkürzungen einführen vor Nutzung - Alle für sich
 
@@ -23,8 +25,7 @@ Bildquellen fixen, Größe anpassen - Alle für sich
 Quellen - Jeder für sich
 
 - Kristina: Q3.1 vs. Q3.3 mit QEP ?
-- Kristina: Column Store mit Indizes schneller, aber QEPs sind gleich
-- Kristina: HINTs (Columnstore profitiert stark von OLAP Engine)
+- Kristina: HINTs (Column Store profitiert stark von OLAP Engine)
 - Marius: Query Beschreibung 
 - Marius: Fazit
 - Marius: Motivation 
@@ -43,7 +44,7 @@ Ziel dieser Arbeit ist die Durchführung eines Performance Benchmarks von SAP HA
 
 Im Anschluss werden die Queries des SSB ausgeführt und die Ergebnisse gespeichert. Zum Analysieren der Testergebnisse wird ein Benchmark-Cube erstellt, dessen Aufbau ebenfalls beschrieben werden soll.
 
-Bei den Tests wurde besonderer Wert auf die Unterschiede zwischen den Ausführungszeiten der Queries bei Column- und Rowstores gelegt. Dabei sollen auch die Auswirkungen von Indizes auf Column- und Rowstores näher untersucht werden.
+Bei den Tests wurde besonderer Wert auf die Unterschiede zwischen den Ausführungszeiten der Queries bei Column- und Row Store gelegt. Dabei sollen auch die Auswirkungen von Indizes auf Column- und Row Store näher untersucht werden.
 
 # SAP HANA
 
@@ -247,7 +248,7 @@ Das Laden der Daten mit einem einzigen Import-Statement pro Tabelle führt dazu,
 
 ### Ladezeiten von Tabellen und Indizes
 
-Bereits beim Laden der Tabellen wurde der Unterschied zwischen Spalten- und Zeilen-basierter Speicherung festgestellt. Der Ladeprozess bei der Spalten-basierten Tabellenorganisation hat 27% weniger Zeit benötigt (81 Sekunden für Columnstore und 112 Sekunden für Rowstore). Ein möglicher Grund ist die Kompression, die dafür sorgt, dass weniger Daten geschrieben werden müssen.
+Bereits beim Laden der Tabellen wurde der Unterschied zwischen Spalten- und Zeilen-basierter Speicherung festgestellt. Der Ladeprozess bei der Spalten-basierten Tabellenorganisation hat 27% weniger Zeit benötigt (81 Sekunden für Column Store und 112 Sekunden für Row Store). Ein möglicher Grund ist die Kompression, die dafür sorgt, dass weniger Daten geschrieben werden müssen.
 
 Als nächtes haben wir die Ladezeiten für das Anlegen der Indizes gemessen. Es wurden Indizes für  Spalten mit unterschidlich vielen einmaligen Werten in unterschiedlich großen Tabellen ausgewählt (*LO_ORDERKEY* und *LO_DISCOUNT* auf der Faktentabelle und *D_YEAR* auf einer Dimensionstabelle).
 
@@ -257,7 +258,7 @@ Bei D_YEAR war das Erstellen des Index bei der zeilenorientierten Tabellenorgani
 
 ### Vorgehensweise
 
-Das Ziel des Benchmarks war es, das Star Schema auf der HANA-Datenbank zu testen. Der Schwerpunkt lag dabei auf dem Vergleich zwischen Spalten- und Zeilen-basierter Tabellenorganisation. Es ging vor allem darum, am Beispiel der HANA In-Memory-Datenbank zu testen, ob Columnstores sich besser für Data Warehouse bzw. OLAP-Zwecke eignen als Zeilen-basierte Datenspeicherung. Desweiteren wurde der Einfluss von Indizes auf die Performance der HANA-Datenbank bei Column- und Rowstore analysiert.
+Das Ziel des Benchmarks war es, das Star Schema auf der HANA-Datenbank zu testen. Der Schwerpunkt lag dabei auf dem Vergleich zwischen Spalten- und Zeilen-basierter Tabellenorganisation. Es ging vor allem darum, am Beispiel der HANA In-Memory-Datenbank zu testen, ob Column Store sich besser für Data Warehouse bzw. OLAP-Zwecke eignen als Zeilen-basierte Datenspeicherung. Desweiteren wurde der Einfluss von Indizes auf die Performance der HANA-Datenbank bei Column und Row Store analysiert.
 
 Der Benchmark wurde mit folgenden Testvariablen durchgeführt:
 
@@ -268,7 +269,7 @@ Der Benchmark wurde mit folgenden Testvariablen durchgeführt:
 
 Die Tests wurden iterativ mit verschiedenen Kombinationen der Testvariablen durchgeführt. Die Durchführung des Benchmarks lässt sich in folgende Schritte unterteilen:
 
-1. Erzeugung vom Schema und Datenimport (Wechsel zwischen Column- und Rowstore)
+1. Erzeugung vom Schema und Datenimport (Wechsel zwischen Column und Row Store)
 2. Erstellen von Indizes
 3. Durchführung von Benchmarks (jeweils 100 Iterationen):
    1. ohne Hints
@@ -278,7 +279,7 @@ Die Tests wurden iterativ mit verschiedenen Kombinationen der Testvariablen durc
 5. Importieren der Daten in den Cube
 6. Analyse und Auswertung der Ergebnisse 
 
-Um den Einfluss von asynchronen Prozessen auf die Testergebnisse zu vermeiden, wurden die Benchmarks für Row- und Columnstore getrennt durchgeführt. Die Erzeugung vom Column- bzw. Row-Schema und der Datenimport (Schritt 1) erfolgten daher manuell. 
+Um den Einfluss von asynchronen Prozessen auf die Testergebnisse zu vermeiden, wurden die Benchmarks für Row- und Column Store getrennt durchgeführt. Die Erzeugung vom Column- bzw. Row-Schema und der Datenimport (Schritt 1) erfolgten daher manuell. 
 
 Schritte 2-4 wurden automatisiert mit einem bash-Skript ausgeführt. Für die Durchführung des Benchmarks wuden SQL-Abfragen zum Anlegen und Entfernen von Indizes, sowie SSBM-Abfragen (mit und ohne Hints) vorbereitet, die im bash-Skript nacheinander ausgeführt wurden. Benchmarks mit unterschiedlichen Indizes wurden jeweils ohne Hints sowie mit und ohne OLAP-Hint durchgeführt. 
 
@@ -296,7 +297,7 @@ Die Benchmark-Daten wurden in der HANA-Datenbank in einem Star Schema gespeicher
 
 ![Benchmark-Cube](/home/kristina/git/SSBM-HANA/BenchmarkCube.PNG)
 
-Man sollte jedoch vermeiden, dass der Cube sparse besetzt ist (wenn Daten zu bestimmten Testvariablen fehlen), und möglichst nach verschiedenen Parametern filtern, um keine falschen Schlussfolgerungen zu ziehen. Des Weiteren soll bei der Auswertung der Messungen die Durchschnittszeiten und keine Summe verglichen werden, um zu vermeiden, dass die Tests die öfter durchgeführt werden, größere Werte liefern (z.B. wenn Columnstore mehr als Rowstore getestet wurde).
+Man sollte jedoch vermeiden, dass der Cube sparse besetzt ist (wenn Daten zu bestimmten Testvariablen fehlen), und möglichst nach verschiedenen Parametern filtern, um keine falschen Schlussfolgerungen zu ziehen. Des Weiteren soll bei der Auswertung der Messungen die Durchschnittszeiten und keine Summe verglichen werden, um zu vermeiden, dass die Tests die öfter durchgeführt werden, größere Werte liefern (z.B. wenn Column Store mehr als Row Store getestet wurde).
 
 #### Excel
 
@@ -324,22 +325,22 @@ Im nächsten Schritt erfolgt die Anmeldung über einen HANA-User. Darauf folgt d
 
 Die Benchmark-Ergebnisse lassen folgende Schlussfolgerungen zu:
 
-1. Columnstore ist generell schneller als Rowstore
-2. Indizes sind mehr für Rowstore als für Columnstore relevant
-3. Columnstore profitiert stark von der OLAP-Engine.
+1. Column Store ist generell schneller als Row Store
+2. Indizes sind mehr für Row Store als für Column Store relevant
+3. Column Store profitiert stark von der OLAP-Engine.
 
 Diese Aussagen werden nun näher erläutert. 
 
-### Columnstore ist schneller als Rowstore
+### Column Store ist schneller als Row Store
 
-Wenn man Optimierungen durch Indizes oder Hints nicht in Betracht zieht, schneidet der Columnstore mit großem Abstand bei jeder SQL-Query besser ab als Rowstore. Bei den Auswertungen wurden die durchschnittlichen Ausführungszeiten der SSBM-Queries genommen. 
+Wenn man Optimierungen durch Indizes oder Hints nicht in Betracht zieht, schneidet der Column Store mit großem Abstand bei jeder SQL-Query besser ab als Row Store. Bei den Auswertungen wurden die durchschnittlichen Ausführungszeiten der SSBM-Queries genommen. 
 
 ![Column vs. Row Store Performance](RS-CS-Index-NoIndex.png)
 
-Im Vergleich zu Rowstore braucht der Columnstore meist nur einen Bruchteil der Zeit. Das Gesamtbild relativiert sich etwas durch die Verwendung von Indizes, die besonders bei Rowstore eine Rolle spielen, was im Weiteren ausführlicher erläutert wird. Nichts desto trotz kann man generell aus den Benchmark-Ergebnissen schließen, dass der Columnstore wesentlich besser performt.
+Im Vergleich zu Row Store braucht der Column Store meist nur einen Bruchteil der Zeit. Das Gesamtbild relativiert sich etwas durch die Verwendung von Indizes, die besonders bei Row Store eine Rolle spielen, was im Weiteren ausführlicher erläutert wird. Nichts desto trotz kann man generell aus den Benchmark-Ergebnissen schließen, dass der Column Store wesentlich besser performt.
 
 
-### Einfluss von Indizes bei Row- und Columnstore
+### Einfluss von Indizes bei Row- und Column Store
 
 ####Auswahl der Indizes
 
@@ -375,11 +376,11 @@ Bei den Dimensionstabellen wurden Indizes auf restriktive und weniger restriktiv
 
 #### Indizes auf Fremdschlüssel in der Faktentabelle
 
-##### Rowstore
+##### Row Store
 
-Bei Rowstore ist die Performance mit Indizes auf Fremdschlüsseln stark von den Queries abhängig. Bei der Merheit der Queries performt Rowstore vergleichbar mit dem Columnstore (1.2, 1.3, 2.1, 2.2, 2.3, 3.3, 3.4), und kann Columnstore ohne Indizes sogar in manchen Fällen schlagen (1.3, 2.2, 3.3, 3.4). Im Gesamtbild bleibt der Rowstore aber wesentlich langsamer als der Columnstore. Besonders bei der vierten Query Gruppe. Teilweise verschlechtern die Indizes die Zeiten des Rowstores sogar (1.1, 3.1, 4.1, 4.2)
+Bei Row Store ist die Performance mit Indizes auf Fremdschlüsseln stark von den Queries abhängig. Bei der Merheit der Queries performt Row Store vergleichbar mit dem Column Store (1.2, 1.3, 2.1, 2.2, 2.3, 3.3, 3.4), und kann Column Store ohne Indizes sogar in manchen Fällen schlagen (1.3, 2.2, 3.3, 3.4). Im Gesamtbild bleibt der Row Store aber wesentlich langsamer als der Column Store. Besonders bei der vierten Query Gruppe. Teilweise verschlechtern die Indizes die Zeiten des Row Stores sogar (1.1, 3.1, 4.1, 4.2)
 
-Die gute Performance des RS mit FK Indizes bei manchen Queries kann dadurch erklärt werden, dass die betroffenen Queries starke Einschränkungen auf einer Dimension haben. Bei Gruppe 1 wird auf einen Monat (1.2) bzw eine Woche (1.3) eingeschränkt. Der Unterschied zwischen Monat und Woche ist ebenfalls deutlich sichtbar. Query Gruppe 2, welche starke Einschränkungen auf der PART Dimension hat, ergibt ein ähnliches Bild: 2.1 schränkt auf eine Kategorie ein, 2.2 auf mehre Marken und 2.3 auf eine Marke. 2.3 ist mit FK Indizes am schnellsten, gefolgt von 2.2 und mit etwas größerem Abstand 2.1. Gruppe 3 schränkt auf der Customer und Supplier Dimension ein. 3.2 schränkt nur auf eine Nation ein und kann deshalb nicht ganz so stark profitieren wie 3.3 und 3.4, welche auf je 2 Städte einschränken. Bei Gruppe 4 ist nur bei 4.3 ein geringer positiver Effekt durch die FK Indizes sichtbar, hier wird nur auf der Supplier Dimension nach Nation eingeschränkt. Die Verwendung der Indizes ist auch in den QEPs, in Form eines "Cpbtree Index Join", an Stelle eines Hash Join sichtbar.
+Die gute Performance von Row Store mit Foreagn Key Indizes bei manchen Queries kann dadurch erklärt werden, dass die betroffenen Queries starke Einschränkungen auf einer Dimension haben. Bei Gruppe 1 wird auf einen Monat (1.2) bzw eine Woche (1.3) eingeschränkt. Der Unterschied zwischen Monat und Woche ist ebenfalls deutlich sichtbar. Query Gruppe 2, welche starke Einschränkungen auf der PART Dimension hat, ergibt ein ähnliches Bild: 2.1 schränkt auf eine Kategorie ein, 2.2 auf mehre Marken und 2.3 auf eine Marke. 2.3 ist mit FK Indizes am schnellsten, gefolgt von 2.2 und mit etwas größerem Abstand 2.1. Gruppe 3 schränkt auf der Customer und Supplier Dimension ein. 3.2 schränkt nur auf eine Nation ein und kann deshalb nicht ganz so stark profitieren wie 3.3 und 3.4, welche auf je 2 Städte einschränken. Bei Gruppe 4 ist nur bei 4.3 ein geringer positiver Effekt durch die FK Indizes sichtbar, hier wird nur auf der Supplier Dimension nach Nation eingeschränkt. Die Verwendung der Indizes ist auch in den QEPs, in Form eines "Cpbtree Index Join", an Stelle eines Hash Join sichtbar.
 
 Die Queries, welche negativ von den Indizes betroffen sind, haben nur eine schwache Einschränkung auf der jeweiligen Dimension. (Jahr (1.1), Region (3.1, 4.1, 4.2 )). Das kann man an dem Beispiel von der Query 3.1 beobachten. Beim QEP ohne Index sieht man, dass der Optimizer zuerst die Dimensionstabellen entsprechend den Restriktionen scannt und daraus die Hash-Tables für die Hash-Joins baut. Dann geht er mit mehreren Threads parallel über die Faktentabelle und filtert sie dann anhand der Hash-Tabellen. Aus den verbleibenden Zeilen bildet er ein Aggregat und ordnet das Result Set.
 
@@ -395,27 +396,27 @@ Auffällig ist, dass der Optimizer immer die vorhandeten Indizes verwendet hat u
 
 Über den Hint NO_INDEX_JOIN kann die Verwendung von Hash Joins bei den betroffenen Queries erzwungen werden, um eine verschlechterung der Performance zu verhindern. 
 
-##### Columnstore
+##### Column Store
 
-Im Gegensatz zu Rowstore haben FK Indizes bei Columnstore keine negativen Auswirkungen. Die Performance verbessert sich je nach Query leicht bis stark, jedoch nicht stark wie bei Rowstore. Sogar bei Querys, bei denen sich Rowstore mit den Indizes verschlechtert hat, konnte Columnstore leicht davon profitieren. Das widerspricht den Erwartungen. Da bei Rowstore ein Full Scan tendenziell teurer ist, wäre zu erwarten, dass sich hier ein Index Zugriff noch bei einer größeren Treffermenge lohnt als bei Columnstore. Die Beobachtung ist aber genau das Gegenteil. Eine mögliche erklärung wäre, dass Columnstore in diesen Fällen keinen Index Join macht, sondern nur zusätzliche Metadaten der Indizes verwendet. Einzig bei Query 3.2 sind die Zeiten mit und ohne Indizes identisch.
+Im Gegensatz zu Row Store haben FK Indizes bei Column Store keine negativen Auswirkungen. Die Performance verbessert sich je nach Query leicht bis stark, jedoch nicht stark wie bei Row Store. Sogar bei Querys, bei denen sich Row Store mit den Indizes verschlechtert hat, konnte Column Store leicht davon profitieren. Das widerspricht den Erwartungen. Da bei Row Store ein Full Scan tendenziell teurer ist, wäre zu erwarten, dass sich hier ein Index Zugriff noch bei einer größeren Treffermenge lohnt als bei Column Store. Die Beobachtung ist aber genau das Gegenteil. Eine mögliche erklärung wäre, dass Column Store in diesen Fällen keinen Index Join macht, sondern nur zusätzliche Metadaten der Indizes verwendet. Einzig bei Query 3.2 sind die Zeiten mit und ohne Indizes identisch.
 
-Die QEPs bei Columnstore geben das genaue JOIN Verfahren nicht preis und unterscheiden sich nur in der Ausführungszeit, daher können keine genaueren Aussagen getroffen werden.
+Die QEPs bei Column Store geben das genaue JOIN Verfahren nicht preis und unterscheiden sich nur in der Ausführungszeit, daher können keine genaueren Aussagen getroffen werden.
 
-![QEP 3.1 Rowstore](qep_3.1row_4core_noht.png){ width=50%}
+![QEP 3.1 Row Store](qep_3.1row_4core_noht.png){ width=50%}
 
-Der CS kann seinen Vorteil vor allem bei den Queries auspielen, bei denen keine starke Eingrenzung stattfindet, wodurch sich Index Zugriffe nicht lohnen. 
+Der Column Store kann seinen Vorteil vor allem bei den Queries auspielen, bei denen keine starke Eingrenzung stattfindet, wodurch sich Index Zugriffe nicht lohnen. 
 
-#### Rolle von OLAP-Engine bei Columnstore
+#### Rolle von OLAP-Engine bei Column Store
 
-Beim Columnstore entscheidet sich der Optimizer je nach Abfrage, ob Join-Engine oder OLAP-Engine verwendet wird. Mit den Hints *USE_OLAP_PLAN* und *NO_USE_OLAP_PLAN* lässt sich die Verwendung vom OLAP-Engine durch den Optimizer beim Columnstore entweder erzwingen oder verhindern. 
+Beim Column Store entscheidet sich der Optimizer je nach Abfrage, ob Join-Engine oder OLAP-Engine verwendet wird. Mit den Hints *USE_OLAP_PLAN* und *NO_USE_OLAP_PLAN* lässt sich die Verwendung vom OLAP-Engine durch den Optimizer beim Column Store entweder erzwingen oder verhindern. 
 
 In der Regel performt OLAP-Engine fast immer besser, außer bei 2.3, 3.3 und 3.4. Bei 2.3 ist JE sogar schneller. 
 
 ![](bilder/hintquerycol.png)
 
-Interessante Feststellung war, dass die Queries, welche bei Rowstore schlecht mit Indizes (Foreign Key Indizes) performt haben, auch mit Join-Engine (NO_USE_OLAP_PLAN) deutlich langsamer waren.
+Interessante Feststellung war, dass die Queries, welche bei Row Store schlecht mit Indizes (Foreign Key Indizes) performt haben, auch mit Join-Engine (NO_USE_OLAP_PLAN) deutlich langsamer waren.
 
-Wenn man Rowstore mit Indizes und Columnstore ohne OLAP-Engine (*NO_USE_OLAP_PLAN*) miteinander vergleicht, ist zwar Columnstore immer noch schneller, allerdings ist der Unterschied nicht so drastisch wie mit dem OLAP-Plan, woraus sich schließen lässt, dass Columnstore sehr stark vom OLAP-Engine profitiert.
+Wenn man Row Store mit Indizes und Column Store ohne OLAP-Engine (*NO_USE_OLAP_PLAN*) miteinander vergleicht, ist zwar Column Store immer noch schneller, allerdings ist der Unterschied nicht so drastisch wie mit dem OLAP-Plan, woraus sich schließen lässt, dass Column Store sehr stark vom OLAP-Engine profitiert.
 
 
 
@@ -443,7 +444,7 @@ Aussagen:
 
    Beispiel 3.3 CS, QEP
 
-   Rowstore, Beispiel 3.1, 3.3 
+   Row Store, Beispiel 3.1, 3.3 
 
 3. CS profitiert sehr stark von OLAP-Plan
 
