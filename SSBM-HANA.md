@@ -52,7 +52,7 @@ Bei den Tests wurde besonderer Wert auf die Unterschiede zwischen den Ausführun
 
 <!-- Anführungszeichen für "in-memory" rausnehmen -->
 
-SAP Hana (Die High Performance Analytic Appliance) ist eine Entwicklungsplattform und besteht im Kern aus einer "in-memory" Datenbank.
+SAP Hana (Die High Performance Analytic Appliance) ist eine Entwicklungsplattform und besteht im Kern aus einer in-memory Datenbank.
 
 Transaktionen und Analysen werden auf einer einzigen, singulären Datenkopie im Hauptspeicher verarbeitet, anstatt die Festplatte als Datenspeicher zu benutzen. Dadurch ist es möglich sehr komplexe Abfragen und Datenbankoperationen mit sehr hohem Durchsatz auszuführen.
 
@@ -111,44 +111,40 @@ Diese Methode wird auf alle Spalten angewandt. Alle verschiedenen Spaltenwerte w
 Die einzelnen Zeilen selbst können durch verschiedene Komprimierungsmethoden weiter verkleinert werden. Dazu gehören: 
 
 #### prefix encoding:
-Spalte enthält eine dominante Value / andere Values selten
-- ein Wert wird sehr oft unkomprimiert gespeichert
-  datenset muss sortiert werden nach der Spalte mit der dominanten Value & der Attribut Vektor muss mit dem dominanten starten.
-  Zur Komprimierung sollte die dominante Value nicht jedes mal explizit gespeichert werden wenn sie auftritt. 
-  	Speichern der Nummer der Auftretungen der dominanten Value und eine Instanz der Value selbst im Attribut Vektor.
-  Prefix encoded Attribut Vektor enthält folgende Informationen:
-  	Nummer der Auftretungen der dominanten Value 
-  	valueID der dominanten Value aus dem Dictonary
-  	valueIDs der fehlenden Values
+Diese Methode eignet sich besonders, wenn eine Spalte einen dominanten Wert hat und die restlichen Werte selten auftreten. Bsp: Alle Züge Deutschlands in Tabelle / ein Attribut Firma -> sehr oft String "Deutsche Bahn" unkomprimiert gespeichert.
+
+Um nun mit prefix encoding die Spalte zu komprimieren, muss das Datenset nach der Spalte mit dem dominanten Wert sortiert werden. Außerdem muss der neue Attributvektor damit beginnen. Anstatt nun diesen Wert jedes mal explizit zu speichern, wird nur die Anzahl der Auftretungen gespeichert. Die restlichen Werte der Spalte werden unkomprimiert gespeichert. Im neuen Attribut Vektor wird dann die Anzahl der Auftretungen der dominantten Value, ihre valueID aus dem Dictonary und die valueIDs der fehlden Werte.
 
 ![TPC-H_Schema](bilder/prefixEncoding.png){width=50%}
 
 #### run length encoding:
-Gut wenn ein Paar Werte mit hohem Aufkommen
-Sollte nach Werten sortiert sein für eine maximale Komprimierung
-Anstatt alle Werte einer Spalte zu Speichern werden lediglich 2 Vektoren gespeichert.
-Einer mit allen verschiedenen Values
-Einer mit der Startposition der Value 
+Run length encoding wird verwendet, wenn es mehrere Werte mit homem Aufkommen in einer Spalte gibt. Hierbei ist es wichtig, dass das Datenset nach dieser Spalte sortiert ist, um eine maximale Komprimierung zu erreichen. Bei dieser Methode werden nun ausschließlich 2 Vektoren gespeichert, einer mit allen verschiedenen Werten und der andere mit der Startposition dieser Werte.
+
+
 
 ![TPC-H_Schema](bilder/runlengthEncoding.png){width=50%}
 
 
 #### cluster encoding:
-Ist gut wenn eine Spalte viele identische Werte hat die hinternander stehen.
-Attribut Vektor is partitioniert in n Blöcke mit fester Größe (tipischerweise 1024 Elements)
-Wenn ein Cluster nur einen Wert hat wird er durch eine 1 ersetzt.
-Wurde er nicht ersetzt steht dort eine 0.
+Bei dieser Kompressionsmethode istder Attributvektor in n Blöcke mit einer festen Größe partitioniert. Typischerweise ist die Größe 1024 Elemente, kann jedoch je nach Datentyp, Anzahl der Daten, etc. variieren. Wenn nun ein Cluster nur einen Wert, wird er im Attributvektort gespeichert und in Bitvector wird an dieser Stelle eine 1 notiert. Wurde im Bitvector eine 0 gespeichert, so wurde dieser nicht ersetzt.
+
+Diese Methode wird meist benutzt, wenn es in einer Spalte viele identesche Werte gibt, die hintereinander stehen.
 
 ![TPC-H_Schema](bilder/ClusterEncoding.png){width=50%}
 
 #### sparse encoding: 
 
-o inderict encoding:
+![Compression](bilder/SparseEncoding.jpg){ width=20% }
+
+#### inderict encoding:
+
 Ist gut wenn verschiedene Values oft vorkommen 
 BSP: bei zusammenhängenden Spalten. Nach Land Sortiert und auf Namensspalte zugreifen
 Wie bei Cluster encoding N Datenblöcke mit fester Anzahl Elementen (1024)
 
-![Compression](bilder/SparseEncoding.jpg){ width=20% }
+![Compression](bilder/indirectEncoding.png){ width=20% }
+
+
 
 Die SAP Hana Datenbank benutzt Algorithmen um zu entscheiden, welche der Komprimierungsmethoden am angebrachtesten für die verschiedenen Spalten ist.
 Bei jeder „delta merge“ Operation wird die Datenkompression automatisch evaluiert, optimiert und ausgeführt. 
@@ -433,7 +429,7 @@ Der Columnstore kann seinen Vorteil vor allem bei den Queries ausspielen, bei de
 
 # Autoren
 
-| Kapitel                          | Kristina Albrecht (2835001) | Jan Hofmeier (5822161) | Marius Jochheim (1240352) | Lion Scherer (XXXXXXX) |
+| Kapitel                          | Kristina Albrecht (2835001) | Jan Hofmeier (5822161) | Marius Jochheim (1240352) | Lion Scherer (2903476) |
 | -------------------------------- | --------------------------- | ---------------------- | ------------------------- | ---------------------- |
 | 1 Einleitung                     |                             |                        | X                         |                        |
 | 2 SAP HANA: Überblick            |                             |                        |                           | X                      |
