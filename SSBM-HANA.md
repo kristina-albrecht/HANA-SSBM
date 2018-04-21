@@ -413,17 +413,11 @@ In der Regel performt OLAP-Engine fast immer besser, außer bei 2.3, 3.3 und 3.4
 
 Interessante Feststellung war, dass die Queries, welche bei Row Store schlecht mit Indizes (Foreign Key Indizes) performt haben, auch mit Join-Engine (NO_USE_OLAP_PLAN) deutlich langsamer waren.
 
-Wenn man Row Store und Column Store ohne OLAP-Engine (*NO_USE_OLAP_PLAN*) miteinander vergleicht, ist festzustellen, dass Column Store sogar langsamer ist, woraus sich schließen lässt, dass Column Store sehr stark vom OLAP-Engine profitiert.
+Wenn man Row Store und Column Store ohne OLAP-Engine (*NO_USE_OLAP_PLAN*) miteinander vergleicht, ist festzustellen, dass Column Store sogar langsamer ist, woraus sich schließen lässt, dass Column Store sehr stark vom OLAP-Engine profitiert.  
 
-![Vergleich von OLAP-Hints bei Column Store mit Row Store Performance](bilder/hints.jpg)
+![Vergleich von OLAP-Hints bei Column Store mit Row Store Performance](bilder/hintqueryrowcol-combinedfk.png)
 
-
-
-In keinem Fall konnte mit einem der beiden Hints eine bessere Performance erziehlt werden als ohne. Das lässt darauf schließen, dass der Optimizer von selbst die bestmögliche Entscheidung trifft.  
-
-
-
-
+In keinem Fall konnte mit einem der beiden Hints eine bessere Performance erziehlt werden als ohne. Das lässt darauf schließen, dass der Optimizer von selbst die bestmögliche Entscheidung trifft.
 
 # Fazit
 
