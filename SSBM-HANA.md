@@ -10,6 +10,8 @@ titlepage-color: 06386e
 titlepage-text-color: FFFFFF
 titlepage-rule-color: FFFFFF
 titlepage-rule-height: 1
+numbersections: true
+secnumdepth: 3
 ---
 
 
