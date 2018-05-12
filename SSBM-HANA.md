@@ -50,8 +50,6 @@ Bei den Tests wurde besonderer Wert auf die Unterschiede zwischen den Ausführun
 
 ## Überblick
 
-<!-- Anführungszeichen für "in-memory" rausnehmen -->
-
 SAP Hana (Die High Performance Analytic Appliance) ist eine Entwicklungsplattform und besteht im Kern aus einer in-memory Datenbank.
 
 Transaktionen und Analysen werden auf einer einzigen, singulären Datenkopie im Hauptspeicher verarbeitet, anstatt die Festplatte als Datenspeicher zu benutzen. Dadurch ist es möglich sehr komplexe Abfragen und Datenbankoperationen mit sehr hohem Durchsatz auszuführen.
@@ -104,7 +102,7 @@ Bei der spaltenorientierten Speicherung ist es möglich Daten zu Komprimieren. D
 
 Diese Methode wird auf alle Spalten angewandt. Alle verschiedenen Spaltenwerte werden aufeinanderfolgenden Zahlen zugeordnet. Anstatt nun die verschiedenen Werte zu speichern werden stattdessen die viel kleiner Zahlen gespeichert. Dadurch wird die Zahl der Datenzugriffe minimiert und es gibt weniger Cache Fehler, da mehrere Informationen in einer Cache-Line vorhanden sind. Außerdem ist es möglich Operationen direkt auf die komprimierten Daten auszuführen.
 
-![TPC-H_Schema](bilder/DictonaryCompression.png){width=50%}
+![DictonaryCompression](bilder/DictonaryCompression.png){width=50%}
 
 ### Advanced compression:
 
@@ -115,14 +113,14 @@ Diese Methode eignet sich besonders, wenn eine Spalte einen dominanten Wert hat 
 
 Um nun mit prefix encoding die Spalte zu komprimieren, muss das Datenset nach der Spalte mit dem dominanten Wert sortiert werden. Außerdem muss der neue Attributvektor damit beginnen. Anstatt nun diesen Wert jedes mal explizit zu speichern, wird nur die Anzahl der Auftretungen gespeichert. Die restlichen Werte der Spalte werden unkomprimiert gespeichert. Im neuen Attribut Vektor wird dann die Anzahl der Auftretungen der dominantten Value, ihre valueID aus dem Dictonary und die valueIDs der fehlden Werte.
 
-![TPC-H_Schema](bilder/prefixEncoding.png){width=50%}
+![prefixEncoding](bilder/prefixEncoding.png){width=50%}
 
 #### run length encoding:
 Run length encoding wird verwendet, wenn es mehrere Werte mit homem Aufkommen in einer Spalte gibt. Hierbei ist es wichtig, dass das Datenset nach dieser Spalte sortiert ist, um eine maximale Komprimierung zu erreichen. Bei dieser Methode werden nun ausschließlich 2 Vektoren gespeichert, einer mit allen verschiedenen Werten und der andere mit der Startposition dieser Werte.
 
 
 
-![TPC-H_Schema](bilder/runlengthEncoding.png){width=50%}
+![runLengthEncoding](bilder/runlengthEncoding.png){width=50%}
 
 
 #### cluster encoding:
@@ -130,19 +128,19 @@ Bei dieser Kompressionsmethode istder Attributvektor in n Blöcke mit einer fest
 
 Diese Methode wird meist benutzt, wenn es in einer Spalte viele identesche Werte gibt, die hintereinander stehen.
 
-![TPC-H_Schema](bilder/ClusterEncoding.png){width=50%}
+![clusterEncoding](bilder/ClusterEncoding.png){width=50%}
 
 #### sparse encoding: 
 
-![Compression](bilder/SparseEncoding.jpg){ width=20% }
+![sparseEncoding](bilder/SparseEncoding.jpg){ width=20% }
 
-#### inderict encoding:
+#### indirect encoding:
 
 Ist gut wenn verschiedene Values oft vorkommen 
 BSP: bei zusammenhängenden Spalten. Nach Land Sortiert und auf Namensspalte zugreifen
 Wie bei Cluster encoding N Datenblöcke mit fester Anzahl Elementen (1024)
 
-![Compression](bilder/indirectEncoding.png){ width=20% }
+![indirect](bilder/indirectEncoding.png){ width=20% }
 
 
 
@@ -160,10 +158,6 @@ Bei jeder „delta merge“ Operation wird die Datenkompression automatisch eval
 
 
 
-- In-Memory Datenbank
-- Column-Based Architektur
-- Komprimierung
-- Memory Zugriffe
 
 # Star Schema Benchmark (SSBM)
 <!-- Star Schema Benchmark (https://www.cs.umb.edu/~poneil/StarSchemaB.PDF) als Quelle einfügen und einarbeiten (Vergleiche Quelle 9)-->
