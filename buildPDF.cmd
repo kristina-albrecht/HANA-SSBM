@@ -1,0 +1,2 @@
+pandoc --from=markdown+hard_line_breaks+backtick_code_blocks+abbreviations --toc-depth=3 --top-level-division=chapter --template=eisvogel.tex --pdf-engine=lualatex --filter=pandoc-citeproc SSBM-HANA.md -o SSBM-HANA.pdf
+pause
