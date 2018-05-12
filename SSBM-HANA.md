@@ -12,6 +12,14 @@ titlepage-rule-color: FFFFFF
 titlepage-rule-height: 1
 numbersections: true
 secnumdepth: 3
+toc-title: Inhaltsverzeichnis
+bibliography: ./Literaturquellen/HANA-Benchmarks.bib
+# biblio-title: Literatur
+toc: true
+csl: ./Literaturquellen/iso690-numeric-en.csl
+lang: de-DE
+loftitle: "# Abbildungsverzeichnis"
+lotTitle: "# Tabellenverzeichnis"
 ---
 
 
@@ -65,19 +73,19 @@ Bei der "in-memory" Technologie werden die Daten im Hauptspeicher gehalten, anst
 | Zugriff auf  Solid-State-Festplatte (SSD)     | 150.000 ns                     |
 | Festplattenzugriff                            | 10.000.000 ns                  |
 
- 
-
-<https://intellipaat.com/blog/what-is-sap-hana/> 
+ [@IntelliPaat2016] 
 
 Um nun aber dem "D" des ACID Prinzips gerecht zu werden reicht eine Speicherung im füchtigen Hauptspeicher nicht. Für die Datensicherung müssen deshalb traditionelle Festplatten benutzt werden. Diese werden bei der reinen Analyse von Daten nicht berücksichtigt. Wenn Transaktionen getätigt werden, müssen diese regelmäßig auf dem nicht flüchtigen Speichermedium gesichert werden. Außerdem wird dort zu jeder Transaktion ein Protokolleintrag hinterlegt.
 
 ------
 
-[[1\]](#_ftnref1)https://intellipaat.com/interview-question/sap-hana-interview-questions/
+[@IntelliPaat]
 
-2<https://link.springer.com.ezproxy.dhbw-mannheim.de/book/10.1007%2F978-3-658-18603-6>
+[@Preuss2017]
 
-3<https://www.sap.com/germany/products/hana.html#pdf-asset=2caaec36-847c-0010-82c7-eda71af511fa&page=3>
+<!-- Lion: Seitenzahl für oberes Buch eintragen; zusätzlich Quellenangaben nochmals überprüfen; bei vielen Bildern fehlt der Quellennachweis  -->
+
+[@SAP]
 
  
 
@@ -153,7 +161,7 @@ Bei jeder „delta merge“ Operation wird die Datenkompression automatisch eval
 
 ![Architektur SQL Optimizer](bilder/Architektur.png){ width=50%}
 
-
+<!-- Lion: Bildquellen für die oberen Bilder angeben  -->
 
 
 
@@ -170,19 +178,23 @@ Der Star Schema Benchmark (SSB) wurde von Pat O'Neil, Betty O'Neil und Quedong C
 
 ![TPC-H_Schema](bilder/TPC-H_Schema.png){width=50%}
 
-<!-- TPC-H Schema Bild Quelle: http://www.tpc.org/tpc_documents_current_versions/pdf/tpc-h_v2.17.1.pdf -->
+[@Specification2011]
+
+<!-- TPC-H Schema Bild Quelle: Seitenzahl angeben -->
 
 **TPC-H zu SSB-Transformation**
 
-Die von Chen, O'Neil und O'Neil durchgeführten Transformationen von TPC-H zu SSB wurden an die von Kimball und Ross erläuterten Prinzipien zur Dimensionalen Modellierung [**The Data Warehouse Toolkit Second Edition - Quelle einfügen**] angelehnt. 
+Die von Chen, O'Neil und O'Neil durchgeführten Transformationen von TPC-H zu SSB wurden an die von Kimball und Ross erläuterten Prinzipien zur Dimensionalen Modellierung [@Kimball] angelehnt. 
 
 ![SSB_Schema](bilder/SSB_Schema.png){width=50%}
 
-<!-- Source for picture: https://www.cs.umb.edu/~poneil/StarSchemaB.PDF -->
+[@Neil2009]
+
+<!-- Source for picture: Seitenzahl angeben -->
 
 Im Folgenden sind die wichtigsten Änderungen kurz zusammengefasst:
 
-1. Die beiden Tabellen LINEITEM und ORDER aus dem TPC-H Schema werden im SSB zu einer gemeinsamen Tabelle LINEORDER zusammengefasst, was als Denormalisierung bezeichnet wird [**The Data Warehouse Toolkit Seite 121 - Check**]. Dadurch werden für gängige Abfragen weniger Joins benötigt. Die Kardinalität der Tabelle entspricht der ursprünglichen LINEITEM Tabelle und beinhaltet einen replizierten ORDERKEY zur Verknüpfung der Tabellen.
+1. Die beiden Tabellen LINEITEM und ORDER aus dem TPC-H Schema werden im SSB zu einer gemeinsamen Tabelle LINEORDER zusammengefasst, was als Denormalisierung bezeichnet wird [@Kimball, S. 121]. Dadurch werden für gängige Abfragen weniger Joins benötigt. Die Kardinalität der Tabelle entspricht der ursprünglichen LINEITEM Tabelle und beinhaltet einen replizierten ORDERKEY zur Verknüpfung der Tabellen.
 
 2. Die Tabelle PARTSUPP aus dem TPC-H Schema wird nicht in das SSB übernommen, da die Granularität zwischen PARTSUPP und LINEORDER nicht übereinstimmt. Dies kommt daher, dass LINEORDER bei jeder Transaktion vergrößert wird, die PARTSUPP Tabelle jedoch nicht. Sie hat lediglich die Granularität Periodic Snapshot, da es keinen Transaction Key für sie gibt. Auch im TPC-H Schema gibt es keine Aktualisierungen über den Verlauf. Damit bleibt sie im Gegensatz zur LINEORDER Tabelle über den Zeitverlauf unverändert.
 
@@ -193,6 +205,8 @@ Im Folgenden sind die wichtigsten Änderungen kurz zusammengefasst:
   Weiterhin werden die Spalten SHIPDATE, RECEIPTDATE und RETURNFLAG des TPC-H Schemas gelöscht, da die Bestellinformationen vor dem Versand abgefragt werden müssen. Zudem fehlen dem TPC-H Schema Spalten mit kleinem Filterfaktor, deswegen gibt es in dem SSB Schema nun Rollup-Spalten wie etwa P_BRAND1, S_CITY und C_CITY.
 
   Weitergehende Änderungen können in der Veröffentlichung der Autoren unter **[Link]** nachgelesen werden.
+
+  [@Chen]
 
   <!-- Quelle 1 Ende -->
 
@@ -220,7 +234,7 @@ Das Betriebsystem ist SUSE Linux Enterprise Server 12 SP2. Wegen Hardware Kompat
 
 ### Vorbereitung
 
-In der HANA-Datenbank wurde das SSBM-Schema angelegt. Die Tabellen für das SSBM wurden mit Hilfe des SSBM-Tabellengenerator dbgen generiert (mit Scaling Factor 1 für 1GB Daten) (https://github.com/electrum/ssb-dbgen). 
+In der HANA-Datenbank wurde das SSBM-Schema angelegt. Die Tabellen für das SSBM wurden mit Hilfe des SSBM-Tabellengenerator dbgen generiert (mit Scaling Factor 1 für 1GB Daten) [@Phillips]. 
 
 ```dbgen -s 1 -T a```
 
