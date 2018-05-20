@@ -152,17 +152,9 @@ Bei jeder „delta merge“ Operation wird die Datenkompression automatisch eval
 
 
 # Star Schema Benchmark (SSBM)
-<!-- Star Schema Benchmark (https://www.cs.umb.edu/~poneil/StarSchemaB.PDF) als Quelle einfügen und einarbeiten (Vergleiche Quelle 9)-->
-
-<!-- Quelle zu TPC-H Benchmark: www.tpc.org/tpch/ (Vergleiche Quelle 14)-->
-
-<!-- Quelle 1 Anfang: [Adjoined Dimension Column Index (ADC Index) to Improve Star Schema Query Performance](https://www.cs.umb.edu/~xuedchen/research/publications/SSBPaperICDE08_7_full_paper.doc) -->
-
-Der Star Schema Benchmark (SSB) wurde von Pat O'Neil, Betty O'Neil und Quedong Chen entwickelt, um die Performance von Datenbanksystemen, welche mit Data-Marts nach dem Star Schema arbeiten, zu ermitteln und Vergleichbar zu machen [Star Schema Benchmark Quelle]. Dabei nutzen sie das bekannte TPC-H Benchmark [TPCH Quelle] als Grundlage für ihr Star Schema Benchmark, modifizieren es jedoch vielfach zugunsten eines guten Star Schemas.
+Der Star Schema Benchmark (SSBM) wurde von Pat O'Neil, Betty O'Neil und Quedong Chen entwickelt, um die Performance von Datenbanksystemen, welche mit Data-Marts nach dem Star Schema arbeiten, zu ermitteln und Vergleichbar zu machen [@Neil2009]. Dabei nutzen sie das bekannte TPC-H Benchmark [@Specification2011] als Grundlage für ihr Star Schema Benchmark, modifizieren es jedoch vielfach zugunsten eines guten Star Schemas.
 
 ![TPC-H_Schema [@Specification2011]](bilder/TPC-H_Schema.png){width=70%}
-
-<!-- TPC-H Schema Bild Quelle: Seitenzahl angeben -->
 
 **TPC-H zu SSB-Transformation**
 
@@ -171,8 +163,6 @@ Die von Chen, O'Neil und O'Neil durchgeführten Transformationen von TPC-H zu SS
 ![SSB_Schema [@Neil2009]](bilder/SSB_Schema.png){width=70%}
 
 
-
-<!-- Source for picture: Seitenzahl angeben -->
 
 Im Folgenden sind die wichtigsten Änderungen kurz zusammengefasst:
 
@@ -188,9 +178,6 @@ Im Folgenden sind die wichtigsten Änderungen kurz zusammengefasst:
 
   Weitergehende Änderungen können in der Veröffentlichung der Autoren unter **[@Chen]** nachgelesen werden.
 
-  <!-- Quelle 1 Ende -->
-
-  <!-- Queries Marius -->
 
 # Durchführung von Benchmarks
 
