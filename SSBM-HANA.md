@@ -26,8 +26,6 @@ lotTitle: false
 
 # Einleitung
 
- <!-- Heißt es SSB oder SSBM? Stoße oft auf beides? - Marius -->
-
 <!-- Abkürzungen einführen vor Nutzung - Alle für sich -->
 
 <!-- Bildquellen fixen, Größe anpassen - Alle für sich -->
@@ -36,15 +34,9 @@ lotTitle: false
 
 <!-- Kristina: Q3.1 vs. Q3.3 mit QEP ? -->
 
-<!-- Marius: Query Beschreibung  -->
+Ziel dieser Arbeit ist die Durchführung eines Performance Benchmarks von SAP HANA anhand des Star Schema Benchmarks (SSBM). Zunächst wird dafür eine kurze Einleitung in SAP HANA und das Star Schema Benchmark gegeben. Anschließend werden notwendige Schritte zur Einrichtung des Systems beschrieben, sowie die Vorgehensweise zur Erstellung des Schemas in SAP HANA und unserem Testaufbau.
 
-<!-- Marius: Fazit -->
-
-<!-- Marius: Motivation  -->
-
-Ziel dieser Arbeit ist die Durchführung eines Performance Benchmarks von SAP HANA anhand des Star Schema Benchmarks (SSB). Zunächst wird dafür eine kurze Einleitung in SAP HANA und das Star Schema Benchmark gegeben. Anschließend werden notwendige Schritte zur Einrichtung des Systems beschrieben, sowie die Vorgehensweise zur Erstellung des Schemas in SAP HANA und unserem Testaufbau.
-
-Im Anschluss werden die Queries des SSB ausgeführt und die Ergebnisse gespeichert. Zum Analysieren der Testergebnisse wird ein Benchmark-Cube erstellt, dessen Aufbau ebenfalls beschrieben werden soll.
+Im Anschluss werden die Queries des SSBM ausgeführt und die Ergebnisse gespeichert. Zum Analysieren der Testergebnisse wird ein Benchmark-Cube erstellt, dessen Aufbau ebenfalls beschrieben werden soll.
 
 Bei den Tests wurde besonderer Wert auf die Unterschiede zwischen den Ausführungszeiten der Queries bei Column- und Row Store gelegt. Dabei sollen auch die Auswirkungen von Indizes auf Column- und Row Store näher untersucht werden.
 
@@ -156,9 +148,9 @@ Der Star Schema Benchmark (SSBM) wurde von Pat O'Neil, Betty O'Neil und Quedong 
 
 ![TPC-H_Schema [@Specification2011]](bilder/TPC-H_Schema.png){width=70%}
 
-**TPC-H zu SSB-Transformation**
+**TPC-H zu SSBM-Transformation**
 
-Die von Chen, O'Neil und O'Neil durchgeführten Transformationen von TPC-H zu SSB wurden an die von Kimball und Ross erläuterten Prinzipien zur Dimensionalen Modellierung [@Kimball] angelehnt. 
+Die von Chen, O'Neil und O'Neil durchgeführten Transformationen von TPC-H zu SSBM wurden an die von Kimball und Ross erläuterten Prinzipien zur Dimensionalen Modellierung [@Kimball] angelehnt. 
 
 ![SSB_Schema [@Neil2009]](bilder/SSB_Schema.png){width=70%}
 
@@ -166,15 +158,15 @@ Die von Chen, O'Neil und O'Neil durchgeführten Transformationen von TPC-H zu SS
 
 Im Folgenden sind die wichtigsten Änderungen kurz zusammengefasst:
 
-1. Die beiden Tabellen LINEITEM und ORDER aus dem TPC-H Schema werden im SSB zu einer gemeinsamen Tabelle LINEORDER zusammengefasst, was als Denormalisierung bezeichnet wird [@Kimball, S. 121]. Dadurch werden für gängige Abfragen weniger Joins benötigt. Die Kardinalität der Tabelle entspricht der ursprünglichen LINEITEM Tabelle und beinhaltet einen replizierten ORDERKEY zur Verknüpfung der Tabellen.
+1. Die beiden Tabellen LINEITEM und ORDER aus dem TPC-H Schema werden im SSBM zu einer gemeinsamen Tabelle LINEORDER zusammengefasst, was als Denormalisierung bezeichnet wird [@Kimball, S. 121]. Dadurch werden für gängige Abfragen weniger Joins benötigt. Die Kardinalität der Tabelle entspricht der ursprünglichen LINEITEM Tabelle und beinhaltet einen replizierten ORDERKEY zur Verknüpfung der Tabellen.
 
-2. Die Tabelle PARTSUPP aus dem TPC-H Schema wird nicht in das SSB übernommen, da die Granularität zwischen PARTSUPP und LINEORDER nicht übereinstimmt. Dies kommt daher, dass LINEORDER bei jeder Transaktion vergrößert wird, die PARTSUPP Tabelle jedoch nicht. Sie hat lediglich die Granularität Periodic Snapshot, da es keinen Transaction Key für sie gibt. Auch im TPC-H Schema gibt es keine Aktualisierungen über den Verlauf. Damit bleibt sie im Gegensatz zur LINEORDER Tabelle über den Zeitverlauf unverändert.
+2. Die Tabelle PARTSUPP aus dem TPC-H Schema wird nicht in das SSBM übernommen, da die Granularität zwischen PARTSUPP und LINEORDER nicht übereinstimmt. Dies kommt daher, dass LINEORDER bei jeder Transaktion vergrößert wird, die PARTSUPP Tabelle jedoch nicht. Sie hat lediglich die Granularität Periodic Snapshot, da es keinen Transaction Key für sie gibt. Auch im TPC-H Schema gibt es keine Aktualisierungen über den Verlauf. Damit bleibt sie im Gegensatz zur LINEORDER Tabelle über den Zeitverlauf unverändert.
 
   Dies würde kein Problem darstellen, wenn PARTSUPP und LINEORDER durchgehend als getrennte Faktentabellen behandelt würden, welche nur getrennt abgefragt und nie zusammengefügt werden. Jedoch zeigt Abfrage Q9 aus dem TPC-H Schema, dass LINEITEM, ORDERS und PARTSUPP kombiniert werden, womit Konflikte entstehen.
 
-  Die Autoren des SSB argumentieren, dass die PARTSUPP Tabelle im Kontext eines Data Marts unnötig ist, woraus die Löschung der Tabelle erfolgt. Stattdessen wird eine Spalte SUPPLYCOST aus der Tabelle zu jeder LINEORDER Zeile im neuen Schema hinzugefügt. Dadurch wird die Korrektheit der Information in Bezug zur Bestellzeit sicher gestellt.
+  Die Autoren des SSBM argumentieren, dass die PARTSUPP Tabelle im Kontext eines Data Marts unnötig ist, woraus die Löschung der Tabelle erfolgt. Stattdessen wird eine Spalte SUPPLYCOST aus der Tabelle zu jeder LINEORDER Zeile im neuen Schema hinzugefügt. Dadurch wird die Korrektheit der Information in Bezug zur Bestellzeit sicher gestellt.
 
-  Weiterhin werden die Spalten SHIPDATE, RECEIPTDATE und RETURNFLAG des TPC-H Schemas gelöscht, da die Bestellinformationen vor dem Versand abgefragt werden müssen. Zudem fehlen dem TPC-H Schema Spalten mit kleinem Filterfaktor, deswegen gibt es in dem SSB Schema nun Rollup-Spalten wie etwa P_BRAND1, S_CITY und C_CITY.
+  Weiterhin werden die Spalten SHIPDATE, RECEIPTDATE und RETURNFLAG des TPC-H Schemas gelöscht, da die Bestellinformationen vor dem Versand abgefragt werden müssen. Zudem fehlen dem TPC-H Schema Spalten mit kleinem Filterfaktor, deswegen gibt es in dem SSBM Schema nun Rollup-Spalten wie etwa P_BRAND1, S_CITY und C_CITY.
 
   Weitergehende Änderungen können in der Veröffentlichung der Autoren unter **[@Chen]** nachgelesen werden.
 
