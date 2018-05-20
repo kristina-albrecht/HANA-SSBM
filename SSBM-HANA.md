@@ -18,11 +18,11 @@ bibliography: ./Literaturquellen/HANA-Benchmarks.bib
 toc: true
 csl: ./Literaturquellen/iso690-numeric-en.csl
 lang: de-DE
+lol: False
+lot: False
 loftitle: "# Abbildungsverzeichnis"
-lotTitle: "# Tabellenverzeichnis"
+lotTitle: false
 ---
-
-
 
 # Einleitung
 
@@ -42,12 +42,6 @@ lotTitle: "# Tabellenverzeichnis"
 
 <!-- Marius: Motivation  -->
 
-## Motivation
-
-
-
-## Ziele und Struktur
-
 Ziel dieser Arbeit ist die Durchführung eines Performance Benchmarks von SAP HANA anhand des Star Schema Benchmarks (SSB). Zunächst wird dafür eine kurze Einleitung in SAP HANA und das Star Schema Benchmark gegeben. Anschließend werden notwendige Schritte zur Einrichtung des Systems beschrieben, sowie die Vorgehensweise zur Erstellung des Schemas in SAP HANA und unserem Testaufbau.
 
 Im Anschluss werden die Queries des SSB ausgeführt und die Ergebnisse gespeichert. Zum Analysieren der Testergebnisse wird ein Benchmark-Cube erstellt, dessen Aufbau ebenfalls beschrieben werden soll.
@@ -64,7 +58,7 @@ Transaktionen und Analysen werden auf einer einzigen, singulären Datenkopie im 
 
 Hana verbindet OLTP, durch die SQL und ACID (Atomicity, Consistency, Isolation andDurability) Kompatibilität, und OLAP durch die in-memory Datenhaltung. Durch das Einhalten des ACID Prinzips ist die Datenbank geeignet um Unternehmensinterne Daten zu speichern. Es ist nicht nötig Datenanalysen über einen ETL Prozess an ein Datawarehouse weiterzuleiten. Komplexe Echtzeit-Analysen [[1\]](#_ftn1) können nun direkt durch SAP Hana durchgeführt werden. Das erspart die erheblichen Kosten und vor allem Zeit.
 
-Bei der "in-memory" Technologie werden die Daten im Hauptspeicher gehalten, anstatt sie auf elektromagnetischen Festplatten zu speichern. Antwortzeiten und Auswertungen können dadurch schneller als bei gewöhnlichen Festplatten durch den Prozessor vorgenommen werden. Dadurch, dass der Zugriff auf die Festplatte nun wegfällt, verkürzt sich die Datenzugriffszeit bis auf das Fünffache. 
+Bei der "in-memory" Technologie werden die Daten im Hauptspeicher gehalten, anstatt sie auf elektromagnetischen Festplatten zu speichern. Antwortzeiten und Auswertungen können dadurch schneller als bei gewöhnlichen Festplatten durch den Prozessor vorgenommen werden. Dadurch, dass der Zugriff auf die Festplatte nun wegfällt, verkürzt sich die Datenzugriffszeit bis auf das Fünffache. [@IntelliPaat2016] 
 
 | Speicherkomponenten in der  Systemarchitektur | Größenordnung der Zugriffszeit |
 | --------------------------------------------- | ------------------------------ |
@@ -73,19 +67,9 @@ Bei der "in-memory" Technologie werden die Daten im Hauptspeicher gehalten, anst
 | Zugriff auf  Solid-State-Festplatte (SSD)     | 150.000 ns                     |
 | Festplattenzugriff                            | 10.000.000 ns                  |
 
- [@IntelliPaat2016] 
-
-Um nun aber dem "D" des ACID Prinzips gerecht zu werden reicht eine Speicherung im füchtigen Hauptspeicher nicht. Für die Datensicherung müssen deshalb traditionelle Festplatten benutzt werden. Diese werden bei der reinen Analyse von Daten nicht berücksichtigt. Wenn Transaktionen getätigt werden, müssen diese regelmäßig auf dem nicht flüchtigen Speichermedium gesichert werden. Außerdem wird dort zu jeder Transaktion ein Protokolleintrag hinterlegt.
-
-------
-
-[@IntelliPaat]
-
-[@Preuss2017]
+ Um nun aber dem "D" des ACID Prinzips gerecht zu werden reicht eine Speicherung im füchtigen Hauptspeicher nicht. Für die Datensicherung müssen deshalb traditionelle Festplatten benutzt werden. Diese werden bei der reinen Analyse von Daten nicht berücksichtigt. Wenn Transaktionen getätigt werden, müssen diese regelmäßig auf dem nicht flüchtigen Speichermedium gesichert werden. Außerdem wird dort zu jeder Transaktion ein Protokolleintrag hinterlegt. [@IntelliPaat, @Preuss2017, @SAP]
 
 <!-- Lion: Seitenzahl für oberes Buch eintragen; zusätzlich Quellenangaben nochmals überprüfen; bei vielen Bildern fehlt der Quellennachweis  -->
-
-[@SAP]
 
  
 
@@ -102,8 +86,8 @@ Die Anzahl der Indizes kann erheblich reduziert werden. Bei der spaltenorientier
 
 ## Komprimierungen und Referenzen
 
-Warum Komprimierung?
-Daten eignen sich. / CPU aufwand?
+<!--Warum Komprimierung?-->
+<!--Daten eignen sich. / CPU aufwand?-->
 Bei der spaltenorientierten Speicherung ist es möglich Daten zu Komprimieren. Dadurch wird Speicherplatz gespart und Zugriffszeiten verringert. Es gibt zwei mögliche Komprimierungen:
 
 ### Dictonary compression: 
@@ -176,9 +160,7 @@ Bei jeder „delta merge“ Operation wird die Datenkompression automatisch eval
 
 Der Star Schema Benchmark (SSB) wurde von Pat O'Neil, Betty O'Neil und Quedong Chen entwickelt, um die Performance von Datenbanksystemen, welche mit Data-Marts nach dem Star Schema arbeiten, zu ermitteln und Vergleichbar zu machen [Star Schema Benchmark Quelle]. Dabei nutzen sie das bekannte TPC-H Benchmark [TPCH Quelle] als Grundlage für ihr Star Schema Benchmark, modifizieren es jedoch vielfach zugunsten eines guten Star Schemas.
 
-![TPC-H_Schema](bilder/TPC-H_Schema.png){width=50%}
-
-[@Specification2011]
+![TPC-H_Schema [@Specification2011]](bilder/TPC-H_Schema.png){width=70%}
 
 <!-- TPC-H Schema Bild Quelle: Seitenzahl angeben -->
 
@@ -186,9 +168,9 @@ Der Star Schema Benchmark (SSB) wurde von Pat O'Neil, Betty O'Neil und Quedong C
 
 Die von Chen, O'Neil und O'Neil durchgeführten Transformationen von TPC-H zu SSB wurden an die von Kimball und Ross erläuterten Prinzipien zur Dimensionalen Modellierung [@Kimball] angelehnt. 
 
-![SSB_Schema](bilder/SSB_Schema.png){width=50%}
+![SSB_Schema [@Neil2009]](bilder/SSB_Schema.png){width=70%}
 
-[@Neil2009]
+
 
 <!-- Source for picture: Seitenzahl angeben -->
 
@@ -204,9 +186,7 @@ Im Folgenden sind die wichtigsten Änderungen kurz zusammengefasst:
 
   Weiterhin werden die Spalten SHIPDATE, RECEIPTDATE und RETURNFLAG des TPC-H Schemas gelöscht, da die Bestellinformationen vor dem Versand abgefragt werden müssen. Zudem fehlen dem TPC-H Schema Spalten mit kleinem Filterfaktor, deswegen gibt es in dem SSB Schema nun Rollup-Spalten wie etwa P_BRAND1, S_CITY und C_CITY.
 
-  Weitergehende Änderungen können in der Veröffentlichung der Autoren unter **[Link]** nachgelesen werden.
-
-  [@Chen]
+  Weitergehende Änderungen können in der Veröffentlichung der Autoren unter **[@Chen]** nachgelesen werden.
 
   <!-- Quelle 1 Ende -->
 
@@ -434,29 +414,6 @@ Unsere Untersuchungen zur Nutzung von Indizes haben ergeben, dass eine zeilenbas
 Auffällig ist hierbei, dass der Optimizer für zeilenbasierte Speicherung nicht feststellen kann, ob er die Indizes auch verwenden sollte, wenn vorhanden werden sie genutzt.
 
 Der Columnstore kann seinen Vorteil vor allem bei den Queries ausspielen, bei denen keine starke Eingrenzung stattfindet, wodurch sich Index zugriffe nicht lohnen. Er profitiert jedoch sehr stark von der Nutzung eines OLAP-Plans in der Ausführung.
-
-# Autoren
-
-| Kapitel                          | Kristina Albrecht (2835001) | Jan Hofmeier (5822161) | Marius Jochheim (1240352) | Lion Scherer (2903476) |
-| -------------------------------- | --------------------------- | ---------------------- | ------------------------- | ---------------------- |
-| 1 Einleitung                     |                             |                        | X                         |                        |
-| 2 SAP HANA: Überblick            |                             |                        |                           | X                      |
-| 2 Zeilen- und Spaltenbasierte Speicherung |                             |                        |                           | X                       |
-| 2 Komprimierung und Referenzen   |                             |                        |                           | X                      |
-| 2 SAP HANA Architektur           |                             |                        |                           | X                      |
-| 3 SSBM                           |                             |                        | X                         |                        |
-| 4 Aufsetzen                      |                             | X                      |                           |                        |
-| 4 Column- vs Row Store           | X                           | X                      | X                         |                        |
-| 4 Indizes                        | X                           | X                      |                           |                        |
-| 4 Hints                          | X                           |                        |                           |                        |
-| 4 Benchmark Cube                 | X                           |                        |                           |                        |
-|   Excel Anbindung                |                             | X                      |                           |                        |
-|   BenchmarkLoader                |                             | X                      |                           |                        |
-|   Query Execution Plans          |                             | X                      | X                         |                        |
-| 4 Laden von Tabellen und Indizes | X                           |                        |                           |                        |
-| 4 Vorgehensweise                 | X                           |                        |                           |                        |
-| 4 Benchmark-Analyse              | X                           | X                      | X                         |                        |
-| 5 Fazit                          |                             |                        | X                         |                        |
 
 
 
