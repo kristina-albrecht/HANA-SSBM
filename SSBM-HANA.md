@@ -48,9 +48,9 @@ SAP Hana (Die High Performance Analytic Appliance) ist eine Entwicklungsplattfor
 
 Transaktionen und Analysen werden auf einer einzigen, singulären Datenkopie im Hauptspeicher verarbeitet, anstatt die Festplatte als Datenspeicher zu benutzen. Dadurch ist es möglich sehr komplexe Abfragen und Datenbankoperationen mit sehr hohem Durchsatz auszuführen.
 
-Hana verbindet OLTP, durch die SQL und ACID (Atomicity, Consistency, Isolation andDurability) Kompatibilität, und OLAP durch die in-memory Datenhaltung. Durch das Einhalten des ACID Prinzips ist die Datenbank geeignet um Unternehmensinterne Daten zu speichern. Es ist nicht nötig Datenanalysen über einen ETL Prozess an ein Datawarehouse weiterzuleiten. Komplexe Echtzeit-Analysen [[1\]](#_ftn1) können nun direkt durch SAP Hana durchgeführt werden. Das erspart die erheblichen Kosten und vor allem Zeit.
+Hana is kompatibel  mit dem ACID-Standart (Atomicity, Consistency, Isolation and Durability). Dadurch ist die Datenbank geeignet um Unternehmensinterne Daten zu speichern. ETL Prozesse werden meist nicht mehr benötigt. Komplexe Echtzeit-Analysen können nun direkt durch SAP Hana durchgeführt werden. Das erspart die erheblichen Kosten und vor allem Zeit [@SAP].
 
-Bei der "in-memory" Technologie werden die Daten im Hauptspeicher gehalten, anstatt sie auf elektromagnetischen Festplatten zu speichern. Antwortzeiten und Auswertungen können dadurch schneller als bei gewöhnlichen Festplatten durch den Prozessor vorgenommen werden. Dadurch, dass der Zugriff auf die Festplatte nun wegfällt, verkürzt sich die Datenzugriffszeit bis auf das Fünffache. [@IntelliPaat2016] 
+Bei der in-memory Technologie werden die Daten im Hauptspeicher gehalten, anstatt sie auf elektromagnetischen Festplatten zu speichern. Antwortzeiten und Auswertungen können dadurch schneller als bei gewöhnlichen Festplatten durch den Prozessor vorgenommen werden. Dadurch, dass der Zugriff auf die Festplatte nun wegfällt, verkürzt sich die Datenzugriffszeit enorm [@IntelliPaat2016]. 
 
 | Speicherkomponenten in der  Systemarchitektur | Größenordnung der Zugriffszeit |
 | --------------------------------------------- | ------------------------------ |
@@ -59,34 +59,33 @@ Bei der "in-memory" Technologie werden die Daten im Hauptspeicher gehalten, anst
 | Zugriff auf  Solid-State-Festplatte (SSD)     | 150.000 ns                     |
 | Festplattenzugriff                            | 10.000.000 ns                  |
 
- Um nun aber dem "D" des ACID Prinzips gerecht zu werden reicht eine Speicherung im füchtigen Hauptspeicher nicht. Für die Datensicherung müssen deshalb traditionelle Festplatten benutzt werden. Diese werden bei der reinen Analyse von Daten nicht berücksichtigt. Wenn Transaktionen getätigt werden, müssen diese regelmäßig auf dem nicht flüchtigen Speichermedium gesichert werden. Außerdem wird dort zu jeder Transaktion ein Protokolleintrag hinterlegt. [@IntelliPaat, @Preuss2017, @SAP]
-
-<!-- Lion: Seitenzahl für oberes Buch eintragen; zusätzlich Quellenangaben nochmals überprüfen; bei vielen Bildern fehlt der Quellennachweis  -->
+Um nun aber dem "D" des ACID Prinzips gerecht zu werden reicht eine Speicherung im flüchtigen Hauptspeicher nicht. Für die Datensicherung müssen deshalb traditionelle Festplatten benutzt werden. Diese werden bei der reinen Analyse von Daten nicht berücksichtigt. Wenn Transaktionen getätigt werden, müssen diese regelmäßig auf dem nicht flüchtigen Speichermedium gesichert werden. Außerdem wird dort zu jeder Transaktion ein Protokolleintrag hinterlegt. [@IntelliPaat, @Preuss2017 S.66, @SAP]
 
  
 
 ## Zeilen- und Spaltenbasierte Speicherung
 
-Die Daten können in SAP HANA in zwei verschiedenen Formaten abgelegt werden. Hierbei handelt es sich um die spalten- und zeilenorientierte Speicherung.  Sollen beispielsweise transaktionale Prozesse (OLTP) durchgeführt werden, bietet sich die Verwendung der zeilenorientierten Speicherung an, da das Aktualisieren und Hinzufügen der Daten durch die Zeilen Anordnung vereinfacht wird. 
-Für Lesezugriffe ist diese Art der Speicherung nicht geeignet, da jede Zeile gelesen werden muss, was sehr unperformant ist. Es müssten Daten gelesen werden, die für die bestimmte Abfrage nicht von Relevanz sind. Daher werden Lesezugriffe und Analyseabfragen auf die spaltenorientierte Speicherung ausgeführt und somit wird nur auf die relevanten Daten zugegriffen. Dies hat eine Performancesteigerung zur Folge.
+Die Daten können in SAP HANA in zwei verschiedenen Formaten abgelegt werden. Hierbei handelt es sich um die spalten- und zeilenorientierte Speicherung, welche in der folgenden Abbildung dargestellt sind.  Sollen beispielsweise transaktionale Prozesse (OLTP) durchgeführt werden, bietet sich die Verwendung der zeilenorientierten Speicherung an, da das Aktualisieren und Hinzufügen der Daten durch die Zeilen Anordnung vereinfacht wird. Für Lesezugriffe ist diese Art der Speicherung nicht geeignet, da jede Zeile gelesen werden muss, was sehr unperformant ist. Es müssten Daten gelesen werden, die für die bestimmte Abfrage nicht von Relevanz sind. Daher werden Lesezugriffe und Analyseabfragen auf die spaltenorientierte Speicherung ausgeführt und somit wird nur auf die relevanten Daten zugegriffen. Dies hat eine Performancesteigerung zur Folge [@Preuss.2017, S.64].
+
+Außerdem ist es möglich OLAP und OLTP nicht mehr strikt zu trennen, sondern auf einem Datenbestand auszuführen.
+
 Durch die spaltenorientierte Speicherung erreicht man neben der Zugriffsbeschleunigung auch eine höhere Kompression der Daten, da Tabellenspalten häufig gleiche Werte enthalten. 
 
-![Spalten- vs Zeilenbasierte Speicherung](bilder/ZeilenSpaltenSpeicherung.png)
+![Spalten- vs Zeilenbasierte Speicherung [@Preuss2017, S.66]](bilder/ZeilenSpaltenSpeicherung.png)
 
-
-Die Anzahl der Indizes kann erheblich reduziert werden. Bei der spaltenorientierten Speicherung kann jedes Attribut als Index verwendet werden. Da jedoch die gesamten Daten im Speicher vorhanden sind und die Daten einer Spalte alle aufeinanderfolgend gespeichert sind ist die Geschwindigkeit eines vollen sequentiellen Scans eines Attributs ausreichend in den meisten Fällen. Falls es nicht schnell genug ist können zusätzlich Indizes benutzt werden.
+Die Anzahl der Indizes kann erheblich reduziert werden. Bei der spaltenorientierten Speicherung kann jedes Attribut als Index verwendet werden. Da jedoch die gesamten Daten im Speicher vorhanden sind und die Daten einer Spalte alle aufeinanderfolgend gespeichert sind ist die Geschwindigkeit eines vollen sequentiellen Scans eines Attributs ausreichend in den meisten Fällen. Falls es nicht schnell genug ist können zusätzlich Indizes benutzt werden [@Preuss.2017 S. 65,66].
 
 ## Komprimierungen und Referenzen
 
-<!--Warum Komprimierung?-->
-<!--Daten eignen sich. / CPU aufwand?-->
-Bei der spaltenorientierten Speicherung ist es möglich Daten zu Komprimieren. Dadurch wird Speicherplatz gespart und Zugriffszeiten verringert. Es gibt zwei mögliche Komprimierungen:
+Wie bereits oben erwähnt wurde SAP Hana entwickelt, um Transaktionen und Analysen auf einer einzigen, singulären Datenkopie im Hauptspeicher zu verarbeitet, anstatt die Festplatte als Datenspeicher zu benutzen. Da Hauptspeicher immernoch vergleichsweise teuer ist und das Datenset sehr schnell sehr groß werden kann ist es notwendig die Daten zu komprimieren. Durch die spaltenbasierte Speicherung der Daten eignen diese sich gut für Kompression. Dadurch wird Speicherplatz gespart und Zugriffszeiten verringert. Ein weiterer Vorteil ist, dass weniger Daten zwischen Hauptspeicher und den CPUs übertragen werden muss [@Plattner.2017, S.45].
+
+Es gibt zwei mögliche Komprimierungen:
 
 ### Dictonary compression: 
 
-Diese Methode wird auf alle Spalten angewandt. Alle verschiedenen Spaltenwerte werden aufeinanderfolgenden Zahlen zugeordnet. Anstatt nun die verschiedenen Werte zu speichern werden stattdessen die viel kleiner Zahlen gespeichert. Dadurch wird die Zahl der Datenzugriffe minimiert und es gibt weniger Cache Fehler, da mehrere Informationen in einer Cache-Line vorhanden sind. Außerdem ist es möglich Operationen direkt auf die komprimierten Daten auszuführen.
+Diese Methode wird auf alle Spalten angewandt. Alle verschiedenen Spaltenwerte werden aufeinanderfolgenden Zahlen zugeordnet. Anstatt nun die verschiedenen Werte zu speichern werden stattdessen die viel kleiner Zahlen gespeichert. Dadurch wird die Zahl der Datenzugriffe minimiert und es gibt weniger Cache Fehler, da mehrere Informationen in einer Cache-Line vorhanden sind. Außerdem ist es möglich Operationen direkt auf die komprimierten Daten auszuführen [@Plattner.2014, S.39,40].
 
-![DictonaryCompression](bilder/DictonaryCompression.png){width=50%}
+![DictonaryCompression[@Plattner.2014, S.39]](bilder/DictonaryCompression.png){width=50%}
 
 ### Advanced compression:
 
@@ -95,53 +94,70 @@ Die einzelnen Zeilen selbst können durch verschiedene Komprimierungsmethoden we
 #### prefix encoding:
 Diese Methode eignet sich besonders, wenn eine Spalte einen dominanten Wert hat und die restlichen Werte selten auftreten. Bsp: Alle Züge Deutschlands in Tabelle / ein Attribut Firma -> sehr oft String "Deutsche Bahn" unkomprimiert gespeichert.
 
-Um nun mit prefix encoding die Spalte zu komprimieren, muss das Datenset nach der Spalte mit dem dominanten Wert sortiert werden. Außerdem muss der neue Attributvektor damit beginnen. Anstatt nun diesen Wert jedes mal explizit zu speichern, wird nur die Anzahl der Auftretungen gespeichert. Die restlichen Werte der Spalte werden unkomprimiert gespeichert. Im neuen Attribut Vektor wird dann die Anzahl der Auftretungen der dominantten Value, ihre valueID aus dem Dictonary und die valueIDs der fehlden Werte.
+Um nun mit prefix encoding die Spalte zu komprimieren, muss das Datenset nach der Spalte mit dem dominanten Wert sortiert werden. Außerdem muss der neue Attributvektor damit beginnen. Anstatt nun diesen Wert jedes mal explizit zu speichern, wird nur die Anzahl der Auftretungen gespeichert. Die restlichen Werte der Spalte werden unkomprimiert gespeichert. Im neuen Attribut Vektor wird dann die Anzahl der Auftretungen der dominantten Value, ihre valueID aus dem Dictonary und die valueIDs der fehlden Werte [@Plattner.2014, S.45,46].
 
-![prefixEncoding](bilder/prefixEncoding.png){width=50%}
+![prefixEncoding[@Plattner.2014, S.45]](bilder/prefixEncoding.png){width=50%}
 
 #### run length encoding:
-Run length encoding wird verwendet, wenn es mehrere Werte mit homem Aufkommen in einer Spalte gibt. Hierbei ist es wichtig, dass das Datenset nach dieser Spalte sortiert ist, um eine maximale Komprimierung zu erreichen. Bei dieser Methode werden nun ausschließlich 2 Vektoren gespeichert, einer mit allen verschiedenen Werten und der andere mit der Startposition dieser Werte.
+Run length encoding wird verwendet, wenn es mehrere Werte mit homem Aufkommen in einer Spalte gibt. Hierbei ist es wichtig, dass das Datenset nach dieser Spalte sortiert ist, um eine maximale Komprimierung zu erreichen. Bei dieser Methode werden nun ausschließlich 2 Vektoren gespeichert, einer mit allen verschiedenen Werten und der andere mit der Startposition dieser Werte [@Plattner.2014, S.47,48].
 
 
 
-![runLengthEncoding](bilder/runlengthEncoding.png){width=50%}
+![runLengthEncoding[@Plattner.2014, S.47]](bilder/runlengthEncoding.png){width=50%}
 
 
 #### cluster encoding:
-Bei dieser Kompressionsmethode istder Attributvektor in n Blöcke mit einer festen Größe partitioniert. Typischerweise ist die Größe 1024 Elemente, kann jedoch je nach Datentyp, Anzahl der Daten, etc. variieren. Wenn nun ein Cluster nur einen Wert, wird er im Attributvektort gespeichert und in Bitvector wird an dieser Stelle eine 1 notiert. Wurde im Bitvector eine 0 gespeichert, so wurde dieser nicht ersetzt.
+Bei dieser Kompressionsmethode ist der Attributvektor in n Blöcke mit einer festen Größe partitioniert. Typischerweise ist die Größe 1024 Elemente, kann jedoch je nach Datentyp, Anzahl der Daten, etc. variieren. Wenn nun ein Cluster nur einen Wert, wird er im Attributvektort gespeichert und in Bitvector wird an dieser Stelle eine 1 notiert. Wurde im Bitvector eine 0 gespeichert, so wurde dieser nicht ersetzt.
 
-Diese Methode wird meist benutzt, wenn es in einer Spalte viele identesche Werte gibt, die hintereinander stehen.
+Diese Methode wird meist benutzt, wenn es in einer Spalte viele identesche Werte gibt, die hintereinander stehen [@Plattner.2014, S.48,49,50].
 
-![clusterEncoding](bilder/ClusterEncoding.png){width=50%}
+![clusterEncoding[@Plattner.2014, S.48]](bilder/ClusterEncoding.png){width=50%}
 
 #### sparse encoding: 
 
-![sparseEncoding](bilder/SparseEncoding.jpg){ width=20% }
+Sparse Encoding wird typischerweise verwendet, wenn eine Spalte einen dominanten Wert hat und die Werte nicht gut geclustert sind.
+
+Dazu wird dieser dominante Wert aus dem value-ID Array entnommen. Wie in der folgenden Abbildung erkennbar ist, gibt es einen Bitvector der angibt, an welchen Stellen dies der Fall ist [@Compression].
+
+![sparseEncoding[@Compression]](bilder/SparseEncodingNew.jpg){ width=20% }
 
 #### indirect encoding:
 
-Ist gut wenn verschiedene Values oft vorkommen 
-BSP: bei zusammenhängenden Spalten. Nach Land Sortiert und auf Namensspalte zugreifen
-Wie bei Cluster encoding N Datenblöcke mit fester Anzahl Elementen (1024)
 
-![indirect](bilder/indirectEncoding.png){ width=20% }
+
+Das Wert-ID-Array wird wie bei Cluster Encoding in Cluster von 1024 Elementen zerlegt. Enthält ein Cluster nur wenige eindeutige Wert-IDs, wird ein cluster-spezifisches Dictionary erstellt, so dass jede Wert-ID mit noch weniger Bits dargestellt wird. Besitzt ein Block viele einzigartige Werte-IDs, so wird dieser nicht komprimiert [@Compression]. 
 
 
 
-Die SAP Hana Datenbank benutzt Algorithmen um zu entscheiden, welche der Komprimierungsmethoden am angebrachtesten für die verschiedenen Spalten ist.
-Bei jeder „delta merge“ Operation wird die Datenkompression automatisch evaluiert, optimiert und ausgeführt. 
+![indirectEncoding[@Compression]](bilder/indirectEncodingNew.jpg){ width=20% }
+
+
+
+
+
+Die SAP Hana Datenbank benutzt Algorithmen um zu entscheiden, welche der Komprimierungsmethoden am angebrachtesten für die verschiedenen Spalten ist. Bei jeder „delta merge“ Operation wird die Datenkompression automatisch evaluiert, optimiert und ausgeführt. 
 
 
 
 ## SAP HANA Architektur
 
-![Architektur SQL Optimizer](bilder/Architektur.png){ width=50%}
+SAP Hana besitzt verschiedene Engines um mit verschiedenen Views umzugehen. In dieser Abbildung sind die verschiedenen Komponenten erkenntlich, auf welche nun eingegangen wird.
 
-<!-- Lion: Bildquellen für die oberen Bilder angeben  -->
-
-
+![Architektur SQL Optimizer](D:/Users/LionScherer/Documents/GitHub/HANA-SSBM/bilder/Architektur.png){ width=50%}
 
 
+
+Der SQL Optimizer , wird für alle Arten von SQL-Anweisungen verwendet, die von Frontend-Anwendungen über verschiedene Clients erzeugt werden.  Er entscheidet anhand des Models und den Queries, welche Engine er aufruft [@SAP.Architecture2].
+
+Für die spaltenorientierte Speicherung gibt es drei Engines:
+
+Die **JOIN engine** bearbeitet alle Arten von JOINS und Attribute views. Diese Engine wird verwendet, wenn wir eine beliebige Attributansicht in HANA ausführen oder natives SQL auf mehr als einer Tabelle mit Join-Bedingung ausführen [@SAP.Architecture1].
+
+Die **OLAP engine** bearbeitet Analytical views. Sie wird aufgerufen, wenn in SAP HANA Queries auf analytical Views ausgeführt werden. Falls keine zusätzlichen Berechnunngen durchgeführt werden müssen wird alles in der OLAP Engine verarbeitet. Andernfalls wird die Calculation Engine aufgerufen, welche zusammen mit der OLAP Engine verwendet wird [@SAP.Architecture1].
+
+Die **CALCULATION engine** bearbeitet komplexe Berechnungen, welche weder von der JOIN engine noch von der OLAP engine bearbeitet warden können [@SAP.Architecture2].
+
+Wenn Operationenen speziell auf ROW-Tabellen ausgeführt werden, wird die **ROW-STORE Engine** verwendet. Meist hält es sich dabei um Systemstatistiktabellen [@SAP.Architecture1].
 
 # Star Schema Benchmark (SSBM)
 Der Star Schema Benchmark (SSBM) wurde von Pat O'Neil, Betty O'Neil und Quedong Chen entwickelt, um die Performance von Datenbanksystemen, welche mit Data-Marts nach dem Star Schema arbeiten, zu ermitteln und Vergleichbar zu machen [@Neil2009]. Dabei nutzen sie das bekannte TPC-H Benchmark [@Specification2011] als Grundlage für ihr Star Schema Benchmark, modifizieren es jedoch vielfach zugunsten eines guten Star Schemas.
