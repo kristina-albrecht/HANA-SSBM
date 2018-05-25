@@ -65,7 +65,7 @@ Um nun aber dem "D" des ACID Prinzips gerecht zu werden reicht eine Speicherung 
 
 ## Zeilen- und Spaltenbasierte Speicherung
 
-Die Daten können in SAP HANA in zwei verschiedenen Formaten abgelegt werden. Hierbei handelt es sich um die spalten- und zeilenorientierte Speicherung, welche in der folgenden Abbildung dargestellt sind.  Sollen beispielsweise transaktionale Prozesse (OLTP) durchgeführt werden, bietet sich die Verwendung der zeilenorientierten Speicherung an, da das Aktualisieren und Hinzufügen der Daten durch die Zeilen Anordnung vereinfacht wird. Für Lesezugriffe ist diese Art der Speicherung nicht geeignet, da jede Zeile gelesen werden muss, was sehr unperformant ist. Es müssten Daten gelesen werden, die für die bestimmte Abfrage nicht von Relevanz sind. Daher werden Lesezugriffe und Analyseabfragen auf die spaltenorientierte Speicherung ausgeführt und somit wird nur auf die relevanten Daten zugegriffen. Dies hat eine Performancesteigerung zur Folge [@Preuss.2017, S.64].
+Die Daten können in SAP HANA in zwei verschiedenen Formaten abgelegt werden. Hierbei handelt es sich um die spalten- und zeilenorientierte Speicherung, welche in der folgenden Abbildung dargestellt sind.  Sollen beispielsweise transaktionale Prozesse (OLTP) durchgeführt werden, bietet sich die Verwendung der zeilenorientierten Speicherung an, da das Aktualisieren und Hinzufügen der Daten durch die Zeilen Anordnung vereinfacht wird. Für Lesezugriffe ist diese Art der Speicherung nicht geeignet, da jede Zeile gelesen werden muss, was sehr unperformant ist. Es müssten Daten gelesen werden, die für die bestimmte Abfrage nicht von Relevanz sind. Daher werden Lesezugriffe und Analyseabfragen auf die spaltenorientierte Speicherung ausgeführt und somit wird nur auf die relevanten Daten zugegriffen. Dies hat eine Performancesteigerung zur Folge [@Preuss2017, S.64].
 
 Außerdem ist es möglich OLAP und OLTP nicht mehr strikt zu trennen, sondern auf einem Datenbestand auszuführen.
 
@@ -73,19 +73,19 @@ Durch die spaltenorientierte Speicherung erreicht man neben der Zugriffsbeschleu
 
 ![Spalten- vs Zeilenbasierte Speicherung [@Preuss2017, S.66]](bilder/ZeilenSpaltenSpeicherung.png)
 
-Die Anzahl der Indizes kann erheblich reduziert werden. Bei der spaltenorientierten Speicherung kann jedes Attribut als Index verwendet werden. Da jedoch die gesamten Daten im Speicher vorhanden sind und die Daten einer Spalte alle aufeinanderfolgend gespeichert sind ist die Geschwindigkeit eines vollen sequentiellen Scans eines Attributs ausreichend in den meisten Fällen. Falls es nicht schnell genug ist können zusätzlich Indizes benutzt werden [@Preuss.2017 S. 65,66].
+Die Anzahl der Indizes kann erheblich reduziert werden. Bei der spaltenorientierten Speicherung kann jedes Attribut als Index verwendet werden. Da jedoch die gesamten Daten im Speicher vorhanden sind und die Daten einer Spalte alle aufeinanderfolgend gespeichert sind ist die Geschwindigkeit eines vollen sequentiellen Scans eines Attributs ausreichend in den meisten Fällen. Falls es nicht schnell genug ist können zusätzlich Indizes benutzt werden [@Preuss2017 S. 65,66].
 
 ## Komprimierungen und Referenzen
 
-Wie bereits oben erwähnt wurde SAP Hana entwickelt, um Transaktionen und Analysen auf einer einzigen, singulären Datenkopie im Hauptspeicher zu verarbeitet, anstatt die Festplatte als Datenspeicher zu benutzen. Da Hauptspeicher immernoch vergleichsweise teuer ist und das Datenset sehr schnell sehr groß werden kann ist es notwendig die Daten zu komprimieren. Durch die spaltenbasierte Speicherung der Daten eignen diese sich gut für Kompression. Dadurch wird Speicherplatz gespart und Zugriffszeiten verringert. Ein weiterer Vorteil ist, dass weniger Daten zwischen Hauptspeicher und den CPUs übertragen werden muss [@Plattner.2017, S.45].
+Wie bereits oben erwähnt wurde SAP Hana entwickelt, um Transaktionen und Analysen auf einer einzigen, singulären Datenkopie im Hauptspeicher zu verarbeitet, anstatt die Festplatte als Datenspeicher zu benutzen. Da Hauptspeicher immernoch vergleichsweise teuer ist und das Datenset sehr schnell sehr groß werden kann ist es notwendig die Daten zu komprimieren. Durch die spaltenbasierte Speicherung der Daten eignen diese sich gut für Kompression. Dadurch wird Speicherplatz gespart und Zugriffszeiten verringert. Ein weiterer Vorteil ist, dass weniger Daten zwischen Hauptspeicher und den CPUs übertragen werden muss [@Plattner2017, S.45].
 
 Es gibt zwei mögliche Komprimierungen:
 
 ### Dictonary compression: 
 
-Diese Methode wird auf alle Spalten angewandt. Alle verschiedenen Spaltenwerte werden aufeinanderfolgenden Zahlen zugeordnet. Anstatt nun die verschiedenen Werte zu speichern werden stattdessen die viel kleiner Zahlen gespeichert. Dadurch wird die Zahl der Datenzugriffe minimiert und es gibt weniger Cache Fehler, da mehrere Informationen in einer Cache-Line vorhanden sind. Außerdem ist es möglich Operationen direkt auf die komprimierten Daten auszuführen [@Plattner.2014, S.39,40].
+Diese Methode wird auf alle Spalten angewandt. Alle verschiedenen Spaltenwerte werden aufeinanderfolgenden Zahlen zugeordnet. Anstatt nun die verschiedenen Werte zu speichern werden stattdessen die viel kleiner Zahlen gespeichert. Dadurch wird die Zahl der Datenzugriffe minimiert und es gibt weniger Cache Fehler, da mehrere Informationen in einer Cache-Line vorhanden sind. Außerdem ist es möglich Operationen direkt auf die komprimierten Daten auszuführen [@Plattner2014, S.39,40].
 
-![DictonaryCompression[@Plattner.2014, S.39]](bilder/DictonaryCompression.png){width=50%}
+![DictonaryCompression[@Plattner2014, S.39]](bilder/DictonaryCompression.png){width=50%}
 
 ### Advanced compression:
 
@@ -94,42 +94,42 @@ Die einzelnen Zeilen selbst können durch verschiedene Komprimierungsmethoden we
 #### prefix encoding:
 Diese Methode eignet sich besonders, wenn eine Spalte einen dominanten Wert hat und die restlichen Werte selten auftreten. Bsp: Alle Züge Deutschlands in Tabelle / ein Attribut Firma -> sehr oft String "Deutsche Bahn" unkomprimiert gespeichert.
 
-Um nun mit prefix encoding die Spalte zu komprimieren, muss das Datenset nach der Spalte mit dem dominanten Wert sortiert werden. Außerdem muss der neue Attributvektor damit beginnen. Anstatt nun diesen Wert jedes mal explizit zu speichern, wird nur die Anzahl der Auftretungen gespeichert. Die restlichen Werte der Spalte werden unkomprimiert gespeichert. Im neuen Attribut Vektor wird dann die Anzahl der Auftretungen der dominantten Value, ihre valueID aus dem Dictonary und die valueIDs der fehlden Werte [@Plattner.2014, S.45,46].
+Um nun mit prefix encoding die Spalte zu komprimieren, muss das Datenset nach der Spalte mit dem dominanten Wert sortiert werden. Außerdem muss der neue Attributvektor damit beginnen. Anstatt nun diesen Wert jedes mal explizit zu speichern, wird nur die Anzahl der Auftretungen gespeichert. Die restlichen Werte der Spalte werden unkomprimiert gespeichert. Im neuen Attribut Vektor wird dann die Anzahl der Auftretungen der dominantten Value, ihre valueID aus dem Dictonary und die valueIDs der fehlden Werte [@Plattner2014, S.45,46].
 
-![prefixEncoding[@Plattner.2014, S.45]](bilder/prefixEncoding.png){width=50%}
+![prefixEncoding[@Plattner2014, S.45]](bilder/prefixEncoding.png){width=50%}
 
 #### run length encoding:
-Run length encoding wird verwendet, wenn es mehrere Werte mit homem Aufkommen in einer Spalte gibt. Hierbei ist es wichtig, dass das Datenset nach dieser Spalte sortiert ist, um eine maximale Komprimierung zu erreichen. Bei dieser Methode werden nun ausschließlich 2 Vektoren gespeichert, einer mit allen verschiedenen Werten und der andere mit der Startposition dieser Werte [@Plattner.2014, S.47,48].
+Run length encoding wird verwendet, wenn es mehrere Werte mit homem Aufkommen in einer Spalte gibt. Hierbei ist es wichtig, dass das Datenset nach dieser Spalte sortiert ist, um eine maximale Komprimierung zu erreichen. Bei dieser Methode werden nun ausschließlich 2 Vektoren gespeichert, einer mit allen verschiedenen Werten und der andere mit der Startposition dieser Werte [@Plattner2014, S.47,48].
 
 
 
-![runLengthEncoding[@Plattner.2014, S.47]](bilder/runlengthEncoding.png){width=50%}
+![runLengthEncoding[@Plattner2014, S.47]](bilder/runlengthEncoding.png){width=50%}
 
 
 #### cluster encoding:
 Bei dieser Kompressionsmethode ist der Attributvektor in n Blöcke mit einer festen Größe partitioniert. Typischerweise ist die Größe 1024 Elemente, kann jedoch je nach Datentyp, Anzahl der Daten, etc. variieren. Wenn nun ein Cluster nur einen Wert, wird er im Attributvektort gespeichert und in Bitvector wird an dieser Stelle eine 1 notiert. Wurde im Bitvector eine 0 gespeichert, so wurde dieser nicht ersetzt.
 
-Diese Methode wird meist benutzt, wenn es in einer Spalte viele identesche Werte gibt, die hintereinander stehen [@Plattner.2014, S.48,49,50].
+Diese Methode wird meist benutzt, wenn es in einer Spalte viele identesche Werte gibt, die hintereinander stehen [@Plattner2014, S.48,49,50].
 
-![clusterEncoding[@Plattner.2014, S.48]](bilder/ClusterEncoding.png){width=50%}
+![clusterEncoding[@Plattner2014, S.48]](bilder/ClusterEncoding.png){width=50%}
 
 #### sparse encoding: 
 
 Sparse Encoding wird typischerweise verwendet, wenn eine Spalte einen dominanten Wert hat und die Werte nicht gut geclustert sind.
 
-Dazu wird dieser dominante Wert aus dem value-ID Array entnommen. Wie in der folgenden Abbildung erkennbar ist, gibt es einen Bitvector der angibt, an welchen Stellen dies der Fall ist [@Compression].
+Dazu wird dieser dominante Wert aus dem value-ID Array entnommen. Wie in der folgenden Abbildung erkennbar ist, gibt es einen Bitvector der angibt, an welchen Stellen dies der Fall ist [@Visen].
 
-![sparseEncoding[@Compression]](bilder/SparseEncodingNew.jpg){ width=20% }
+![sparseEncoding[@Visen]](bilder/SparseEncodingNew.jpg){ width=20% }
 
 #### indirect encoding:
 
 
 
-Das Wert-ID-Array wird wie bei Cluster Encoding in Cluster von 1024 Elementen zerlegt. Enthält ein Cluster nur wenige eindeutige Wert-IDs, wird ein cluster-spezifisches Dictionary erstellt, so dass jede Wert-ID mit noch weniger Bits dargestellt wird. Besitzt ein Block viele einzigartige Werte-IDs, so wird dieser nicht komprimiert [@Compression]. 
+Das Wert-ID-Array wird wie bei Cluster Encoding in Cluster von 1024 Elementen zerlegt. Enthält ein Cluster nur wenige eindeutige Wert-IDs, wird ein cluster-spezifisches Dictionary erstellt, so dass jede Wert-ID mit noch weniger Bits dargestellt wird. Besitzt ein Block viele einzigartige Werte-IDs, so wird dieser nicht komprimiert [@Visen]. 
 
 
 
-![indirectEncoding[@Compression]](bilder/indirectEncodingNew.jpg){ width=20% }
+![indirectEncoding[@Visen]](bilder/indirectEncodingNew.jpg){ width=20% }
 
 
 
@@ -143,7 +143,7 @@ Die SAP Hana Datenbank benutzt Algorithmen um zu entscheiden, welche der Komprim
 
 SAP Hana besitzt verschiedene Engines um mit verschiedenen Views umzugehen. In dieser Abbildung sind die verschiedenen Komponenten erkenntlich, auf welche nun eingegangen wird.
 
-![Architektur SQL Optimizer](D:/Users/LionScherer/Documents/GitHub/HANA-SSBM/bilder/Architektur.png){ width=50%}
+![Architektur SQL Optimizer](.\bilder\Architektur.png){ width=50%}
 
 
 
